@@ -1062,6 +1062,51 @@
             }
         }
 
+        /* --- FOOTER --- */
+        .site-footer {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px 40px 20px;
+            box-sizing: border-box;
+        }
+        .footer-rule {
+            width: min(220px, 60vw);
+            height: 1px;
+            margin: 0 auto 40px auto;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        .footer-insta {
+            display: inline-block;
+            line-height: 0;
+            margin-bottom: 28px;
+            transition: opacity 0.25s ease;
+        }
+        .footer-insta:hover { opacity: 0.7; }
+        .footer-insta img {
+            width: 34px;
+            height: 34px;
+            display: block;
+        }
+        .footer-logo {
+            display: block;
+            width: 120px;
+            height: auto;
+            margin: 0 auto 30px auto;
+        }
+        .footer-copy {
+            font-family: sans-serif;
+            font-size: 14px;
+            letter-spacing: 0.03em;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+        .footer-copy a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+        .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
+
         /* --- TOP-BANNER: LOGO + NAVIGATION --- */
         .site-banner {
             width: 100vw;
@@ -1471,6 +1516,16 @@
     </div>
 
     </div>
+
+    <!-- 12. FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-rule"></div>
+        <a href="https://www.instagram.com/" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
+            <img src="images/insta.png" alt="Instagram">
+        </a>
+        <img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy">
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="https://tvmartists.com/imprint/">imprint</a></p>
+    </footer>
 
     <!-- HAMBURGER-MENÜ TOGGLE -->
     <script>
