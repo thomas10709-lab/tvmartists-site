@@ -110,6 +110,29 @@
             display: block;
         }
 
+        /* Desktop: Name als Text links neben dem Foto */
+        @media (min-width: 769px) {
+            .artist-hero--overlay-desktop .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 6%;
+                top: 56%;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: nowrap;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: clamp(34px, 4.4vw, 68px);
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            }
+        }
+
         .artist-page {
             width: 80%;
             max-width: 1000px;
@@ -313,23 +336,12 @@
                 background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
                 pointer-events: none;
             }
-            .artist-hero--baked::after { display: none; }
-            .artist-hero--baked .hero-name {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                font-size: 1px;
-                text-shadow: none;
-            }
             .hero-name {
                 position: absolute;
                 z-index: 2;
                 left: 0;
                 right: 0;
-                bottom: 52px;
+                bottom: 24px;
                 width: auto;
                 height: auto;
                 margin: 0;
@@ -559,11 +571,13 @@
         </nav>
     </header>
 
-    <!-- HERO (vorerst WP-Bilder; Name steht dort im Bild) -->
-    <div class="artist-hero artist-hero--baked">
+    <!-- HERO (Querformat auf dem Desktop, Hochformat auf dem Handy; Name als Text) -->
+    <div class="artist-hero artist-hero--overlay-desktop">
         <picture>
-            <source media="(max-width: 768px)" srcset="https://tvmartists.com/wp-content/uploads/2026/09/Karni-Hero-Mobile-800x1000-1.png">
-            <img src="https://tvmartists.com/wp-content/uploads/2026/09/Karni-hero-desk-1920x1080-1.png" alt="Gerald Karni" loading="eager">
+            <source media="(max-width: 768px)" srcset="images/karni-mobile-800.webp 800w, images/karni-mobile-1200.webp 1200w, images/karni-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
+            <source media="(max-width: 768px)" srcset="images/karni-mobile-800.jpg 800w, images/karni-mobile-1200.jpg 1200w, images/karni-mobile-1600.jpg 1600w" sizes="100vw">
+            <source srcset="images/karni-hero-1280.webp 1280w, images/karni-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
+            <img src="images/karni-hero-1920.jpg" alt="Gerald Karni" width="1920" height="1080" loading="eager">
         </picture>
         <h1 class="hero-name">Gerald Karni</h1>
     </div>
