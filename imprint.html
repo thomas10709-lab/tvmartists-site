@@ -116,7 +116,7 @@
 
         /* --- TOP-BANNER: LOGO + NAVIGATION --- */
         html {
-            scroll-padding-top: 1.2cm;
+            scroll-padding-top: 1cm;
         }
         .site-banner {
             position: sticky;
@@ -127,10 +127,15 @@
             box-sizing: border-box;
             margin: 0;
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease;
+        }
+        .site-banner.is-hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
         }
 
         .site-banner-inner {
-            height: 1.2cm;
+            height: 2cm;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
@@ -154,7 +159,7 @@
         }
 
         .site-logo-img {
-            height: 36px !important;
+            height: 60px !important;
             width: auto !important;
             max-width: 60vw !important;
             display: block;
@@ -243,7 +248,7 @@
 
         @media (max-width: 768px) {
             html {
-                scroll-padding-top: 1.5cm;
+                scroll-padding-top: 1cm;
             }
             .site-banner-inner {
                 height: 1.5cm;
@@ -331,7 +336,7 @@
             <li>Comply with legal obligations</li>
         </ul>
 
-        <h3>3. Cookies</h3>
+        <h3 id="cookies">3. Cookies</h3>
         <p>We use cookies to collect information about how visitors interact with our website. Cookies are small data files stored on your device.</p>
         <p>You can disable cookies through your browser settings, but some features of the website may not function properly.</p>
 
@@ -369,8 +374,40 @@
             <img src="images/insta.png" alt="Instagram">
         </a>
         <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
-        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="https://tvmartists.com/cookie-policy/">cookie policy</a></p>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
     </footer>
+
+    <!-- HEADER: BEIM RUNTERSCROLLEN AUSBLENDEN, BEIM HOCHSCROLLEN EINBLENDEN -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.querySelector(".site-banner");
+            const nav = document.getElementById("mobileNav");
+            if (!header) return;
+            let lastY = window.scrollY;
+            let ticking = false;
+
+            function show() { header.classList.remove("is-hidden"); }
+            function hide() { header.classList.add("is-hidden"); }
+
+            window.addEventListener("scroll", function () {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    const y = Math.max(window.scrollY, 0);
+                    const menuOpen = nav && nav.classList.contains("is-open");
+                    if (y <= header.offsetHeight || menuOpen || y < lastY - 4) {
+                        show();
+                    } else if (y > lastY + 4) {
+                        hide();
+                    }
+                    lastY = y;
+                    ticking = false;
+                });
+            }, { passive: true });
+
+            header.addEventListener("focusin", show);
+        });
+    </script>
 
     <!-- HAMBURGER-MENÜ TOGGLE -->
     <script>
