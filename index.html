@@ -833,7 +833,12 @@
             font-size: 14.5px !important;
             line-height: 1.6 !important;
             color: #ffffff !important;
-            background-color: #12396B !important;
+            background-color: transparent !important;
+        }
+
+        .orchestra-dropdown .dropdown-content-unified,
+        .about-contact-dropdown .dropdown-content-unified {
+            background-color: transparent !important;
         }
 
         /* --- ORCHESTRA TOURING --- */
@@ -1101,9 +1106,10 @@
             height: auto;
         }
         .footer-copy {
-            font-family: sans-serif;
+            font-family: var(--font-subtitle);
+            font-weight: 300;
             font-size: 14px;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.06em;
             color: rgba(255, 255, 255, 0.9);
             margin: 0;
         }
@@ -1115,15 +1121,18 @@
         .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
 
         /* --- TOP-BANNER: LOGO + NAVIGATION --- */
+        html {
+            scroll-padding-top: 3cm;
+        }
         .site-banner {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
             background-color: #ffffff;
             box-sizing: border-box;
-            margin: 0 !important;
-            margin-top: -3mm !important;
+            margin: 0;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
         }
 
         .site-banner-inner {
@@ -1239,6 +1248,9 @@
         }
 
         @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 1.5cm;
+            }
             .site-banner-inner {
                 height: 1.5cm;
                 padding: 0 20px;
@@ -1487,7 +1499,7 @@
                     <br>TVM artists was established in 2026 by Thomas Voigt, who has been active in the international cultural management sector since 1995 and since 1998, he has also served as the General Manager of conductor Michael Sanderling.
                     The agency's core activities include the strategic development of artist careers, the acquisition of international tours for symphony orchestras, and advisory services for cultural institutions.<br><br>
                 </p>
-                <div style="padding: 10px 25px; text-align: center !important; display: block !important; background-color: #12396B !important;">
+                <div style="padding: 10px 25px; text-align: center !important; display: block !important; background-color: transparent !important;">
                     <img src="images/voigt-800.jpg"
                          srcset="images/voigt-800.webp 800w" sizes="440px"
                          alt="Thomas Voigt"
