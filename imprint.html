@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Imprint - TVM Artists</title>
+    <style>
+
+        /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Syne:wght@400;500;600;700&family=Urbanist:wght@200;300;400;500&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1F4270;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --artist-photo-width: 55%;
+            --artist-photo-max-width: 65%;
+            --artist-photo-mobile-width: 80%;
+            --spacing-section: 1.5cm;
+            --font-subtitle: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px 40px 20px;
+            box-sizing: border-box;
+        }
+        .footer-rule {
+            width: min(220px, 60vw);
+            height: 1px;
+            margin: 0 auto 40px auto;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        .footer-insta {
+            display: inline-block;
+            line-height: 0;
+            margin-bottom: 28px;
+            transition: opacity 0.25s ease;
+        }
+        .footer-insta:hover { opacity: 0.7; }
+        .footer-insta img {
+            width: 34px;
+            height: 34px;
+            display: block;
+        }
+        .footer-logo-link {
+            display: block;
+            width: 120px;
+            margin: 0 auto 30px auto;
+            line-height: 0;
+            transition: opacity 0.25s ease;
+        }
+        .footer-logo-link:hover { opacity: 0.7; }
+        .footer-logo {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .footer-copy {
+            font-family: var(--font-subtitle);
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+        .footer-copy a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+        .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
+
+        /* --- IMPRINT / LEGAL --- */
+        .legal {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 24px 70px 24px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.92);
+        }
+        .legal h1, .legal h2 {
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #ffffff;
+        }
+        .legal h1 { font-size: 28px; margin: 0 0 24px 0; }
+        .legal h2 { font-size: 22px; margin: 64px 0 16px 0; }
+        .legal h3 { font-size: 17px; font-weight: 600; color: #cfe3f5; margin: 32px 0 8px 0; }
+        .legal p { margin: 0 0 16px 0; }
+        .legal ul { margin: 0 0 16px 0; padding-left: 22px; }
+        .legal li { margin-bottom: 6px; }
+        .legal a { color: #cfe3f5; text-decoration: underline; }
+        @media (max-width: 768px) {
+            .legal { padding: 40px 20px 50px 20px; font-size: 15px; }
+            .legal h1 { font-size: 24px; }
+            .legal h2 { font-size: 19px; margin-top: 48px; }
+        }
+
+        /* --- TOP-BANNER: LOGO + NAVIGATION --- */
+        html {
+            scroll-padding-top: 3cm;
+        }
+        .site-banner {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            margin: 0;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+        }
+
+        .site-banner-inner {
+            height: 3cm;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .site-logo-img {
+            height: 90px !important;
+            width: auto !important;
+            max-width: 60vw !important;
+            display: block;
+            object-fit: contain;
+        }
+
+        .site-nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .site-nav-desktop a {
+            font-family: sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+        }
+
+        .site-nav-desktop a:hover {
+            opacity: 0.6;
+        }
+
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #12396B !important;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.is-open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-btn.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.is-open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .site-nav-mobile {
+            display: none;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .site-nav-mobile a {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #12396B !important;
+            text-decoration: none !important;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(18, 57, 107, 0.1);
+        }
+
+        .site-nav-mobile.is-open {
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 1.5cm;
+            }
+            .site-banner-inner {
+                height: 1.5cm;
+                padding: 0 20px;
+            }
+            .site-logo {
+                font-size: 16px;
+            }
+            .site-logo-img {
+                height: 46px !important;
+            }
+            .site-nav-desktop {
+                display: none;
+            }
+            .hamburger-btn {
+                display: flex;
+            }
+            .site-nav-mobile {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
+    <header class="site-banner">
+        <div class="site-banner-inner">
+            <a href="index.html" class="site-logo">
+                <img src="images/logo1.png"
+                     alt="TVM artists" class="site-logo-img" loading="eager">
+            </a>
+
+            <nav class="site-nav-desktop">
+                <a href="index.html#news">News</a>
+                <a href="index.html#artists">Artists</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#touring">Touring</a>
+                <a href="index.html#about-contact">About</a>
+                <a href="index.html#about-contact">Contact</a>
+            </nav>
+
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="site-nav-mobile" id="mobileNav">
+            <a href="index.html#news">News</a>
+            <a href="index.html#artists">Artists</a>
+            <a href="index.html#media">Media</a>
+            <a href="index.html#touring">Touring</a>
+            <a href="index.html#about-contact">About</a>
+            <a href="index.html#about-contact">Contact</a>
+        </nav>
+    </header>
+
+    <main class="legal">
+
+        <h1 id="imprint">Imprint</h1>
+
+        <p>Responsible for this website in accordance with applicable regulations:</p>
+
+        <p>
+            Thomas Voigt<br>
+            Email: <a href="mailto:thomas@tvmartists.com">thomas@tvmartists.com</a>
+        </p>
+
+        <h2 id="privacy">Privacy Policy for tvmartists.com</h2>
+
+        <p>This Privacy Policy describes how your personal information is collected, used, and shared when you visit this website.</p>
+
+        <h3>1. Personal Information We Collect</h3>
+        <p>When you visit thomvoigt.com, we may automatically collect certain information about your device, including your web browser, IP address, time zone, and some cookies installed on your device.</p>
+        <p>If you contact us through a form or by email, we may also collect your name, email address, and any message you submit.</p>
+
+        <h3>2. How We Use Your Information</h3>
+        <p>We use your information to:</p>
+        <ul>
+            <li>Respond to your inquiries</li>
+            <li>Improve and optimize the website</li>
+            <li>Analyze website usage to enhance user experience</li>
+            <li>Comply with legal obligations</li>
+        </ul>
+
+        <h3>3. Cookies</h3>
+        <p>We use cookies to collect information about how visitors interact with our website. Cookies are small data files stored on your device.</p>
+        <p>You can disable cookies through your browser settings, but some features of the website may not function properly.</p>
+
+        <h3>4. Google Analytics</h3>
+        <p>We may use Google Analytics to understand how users interact with the website. Google Analytics collects anonymous information such as pages visited, time spent on pages, and referring websites.</p>
+        <p>This data helps us improve the website, but it does not identify individual users. You can opt out of Google Analytics tracking using the Google Analytics Opt-out Browser Add-on.</p>
+
+        <h3>5. Sharing Your Information</h3>
+        <p>We do not sell or share your personal data with third parties, except as necessary to comply with laws or protect rights.</p>
+
+        <h3>6. Your Rights</h3>
+        <p>If you are a resident of the EU or other jurisdictions with data protection laws, you may have the right to access, correct, or delete your personal data. Please contact us to make such a request.</p>
+
+        <h3>7. Data Retention</h3>
+        <p>We retain your information only as long as necessary for the purposes stated in this policy.</p>
+
+        <h3>8. Changes to This Policy</h3>
+        <p>We may update this privacy policy. Changes will be posted on this page with the date of revision.</p>
+
+        <h3>9. Contact</h3>
+        <p>If you have any questions, please contact:</p>
+        <p>
+            Thomas Voigt<br>
+            Email: <a href="mailto:hello@tvmartists.com">hello@tvmartists.com</a><br>
+            66 Wayism Road<br>
+            17258 Siem Reap, Cambodia
+        </p>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-rule"></div>
+        <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
+            <img src="images/insta.png" alt="Instagram">
+        </a>
+        <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="https://tvmartists.com/cookie-policy/">cookie policy</a></p>
+    </footer>
+
+    <!-- HAMBURGER-MENÜ TOGGLE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.getElementById("hamburgerBtn");
+            const nav = document.getElementById("mobileNav");
+            if (!btn || !nav) return;
+
+            btn.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                btn.classList.toggle("is-open", isOpen);
+                btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    btn.classList.remove("is-open");
+                    btn.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
