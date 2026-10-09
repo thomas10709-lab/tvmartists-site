@@ -1,13 +1,1648 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>TVM Artists</title>
+    <title>TVM Artists - Frontpage</title>
+    <style>
+        /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Syne:wght@400;500;600;700&family=Urbanist:wght@200;300;400;500&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1F4270;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --artist-photo-width: 55%;
+            --artist-photo-max-width: 65%;
+            --artist-photo-mobile-width: 80%;
+            --spacing-section: 1.5cm;
+            --font-subtitle: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- HERO SEKTION --- */
+        .hero-wrapper {
+            margin-bottom: 0;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: transparent;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            line-height: 0;
+            display: block;
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        .hero-image-desktop,
+        .hero-image-mobile {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+            object-fit: initial;
+        }
+
+        .hero-image-mobile {
+            display: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- HERO SUBTITLE --- */
+        .hero-subtitle-wrapper {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 1.1cm 20px 1.8cm 20px;
+            box-sizing: border-box;
+        }
+
+        .hero-subtitle-line1 {
+            font-family: var(--font-subtitle);
+            font-weight: 200; /* Dünn / nicht fett */
+            letter-spacing: 0.08em;
+            font-size: 28px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0 auto 16px auto;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        .hero-subtitle-line2 {
+            font-family: var(--font-subtitle);
+            font-weight: 200;
+            letter-spacing: 0.06em;
+            font-size: 19px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0 auto;
+            max-width: 780px;
+            text-align: center;
+        }
+
+        .hero-subtitle-line2 br.break-mobile {
+            display: none;
+        }
+        .hero-subtitle-line2 br.break-desktop {
+            display: inline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-subtitle-wrapper {
+                padding: 0.2cm 20px 1.1cm 20px;
+            }
+            .hero-subtitle-line1 {
+                font-size: 22px;
+                letter-spacing: 0.05em;
+                margin-bottom: 12px;
+            }
+            .hero-subtitle-line2 {
+                font-size: 15px;
+                letter-spacing: 0.04em;
+                padding: 0 10px;
+            }
+            .hero-subtitle-line2 br.break-mobile {
+                display: inline;
+            }
+            .hero-subtitle-line2 br.break-desktop {
+                display: none;
+            }
+        }
+
+        /* --- NEWS KARUSSELL --- */
+        .news-carousel-wrapper {
+            display: block !important;
+            width: 100% !important;
+            margin: 0 auto var(--spacing-section) auto !important;
+            position: relative;
+            z-index: 99;
+        }
+
+        .news-carousel-inner {
+            background-color: #cfe3f5 !important;
+            color: #12396B !important;
+            border: 0.5px solid #cfe3f5 !important;
+            border-radius: 8px !important;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .news-carousel-header {
+            text-align: center;
+            padding: 10px 24px;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            border-bottom: 0.5px solid rgba(18, 57, 107, 0.25);
+        }
+
+        .news-carousel-track {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-padding-left: 24px;
+            scroll-padding-right: 24px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 20px 24px;
+            gap: 20px;
+        }
+
+        .news-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .news-slide {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: min(380px, 82vw);
+        }
+
+        .news-slide img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .news-carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 4px 20px 16px 20px;
+        }
+
+        .news-carousel-arrow {
+            background: transparent !important;
+            color: #12396B !important;
+            border: 0.5px solid #12396B !important;
+            border-radius: 50% !important;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+            user-select: none;
+        }
+
+        .news-carousel-arrow:hover {
+            background-color: #12396B !important;
+            color: #ffffff !important;
+        }
+
+        .news-carousel-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .news-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(18, 57, 107, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .news-carousel-dot.active {
+            background-color: #12396B;
+            transform: scale(1.2);
+        }
+
+        /* --- UNIVERSALES ARTIST-STYLING --- */
+        .artist-wrapper {
+            display: inline-block !important;
+            text-align: center !important;
+            width: 100% !important;
+            margin: 0 0 var(--spacing-section) 0 !important;
+        }
+
+        .artist-wrapper:not(.section-start) {
+            position: relative;
+            padding-top: 35px;
+        }
+
+        .artist-wrapper:not(.section-start)::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .section-label {
+            color: #ffffff !important;
+            font-family: 'Raleway', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin: 0 0 20px 0;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-label::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .artist-wrapper.section-start {
+            margin-top: 1cm !important;
+        }
+
+        @media (max-width: 768px) {
+            .section-label {
+                font-size: 18px;
+            }
+            .artist-wrapper.section-start {
+                margin-top: 1cm !important;
+            }
+        }
+
+        .artist-btn {
+            display: inline-block !important;
+            font-family: sans-serif;
+            text-decoration: none !important;
+            cursor: pointer !important;
+            background-color: #cfe3f5 !important;
+            color: #12396B !important;
+            border: 0.5px solid #ffffff !important;
+            border-radius: 8px !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.05em !important;
+            padding: 10px 20px !important;
+            transition: background 0.3s !important;
+            margin: 0 auto 10px auto;
+        }
+
+        .artist-btn:hover {
+            background-color: #b9d6f0 !important;
+        }
+
+        .artist-photo-link {
+            display: block;
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        .artist-wrapper:has(.artist-photo-link:hover) .artist-btn {
+            background-color: #b9d6f0 !important;
+        }
+
+        .artist-img {
+            width: var(--artist-photo-width) !important;
+            max-width: var(--artist-photo-max-width) !important;
+            aspect-ratio: 3 / 2;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            margin: 10px auto 0 auto !important;
+            border-radius: 15px !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+        }
+
+        .artist-photo-crop-wrapper {
+            width: var(--artist-photo-width) !important;
+            max-width: var(--artist-photo-max-width) !important;
+            aspect-ratio: 3 / 2;
+            margin: 10px auto 0 auto !important;
+            border-radius: 15px !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+            overflow: hidden;
+            display: block;
+            clip-path: inset(0 round 15px);
+            isolation: isolate;
+        }
+
+        .artist-photo-crop-wrapper .artist-photo-crop-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 40% 40%;
+            display: block;
+        }
+
+        /* --- CONDUCTORS SECTION: 2-SPALTEN GRID --- */
+        .conductors-section {
+            margin-top: 2.2cm !important;
+            margin-bottom: var(--spacing-section);
+            overflow-x: hidden;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .conductors-section .section-label::after {
+            display: none !important;
+        }
+
+        .conductors-grid .artist-btn {
+            display: block !important;
+            font-size: 17px !important;
+            padding: 12px 20px !important;
+            width: min(419px, calc(100% - 10px)) !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+            margin: 0 auto !important;
+            border-radius: 15px 15px 0 0 !important;
+            border: none !important;
+            white-space: normal !important;
+        }
+
+        .conductors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 419px));
+            column-gap: 1cm;
+            row-gap: 1.5cm;
+            justify-content: center;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            box-sizing: border-box;
+            align-items: start;
+        }
+
+        .conductors-grid .artist-wrapper {
+            margin: 0 !important;
+            padding-top: 0 !important;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .conductors-grid .artist-wrapper::before {
+            display: none !important;
+        }
+
+        .conductors-grid .artist-img,
+        .conductors-grid .artist-photo-crop-wrapper {
+            width: min(419px, calc(100% - 10px)) !important;
+            max-width: min(419px, calc(100% - 10px)) !important;
+            aspect-ratio: 4 / 3 !important;
+            margin: 0 auto 0 auto !important;
+            border-radius: 0 0 15px 15px !important;
+            border: none !important;
+        }
+
+        .conductors-grid .artist-photo-crop-wrapper {
+            clip-path: inset(0 round 0 0 15px 15px) !important;
+        }
+
+        @media (max-width: 768px) {
+            .conductors-grid {
+                display: block !important;
+                padding: 0 20px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            .conductors-grid .artist-wrapper {
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin: 0 auto var(--spacing-section) auto !important;
+            }
+            .conductors-grid .artist-wrapper:last-child {
+                margin-bottom: 0 !important;
+            }
+            .conductors-grid .artist-img,
+            .conductors-grid .artist-photo-crop-wrapper {
+                width: 299px !important;
+                max-width: 299px !important;
+                aspect-ratio: 3 / 2 !important;
+                margin: 0 auto 0 auto !important;
+            }
+            .conductors-grid .artist-btn {
+                width: 299px !important;
+                max-width: 299px !important;
+                font-size: 15px !important;
+                padding: 9px 20px !important;
+                min-width: 0 !important;
+            }
+        }
+
+        /* --- UNIVERSALES DROPDOWN STYLING --- */
+        .center-wrapper-dropdown {
+            display: inline-block !important;
+            text-align: center !important;
+            width: 100% !important;
+            margin: 0 0 var(--spacing-section) 0 !important;
+            padding: 0 24px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .custom-dropdown-unified {
+            display: inline-block !important;
+            font-family: sans-serif;
+            text-align: center !important;
+            margin: 0 auto !important;
+            vertical-align: middle !important;
+            width: auto !important;
+        }
+
+        .custom-dropdown-unified[open] {
+            width: auto !important;
+            max-width: 600px !important;
+        }
+
+        .custom-dropdown-unified summary {
+            list-style: none !important;
+            cursor: pointer !important;
+            background-color: #ffffff !important;
+            color: #12396B !important;
+            border: 0.5px solid #ffffff !important;
+            border-radius: 8px !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            transition: background 0.3s !important;
+            outline: none !important;
+            display: inline-block !important;
+            line-height: 1.2 !important;
+            box-sizing: border-box !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.05em !important;
+            padding: 6px 14px !important;
+            width: auto !important;
+            min-width: 120px !important;
+        }
+
+        .custom-dropdown-unified[open] summary {
+            border-radius: 8px !important;
+            border-bottom: 0.5px solid #ffffff !important;
+        }
+
+        .custom-dropdown-unified summary:hover {
+            background-color: #f0f0f0 !important;
+        }
+
+        .custom-dropdown-unified summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dropdown-content-unified {
+            background-color: #12396B !important;
+            color: #ffffff !important;
+            padding: 15px 0;
+            border: none !important;
+            border-top: none !important;
+            border-radius: 0 0 8px 8px !important;
+            text-align: center;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-top: 0px;
+            font-size: 15px;
+            line-height: 1.6;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* --- VIDEOS SPEZIFISCH --- */
+        .videos-wrapper {
+            position: relative;
+            padding-top: 30px;
+        }
+
+        /* --- ORCHESTRA TOURING ALS FUSIONIERTE FOTO-KARTE --- */
+        .orchestra-card-outer {
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 0 24px;
+            margin: 1cm auto calc(var(--spacing-section) + 1cm) auto;
+            overflow-x: hidden;
+        }
+
+        .orchestra-card-outer .orchestra-card {
+            display: block !important;
+            text-align: center !important;
+            width: min(419px, calc(100% - 10px)) !important;
+            margin: 0 auto !important;
+            vertical-align: middle !important;
+        }
+
+        .orchestra-card-outer .orchestra-card summary,
+        .orchestra-card-outer .orchestra-card[open] summary {
+            display: block !important;
+            list-style: none !important;
+            cursor: pointer !important;
+            width: 100% !important;
+            max-width: 419px !important;
+            min-width: 0 !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            outline: none !important;
+            white-space: normal !important;
+        }
+        .orchestra-card-outer .orchestra-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .orchestra-card-label {
+            display: block;
+            font-family: sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            background-color: #cfe3f5;
+            color: #12396B;
+            border: 0.5px solid #ffffff;
+            border-radius: 15px 15px 0 0;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .orchestra-card-outer .orchestra-card summary:hover .orchestra-card-label {
+            background-color: #b9d6f0;
+        }
+
+        .orchestra-card-img-wrap {
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            overflow: hidden;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .orchestra-card-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .orchestra-card-outer .orchestra-card,
+            .orchestra-card-outer .orchestra-card[open] {
+                width: 100% !important;
+                max-width: 299px !important;
+            }
+            .orchestra-card-outer .orchestra-card summary,
+            .orchestra-card-outer .orchestra-card[open] summary {
+                width: 100% !important;
+                max-width: 299px !important;
+            }
+            .orchestra-card-label {
+                font-size: 15px;
+            }
+        }
+
+        /* --- ABOUT & CONTACT --- */
+        .about-contact-wrapper {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .footer-links-row {
+            width: 100%;
+        }
+
+        @media (min-width: 769px) {
+            .footer-links-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                gap: 32px;
+                margin: 0 auto var(--spacing-section) auto;
+            }
+            .footer-links-row .center-wrapper-dropdown {
+                width: auto !important;
+                margin: 0 !important;
+                padding-top: 0 !important;
+            }
+        }
+
+        .videos-wrapper .custom-dropdown-unified.videos-dropdown,
+        .custom-dropdown-unified.videos-dropdown[open] {
+            display: block !important;
+            width: min(419px, calc(100% - 10px)) !important;
+            margin: 0 auto !important;
+        }
+        .videos-dropdown summary,
+        .about-contact-dropdown summary {
+            background-color: #cfe3f5 !important;
+            color: #12396B !important;
+            border: 0.5px solid #ffffff !important;
+            transition: background 0.3s, transform 0.25s ease !important;
+        }
+        .videos-dropdown summary:hover,
+        .about-contact-dropdown summary:hover {
+            background-color: #b9d6f0 !important;
+        }
+        .custom-dropdown-unified.videos-dropdown summary,
+        .custom-dropdown-unified.videos-dropdown[open] summary {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            font-size: 17px !important;
+            padding: 12px 20px !important;
+            border-radius: 15px 15px 0 0 !important;
+        }
+
+        .about-contact-dropdown summary {
+            background-color: #cfe3f5 !important;
+            color: #12396B !important;
+        }
+        .about-contact-dropdown summary:hover {
+            background-color: #b9d6f0 !important;
+        }
+        .about-contact-wrapper .custom-dropdown-unified.about-contact-dropdown,
+        .custom-dropdown-unified.about-contact-dropdown[open] {
+            width: 220px !important;
+            margin: 0 auto !important;
+        }
+        .custom-dropdown-unified.about-contact-dropdown summary,
+        .custom-dropdown-unified.about-contact-dropdown[open] summary {
+            width: 220px !important;
+            max-width: 220px !important;
+            min-width: 0 !important;
+        }
+        .about-contact-dropdown .dropdown-content-unified {
+            width: 480px !important;
+            max-width: 90vw !important;
+            margin-left: -130px !important;
+            margin-right: -130px !important;
+            box-sizing: border-box !important;
+        }
+        .about-contact-dropdown .ac-sep {
+            margin: 0 8px;
+            opacity: 0.7;
+        }
+
+        .about-contact-dropdown .dropdown-inner-text,
+        .about-contact-dropdown .dropdown-inner-footer {
+            color: #cfe3f5 !important;
+        }
+
+        .custom-dropdown-unified.videos-dropdown .dropdown-content-videos,
+        .custom-dropdown-unified.videos-dropdown[open] .dropdown-content-videos {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 !important;
+            border-radius: 0 0 15px 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .video-preview-card-videos {
+            position: relative;
+            display: block;
+            width: 50% !important;
+            max-width: 50% !important;
+            min-width: 0 !important;
+            aspect-ratio: 16 / 9 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            overflow: hidden;
+            text-decoration: none !important;
+            flex: 1 1 50%;
+        }
+        .video-preview-card-videos:nth-child(odd) {
+            border-right: none;
+        }
+        .video-preview-card-videos:nth-child(-n+2) {
+            border-bottom: none;
+        }
+        .video-preview-card-videos .video-preview-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.40;
+            filter: grayscale(30%);
+            transition: opacity 0.3s ease !important;
+        }
+        .video-preview-card-videos:hover .video-preview-bg {
+            opacity: 0.55;
+        }
+        .video-preview-card-videos::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(180,255,220,0.25), rgba(150,190,255,0.25));
+            z-index: 1;
+        }
+        .video-preview-card-videos .video-preview-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-preview-card-videos .vp-name-wrap {
+            text-align: center;
+            padding: 0 8px;
+        }
+        .video-preview-card-videos .vp-name-wrap strong {
+            color: #ffffff !important;
+            font-family: 'Raleway', sans-serif !important;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .video-preview-card-videos .vp-subtitle {
+            text-align: center;
+            color: #ffffff !important;
+            font-family: 'Raleway', sans-serif !important;
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            padding: 0 8px;
+            margin-top: 2px;
+        }
+
+        .dropdown-inner-text {
+            margin: 0 0 15px 0 !important;
+            padding: 0 25px !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            font-size: 14.5px !important;
+            line-height: 1.6 !important;
+            color: #ffffff !important;
+            background-color: #12396B !important;
+        }
+
+        /* --- ORCHESTRA TOURING --- */
+        .orchestra-dropdown .dropdown-content-unified {
+            padding-top: 30px !important;
+        }
+        .orchestra-dropdown .dropdown-inner-text {
+            font-size: 16px !important;
+        }
+        .orchestra-dropdown .dropdown-inner-text,
+        .orchestra-dropdown .dropdown-inner-footer {
+            color: #cfe3f5 !important;
+        }
+
+        /* --- ABOUT & CONTACT --- */
+        .about-contact-dropdown .dropdown-inner-text {
+            font-size: 16px !important;
+        }
+
+        .dropdown-inner-footer {
+            margin: 0;
+            padding: 0 25px;
+            font-size: 14px;
+            opacity: 0.9;
+            text-align: center;
+            font-style: italic;
+            box-sizing: border-box;
+            color: #ffffff !important;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .hero-image-desktop {
+                display: none !important;
+            }
+            .hero-image-mobile {
+                display: block !important;
+            }
+            .hero-container {
+                display: block !important;
+                max-width: 100% !important;
+                margin: 0 auto !important;
+                overflow: hidden;
+            }
+            .hero-image-mobile {
+                width: 100% !important;
+                display: block !important;
+                object-fit: initial !important;
+            }
+            .hero-wrapper {
+                margin-bottom: 0 !important;
+            }
+
+            .news-carousel-wrapper {
+                width: 100vw !important;
+                position: relative !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .news-carousel-inner {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+            .news-carousel-header {
+                font-size: 20px;
+            }
+            .news-carousel-track {
+                padding: 20px 0 !important;
+                scroll-padding-left: 0 !important;
+                scroll-padding-right: 0 !important;
+            }
+            .news-slide {
+                width: min(380px, 85vw);
+                margin: 0 12px;
+            }
+            .news-carousel-nav {
+                padding: 4px 0 16px 0 !important;
+            }
+
+            .artist-wrapper {
+                margin: 0 0 var(--spacing-section) 0 !important;
+            }
+            .artist-btn {
+                padding: 9px 20px !important;
+                font-size: 14px !important;
+            }
+            .artist-img {
+                width: var(--artist-photo-mobile-width) !important;
+                max-width: 260px !important;
+                margin-top: 18px !important;
+            }
+            .artist-photo-crop-wrapper {
+                width: var(--artist-photo-mobile-width) !important;
+                max-width: 260px !important;
+                margin-top: 18px !important;
+            }
+
+            .center-wrapper-dropdown {
+                margin: 0 0 var(--spacing-section) 0 !important;
+                padding: 0 20px;
+            }
+
+            .custom-dropdown-unified summary,
+            .custom-dropdown-unified[open] summary {
+                width: auto !important;
+                min-width: 100px !important;
+                max-width: 90vw !important;
+                font-size: 11px !important;
+                padding: 6px 14px !important;
+                display: inline-block !important;
+                border-radius: 8px !important;
+            }
+
+            .custom-dropdown-unified[open] {
+                width: auto !important;
+                max-width: 90vw !important;
+            }
+
+            .videos-wrapper .custom-dropdown-unified.videos-dropdown,
+            .custom-dropdown-unified.videos-dropdown[open] {
+                width: 100% !important;
+                max-width: 299px !important;
+            }
+
+            .about-contact-wrapper .custom-dropdown-unified.about-contact-dropdown,
+            .custom-dropdown-unified.about-contact-dropdown[open] {
+                width: 100% !important;
+                max-width: 209px !important;
+            }
+            .custom-dropdown-unified.about-contact-dropdown summary,
+            .custom-dropdown-unified.about-contact-dropdown[open] summary {
+                width: 100% !important;
+                max-width: 209px !important;
+                min-width: 0 !important;
+            }
+
+            .custom-dropdown-unified[open] .dropdown-content-unified {
+                width: 90vw !important;
+                max-width: 90vw !important;
+                padding: 15px 0;
+                box-sizing: border-box !important;
+            }
+
+            .custom-dropdown-unified.about-contact-dropdown .dropdown-content-unified,
+            .custom-dropdown-unified.about-contact-dropdown[open] .dropdown-content-unified {
+                width: 320px !important;
+                max-width: 92vw !important;
+                margin-left: -55.5px !important;
+                margin-right: -55.5px !important;
+                box-sizing: border-box !important;
+            }
+
+            .custom-dropdown-unified.orchestra-card .dropdown-content-unified,
+            .custom-dropdown-unified.orchestra-card[open] .dropdown-content-unified {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .custom-dropdown-unified.videos-dropdown .dropdown-content-videos,
+            .custom-dropdown-unified.videos-dropdown[open] .dropdown-content-videos {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                gap: 0 !important;
+            }
+
+            .custom-dropdown-unified.videos-dropdown summary,
+            .custom-dropdown-unified.videos-dropdown[open] summary {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                font-size: 15px !important;
+                padding: 9px 14px !important;
+                display: block !important;
+                border-radius: 15px 15px 0 0 !important;
+            }
+
+            .video-preview-card-videos {
+                width: 50% !important;
+                max-width: 50% !important;
+                min-width: 0 !important;
+                flex: 1 1 50%;
+            }
+            .video-preview-card-videos .vp-name-wrap strong {
+                font-size: 15px;
+            }
+            .video-preview-card-videos .vp-subtitle {
+                font-size: 12px !important;
+            }
+
+            .dropdown-inner-text {
+                padding: 0 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-preview-card-videos {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: unset !important;
+                flex: 1 1 100%;
+            }
+            .video-preview-card-videos:nth-child(odd) {
+                border-right: none;
+            }
+            .video-preview-card-videos:nth-child(-n+2) {
+                border-bottom: none;
+            }
+            .video-preview-card-videos:not(:last-child) {
+                border-bottom: none;
+            }
+            .dropdown-content-videos {
+                flex-direction: column;
+            }
+            .artist-img {
+                max-width: 280px !important;
+            }
+            .artist-photo-crop-wrapper {
+                max-width: 280px !important;
+            }
+        }
+
+        /* --- TOP-BANNER: LOGO + NAVIGATION --- */
+        .site-banner {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            box-sizing: border-box;
+            margin: 0 !important;
+            margin-top: -3mm !important;
+        }
+
+        .site-banner-inner {
+            height: 3cm;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .site-logo-img {
+            height: 90px !important;
+            width: auto !important;
+            max-width: 60vw !important;
+            display: block;
+            object-fit: contain;
+        }
+
+        .site-nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .site-nav-desktop a {
+            font-family: sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+        }
+
+        .site-nav-desktop a:hover {
+            opacity: 0.6;
+        }
+
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #12396B !important;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.is-open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-btn.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.is-open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .site-nav-mobile {
+            display: none;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .site-nav-mobile a {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #12396B !important;
+            text-decoration: none !important;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(18, 57, 107, 0.1);
+        }
+
+        .site-nav-mobile.is-open {
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .site-banner-inner {
+                height: 1.5cm;
+                padding: 0 20px;
+            }
+            .site-logo {
+                font-size: 16px;
+            }
+            .site-logo-img {
+                height: 46px !important;
+            }
+            .site-nav-desktop {
+                display: none;
+            }
+            .hamburger-btn {
+                display: flex;
+            }
+            .site-nav-mobile {
+                display: flex;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>TVM Artists</h1>
-    <p>Neue Version in Vorbereitung.</p>
+
+    <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
+    <header class="site-banner">
+        <div class="site-banner-inner">
+            <a href="#" class="site-logo">
+                <img src="https://tvmartists.com/wp-content/uploads/2026/09/TVM-Final-1-Horizontal-01-4.png"
+                     alt="TVM artists" class="site-logo-img" loading="eager">
+            </a>
+
+            <nav class="site-nav-desktop">
+                <a href="#news">News</a>
+                <a href="#artists">Artists</a>
+                <a href="#media">Media</a>
+                <a href="#touring">Touring</a>
+                <a href="#about-contact">About</a>
+                <a href="#about-contact">Contact</a>
+            </nav>
+
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="site-nav-mobile" id="mobileNav">
+            <a href="#news">News</a>
+            <a href="#artists">Artists</a>
+            <a href="#media">Media</a>
+            <a href="#touring">Touring</a>
+            <a href="#about-contact">About</a>
+            <a href="#about-contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- 1. HERO SEKTION -->
+    <div class="hero-wrapper">
+        <div class="hero-container">
+            <!-- Desktop Bild -->
+            <img src="https://tvmartists.com/wp-content/uploads/2026/09/1920x1080-Were-here-to-help-you-get-enough-of-it.png"
+                 alt="TVM Artists - Next Stop: Standing Ovations"
+                 class="hero-image-desktop"
+                 loading="eager">
+
+            <!-- Mobile Bild -->
+            <img src="https://tvmartists.com/wp-content/uploads/2026/09/800x1000-Were-here-to-help-you-get-enough-of-it.png"
+                alt="TVM Artists - Next Stop: Standing Ovations Mobile"
+                class="hero-image-mobile"
+                loading="eager">
+
+            <div class="hero-overlay"></div>
+            <div class="hero-content"></div>
+        </div>
+    </div>
+
+    <!-- 1b. HERO SUBTITLE -->
+    <div class="hero-subtitle-wrapper">
+        <p class="hero-subtitle-line1">Artist Career Development</p>
+        <p class="hero-subtitle-line2">Strategic Consulting <br class="break-mobile">for Soloists, Conductors <br class="break-mobile"><br class="break-desktop">and Orchestras on Tour</p>
+    </div>
+
+    <!-- 2. NEWS KARUSSELL -->
+    <div class="news-carousel-wrapper" id="news">
+        <div class="news-carousel-inner">
+            <div class="news-carousel-header">News</div>
+            <div class="news-carousel-track" id="newsTrack"></div>
+            <div class="news-carousel-nav">
+                <div class="news-carousel-arrow" id="newsPrev" aria-label="Zurück">&#8249;</div>
+                <div class="news-carousel-dots" id="newsDots"></div>
+                <div class="news-carousel-arrow" id="newsNext" aria-label="Weiter">&#8250;</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. CONDUCTORS (2-SPALTEN GRID, ZUFÄLLIGE REIHENFOLGE) -->
+    <div class="conductors-section" id="artists">
+        <p class="section-label">Conductors</p>
+        <div class="conductors-grid" id="conductorsGrid">
+
+            <div class="artist-wrapper">
+                <a href="/johannes-pierre-bettac/" class="artist-btn">Johannes Pierre Bettac</a>
+                <a href="/johannes-pierre-bettac/" class="artist-photo-link" aria-label="Johannes Pierre Bettac">
+                    <div class="artist-photo-crop-wrapper">
+                        <img src="https://tvmartists.com/wp-content/uploads/2026/09/Johannes-Pierre-Bettac-photo-Julia-Valero-93-scaled.jpg"
+                             alt="Johannes Pierre Bettac" class="artist-photo-crop-img" loading="eager">
+                    </div>
+                </a>
+            </div>
+
+            <div class="artist-wrapper">
+                <a href="https://tvmartists.com/francesco-cagnasso/" class="artist-btn">Francesco Cagnasso</a>
+                <a href="https://tvmartists.com/francesco-cagnasso/" class="artist-photo-link" aria-label="Francesco Cagnasso">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/08/Francesco_-Cagnasso006-scaled.jpg"
+                         alt="Francesco Cagnasso" class="artist-img" loading="eager">
+                </a>
+            </div>
+
+            <div class="artist-wrapper">
+                <a href="https://tvmartists.com/jose-luis-gutierrez/" class="artist-btn">José Luis Gutiérrez</a>
+                <a href="https://tvmartists.com/jose-luis-gutierrez/" class="artist-photo-link" aria-label="José Luis Gutiérrez">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/05/Gutierrez_5711.jpg"
+                         alt="José Luis Gutiérrez" class="artist-img" loading="eager">
+                </a>
+            </div>
+
+            <div class="artist-wrapper" id="artist-gerald-karni">
+                <a href="/gerald-karni" class="artist-btn">Gerald Karni</a>
+                <a href="/gerald-karni" class="artist-photo-link" aria-label="Gerald Karni">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/09/Karni-TVM-Front-1920x1080-1.png"
+                         alt="Gerald Karni" class="artist-img" loading="eager">
+                </a>
+            </div>
+
+            <div class="artist-wrapper">
+                <a href="/michael-sanderling/" class="artist-btn">Michael Sanderling</a>
+                <a href="/michael-sanderling/" class="artist-photo-link" aria-label="Michael Sanderling">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/05/C-Marco-Borggreve_Sanderling_Michael_13-scaled-e1778372885796.jpeg"
+                         alt="Michael Sanderling" class="artist-img" loading="eager">
+                </a>
+            </div>
+
+            <div class="artist-wrapper">
+                <a href="/mats-thiersch/" class="artist-btn">Mats Thiersch</a>
+                <a href="/mats-thiersch/" class="artist-photo-link" aria-label="Mats Thiersch">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/08/MATS-THIERSCH029-1-scaled.jpg"
+                         alt="Mats Thiersch" class="artist-img" loading="eager">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 8. LATEST VIDEOS DROPDOWN -->
+    <div class="center-wrapper-dropdown videos-wrapper" id="media">
+         <details class="custom-dropdown-unified videos-dropdown" open>
+            <summary>Latest Videos</summary>
+            <div class="dropdown-content-unified dropdown-content-videos">
+                <a href="https://www.youtube.com/watch?v=OANAFs_yfGI" target="_blank" class="video-preview-card-videos">
+                    <img src="https://img.youtube.com/vi/OANAFs_yfGI/hqdefault.jpg" alt="Michael Sanderling - Sibelius Symphony No. 2" class="video-preview-bg" loading="lazy">
+                    <div class="video-preview-text">
+                        <div class="vp-name-wrap"><strong>Michael Sanderling</strong></div>
+                        <div class="vp-subtitle">Sibelius: Symphony No. 2</div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=Z0AY6GW3R54" target="_blank" class="video-preview-card-videos">
+                    <img src="https://img.youtube.com/vi/Z0AY6GW3R54/hqdefault.jpg" alt="José Luis Gutiérrez - Shostakovich Symphony No. 9" class="video-preview-bg" loading="lazy">
+                    <div class="video-preview-text">
+                        <div class="vp-name-wrap"><strong>José Luis Gutiérrez</strong></div>
+                        <div class="vp-subtitle">Shostakovich: Symphony No. 9</div>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/50vEImdV4WU" target="_blank" class="video-preview-card-videos">
+                    <img src="https://img.youtube.com/vi/50vEImdV4WU/hqdefault.jpg" alt="Mats Thiersch - Brahms Tragische Ouvertüre" class="video-preview-bg" loading="lazy">
+                    <div class="video-preview-text">
+                        <div class="vp-name-wrap"><strong>Mats Thiersch</strong></div>
+                        <div class="vp-subtitle">Brahms: Tragische Ouvertüre</div>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/Hq6yPceSGEA" target="_blank" class="video-preview-card-videos">
+                    <img src="https://img.youtube.com/vi/Hq6yPceSGEA/hqdefault.jpg" alt="Gerald Karni - Haydn Symphony No. 104" class="video-preview-bg" loading="lazy">
+                    <div class="video-preview-text">
+                        <div class="vp-name-wrap"><strong>Gerald Karni</strong></div>
+                        <div class="vp-subtitle">Haydn: Symphony No. 104</div>
+                    </div>
+                </a>
+            </div>
+        </details>
+    </div>
+
+    <!-- 9. ORCHESTRA TOURING ALS FUSIONIERTE FOTO-KARTE -->
+    <div class="orchestra-card-outer" id="touring">
+        <details class="custom-dropdown-unified orchestra-dropdown orchestra-card">
+            <summary>
+                <span class="orchestra-card-label">Orchestra Touring</span>
+                <div class="orchestra-card-img-wrap">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/09/philharmoniehadelichsanderling042-scaled.jpg"
+                         alt="Orchestra Touring" class="orchestra-card-img" loading="eager">
+                </div>
+            </summary>
+            <div class="dropdown-content-unified">
+                <p class="dropdown-inner-text">
+                    Our international network proudly includes some of the world's most
+                    renowned symphony and chamber orchestras. We are privileged to
+                    collaborate with esteemed ensembles such as the Konzerthausorchester
+                    Berlin, the Rundfunk-Sinfonieorchester Berlin, the Dresden Philharmonic,
+                     the Philharmonia Orchestra London, the Hong Kong Philharmonic
+                    Orchestra, the KBS Symphony Orchestra and the SWR Symphonieorchester Stuttgart. Our roster also
+                    features the Deutsche Radiophilharmonie Saarbrücken, the
+                    MDR-Sinfonieorchester Leipzig, the Prague Philharmonia, the Berlin
+                    Chamber Orchestra, the Orquesta Sinfónica Nacional de México, the
+                    Romanian National Symphony Orchestra, and the Trondheim Soloists.
+                    Furthermore, we regularly represent leading early music formations and
+                    highly specialized ensembles that are redefining their genres. This
+                    stellar lineup includes the Akademie für Alte Musik Berlin, Les Siècles,
+                     L'Arpeggiata, Jordi Savall and his ensembles, the 12 Cellists of the
+                    Berlin Philharmonic, German Brass, and the Netherlands Blazers Ensemble.
+                </p>
+                <p class="dropdown-inner-footer">
+                    In collaboration with Predan Voigt Productions
+                </p>
+            </div>
+        </details>
+    </div>
+
+    <!-- 10./11. ABOUT & CONTACT -->
+    <div class="footer-links-row">
+
+    <div class="center-wrapper-dropdown about-contact-wrapper" id="about-contact">
+        <details class="custom-dropdown-unified about-contact-dropdown">
+            <summary>About <span class="ac-sep">&amp;</span> Contact</summary>
+            <div class="dropdown-content-unified">
+                <p class="dropdown-inner-text">
+                    <br>TVM artists was established in 2026 by Thomas Voigt, who has been active in the international cultural management sector since 1995 and since 1998, he has also served as the General Manager of conductor Michael Sanderling.
+                    The agency's core activities include the strategic development of artist careers, the acquisition of international tours for symphony orchestras, and advisory services for cultural institutions.<br><br>
+                </p>
+                <div style="padding: 10px 25px; text-align: center !important; display: block !important; background-color: #12396B !important;">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/05/Thomas-Voigt-TVM-artists-1.jpeg"
+                         alt="Thomas Voigt"
+                         loading="eager"
+                         style="width: 100% !important; max-width: 440px !important; height: auto !important; border-radius: 10px !important; box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important; display: inline-block !important; margin: 0 auto !important;">
+                </div>
+                <p class="dropdown-inner-text">
+                    <br>Thomas Voigt, born and raised in Germany, comes from a family of musicians. He studied violin and piano in Leipzig and Berlin and served as a violinist with the Berlin Radio Symphony Orchestra from 1990 to 1997. From 1989 to 2014, he was general manager of the Berlin Chamber Orchestra, leading the ensemble on extensive tours throughout Europe, Asia, and the Americas. In this role, he also organized his own subscription concert series featuring a wide variety of concerts at the Berlin Philharmonie and the Konzerthaus Berlin. Since 1995, he has been working as an artist agent, concert promoter and consultant, collaborating with leading orchestras and artists.<br><br>
+                </p>
+                <p class="dropdown-inner-text">
+                    <strong style="font-size: 16px;"><br>Postal Address</strong><br>
+                    <span style="font-style: italic; opacity: 0.9;">– Correspondence only by email please –</span>
+                    <br><br><br>
+                    <strong style="font-size: 15px;">TVM artists</strong><br>
+                    c/o Kanzlei Dr. Hans Cobet<br>
+                    Kurfürstendamm 157/158<br>
+                    10709 Berlin
+                    <br><br>
+                    phone: +49 30 120 766 896<br>
+                    e-mail: <a href="mailto:info@tvmartists.com" style="color: #cfe3f5 !important; text-decoration: underline !important;">info@tvmartists.com</a>
+                    <br><br><br>
+                    Managing Director<br>
+                    Thomas Voigt
+                    <br><br>
+                    Assistance<br>
+                    Gabriel Sommerfeld<br>
+                    Adriana Santoro<br>
+                    Michel Lacroix
+                    <br><br>
+                </p>
+            </div>
+        </details>
+    </div>
+
+    </div>
+
+    <!-- HAMBURGER-MENÜ TOGGLE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.getElementById("hamburgerBtn");
+            const nav = document.getElementById("mobileNav");
+            if (!btn || !nav) return;
+
+            btn.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                btn.classList.toggle("is-open", isOpen);
+                btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    btn.classList.remove("is-open");
+                    btn.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+
+    <!-- CONDUCTORS: ZUFÄLLIGE REIHENFOLGE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const grid = document.getElementById("conductorsGrid");
+            if (!grid) return;
+            const items = Array.from(grid.children);
+            for (let i = items.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [items[i], items[j]] = [items[j], items[i]];
+            }
+            items.forEach(item => grid.appendChild(item));
+        });
+    </script>
+
+    <!-- NEWS SCRIPT -->
+    <script>
+        const WP_API_BASE = "https://tvmartists.com/wp-json/wp/v2";
+        const CATEGORY_ID = 7;
+        const INCLUDE_CHILD_CATEGORIES = false;
+        const MAX_ITEMS = 10;
+
+        function stripHtml(html) {
+            const tmp = document.createElement("div");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        }
+
+        async function getCategoryIdsToQuery() {
+            if (!INCLUDE_CHILD_CATEGORIES) return [CATEGORY_ID];
+            const childUrl = WP_API_BASE + "/categories?parent=" + CATEGORY_ID + "&per_page=100";
+            const response = await fetch(childUrl);
+            if (!response.ok) return [CATEGORY_ID];
+            const children = await response.json();
+            return [CATEGORY_ID].concat(children.map(c => c.id));
+        }
+
+        async function loadNewsItems() {
+            const categoryIds = await getCategoryIdsToQuery();
+            const url = WP_API_BASE + "/posts?categories=" + categoryIds.join(",") + "&per_page=" + MAX_ITEMS + "&_embed";
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("WordPress API Fehler: " + response.status);
+            let posts = await response.json();
+
+            if (!INCLUDE_CHILD_CATEGORIES) {
+                posts = posts.filter(post => post.categories.indexOf(CATEGORY_ID) !== -1);
+            }
+
+            return posts.map(post => {
+                let image = "";
+                try {
+                    image = post._embedded["wp:featuredmedia"][0].source_url;
+                } catch (e) {
+                    image = "";
+                }
+                return {
+                    image: image,
+                    alt: stripHtml(post.title.rendered),
+                    link: post.link
+                };
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const track = document.getElementById("newsTrack");
+            const dotsWrap = document.getElementById("newsDots");
+            const prevBtn = document.getElementById("newsPrev");
+            const nextBtn = document.getElementById("newsNext");
+
+            if (!track) return;
+
+            let newsItems = [];
+            try {
+                newsItems = await loadNewsItems();
+            } catch (e) {
+                track.innerHTML = "<p style='padding:20px; text-align:center;'>News konnten nicht geladen werden.</p>";
+                return;
+            }
+
+            newsItems = newsItems.filter(item => !!item.image);
+
+            if (newsItems.length === 0) {
+                track.innerHTML = "<p style='padding:20px; text-align:center;'>Noch keine News vorhanden.</p>";
+                return;
+            }
+
+            newsItems.forEach(item => {
+                const slide = document.createElement("div");
+                slide.className = "news-slide";
+
+                const img = document.createElement("img");
+                img.src = item.image;
+                img.alt = item.alt || "News";
+                img.loading = "lazy";
+
+                slide.appendChild(img);
+                track.appendChild(slide);
+            });
+
+            const slides = Array.from(track.children);
+            if (slides.length > 0) {
+                slides.forEach((_, i) => {
+                    const dot = document.createElement("div");
+                    dot.className = "news-carousel-dot" + (i === 0 ? " active" : "");
+                    dot.addEventListener("click", () => {
+                        slides[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+                    });
+                    dotsWrap.appendChild(dot);
+                });
+            }
+            const dots = Array.from(dotsWrap.children);
+
+            if (slides.length > 1) {
+                track.scrollLeft = 90;
+            }
+
+            let currentIndex = 0;
+
+            function getClosestIndex() {
+                const trackRect = track.getBoundingClientRect();
+                let closestIndex = 0;
+                let closestDist = Infinity;
+                slides.forEach((slide, i) => {
+                    const rect = slide.getBoundingClientRect();
+                    const dist = Math.abs(rect.left - trackRect.left);
+                    if (dist < closestDist) {
+                        closestDist = dist;
+                        closestIndex = i;
+                    }
+                });
+                return closestIndex;
+            }
+
+            function updateActiveDot() {
+                if (dots.length === 0) return;
+                currentIndex = getClosestIndex();
+                dots.forEach((d, i) => {
+                    d.classList.toggle("active", i === currentIndex);
+                });
+            }
+
+            let scrollTimeout;
+            track.addEventListener("scroll", () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateActiveDot, 80);
+            });
+
+            function goToSlide(index) {
+                const clamped = Math.max(0, Math.min(slides.length - 1, index));
+                slides[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+            }
+
+            if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(getClosestIndex() - 1));
+            if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(getClosestIndex() + 1));
+
+            updateActiveDot();
+        });
+    </script>
 </body>
 </html>
