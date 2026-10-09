@@ -1122,7 +1122,7 @@
 
         /* --- TOP-BANNER: LOGO + NAVIGATION --- */
         html {
-            scroll-padding-top: 3cm;
+            scroll-padding-top: 2cm;
         }
         .site-banner {
             position: sticky;
@@ -1136,7 +1136,7 @@
         }
 
         .site-banner-inner {
-            height: 3cm;
+            height: 2cm;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
@@ -1160,7 +1160,7 @@
         }
 
         .site-logo-img {
-            height: 90px !important;
+            height: 60px !important;
             width: auto !important;
             max-width: 60vw !important;
             display: block;
@@ -1543,18 +1543,8 @@
             <img src="images/insta.png" alt="Instagram">
         </a>
         <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
-        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="#about-contact" id="imprintLink">imprint</a> &ndash; <a href="https://tvmartists.com/cookie-policy/">cookie policy</a></p>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="https://tvmartists.com/cookie-policy/">cookie policy</a></p>
     </footer>
-
-    <!-- FOOTER: IMPRINT ÖFFNET ABOUT & CONTACT -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const link = document.getElementById("imprintLink");
-            const box = document.querySelector(".about-contact-dropdown");
-            if (!link || !box) return;
-            link.addEventListener("click", function () { box.open = true; });
-        });
-    </script>
 
     <!-- HAMBURGER-MENÜ TOGGLE -->
     <script>
