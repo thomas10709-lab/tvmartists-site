@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Mats Thiersch - TVM Artists</title>
+    <title>Gerald Karni - TVM Artists</title>
     <style>
 
         /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
@@ -108,6 +108,29 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* Desktop: Name als Text links neben dem Foto */
+        @media (min-width: 769px) {
+            .artist-hero--overlay-desktop .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 6%;
+                top: 56%;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: nowrap;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: clamp(34px, 4.4vw, 68px);
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            }
         }
 
         .artist-page {
@@ -318,7 +341,7 @@
                 z-index: 2;
                 left: 0;
                 right: 0;
-                bottom: 52px;
+                bottom: 24px;
                 width: auto;
                 height: auto;
                 margin: 0;
@@ -548,46 +571,44 @@
         </nav>
     </header>
 
-    <!-- HERO (Hochformat-Foto auf dem Handy) -->
-    <div class="artist-hero">
+    <!-- HERO (Querformat auf dem Desktop, Hochformat auf dem Handy; Name als Text) -->
+    <div class="artist-hero artist-hero--overlay-desktop">
         <picture>
-            <source media="(max-width: 768px)" srcset="images/thiersch-mobile-800.webp 800w, images/thiersch-mobile-1200.webp 1200w, images/thiersch-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
-            <source media="(max-width: 768px)" srcset="images/thiersch-mobile-800.jpg 800w, images/thiersch-mobile-1200.jpg 1200w, images/thiersch-mobile-1600.jpg 1600w" sizes="100vw">
-            <source srcset="images/thiersch-hero-1280.webp 1280w, images/thiersch-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
-            <img src="images/thiersch-hero-1920.jpg" alt="Mats Thiersch" width="1920" height="1080" loading="eager">
+            <source media="(max-width: 768px)" srcset="images/karni-mobile-800.webp 800w, images/karni-mobile-1200.webp 1200w, images/karni-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
+            <source media="(max-width: 768px)" srcset="images/karni-mobile-800.jpg 800w, images/karni-mobile-1200.jpg 1200w, images/karni-mobile-1600.jpg 1600w" sizes="100vw">
+            <source srcset="images/karni-hero-1280.webp 1280w, images/karni-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
+            <img src="images/karni-hero-1920.jpg" alt="Gerald Karni" width="1920" height="1080" loading="eager">
         </picture>
-        <h1 class="hero-name">Mats Thiersch</h1>
+        <h1 class="hero-name">Gerald Karni</h1>
     </div>
 
     <main class="artist-page">
 
-        <!-- FUTURE PROJECTS -->
+        <!-- ORCHESTRAS -->
         <div id="future-projects-wrapper">
-            <div class="fp-title">
-                Assistant Conductor of the Berliner Philharmoniker 2026-28<br>
-                <span>Siemens Conducting Scholarship of the Karajan Academy</span>
-            </div>
-            <div class="fp-list">
-                Future Projects<br><br>
-                Konzerthausorchester Berlin<br>
-                NDR Radio Philharmonie Hannover<br>
-                RTVE Radio Symphony Orchestra Madrid<br>
-                Orquestra Sinfónica do Porto<br>
-                Orquesta Sinfónica de Galicia<br>
-                Opéra de Dijon (Assistant Conductor)<br>
-                80th Concours de Genève - November 2026
+            <div class="fp-list" style="margin-top: 0;">
+                Belgrade Philharmonic<br>
+                San Diego Symphony<br>
+                Tucson Symphony<br>
+                Orchestra della Svizzera italiana<br>
+                New York Philharmonic Ensemble<br>
+                Romanian National Radio Orchestra<br>
+                Sønderjyllands Symfoniorkester<br>
+                Lucerne Symphony<br>
+                NDR Elbphilharmonie Orchester<br>
+                Interlochen World Youth Symphony
             </div>
         </div>
 
         <!-- BUTTON-REIHE -->
         <div id="top-button-row">
-            <a href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener" class="custom-btn">Videos</a>
-            <a href="https://www.dropbox.com/scl/fo/i2ixplget98d5xvvjoi8n/AH-OklR4ffGZw9KttNXUP-o?rlkey=azodsh0k3q5fbzpxu8v5poasn&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
-            <a href="https://matsthiersch.com" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
+            <a href="https://www.dropbox.com/scl/fo/icgfehcbnurgwx0a16p0w/AKCfz7vDO8gWOOSHHnuS5S4?rlkey=zjj77ez37us0nebntwg8dgh4t&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
+            <a href="https://www.youtube.com/playlist?list=PLOwEdDKyt7G4" target="_blank" rel="noopener" class="custom-btn">YouTube</a>
+            <a href="https://geraldkarni.com" target="_blank" rel="noopener" class="custom-btn">Official Artist Website</a>
         </div>
 
-        <!-- NEWS-KARUSSELL (WordPress-Kategorie 14 = Mats Thiersch) -->
-        <div class="news-carousel-wrapper" id="newsCarousel" data-category="14">
+        <!-- NEWS-KARUSSELL (WordPress-Kategorie "Gerald Karni", wird über den Namen gesucht) -->
+        <div class="news-carousel-wrapper" id="newsCarousel" data-category-name="Gerald Karni">
             <div class="news-carousel-inner">
                 <div class="news-carousel-header">News</div>
                 <div class="news-carousel-track" id="newsTrack"></div>
@@ -604,23 +625,23 @@
 
             <strong>Biography</strong><br><br>
 
-            Mats Thiersch (b. 2003) is a German conductor and since September 2026 assistant conductor with the Berliner Philharmoniker for Kirill Petrenko and conducting fellow in the Karajan-Academy.<br><br>
+            For the 2026/27 season, Gerald Karni marks his second year in the role of Conducting Fellow with the San Diego Symphony Orchestra under the guidance of Music Director Rafael Payare. Raised and educated across Europe and the United States, his international career has rapidly gained momentum through performances and collaborations with leading orchestras across Europe and North America.<br><br>
 
-            Despite his young age, he has already collaborated with several prestigious ensembles, including the Orchestre National de Lille, the Deutsche Radio Philharmonie Saarbrücken, the Ensemble Intercontemporain, and the Gstaad Festival Orchestra.<br><br>
+            A significant milestone in his career was his collaboration with the New York Philharmonic, where, while serving as Assistant Conductor, he led the world premiere of Melinda Wagner's Elegy Flywheel at New York's Merkin Hall. Karni is a three-time recipient of the prestigious Career Assistance Award from the Solti Foundation U.S. and was a Conducting Fellow at the Verbier Festival.<br><br>
 
-            Future highlights include debuts with the NDR Radiophilharmonie, the RTVE Symphony Orchestra in Madrid, the Orquesta Sinfónica de Galicia, and the Orquestra Sinfónica do Porto. He will also serve as assistant conductor to Joseph Bastian for Strauss's Ariadne auf Naxos at the Opéra de Dijon. Most recently, in June 2026, he took part in Paavo Järvi's Conductors' Academy with the Tonhalle-Orchester Zürich, followed by a conducting-seminar fellowship at Tanglewood with the Boston Symphony Orchestra later that summer.<br><br>
+            Highlights of the current season include major international projects, including debuts with the Nuremberg Symphony Orchestra, the Tucson Symphony Orchestra, the Brașov Philharmonic, and the MÁV Symphony Orchestra Budapest. In spring 2027, he will continue his collaboration with the San Diego Symphony by assisting Music Director Rafael Payare and the orchestra on their upcoming European tour.<br><br>
 
-            Thiersch began his musical journey at the age of six with the violin, later expanding his studies to include piano and composition. In 2021, he began studying composition under Miroslav Srnka at the University of Music and Dance Cologne (HfMT Köln). His original works have been performed by renowned groups such as Ensemble Musikfabrik and have earned him prestigious accolades, including the Composition Prize of the German Orchestra Foundation (Deutsche Orchester-Stiftung).<br><br>
+            His profile as a conductor and sought-after collaborator on the podium has been further shaped through close collaborations with leading orchestras, including the Baltimore Symphony Orchestra, the San Diego Symphony, and the Rundfunk-Sinfonieorchester Berlin, through assistant conducting roles.<br><br>
 
-            In 2024, he was invited to the renowned Gstaad Conducting Academy, where he studied with Johannes Schlaefli and Jaap van Zweden. He is currently one of the six semi-finalists in the 80th Concours de Genève (Conducting Competition, November 2026).<br><br>
+            As a Conducting Fellow at the Verbier Festival in 2022 and 2023, he assisted Sir Simon Rattle, Gábor Takács-Nagy, Gianandrea Noseda, and Klaus Mäkelä. He has since conducted orchestras including the NDR Elbphilharmonie Orchestra, the Lucerne Symphony Orchestra, the Hamburger Camerata at the Elbphilharmonie, the Orchestra della Svizzera Italiana, and the Sønderjyllands Symfoniorkester. In May 2024, he stepped in at short notice to lead a concert week with the Belgrade Philharmonic Orchestra, conducting Strauss's Don Quixote with Daniel Müller-Schott, Debussy's Ibéria, and Márquez's Danzón No. 2. Additional engagements have taken him to the Haifa Symphony Orchestra, the Mozartfest Augsburg, and the Traunsteiner Sommerkonzerte, where he collaborated with soloists Vilde Frang and Maximilian Hornung.<br><br>
 
-            Since 2023, Thiersch has been continuing his conducting studies at the Conservatoire National Supérieur de Musique et de Danse de Paris in the class of Alain Altinoglu and from 2024 to 2026, served as Music Director of the Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris). He has gained additional artistic insights in masterclasses with distinguished conductors such as Daniele Gatti, Mikko Franck, and Alexandre Bloch.<br><br>
+            Karni began his musical training as a violist, studying with Lawrence Power at the Zurich University of the Arts (ZHdK), before completing his Master's degree in Orchestral Conducting with Marc Kissóczy at the Conservatorio della Svizzera Italiana. While still a student, he won the Silver Medal at the 3rd International Antal Doráti Conducting Competition in Budapest, marking an early breakthrough on the international podium. During his time in Zurich, he founded the Side-by-Side initiative, bringing together musicians from the Tonhalle Orchestra Zurich and the Zurich Opera Orchestra with students. Since 2015, he has also been a member of the West-Eastern Divan Orchestra, where his longstanding collaboration with its founder, Daniel Barenboim, has played a formative role in his artistic development.<br><br>
 
             <div class="artist-footer-note">
 
                 <!-- Instagram -->
                 <div style="margin-top: 25px; margin-bottom: 15px;">
-                    <a href="https://www.instagram.com/mats.thiersch/" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
+                    <a href="https://www.instagram.com/geraldkarni/" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -628,10 +649,6 @@
                         </svg>
                         <span style="vertical-align: super; margin-left: 8px; font-size: 14px;">Follow on Instagram</span>
                     </a>
-                </div>
-
-                <div style="font-size: 13px; opacity: 0.9; margin-top: 25px;">
-                    Photo credit: &copy; Marco Borggreve
                 </div>
 
                 <div style="font-size: 13px; line-height: 1.4; margin-top: 15px;">
