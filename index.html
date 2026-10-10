@@ -137,9 +137,10 @@
                 padding: 0.2cm 20px 1.1cm 20px;
             }
             .hero-subtitle-line2 {
-                font-size: 17px;
+                font-size: min(17px, 4.1vw);   /* "Strategic Consulting and Representation" bleibt auf einer Zeile */
                 letter-spacing: 0.04em;
-                padding: 0 10px;
+                padding: 0;
+                white-space: nowrap;
             }
             .hero-subtitle-line2 br.break-mobile {
                 display: inline;
@@ -1349,7 +1350,7 @@
 
     <!-- 1b. HERO SUBTITLE -->
     <div class="hero-subtitle-wrapper">
-        <p class="hero-subtitle-line2">Strategic Consulting and <br class="break-mobile">Representation for <br class="break-mobile">Conductors, Soloists <br class="break-mobile"><br class="break-desktop">and Orchestras on Tour</p>
+        <p class="hero-subtitle-line2">Strategic Consulting and Representation<br>for Conductors, Soloists <br class="break-mobile">and Orchestras on Tour</p>
     </div>
 
     <!-- 2. NEWS KARUSSELL -->
