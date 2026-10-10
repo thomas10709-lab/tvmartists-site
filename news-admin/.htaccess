@@ -3,3 +3,7 @@ DirectoryIndex index.php
 <IfModule mod_headers.c>
   Header set X-Robots-Tag "noindex, nofollow"
 </IfModule>
+# Hilfsdateien nie direkt über den Browser ausliefern
+<FilesMatch "^(lib|import-wp)\.php$">
+  Require all denied
+</FilesMatch>
