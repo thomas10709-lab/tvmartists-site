@@ -397,6 +397,13 @@
             display: none !important;
         }
 
+        .conductors-section .section-label {
+            text-transform: uppercase;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            margin-bottom: 0.9cm;
+        }
+
         .conductors-grid .artist-btn {
             display: block !important;
             font-size: 17px !important;
@@ -411,14 +418,20 @@
         }
 
         .wave-divider {
-            width: min(720px, calc(100% - 48px));
+            width: min(419px, calc(100% - 10px));   /* gleiche Breite wie der Latest-Videos-Kasten */
             margin: 1.5cm auto 0 auto;
         }
 
         .wave-divider svg {
             display: block;
             width: 100%;
-            height: 30px;
+            height: 44px;
+        }
+
+        @media (max-width: 768px) {
+            .wave-divider {
+                width: 299px;   /* wie die Karten und der Videos-Kasten auf dem Handy */
+            }
         }
 
         .conductors-grid {
@@ -1379,7 +1392,7 @@
 
     <!-- 3. CONDUCTORS (2-SPALTEN GRID, ZUFÄLLIGE REIHENFOLGE) -->
     <div class="conductors-section" id="artists">
-        <h2 class="section-label">Representation</h2>
+        <h2 class="section-label">Representatives</h2>
         <div class="conductors-grid" id="conductorsGrid">
 
             <div class="artist-wrapper">
@@ -1450,8 +1463,8 @@
         </div>
         <!-- leicht geschwungene Trennlinie unter den Karten -->
         <div class="wave-divider" aria-hidden="true">
-            <svg viewBox="0 0 1200 40" preserveAspectRatio="none" focusable="false">
-                <path d="M0 22 C 200 4, 400 4, 600 20 S 1000 36, 1200 18" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            <svg viewBox="0 0 1200 64" preserveAspectRatio="none" focusable="false">
+                <path d="M0 32 C 200 0, 400 0, 600 32 S 1000 64, 1200 32" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
             </svg>
         </div>
     </div>
