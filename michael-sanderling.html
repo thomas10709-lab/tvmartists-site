@@ -305,6 +305,40 @@
             margin-top: 22px;
         }
 
+        /* Future-Projects-Container: ca. 66 % der Breite des News-Containers */
+        .fp-box {
+            width: 66%;
+            margin: 0 auto 14px auto;
+            background-color: #ffffff;
+            color: #1b2a3a;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            padding: 18px 24px;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
+        .fp-box-title {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-align: center;
+            margin: 0 0 12px 0;
+            color: #1b2a3a;
+        }
+        .fp-box-text {
+            margin: 0;
+            font-size: 14.5px;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.7;
+            text-align: justify;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        @media (max-width: 768px) {
+            .fp-box { width: 100%; padding: 16px 18px; }
+        }
+
         /* News-Karussell */
         .news-carousel-wrapper {
             display: block;
@@ -705,38 +739,6 @@
                 Lucerne Symphony Orchestra since 2021<br>
                 Dresden Philharmonic 2011–19<br><br>
 
-                Future projects<br>
-                Berliner Philharmoniker<br>
-                Hong Kong Philharmonic Orchestra<br>
-                Dallas Symphony Orchestra<br>
-                Leipzig Gewandhaus Orchestra<br>
-                NDR Radio Philharmonic Hanover<br>
-                KBS Symphony Orchestra Seoul<br>
-                Milwaukee Symphony Orchestra<br>
-                Vienna Symphoniker<br>
-                Konzerthausorchester Berlin<br>
-                Helsinki Philharmonic Orchestra<br>
-                Gothenburg Symphoniker<br>
-                Norwegian Radio Orchestra<br>
-                The Florida Orchestra<br>
-                Düsseldorfer Symphoniker<br>
-                BBC Scottish Symphony Orchestra<br>
-                Dresden Philharmonic<br>
-                Hyogo PAC Orchestra<br>
-                National Symphony Orchestra of Taiwan<br>
-                Nagoya Symphony Orchestra<br>
-                Osaka Symphony Orchestra<br>
-                Musikkollegium Winterthur<br>
-                Antwerp Symphony Orchestra<br>
-                Guerzenich Orchestra Cologne<br>
-                Essen Philharmonic<br>
-                Orquestra Simfònica de Barcelona<br>
-                Orquesta Sinfónica del Principado de Asturias<br>
-                Orquestra Sinfónica do Porto<br>
-                Irish National Symphony Orchestra<br>
-                Shanghai Philharmonic<br>
-                Orquestra Gulbenkian<br><br>
-
                 Labels: Sony classical, Warner
             </div>
         </div>
@@ -760,6 +762,12 @@
                 </div>
             </div>
         </div>
+
+        <!-- FUTURE PROJECTS: Container (ca. 66 % der News-Breite), Orchester als Blocktext -->
+        <section class="fp-box" aria-labelledby="fpTitle">
+            <h2 id="fpTitle" class="fp-box-title">Future projects</h2>
+            <p class="fp-box-text">Berliner Philharmoniker, Hong Kong Philharmonic Orchestra, Dallas Symphony Orchestra, Leipzig Gewandhaus Orchestra, NDR Radio Philharmonic Hanover, KBS Symphony Orchestra Seoul, Milwaukee Symphony Orchestra, Vienna Symphoniker, Konzerthausorchester Berlin, Helsinki Philharmonic Orchestra, Gothenburg Symphoniker, Norwegian Radio Orchestra, The Florida Orchestra, Düsseldorfer Symphoniker, BBC Scottish Symphony Orchestra, Dresden Philharmonic, Hyogo PAC Orchestra, National Symphony Orchestra of Taiwan, Nagoya Symphony Orchestra, Osaka Symphony Orchestra, Musikkollegium Winterthur, Antwerp Symphony Orchestra, Guerzenich Orchestra Cologne, Essen Philharmonic, Orquestra Simfònica de Barcelona, Orquesta Sinfónica del Principado de Asturias, Orquestra Sinfónica do Porto, Irish National Symphony Orchestra, Shanghai Philharmonic, Orquestra Gulbenkian</p>
+        </section>
 
         <!-- KALENDER: nächste 3 Termine, "Read more" zeigt die Saison -->
         <section id="calendar-preview-wrapper" class="calendar-box" aria-labelledby="calendarTitle">
