@@ -654,7 +654,7 @@
         </div>
 
         <!-- NEWS-KARUSSELL (WordPress-Kategorie 12 = Johannes Pierre Bettac) -->
-        <div class="news-carousel-wrapper" id="newsCarousel" data-category="12">
+        <div class="news-carousel-wrapper" id="newsCarousel" data-news-key="johannes-pierre-bettac" data-category="12">
             <div class="news-carousel-inner">
                 <div class="news-carousel-header">News</div>
                 <div class="news-carousel-track" id="newsTrack"></div>
@@ -733,123 +733,8 @@
         <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
     </footer>
 
-    <!-- NEWS-KARUSSELL: lädt die Beiträge der Kategorie aus WordPress -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const WP_API_BASE = "https://tvmartists.com/wp-json/wp/v2";
-            const MAX_ITEMS = 10;
-            const wrapper = document.getElementById("newsCarousel");
-            const track = document.getElementById("newsTrack");
-            const dotsWrap = document.getElementById("newsDots");
-            const prevBtn = document.getElementById("newsPrev");
-            const nextBtn = document.getElementById("newsNext");
-            if (!wrapper || !track) return;
-            const categoryId = wrapper.dataset.category;
-            const categoryName = wrapper.dataset.categoryName || "";
-
-            function stripHtml(html) {
-                const tmp = document.createElement("div");
-                tmp.innerHTML = html;
-                return tmp.textContent || tmp.innerText || "";
-            }
-
-            function normalize(s) {
-                return stripHtml(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
-            }
-
-            // Kategorie-ID: direkt aus data-category, sonst über den Namen suchen
-            async function resolveCategoryId() {
-                if (categoryId) return categoryId;
-                const keyword = categoryName.split(" ").pop();
-                const response = await fetch(WP_API_BASE + "/categories?per_page=100&search=" + encodeURIComponent(keyword));
-                if (!response.ok) throw new Error("Kategorie-Suche fehlgeschlagen: " + response.status);
-                const cats = await response.json();
-                const wanted = normalize(categoryName);
-                const match = cats.find(function (c) { return normalize(c.name) === wanted; })
-                           || cats.find(function (c) { return normalize(c.name).indexOf(normalize(keyword)) !== -1; });
-                if (!match) throw new Error("Kategorie nicht gefunden");
-                return match.id;
-            }
-
-            async function loadNewsItems() {
-                const catId = await resolveCategoryId();
-                const url = WP_API_BASE + "/posts?categories=" + catId + "&per_page=" + MAX_ITEMS + "&_embed";
-                const response = await fetch(url);
-                if (!response.ok) throw new Error("WordPress API Fehler: " + response.status);
-                const posts = await response.json();
-                return posts.map(function (post) {
-                    let image = "";
-                    try { image = post._embedded["wp:featuredmedia"][0].source_url; } catch (e) { image = ""; }
-                    return { image: image, alt: stripHtml(post.title.rendered) };
-                });
-            }
-
-            loadNewsItems().then(function (items) {
-                items = items.filter(function (item) { return !!item.image; });
-                if (items.length === 0) {
-                    track.innerHTML = "<p style='padding:20px;'>Noch keine News vorhanden.</p>";
-                    return;
-                }
-                items.forEach(function (item) {
-                    const slide = document.createElement("div");
-                    slide.className = "news-slide";
-                    const img = document.createElement("img");
-                    img.src = item.image;
-                    img.alt = item.alt || "News";
-                    img.loading = "lazy";
-                    slide.appendChild(img);
-                    track.appendChild(slide);
-                });
-
-                const slides = Array.from(track.children);
-                slides.forEach(function (_, i) {
-                    const dot = document.createElement("div");
-                    dot.className = "news-carousel-dot" + (i === 0 ? " active" : "");
-                    dot.addEventListener("click", function () {
-                        slides[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-                    });
-                    dotsWrap.appendChild(dot);
-                });
-                const dots = Array.from(dotsWrap.children);
-
-                function getClosestIndex() {
-                    const trackRect = track.getBoundingClientRect();
-                    let closestIndex = 0, closestDist = Infinity;
-                    slides.forEach(function (slide, i) {
-                        const dist = Math.abs(slide.getBoundingClientRect().left - trackRect.left);
-                        if (dist < closestDist) { closestDist = dist; closestIndex = i; }
-                    });
-                    return closestIndex;
-                }
-                function updateActiveDot() {
-                    const idx = getClosestIndex();
-                    dots.forEach(function (d, i) { d.classList.toggle("active", i === idx); });
-                }
-                let scrollTimeout;
-                track.addEventListener("scroll", function () {
-                    clearTimeout(scrollTimeout);
-                    scrollTimeout = setTimeout(updateActiveDot, 80);
-                });
-                function goToSlide(index) {
-                    const clamped = Math.max(0, Math.min(slides.length - 1, index));
-                    slides[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-                }
-                if (prevBtn) prevBtn.addEventListener("click", function () { goToSlide(getClosestIndex() - 1); });
-                if (nextBtn) nextBtn.addEventListener("click", function () { goToSlide(getClosestIndex() + 1); });
-                updateActiveDot();
-
-                // Karussell leicht anscrollen, damit die nächste Karte angeschnitten ist
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        track.scrollLeft = window.innerWidth <= 768 ? 32 : 56;
-                        updateActiveDot();
-                    });
-                });
-            }).catch(function () {
-                track.innerHTML = "<p style='padding:20px;'>News konnten nicht geladen werden.</p>";
-            });
-        });
-    </script>
+    <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json), sonst WordPress -->
+    <script src="news-carousel.js?v=1" defer></script>
 
     <!-- KALENDER: lädt die Termine aus dem Google-Sheet-Feed -->
     <script>

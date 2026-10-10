@@ -2,3 +2,6 @@
 node_modules/
 *.log
 .env
+
+# Daten der News-Verwaltung liegen nur auf dem Server
+news-data/

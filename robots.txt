@@ -3,5 +3,6 @@ Allow: /
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 Disallow: /neu/
+Disallow: /news-admin/
 
 Sitemap: https://tvmartists.com/sitemap.xml
