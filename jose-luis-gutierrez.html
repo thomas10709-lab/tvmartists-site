@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>José Luis Gutiérrez - TVM Artists</title>
+    <meta name="description" content="José Luis Gutiérrez – Mexican-born conductor, General Music Director of the Mittelsächsisches Theater Freiberg. Biography, future projects, news and contact via TVM artists.">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="TVM artists">
+    <meta property="og:title" content="José Luis Gutiérrez - TVM Artists">
+    <meta property="og:description" content="José Luis Gutiérrez – Mexican-born conductor, General Music Director of the Mittelsächsisches Theater Freiberg. Biography, future projects, news and contact via TVM artists.">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "José Luis Gutiérrez", "jobTitle": "Conductor", "sameAs": ["https://instagram.com/gutierrezconductor", "https://gutierrezconductor.com"], "description": "José Luis Gutiérrez – Mexican-born conductor, General Music Director of the Mittelsächsisches Theater Freiberg. Biography, future projects, news and contact via TVM artists."}</script>
+    <style>
+
+        /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Syne:wght@400;500;600;700&family=Urbanist:wght@200;300;400;500&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1F4270;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --artist-photo-width: 55%;
+            --artist-photo-max-width: 65%;
+            --artist-photo-mobile-width: 80%;
+            --spacing-section: 1.5cm;
+            --font-subtitle: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px 40px 20px;
+            box-sizing: border-box;
+        }
+        .footer-rule {
+            width: min(220px, 60vw);
+            height: 1px;
+            margin: 0 auto 40px auto;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        .footer-insta {
+            display: inline-block;
+            line-height: 0;
+            margin-bottom: 28px;
+            transition: opacity 0.25s ease;
+        }
+        .footer-insta:hover { opacity: 0.7; }
+        .footer-insta img {
+            width: 34px;
+            height: 34px;
+            display: block;
+        }
+        .footer-logo-link {
+            display: block;
+            width: 120px;
+            margin: 0 auto 30px auto;
+            line-height: 0;
+            transition: opacity 0.25s ease;
+        }
+        .footer-logo-link:hover { opacity: 0.7; }
+        .footer-logo {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .footer-copy {
+            font-family: var(--font-subtitle);
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+        .footer-copy a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+        .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
+
+        /* --- ARTIST-SEITE --- */
+        .artist-hero {
+            position: relative;
+            width: 100%;
+            margin: 0 0 14px 0;
+            line-height: 0;
+        }
+        /* Desktop: Name steht schon im Bild, die Überschrift bleibt nur für Suchmaschinen und Screenreader */
+        .hero-name {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .artist-hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Desktop: Name als Text links neben dem Foto */
+        @media (min-width: 769px) {
+            .artist-hero--overlay-desktop .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 4%;
+                top: 58%;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: nowrap;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: clamp(28px, 3.3vw, 52px);
+                line-height: 1.2;
+                letter-spacing: 0.05em;
+                color: #ffffff;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+            }
+        }
+        @media (max-width: 768px) {
+            .artist-hero--overlay-desktop .hero-name { bottom: 24px; font-size: 6.4vw; letter-spacing: 0.04em; }
+        }
+
+        .artist-subtitle {
+            text-align: center;
+            margin: 18px 0 20px 0;
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .bio-photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bio-photo img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .artist-page {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            text-align: left;
+        }
+
+        .artist-page, .container-content {
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            word-break: break-word;
+        }
+
+        /* Buttons: weiß mit blauem Rand und blauer Schrift */
+        .custom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #061d3a !important;
+            font-family: sans-serif !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            line-height: 1;
+            background-color: #ffffff !important;
+            padding: 0 10px;
+            height: 30px;
+            border-radius: 8px;
+            border: 0.5px solid #061d3a !important;
+            margin: 3px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        .custom-btn:hover {
+            background-color: #f0f0f0 !important;
+        }
+        #top-button-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin: 0 0 12px 0;
+        }
+
+        /* Future Projects */
+        #future-projects-wrapper {
+            max-width: 700px;
+            margin: 0 auto 14px auto;
+            text-align: center;
+            padding: 4px 20px 18px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        #future-projects-wrapper .fp-title {
+            font-weight: 400;
+        }
+        #future-projects-wrapper .fp-list {
+            margin-top: 22px;
+        }
+
+        /* News-Karussell */
+        .news-carousel-wrapper {
+            display: block;
+            width: 100%;
+            margin: 0 auto 14px auto;
+            box-sizing: border-box;
+            position: relative;
+            font-family: sans-serif;
+        }
+        .news-carousel-inner {
+            background-color: #f4f7f9;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .news-carousel-header {
+            text-align: center;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-bottom: 0.5px solid rgba(44, 62, 80, 0.2);
+        }
+        .news-carousel-track {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            scroll-padding-left: 24px;
+            scroll-padding-right: 24px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 20px 24px;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+        .news-carousel-track::-webkit-scrollbar { display: none; }
+        .news-slide {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: min(380px, 82vw);
+            box-sizing: border-box;
+        }
+        .news-slide img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+        .news-carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 4px 20px 16px 20px;
+        }
+        .news-carousel-arrow {
+            background: transparent;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+            user-select: none;
+        }
+        .news-carousel-arrow:hover {
+            background-color: #2C3E50;
+            color: #ffffff;
+        }
+        .news-carousel-dots { display: flex; gap: 6px; }
+        .news-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(44, 62, 80, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .news-carousel-dot.active {
+            background-color: #2C3E50;
+            transform: scale(1.2);
+        }
+
+        /* Biografie-Box */
+        .container-content {
+            background-color: #ffffff;
+            color: #2C3E50;
+            padding: 20px;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+        .container-content a { color: #2C3E50; }
+
+        .artist-footer-note {
+            padding-top: 1px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .artist-page {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0 40px 0;
+            }
+            .artist-hero img { object-fit: contain; }
+            /* Handy: Name als Text über dem Foto */
+            .artist-hero::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 34%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+                pointer-events: none;
+            }
+            .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 0;
+                right: 0;
+                bottom: 52px;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                text-align: center;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+            }
+            .news-carousel-inner {
+                max-width: none;
+                border-radius: 0;
+                border: none;
+            }
+            .news-carousel-header { font-size: 16px; }
+            .news-carousel-track {
+                padding: 20px 0;
+                scroll-padding-left: 0;
+                scroll-padding-right: 0;
+            }
+            .news-slide { width: min(380px, 85vw); margin: 0 12px; }
+            .news-carousel-nav { padding: 4px 0 16px 0; }
+            .container-content {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                padding: 20px;
+            }
+        }
+
+        /* --- TOP-BANNER: LOGO + NAVIGATION --- */
+        html {
+            scroll-padding-top: 1cm;
+        }
+        .site-banner {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            margin: 0;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease;
+        }
+        .site-banner.is-hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
+        }
+
+        .site-banner-inner {
+            height: 2cm;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .site-logo-img {
+            height: 60px !important;
+            width: auto !important;
+            max-width: 60vw !important;
+            display: block;
+            object-fit: contain;
+        }
+
+        .site-nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .site-nav-desktop a {
+            font-family: sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+        }
+
+        .site-nav-desktop a:hover {
+            opacity: 0.6;
+        }
+
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #12396B !important;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.is-open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-btn.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.is-open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .site-nav-mobile {
+            display: none;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .site-nav-mobile a {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #12396B !important;
+            text-decoration: none !important;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(18, 57, 107, 0.1);
+        }
+
+        .site-nav-mobile.is-open {
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 1cm;
+            }
+            .site-banner-inner {
+                height: 2cm;
+                padding: 0 20px;
+            }
+            .site-logo {
+                font-size: 16px;
+            }
+            .site-logo-img {
+                height: 60px !important;
+            }
+            .site-nav-desktop {
+                display: none;
+            }
+            .hamburger-btn {
+                display: flex;
+            }
+            .site-nav-mobile {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
+    <header class="site-banner">
+        <div class="site-banner-inner">
+            <a href="index.html" class="site-logo">
+                <img src="images/logo1.png"
+                     alt="TVM artists" class="site-logo-img" loading="eager">
+            </a>
+
+            <nav class="site-nav-desktop">
+                <a href="index.html#news">News</a>
+                <a href="index.html#artists">Artists</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#touring">Touring</a>
+                <a href="index.html#about-contact">About</a>
+                <a href="index.html#about-contact">Contact</a>
+            </nav>
+
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="site-nav-mobile" id="mobileNav">
+            <a href="index.html#news">News</a>
+            <a href="index.html#artists">Artists</a>
+            <a href="index.html#media">Media</a>
+            <a href="index.html#touring">Touring</a>
+            <a href="index.html#about-contact">About</a>
+            <a href="index.html#about-contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO (Querformat auf dem Desktop, Hochformat auf dem Handy; Name als Text) -->
+    <div class="artist-hero artist-hero--overlay-desktop">
+        <picture>
+            <source media="(max-width: 768px)" srcset="images/gutierrez-mobile-800.webp 800w, images/gutierrez-mobile-1200.webp 1200w, images/gutierrez-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
+            <source media="(max-width: 768px)" srcset="images/gutierrez-mobile-800.jpg 800w, images/gutierrez-mobile-1200.jpg 1200w, images/gutierrez-mobile-1600.jpg 1600w" sizes="100vw">
+            <source srcset="images/gutierrez-hero-1280.webp 1280w, images/gutierrez-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
+            <img src="images/gutierrez-hero-1920.jpg" alt="José Luis Gutiérrez" width="1920" height="1080" loading="eager">
+        </picture>
+        <h1 class="hero-name">José Luis Gutiérrez</h1>
+    </div>
+
+    <main class="artist-page">
+
+        <!-- KURZTITEL -->
+        <div class="artist-subtitle">GMD of the Mittelsächsische Theater Freiberg</div>
+
+        <!-- FUTURE GUEST CONDUCTOR -->
+        <div id="future-projects-wrapper">
+            <div class="fp-title">Future Guest Conductor</div>
+            <div class="fp-list">
+                Staatsphilharmonie Rheinland Pfalz<br>
+                Prague Philharmonia<br>
+                NDR Radio Philharmonic Hanover<br>
+                Lakes Area Music Festival<br>
+                Opera Cologne<br>
+                Opera Stuttgart<br>
+                Orquesta Sinfónica Sinaloa<br>
+                San Francisco Opera (assistant)<br>
+                among others
+            </div>
+        </div>
+
+        <!-- BUTTON-REIHE -->
+        <div id="top-button-row">
+            <a href="https://tinyurl.com/youtubegutierrez" target="_blank" rel="noopener" class="custom-btn">Videos</a>
+            <a href="https://www.dropbox.com/scl/fo/4kbgxnee0w0hbz433gni1/AEun7MvqWWGkcSTHUavjim8?rlkey=rbkspg2a6jphawsrb5vtxwrcc&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
+            <a href="https://gutierrezconductor.com" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
+        </div>
+
+        <!-- NEWS-KARUSSELL (WordPress-Kategorie 15 = José Luis Gutiérrez) -->
+        <div class="news-carousel-wrapper" id="newsCarousel" data-category="15">
+            <div class="news-carousel-inner">
+                <div class="news-carousel-header">News</div>
+                <div class="news-carousel-track" id="newsTrack"></div>
+                <div class="news-carousel-nav">
+                    <div class="news-carousel-arrow" id="newsPrev" aria-label="Zurück">&#8249;</div>
+                    <div class="news-carousel-dots" id="newsDots"></div>
+                    <div class="news-carousel-arrow" id="newsNext" aria-label="Weiter">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIOGRAPHY -->
+        <div class="container-content">
+
+            <!-- Foto -->
+            <div class="bio-photo">
+                <img src="https://tvmartists.com/wp-content/uploads/2026/06/Gutierrez_6046.jpg" alt="José Luis Gutiérrez" loading="lazy">
+            </div>
+
+            <strong>Biography</strong><br><br>
+
+            Mexican-born conductor José Luis Gutiérrez has served as General Music Director (GMD) at the Mittelsächsisches Theater Freiberg since the 2025/26 season, after previously shaping the house's musical profile as First Kapellmeister. He is currently the youngest GMD in Germany. His repertoire spans from classical opera to modern symphonic works, with critics frequently highlighting his musical versatility and collaborative leadership style.<br><br>
+
+            Notable highlights of the 2025/26 season include his debut with the Gürzenich Orchestra at the Cologne Opera with Mozart's The Magic Flute, as well as his debut with the Deutsche Staatsphilharmonie Rheinland-Pfalz. In 2025, he made his U.S. debut at the Lakes Area Music Festival in Minnesota, to which he has already been reinvited for 2026.<br><br>
+
+            Upcoming projects will take him to the NDR Radio Philharmonic Hannover and the Prague Philharmonia, including a performance at the Concertgebouw Amsterdam. Furthermore, he will return to conduct the Deutsche Staatsphilharmonie Rheinland-Pfalz, at the Cologne Opera, and the Lakes Area Music Festival. In Mexico, he will conduct the Orquesta Sinfónica Sinaloa de las Artes. In 2027, he will serve as assistant conductor for the production of Tosca at the San Francisco Opera. He previously drew significant attention in November 2024 with his debut at the Stuttgart State Opera, conducting Barrie Kosky's legendary production of The Magic Flute at the invitation of GMD Cornelius Meister.<br><br>
+
+            In 2023, he worked internationally at the San Francisco Opera, where he served as an assistant to Sir Donald Runnicles and Roberto Kalb during the anniversary season. His work there included the world premiere of El último sueño de Frida y Diego and Richard Strauss's Die Frau ohne Schatten.<br><br>
+
+            His extensive opera repertoire spans numerous productions, including Dido and Aeneas, Don Giovanni, The Magic Flute, Fidelio, Der Waffenschmied, The Barber of Seville, Don Pasquale, Rigoletto, The Merry Wives of Windsor, Carmen, Die Fledermaus, Pagliacci, Gianni Schicchi, Hänsel und Gretel, Frau ohne Schatten, Frau Luna, Cendrillon, The Tsarevich, The Count of Luxembourg, The Csárdás Princess, Countess Maritza, La voix humaine, The Telephone, and The Consul. In addition to his work in Freiberg, he has made guest appearances at theaters such as the Landestheater Coburg and the Staatstheater Meiningen. He is also deeply committed to contemporary music, regularly collaborating with ensembles like the Tiroler Ensemble für Neue Musik.<br><br>
+
+            José Luis Gutiérrez graduated with honors in conducting from the Tiroler Landeskonservatorium under Dorian Keilhack and is currently pursuing his Master's degree at the Hochschule für Musik Nürnberg. He received further artistic guidance through the Carlos Miguel Prieto Conducting Program at the OAcademy and in masterclasses with Kenneth Kiesler. His musical roots lie in the Mexican National Youth Orchestra and the Orquesta Esperanza Azteca, where he performed as a cellist.<br><br>
+
+            <div class="artist-footer-note">
+
+                <!-- Instagram -->
+                <div style="margin-top: 25px; margin-bottom: 15px;">
+                    <a href="https://instagram.com/gutierrezconductor" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <span style="vertical-align: super; margin-left: 8px; font-size: 14px;">Follow on Instagram</span>
+                    </a>
+                </div>
+
+                <div style="font-size: 13px; opacity: 0.9; margin-top: 25px;">
+                    Photo credit: &copy; Theresa Pewal
+                </div>
+
+                <div style="font-size: 13px; line-height: 1.4; margin-top: 15px;">
+                    Contact: Thomas Voigt - <a href="mailto:thomas@tvmartists.com" style="text-decoration: underline;">thomas@tvmartists.com</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-rule"></div>
+        <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
+            <img src="images/insta.png" alt="Instagram">
+        </a>
+        <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
+    </footer>
+
+    <!-- NEWS-KARUSSELL: lädt die Beiträge der Kategorie aus WordPress -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const WP_API_BASE = "https://tvmartists.com/wp-json/wp/v2";
+            const MAX_ITEMS = 10;
+            const wrapper = document.getElementById("newsCarousel");
+            const track = document.getElementById("newsTrack");
+            const dotsWrap = document.getElementById("newsDots");
+            const prevBtn = document.getElementById("newsPrev");
+            const nextBtn = document.getElementById("newsNext");
+            if (!wrapper || !track) return;
+            const categoryId = wrapper.dataset.category;
+            const categoryName = wrapper.dataset.categoryName || "";
+
+            function stripHtml(html) {
+                const tmp = document.createElement("div");
+                tmp.innerHTML = html;
+                return tmp.textContent || tmp.innerText || "";
+            }
+
+            function normalize(s) {
+                return stripHtml(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+            }
+
+            // Kategorie-ID: direkt aus data-category, sonst über den Namen suchen
+            async function resolveCategoryId() {
+                if (categoryId) return categoryId;
+                const keyword = categoryName.split(" ").pop();
+                const response = await fetch(WP_API_BASE + "/categories?per_page=100&search=" + encodeURIComponent(keyword));
+                if (!response.ok) throw new Error("Kategorie-Suche fehlgeschlagen: " + response.status);
+                const cats = await response.json();
+                const wanted = normalize(categoryName);
+                const match = cats.find(function (c) { return normalize(c.name) === wanted; })
+                           || cats.find(function (c) { return normalize(c.name).indexOf(normalize(keyword)) !== -1; });
+                if (!match) throw new Error("Kategorie nicht gefunden");
+                return match.id;
+            }
+
+            async function loadNewsItems() {
+                const catId = await resolveCategoryId();
+                const url = WP_API_BASE + "/posts?categories=" + catId + "&per_page=" + MAX_ITEMS + "&_embed";
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("WordPress API Fehler: " + response.status);
+                const posts = await response.json();
+                return posts.map(function (post) {
+                    let image = "";
+                    try { image = post._embedded["wp:featuredmedia"][0].source_url; } catch (e) { image = ""; }
+                    return { image: image, alt: stripHtml(post.title.rendered) };
+                });
+            }
+
+            loadNewsItems().then(function (items) {
+                items = items.filter(function (item) { return !!item.image; });
+                if (items.length === 0) {
+                    track.innerHTML = "<p style='padding:20px;'>Noch keine News vorhanden.</p>";
+                    return;
+                }
+                items.forEach(function (item) {
+                    const slide = document.createElement("div");
+                    slide.className = "news-slide";
+                    const img = document.createElement("img");
+                    img.src = item.image;
+                    img.alt = item.alt || "News";
+                    img.loading = "lazy";
+                    slide.appendChild(img);
+                    track.appendChild(slide);
+                });
+
+                const slides = Array.from(track.children);
+                slides.forEach(function (_, i) {
+                    const dot = document.createElement("div");
+                    dot.className = "news-carousel-dot" + (i === 0 ? " active" : "");
+                    dot.addEventListener("click", function () {
+                        slides[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+                    });
+                    dotsWrap.appendChild(dot);
+                });
+                const dots = Array.from(dotsWrap.children);
+
+                function getClosestIndex() {
+                    const trackRect = track.getBoundingClientRect();
+                    let closestIndex = 0, closestDist = Infinity;
+                    slides.forEach(function (slide, i) {
+                        const dist = Math.abs(slide.getBoundingClientRect().left - trackRect.left);
+                        if (dist < closestDist) { closestDist = dist; closestIndex = i; }
+                    });
+                    return closestIndex;
+                }
+                function updateActiveDot() {
+                    const idx = getClosestIndex();
+                    dots.forEach(function (d, i) { d.classList.toggle("active", i === idx); });
+                }
+                let scrollTimeout;
+                track.addEventListener("scroll", function () {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(updateActiveDot, 80);
+                });
+                function goToSlide(index) {
+                    const clamped = Math.max(0, Math.min(slides.length - 1, index));
+                    slides[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+                }
+                if (prevBtn) prevBtn.addEventListener("click", function () { goToSlide(getClosestIndex() - 1); });
+                if (nextBtn) nextBtn.addEventListener("click", function () { goToSlide(getClosestIndex() + 1); });
+                updateActiveDot();
+
+                // Karussell leicht anscrollen, damit die nächste Karte angeschnitten ist
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        track.scrollLeft = window.innerWidth <= 768 ? 32 : 56;
+                        updateActiveDot();
+                    });
+                });
+            }).catch(function () {
+                track.innerHTML = "<p style='padding:20px;'>News konnten nicht geladen werden.</p>";
+            });
+        });
+    </script>
+
+    <!-- HEADER: BEIM RUNTERSCROLLEN AUSBLENDEN, BEIM HOCHSCROLLEN EINBLENDEN -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.querySelector(".site-banner");
+            const nav = document.getElementById("mobileNav");
+            if (!header) return;
+            let lastY = window.scrollY;
+            let ticking = false;
+
+            function show() { header.classList.remove("is-hidden"); }
+            function hide() { header.classList.add("is-hidden"); }
+
+            window.addEventListener("scroll", function () {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    const y = Math.max(window.scrollY, 0);
+                    const menuOpen = nav && nav.classList.contains("is-open");
+                    if (y <= header.offsetHeight || menuOpen || y < lastY - 4) {
+                        show();
+                    } else if (y > lastY + 4) {
+                        hide();
+                    }
+                    lastY = y;
+                    ticking = false;
+                });
+            }, { passive: true });
+
+            header.addEventListener("focusin", show);
+        });
+    </script>
+
+    <!-- HAMBURGER-MENÜ TOGGLE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.getElementById("hamburgerBtn");
+            const nav = document.getElementById("mobileNav");
+            if (!btn || !nav) return;
+
+            btn.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                btn.classList.toggle("is-open", isOpen);
+                btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    btn.classList.remove("is-open");
+                    btn.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
