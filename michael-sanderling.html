@@ -196,6 +196,11 @@
             margin: 0 auto;
         }
         .bio-image { text-align: center; margin: 0 0 1em 0; }
+        /* Desktop: Grafiken nur halb so breit wie der Textkasten, mittig; Handy bleibt volle Breite */
+        @media (min-width: 769px) {
+            .bio-image { margin: 0.6em 0 1.2em 0; }
+            .bio-image img { width: 50%; }
+        }
 
         /* Kalender */
         .calendar-box {
