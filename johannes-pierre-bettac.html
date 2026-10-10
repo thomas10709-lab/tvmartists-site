@@ -144,13 +144,13 @@
             .artist-hero--name-bottom .hero-name {
                 left: 50%;
                 top: auto;
-                bottom: 7%;
+                bottom: calc(7% + 2cm);
                 transform: translateX(-50%);
                 font-size: clamp(30px, 3.4vw, 56px);
             }
         }
         @media (max-width: 768px) {
-            .artist-hero--name-bottom .hero-name { font-size: 6.4vw; letter-spacing: 0.04em; }
+            .artist-hero--name-bottom .hero-name { font-size: 6.4vw; letter-spacing: 0.04em; bottom: calc(24px + 2cm); }
         }
 
         /* Kalender */
