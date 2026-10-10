@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Michael Sanderling - TVM Artists</title>
+    <meta name="description" content="Michael Sanderling – conductor, Chief Conductor of the Lucerne Symphony Orchestra since 2021 and Chief Conductor of the Dresden Philharmonic 2011–19. News, calendar, biography and contact via TVM artists.">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="TVM artists">
+    <meta property="og:title" content="Michael Sanderling - TVM Artists">
+    <meta property="og:description" content="Michael Sanderling – conductor, Chief Conductor of the Lucerne Symphony Orchestra since 2021 and Chief Conductor of the Dresden Philharmonic 2011–19. News, calendar, biography and contact via TVM artists.">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Michael Sanderling", "jobTitle": "Conductor", "sameAs": ["https://instagram.com/sanderlingconductor", "https://michaelsanderling.com"], "description": "Michael Sanderling – conductor, Chief Conductor of the Lucerne Symphony Orchestra since 2021 and Chief Conductor of the Dresden Philharmonic 2011–19. News, calendar, biography and contact via TVM artists."}</script>
+    <style>
+
+        /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Syne:wght@400;500;600;700&family=Urbanist:wght@200;300;400;500&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1F4270;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --artist-photo-width: 55%;
+            --artist-photo-max-width: 65%;
+            --artist-photo-mobile-width: 80%;
+            --spacing-section: 1.5cm;
+            --font-subtitle: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px 40px 20px;
+            box-sizing: border-box;
+        }
+        .footer-rule {
+            width: min(220px, 60vw);
+            height: 1px;
+            margin: 0 auto 40px auto;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        .footer-insta {
+            display: inline-block;
+            line-height: 0;
+            margin-bottom: 28px;
+            transition: opacity 0.25s ease;
+        }
+        .footer-insta:hover { opacity: 0.7; }
+        .footer-insta img {
+            width: 34px;
+            height: 34px;
+            display: block;
+        }
+        .footer-logo-link {
+            display: block;
+            width: 120px;
+            margin: 0 auto 30px auto;
+            line-height: 0;
+            transition: opacity 0.25s ease;
+        }
+        .footer-logo-link:hover { opacity: 0.7; }
+        .footer-logo {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .footer-copy {
+            font-family: var(--font-subtitle);
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+        .footer-copy a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+        .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
+
+        /* --- ARTIST-SEITE --- */
+        .artist-hero {
+            position: relative;
+            width: 100%;
+            margin: 0 0 14px 0;
+            line-height: 0;
+        }
+        /* Desktop: Name steht schon im Bild, die Überschrift bleibt nur für Suchmaschinen und Screenreader */
+        .hero-name {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .artist-hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Desktop: Name als Text links neben dem Foto */
+        @media (min-width: 769px) {
+            .artist-hero--overlay-desktop .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 6%;
+                top: 56%;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: nowrap;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: clamp(34px, 4.4vw, 68px);
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* Hero mit Bildern von WP; Name als Text rechts neben dem Foto (Desktop) */
+        @media (min-width: 769px) {
+            .artist-hero--wp .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 58%;
+                top: 50%;
+                transform: translateY(-50%);
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: nowrap;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: clamp(30px, 3.4vw, 56px);
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+            }
+        }
+        /* Handy: Name steht im Hochformat-Bild, die Überschrift bleibt nur für Suchmaschinen */
+        @media (max-width: 768px) {
+            .artist-hero--wp::after { display: none; }
+            .artist-hero--wp .hero-name {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                font-size: 1px;
+                text-shadow: none;
+            }
+        }
+
+        .bio-headline {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.5;
+            margin: 0 0 1em 0;
+            color: #2C3E50;
+        }
+        .container-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .bio-image { text-align: center; margin: 0 0 1em 0; }
+
+        /* Kalender */
+        .calendar-box {
+            max-width: 700px;
+            margin: 0 auto 14px auto;
+            text-align: center;
+            background-color: #ffffff;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-sizing: border-box;
+        }
+        .calendar-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin: 0 0 12px 0;
+            color: #2C3E50;
+        }
+        .calendar-list {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #2C3E50;
+        }
+        .calendar-event { margin-bottom: 14px; }
+        #calendar-readmore-wrapper { margin-top: 8px; }
+        #calendar-full {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 0.5px solid rgba(44, 62, 80, 0.3);
+        }
+        @media (max-width: 768px) {
+            .calendar-box { margin-left: 12px; margin-right: 12px; }
+        }
+
+        .artist-page {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            text-align: left;
+        }
+
+        .artist-page, .container-content {
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            word-break: break-word;
+        }
+
+        /* Buttons: weiß mit blauem Rand und blauer Schrift */
+        .custom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #061d3a !important;
+            font-family: sans-serif !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            line-height: 1;
+            background-color: #ffffff !important;
+            padding: 0 10px;
+            height: 30px;
+            border-radius: 8px;
+            border: 0.5px solid #061d3a !important;
+            margin: 3px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        .custom-btn:hover {
+            background-color: #f0f0f0 !important;
+        }
+        #top-button-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin: 0 0 12px 0;
+        }
+
+        /* Future Projects */
+        #future-projects-wrapper {
+            max-width: 700px;
+            margin: 0 auto 14px auto;
+            text-align: center;
+            padding: 4px 20px 18px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        #future-projects-wrapper .fp-title {
+            font-weight: 400;
+        }
+        #future-projects-wrapper .fp-list {
+            margin-top: 22px;
+        }
+
+        /* News-Karussell */
+        .news-carousel-wrapper {
+            display: block;
+            width: 100%;
+            margin: 0 auto 14px auto;
+            box-sizing: border-box;
+            position: relative;
+            font-family: sans-serif;
+        }
+        .news-carousel-inner {
+            background-color: #f4f7f9;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .news-carousel-header {
+            text-align: center;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-bottom: 0.5px solid rgba(44, 62, 80, 0.2);
+        }
+        .news-carousel-track {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            scroll-padding-left: 24px;
+            scroll-padding-right: 24px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 20px 24px;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+        .news-carousel-track::-webkit-scrollbar { display: none; }
+        .news-slide {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: min(380px, 82vw);
+            box-sizing: border-box;
+        }
+        .news-slide img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+        .news-carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 4px 20px 16px 20px;
+        }
+        .news-carousel-arrow {
+            background: transparent;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+            user-select: none;
+        }
+        .news-carousel-arrow:hover {
+            background-color: #2C3E50;
+            color: #ffffff;
+        }
+        .news-carousel-dots { display: flex; gap: 6px; }
+        .news-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(44, 62, 80, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .news-carousel-dot.active {
+            background-color: #2C3E50;
+            transform: scale(1.2);
+        }
+
+        /* Biografie-Box */
+        .container-content {
+            background-color: #ffffff;
+            color: #2C3E50;
+            padding: 20px;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+        .container-content a { color: #2C3E50; }
+
+        .artist-footer-note {
+            padding-top: 1px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .artist-page {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0 40px 0;
+            }
+            .artist-hero img { object-fit: contain; }
+            /* Handy: Name als Text über dem Foto */
+            .artist-hero::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 34%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+                pointer-events: none;
+            }
+            .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 0;
+                right: 0;
+                bottom: 24px;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                text-align: center;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+            }
+            .news-carousel-inner {
+                max-width: none;
+                border-radius: 0;
+                border: none;
+            }
+            .news-carousel-header { font-size: 16px; }
+            .news-carousel-track {
+                padding: 20px 0;
+                scroll-padding-left: 0;
+                scroll-padding-right: 0;
+            }
+            .news-slide { width: min(380px, 85vw); margin: 0 12px; }
+            .news-carousel-nav { padding: 4px 0 16px 0; }
+            .container-content {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                padding: 20px;
+            }
+        }
+
+        /* --- TOP-BANNER: LOGO + NAVIGATION --- */
+        html {
+            scroll-padding-top: 1cm;
+        }
+        .site-banner {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            margin: 0;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease;
+        }
+        .site-banner.is-hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
+        }
+
+        .site-banner-inner {
+            height: 2cm;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .site-logo-img {
+            height: 60px !important;
+            width: auto !important;
+            max-width: 60vw !important;
+            display: block;
+            object-fit: contain;
+        }
+
+        .site-nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .site-nav-desktop a {
+            font-family: sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+        }
+
+        .site-nav-desktop a:hover {
+            opacity: 0.6;
+        }
+
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #12396B !important;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.is-open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-btn.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.is-open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .site-nav-mobile {
+            display: none;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .site-nav-mobile a {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #12396B !important;
+            text-decoration: none !important;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(18, 57, 107, 0.1);
+        }
+
+        .site-nav-mobile.is-open {
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 1cm;
+            }
+            .site-banner-inner {
+                height: 2cm;
+                padding: 0 20px;
+            }
+            .site-logo {
+                font-size: 16px;
+            }
+            .site-logo-img {
+                height: 60px !important;
+            }
+            .site-nav-desktop {
+                display: none;
+            }
+            .hamburger-btn {
+                display: flex;
+            }
+            .site-nav-mobile {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
+    <header class="site-banner">
+        <div class="site-banner-inner">
+            <a href="index.html" class="site-logo">
+                <img src="images/logo1.png"
+                     alt="TVM artists" class="site-logo-img" loading="eager">
+            </a>
+
+            <nav class="site-nav-desktop">
+                <a href="index.html#news">News</a>
+                <a href="index.html#artists">Artists</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#touring">Touring</a>
+                <a href="index.html#about-contact">About</a>
+                <a href="index.html#about-contact">Contact</a>
+            </nav>
+
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="site-nav-mobile" id="mobileNav">
+            <a href="index.html#news">News</a>
+            <a href="index.html#artists">Artists</a>
+            <a href="index.html#media">Media</a>
+            <a href="index.html#touring">Touring</a>
+            <a href="index.html#about-contact">About</a>
+            <a href="index.html#about-contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO (Bilder vorerst von WP) -->
+    <div class="artist-hero artist-hero--wp">
+        <picture>
+            <source media="(max-width: 768px)" srcset="https://tvmartists.com/wp-content/uploads/2026/09/Sanderling-Hero-Mobile.png">
+            <img src="https://tvmartists.com/wp-content/uploads/2026/08/C-Marco-Borggreve_Sanderling_Michael_06-scaled.jpeg" alt="Michael Sanderling" loading="eager">
+        </picture>
+        <h1 class="hero-name">Michael Sanderling</h1>
+    </div>
+
+    <main class="artist-page">
+
+        <!-- POSITION / FUTURE PROJECTS / LABELS -->
+        <div id="future-projects-wrapper">
+            <div class="fp-list" style="margin-top: 0;">
+                Chief Conductor<br>
+                Lucerne Symphony Orchestra since 2021<br>
+                Dresden Philharmonic 2011–19<br><br>
+
+                Future projects<br>
+                Berliner Philharmoniker<br>
+                Hong Kong Philharmonic Orchestra<br>
+                Dallas Symphony Orchestra<br>
+                Leipzig Gewandhaus Orchestra<br>
+                NDR Radio Philharmonic Hanover<br>
+                KBS Symphony Orchestra Seoul<br>
+                Milwaukee Symphony Orchestra<br>
+                Vienna Symphoniker<br>
+                Konzerthausorchester Berlin<br>
+                Helsinki Philharmonic Orchestra<br>
+                Gothenburg Symphoniker<br>
+                Norwegian Radio Orchestra<br>
+                The Florida Orchestra<br>
+                Düsseldorfer Symphoniker<br>
+                BBC Scottish Symphony Orchestra<br>
+                Dresden Philharmonic<br>
+                Hyogo PAC Orchestra<br>
+                National Symphony Orchestra of Taiwan<br>
+                Nagoya Symphony Orchestra<br>
+                Osaka Symphony Orchestra<br>
+                Musikkollegium Winterthur<br>
+                Antwerp Symphony Orchestra<br>
+                Guerzenich Orchestra Cologne<br>
+                Essen Philharmonic<br>
+                Orquestra Simfònica de Barcelona<br>
+                Orquesta Sinfónica del Principado de Asturias<br>
+                Orquestra Sinfónica do Porto<br>
+                Irish National Symphony Orchestra<br>
+                Shanghai Philharmonic<br>
+                Orquestra Gulbenkian<br><br>
+
+                Labels: Sony classical, Warner
+            </div>
+        </div>
+
+        <!-- BUTTON-REIHE -->
+        <div id="top-button-row">
+            <a href="https://tinyurl.com/youtubesanderling" target="_blank" rel="noopener" class="custom-btn">Videos</a>
+            <a href="https://www.dropbox.com/scl/fo/an30w2p1geeb4te69e9cv/AJz6dwPxvScdZ8i6qud-COM?rlkey=cxx4pitj469kzho4vkqz7o9hy&e=1&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
+            <a href="https://michaelsanderling.com" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
+        </div>
+
+        <!-- NEWS-KARUSSELL (WordPress-Kategorie 11 = Michael Sanderling) -->
+        <div class="news-carousel-wrapper" id="newsCarousel" data-category="11">
+            <div class="news-carousel-inner">
+                <div class="news-carousel-header">News</div>
+                <div class="news-carousel-track" id="newsTrack"></div>
+                <div class="news-carousel-nav">
+                    <div class="news-carousel-arrow" id="newsPrev" aria-label="Zurück">&#8249;</div>
+                    <div class="news-carousel-dots" id="newsDots"></div>
+                    <div class="news-carousel-arrow" id="newsNext" aria-label="Weiter">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KALENDER: nächste 3 Termine, "Read more" zeigt die Saison -->
+        <section id="calendar-preview-wrapper" class="calendar-box" aria-labelledby="calendarTitle">
+            <h2 id="calendarTitle" class="calendar-title">Calendar</h2>
+            <div id="calendar-preview" class="calendar-list">Lade Termine…</div>
+            <div id="calendar-readmore-wrapper" hidden>
+                <button id="btn-readmore" class="custom-btn" type="button" aria-expanded="false" aria-controls="calendar-full">Read more</button>
+            </div>
+            <div id="calendar-full" hidden>
+                <div id="calendar-full-list" class="calendar-list"></div>
+            </div>
+        </section>
+
+        <!-- BIOGRAPHY -->
+        <div class="container-content">
+
+            <h2 class="bio-headline">The Architect of Sound: <br>Michael Sanderling's journey from the world-class cello to the conductor's podium</h2>
+
+            Anyone who experiences Michael Sanderling on the podium today immediately senses the deep, tangible connection he has with the musicians before him. Every gesture reveals a precision that does not merely instruct, but empathizes. His current work at the helm of the Lucerne Symphony Orchestra and his formative era with the Dresden Philharmonic constitute the two pillars of a conducting career that occupies a firm place in international musical life. Sanderling has established himself as one of the most distinguished conductors of our time, setting standards with his interpretations of late Romantic and modern masterpieces.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.digitalconcerthall.com/de/concert/56395" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/2-scaled.png" alt="Michael Sanderling Berliner Philharmoniker" loading="lazy">
+                </a>
+            </div>
+
+            Since the 2021/22 season, Michael Sanderling has led musical life in Lucerne as Chief Conductor. He took on the task of leading the Lucerne Symphony Orchestra into a new era and sharpening the international profile of this tradition-steeped ensemble, particularly in the late Romantic repertoire of Bruckner, Mahler, and Richard Strauss. The success of these creative partnerships is evidenced by the internationally acclaimed Brahms cycle released on Warner Classics and the collaboration with piano legend Elisabeth Leonskaja. This tireless pursuit of interpretive excellence recently received official recognition at the highest level: expert committees nominated Michael Sanderling for the renowned German music prize, Opus Klassik, in the category "Conductor of the Year 2026."<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.youtube.com/watch?v=OANAFs_yfGI&t=1" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/1-scaled.png" alt="Michael Sanderling NDR Radiophilharmonie Hannover" loading="lazy">
+                </a>
+            </div>
+
+            Through visionary projects—such as the multimedia combination of Shostakovich's 10th Symphony with animations by artist William Kentridge—he carries the orchestra's reputation from the shores of Lake Lucerne far into the world. This global influence is expressed in a busy, highly regarded touring schedule: under his leadership, the Lucerne Symphony Orchestra has performed in major music metropolises across Europe, South America, and Asia.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.youtube.com/watch?v=QE9nBLc6li4&list=RDQE9nBLc6li4&start_radio=1" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/3-scaled.png" alt="Michael Sanderling Hong Kong Philharmonic Orchestra" loading="lazy">
+                </a>
+            </div>
+
+            This international recognition has led to lasting, close artistic partnerships with the world's most significant orchestras over the years. Michael Sanderling connects with these orchestras through much more than standard guest conducting; deep mutual trust has defined their collaborative work. In the German-speaking world, he developed intensive relationships with the Berliner Philharmoniker, the Gewandhausorchester Leipzig, the Vienna Symphony, the Munich Philharmonic, the SWR Symphony Orchestra Stuttgart, the Gürzenich Orchestra Cologne, the Konzerthausorchester Berlin, the NDR Radiophilharmonie Hannover, the Musikkollegium Winterthur, and the Tonhalle-Orchester Zurich. These close ties continued at the European level, where he worked as a valued partner with ensembles such as the Royal Concertgebouw Orchestra Amsterdam, the Orchestre de Paris, and the Philharmonia Orchestra London. The musical resonance extended far beyond the European continent to Asia, where he maintains a continuous, productive partnership with the NHK Symphony Orchestra in Tokyo, the Hong Kong Philharmonic Orchestra, and the KBS Symphony Orchestra in Seoul. His analytical yet collaborative approach created a foundation for profound, long-matured interpretations at these international elite orchestras.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.ardmediathek.de/video/ard-klassik/reger-mozart-variationen-swr-symphonieorchester-michael-sanderling-swr-kultur/ard/Y3JpZDovL3N3ci5kZS9hZXgvbzE4NjU4ODY" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/4-scaled.png" alt="Michael Sanderling SWR Symphony Orchestra" loading="lazy">
+                </a>
+            </div>
+
+            Sanderling laid the foundation for his international standing in the grand symphonic field during his tenure at the head of the Dresden Philharmonic from 2011 to 2019. Those years were marked by renewal and success: under his leadership, the orchestra moved into the new, acoustically brilliant concert hall in the Dresden Kulturpalast. On extensive tours to Japan, South Korea, South America, and across Europe, he forged the orchestra into a cohesive interpretive unit.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.youtube.com/watch?v=PgnKjHvRAAY" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/5-scaled.png" alt="Michael Sanderling Dresden Philharmonic" loading="lazy">
+                </a>
+            </div>
+
+            The enduring monument of this fruitful era is the monumental complete recording of all symphonies by Ludwig van Beethoven and Dmitri Shostakovich for the label Sony Classical. This comparative release is considered an undisputed discographic milestone of recent music history for its analytical sharpness, perfect sonic balance, and emotional power. That he also masterfully commanded the theatrical craft during this time was proven in the opera world: his staging of Prokofiev's "War and Peace" at the Cologne Opera earned him the renowned "Conductor of the Year 2011" award.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.youtube.com/watch?v=k4M1ADsqrwo&t=2683s" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/6-scaled.png" alt="Michael Sanderling Tonhalle Orchestra Zurich" loading="lazy">
+                </a>
+            </div>
+
+            Sanderling's current sovereignty as Chief Conductor in Lucerne and his successes in Dresden are based on a profound understanding of the orchestral apparatus, which he developed in the decades prior. Before dedicating himself entirely to conducting, he belonged to the absolute world elite of cellists. Following his soloist debut, he traveled the world's stages as an internationally sought-after cello soloist, performing with top American orchestras such as the Boston Symphony Orchestra and the Los Angeles Philharmonic, as well as European orchestras like the Orchestre de Paris and the Vienna Symphony, and numerous leading orchestras in Germany. Parallel to this, from 1987, he held the position of principal cellist of the Gewandhausorchester Leipzig under Kurt Masur and later with the Berlin Radio Symphony Orchestra. Chamber music also deeply shaped him: from 1988 to 1996, he was a foundational member of the Trio Ex Aequo, whose debut at the Lucerne Festival in 1989 left a lasting impression. He ended his active career as a concert cellist in 2010 to devote himself entirely to the baton. He had previously set his first milestones as a conductor as Chief Conductor of the Kammerakademie Potsdam (2006–2011) and in his very first chief position with the Berlin Chamber Orchestra.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.youtube.com/watch?v=xVtPlToWjFs&t=8s" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/7-scaled.png" alt="Michael Sanderling NHK Symphony Orchestra Tokyo" loading="lazy">
+                </a>
+            </div>
+
+            Beyond the great concert stages in Lucerne and Dresden, passing on his vast experience to the next generation runs like a common thread through his entire life. For almost three decades—since 1998—Michael Sanderling has taught as a professor of violoncello at the University of Music and Performing Arts Frankfurt am Main. He has always combined this academic anchoring with work with top youth orchestras; for example, as the long-time leader of the German String Philharmonic, he shaped the next generation of German orchestral musicians.<br><br>
+
+            <div class="bio-image">
+                <a href="https://www.youtube.com/watch?v=2UIdP79Pg9Y&list=RD2UIdP79Pg9Y&start_radio=1" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tvmartists.com/wp-content/uploads/2026/06/8-scaled.png" alt="Michael Sanderling HR Symphony Orchestra Frankfurt" loading="lazy">
+                </a>
+            </div>
+
+            The fact that music is in Michael Sanderling's blood seems perfectly natural given his background. Born in East Berlin in 1967, he grew up as the son of double bassist Barbara Sanderling and legendary conductor Kurt Sanderling at an epicenter of European cultural life. His training at the Hanns Eisler School of Music Berlin with Josef Schwab and masterclasses with icons like Yo-Yo Ma laid the foundation for his ascent. It is this rare symbiosis of familial influence, the phenomenal Dresden and Lucerne eras, and his own experience as a world-class soloist and partner of global elite orchestras that distinguishes Michael Sanderling today. His strengths lie in a relentless structural clarity and the ability to intellectually penetrate music completely without depriving it of its soul—a true architect of sound.<br><br>
+
+            <div class="artist-footer-note">
+
+                <!-- Instagram -->
+                <div style="margin-top: 25px; margin-bottom: 15px;">
+                    <a href="https://instagram.com/sanderlingconductor" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <span style="vertical-align: super; margin-left: 8px; font-size: 14px;">Follow on Instagram</span>
+                    </a>
+                </div>
+
+                <div style="font-size: 13px; opacity: 0.9; margin-top: 25px;">
+                    Photo credit: &copy; Marco Borggreve
+                </div>
+
+                <div style="font-size: 13px; line-height: 1.4; margin-top: 15px;">
+                    Contact: Thomas Voigt - <a href="mailto:thomas@tvmartists.com" style="text-decoration: underline;">thomas@tvmartists.com</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-rule"></div>
+        <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
+            <img src="images/insta.png" alt="Instagram">
+        </a>
+        <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
+    </footer>
+
+    <!-- NEWS-KARUSSELL: lädt die Beiträge der Kategorie aus WordPress -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const WP_API_BASE = "https://tvmartists.com/wp-json/wp/v2";
+            const MAX_ITEMS = 10;
+            const wrapper = document.getElementById("newsCarousel");
+            const track = document.getElementById("newsTrack");
+            const dotsWrap = document.getElementById("newsDots");
+            const prevBtn = document.getElementById("newsPrev");
+            const nextBtn = document.getElementById("newsNext");
+            if (!wrapper || !track) return;
+            const categoryId = wrapper.dataset.category;
+            const categoryName = wrapper.dataset.categoryName || "";
+
+            function stripHtml(html) {
+                const tmp = document.createElement("div");
+                tmp.innerHTML = html;
+                return tmp.textContent || tmp.innerText || "";
+            }
+
+            function normalize(s) {
+                return stripHtml(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+            }
+
+            // Kategorie-ID: direkt aus data-category, sonst über den Namen suchen
+            async function resolveCategoryId() {
+                if (categoryId) return categoryId;
+                const keyword = categoryName.split(" ").pop();
+                const response = await fetch(WP_API_BASE + "/categories?per_page=100&search=" + encodeURIComponent(keyword));
+                if (!response.ok) throw new Error("Kategorie-Suche fehlgeschlagen: " + response.status);
+                const cats = await response.json();
+                const wanted = normalize(categoryName);
+                const match = cats.find(function (c) { return normalize(c.name) === wanted; })
+                           || cats.find(function (c) { return normalize(c.name).indexOf(normalize(keyword)) !== -1; });
+                if (!match) throw new Error("Kategorie nicht gefunden");
+                return match.id;
+            }
+
+            async function loadNewsItems() {
+                const catId = await resolveCategoryId();
+                const url = WP_API_BASE + "/posts?categories=" + catId + "&per_page=" + MAX_ITEMS + "&_embed";
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("WordPress API Fehler: " + response.status);
+                const posts = await response.json();
+                return posts.map(function (post) {
+                    let image = "";
+                    try { image = post._embedded["wp:featuredmedia"][0].source_url; } catch (e) { image = ""; }
+                    return { image: image, alt: stripHtml(post.title.rendered) };
+                });
+            }
+
+            loadNewsItems().then(function (items) {
+                items = items.filter(function (item) { return !!item.image; });
+                if (items.length === 0) {
+                    track.innerHTML = "<p style='padding:20px;'>Noch keine News vorhanden.</p>";
+                    return;
+                }
+                items.forEach(function (item) {
+                    const slide = document.createElement("div");
+                    slide.className = "news-slide";
+                    const img = document.createElement("img");
+                    img.src = item.image;
+                    img.alt = item.alt || "News";
+                    img.loading = "lazy";
+                    slide.appendChild(img);
+                    track.appendChild(slide);
+                });
+
+                const slides = Array.from(track.children);
+                slides.forEach(function (_, i) {
+                    const dot = document.createElement("div");
+                    dot.className = "news-carousel-dot" + (i === 0 ? " active" : "");
+                    dot.addEventListener("click", function () {
+                        slides[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+                    });
+                    dotsWrap.appendChild(dot);
+                });
+                const dots = Array.from(dotsWrap.children);
+
+                function getClosestIndex() {
+                    const trackRect = track.getBoundingClientRect();
+                    let closestIndex = 0, closestDist = Infinity;
+                    slides.forEach(function (slide, i) {
+                        const dist = Math.abs(slide.getBoundingClientRect().left - trackRect.left);
+                        if (dist < closestDist) { closestDist = dist; closestIndex = i; }
+                    });
+                    return closestIndex;
+                }
+                function updateActiveDot() {
+                    const idx = getClosestIndex();
+                    dots.forEach(function (d, i) { d.classList.toggle("active", i === idx); });
+                }
+                let scrollTimeout;
+                track.addEventListener("scroll", function () {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(updateActiveDot, 80);
+                });
+                function goToSlide(index) {
+                    const clamped = Math.max(0, Math.min(slides.length - 1, index));
+                    slides[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+                }
+                if (prevBtn) prevBtn.addEventListener("click", function () { goToSlide(getClosestIndex() - 1); });
+                if (nextBtn) nextBtn.addEventListener("click", function () { goToSlide(getClosestIndex() + 1); });
+                updateActiveDot();
+
+                // Karussell leicht anscrollen, damit die nächste Karte angeschnitten ist
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        track.scrollLeft = window.innerWidth <= 768 ? 32 : 56;
+                        updateActiveDot();
+                    });
+                });
+            }).catch(function () {
+                track.innerHTML = "<p style='padding:20px;'>News konnten nicht geladen werden.</p>";
+            });
+        });
+    </script>
+
+    <!-- KALENDER: lädt die Termine aus dem Google-Sheet-Feed -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const FEED_URL = "https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec";
+            const monthMap = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAI: 4, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OKT: 9, OCT: 9, NOV: 10, DEZ: 11, DEC: 11 };
+            const previewEl = document.getElementById("calendar-preview");
+            const fullListEl = document.getElementById("calendar-full-list");
+            const fullWrapper = document.getElementById("calendar-full");
+            const readmoreWrapper = document.getElementById("calendar-readmore-wrapper");
+            const readmoreBtn = document.getElementById("btn-readmore");
+            if (!previewEl) return;
+
+            if (readmoreBtn) {
+                readmoreBtn.addEventListener("click", function () {
+                    const showing = !fullWrapper.hidden;
+                    fullWrapper.hidden = showing;
+                    readmoreBtn.textContent = showing ? "Read more" : "Show less";
+                    readmoreBtn.setAttribute("aria-expanded", showing ? "false" : "true");
+                });
+            }
+
+            function parseEventDate(str) {
+                if (!str) return null;
+                const firstPart = str.split("–")[0].split("-")[0].trim();
+                const parts = firstPart.split(" ").filter(Boolean);
+                if (parts.length < 3) return null;
+                const day = parseInt(parts[0], 10);
+                const month = monthMap[parts[1].toUpperCase()];
+                const year = parseInt(parts[parts.length - 1], 10);
+                if (isNaN(day) || month === undefined || isNaN(year)) return null;
+                return new Date(year, month, day);
+            }
+
+            // Termine werden als DOM-Knoten (Text) aufgebaut, nie als HTML aus dem Feed
+            function renderEvent(ev) {
+                const box = document.createElement("div");
+                box.className = "calendar-event";
+                function line(text, bold) {
+                    if (!text) return;
+                    const el = bold ? document.createElement("strong") : document.createElement("span");
+                    el.textContent = text;
+                    box.appendChild(el);
+                    box.appendChild(document.createElement("br"));
+                }
+                function lines(text) {
+                    (text || "").split("\n").map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) { line(l, false); });
+                }
+                line(ev.date, true);
+                line(ev.city, true);
+                lines(ev.venue);
+                lines(ev.orchestra);
+                lines(ev.program);
+                return box;
+            }
+            function renderList(target, list) {
+                target.textContent = "";
+                list.forEach(function (ev) { target.appendChild(renderEvent(ev)); });
+            }
+
+            fetch(FEED_URL)
+                .then(function (res) { return res.text(); })
+                .then(function (text) {
+                    const blocks = text.trim().split("###EVENT###").filter(function (b) { return b.trim() !== ""; });
+                    const events = blocks.map(function (block) {
+                        const parts = block.trim().split("---").map(function (p) { return p.trim(); });
+                        const firstLines = parts[0].split("\n").map(function (s) { return s.trim(); });
+                        const date = firstLines[0] || "";
+                        return { date: date, city: firstLines[1] || "", venue: parts[1] || "", orchestra: parts[2] || "", program: parts[3] || "", parsedDate: parseEventDate(date) };
+                    }).filter(function (ev) { return ev.city !== "" && ev.parsedDate !== null; });
+
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const next3 = events.filter(function (ev) { return ev.parsedDate >= today; }).slice(0, 3);
+
+                    if (next3.length > 0) {
+                        renderList(previewEl, next3);
+                    } else {
+                        previewEl.textContent = "Keine kommenden Termine gefunden.";
+                    }
+
+                    const jan2026 = new Date(2026, 0, 1);
+                    const fullEvents = events.filter(function (ev) { return ev.parsedDate >= jan2026; });
+                    renderList(fullListEl, fullEvents);
+                    if (fullEvents.length > 0) readmoreWrapper.hidden = false;
+                })
+                .catch(function (err) {
+                    previewEl.textContent = "Fehler beim Laden der Termine.";
+                    console.error("Kalender-Feed Fehler:", err);
+                });
+        });
+    </script>
+
+    <!-- HEADER: BEIM RUNTERSCROLLEN AUSBLENDEN, BEIM HOCHSCROLLEN EINBLENDEN -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.querySelector(".site-banner");
+            const nav = document.getElementById("mobileNav");
+            if (!header) return;
+            let lastY = window.scrollY;
+            let ticking = false;
+
+            function show() { header.classList.remove("is-hidden"); }
+            function hide() { header.classList.add("is-hidden"); }
+
+            window.addEventListener("scroll", function () {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    const y = Math.max(window.scrollY, 0);
+                    const menuOpen = nav && nav.classList.contains("is-open");
+                    if (y <= header.offsetHeight || menuOpen || y < lastY - 4) {
+                        show();
+                    } else if (y > lastY + 4) {
+                        hide();
+                    }
+                    lastY = y;
+                    ticking = false;
+                });
+            }, { passive: true });
+
+            header.addEventListener("focusin", show);
+        });
+    </script>
+
+    <!-- HAMBURGER-MENÜ TOGGLE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.getElementById("hamburgerBtn");
+            const nav = document.getElementById("mobileNav");
+            if (!btn || !nav) return;
+
+            btn.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                btn.classList.toggle("is-open", isOpen);
+                btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    btn.classList.remove("is-open");
+                    btn.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
