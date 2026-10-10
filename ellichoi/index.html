@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elli Choi – Violinist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&family=Great+Vibes:wght@400&family=Fredoka+One:wght@400&family=Pacifico:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: #222;
+            background: #fff;
+            font-weight: 300;
+        }
+
+        /* Navigation (Desktop): transparent, auf dem Foto, rechte Seite */
+        nav {
+            position: absolute;
+            top: 0;
+            right: 9vw;
+            z-index: 100;
+            background: transparent;
+            padding: 40px 0 0 0;
+            text-align: right;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin: 0 0 0 40px;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover {
+            opacity: 0.65;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 101;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #222;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.99);
+            z-index: 99;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .mobile-menu a {
+            color: #222;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: calc(145vh + 0.5mm);   /* +0.5mm, damit das Foto unten nicht abgeschnitten wird */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #262626;
+            margin-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://violin.org/wp-content/uploads/2026/06/elli-choi-2026.jpg');
+            background-size: 75%;
+            background-position: center -1.95cm;   /* Foto-Position: 0.5mm weiter nach unten */
+            background-repeat: no-repeat;
+            filter: brightness(0.9);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(1px 1px at 2% 5%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 5% 12%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 3% 25%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 1% 35%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 4% 48%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 2% 65%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 5% 78%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 3% 88%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 98% 8%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 96% 20%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 99% 40%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 97% 55%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 98% 72%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                radial-gradient(1px 1px at 96% 85%, rgba(255,255,200,0.3) 1px, transparent 1px),
+                linear-gradient(to right, #000 0%, #000 8%, transparent 8%, transparent 92%, #000 92%, #000 100%);
+            z-index: 1;
+            pointer-events: none;
+            background-size: 100% 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: left;
+            top: -2cm;
+            left: 9cm;
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 9vw;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+            margin: 0;
+            line-height: 1;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Tagline Section */
+        .tagline {
+            background: #ffffff;
+            padding: 100px 80px 20px 80px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tagline-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5vw;
+            font-weight: 300;
+            color: #222;
+            letter-spacing: 2px;
+            text-align: left;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* Bio Section */
+        .bio {
+            background: #ffffff;
+            padding: 80px 80px 120px 80px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bio p {
+            font-size: 18px;
+            line-height: 2;
+            color: #333;
+            margin-bottom: 24px;
+            text-align: left;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        /* Upcoming Dates */
+        .dates {
+            background: linear-gradient(135deg, #0a0e1f 0%, #1a1f3a 100%);
+            color: white;
+            padding: 120px 80px;
+        }
+
+        .dates-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .date-list {
+            display: flex;
+            flex-direction: column;
+            gap: 45px;
+        }
+
+        .date-entry {
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 45px;
+        }
+
+        .date-entry:last-child {
+            border-bottom: none;
+        }
+
+        .date-entry:nth-child(odd) {
+            text-align: left;
+        }
+
+        .date-entry:nth-child(even) {
+            text-align: right;
+        }
+
+        .date-range {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: white;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .date-location {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 1.5px;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: #f5f5f5;
+            padding: 1cm 0 0 0;   /* oben 1cm Abstand zum Calendar, unten kein Abstand, links/rechts volle Breite */
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            aspect-ratio: 16 / 9;
+            display: block;
+            text-decoration: none;
+        }
+
+        /* ===== Video-Beschriftung und Play-Button (Desktop + Mobile) ===== */
+
+        .video-caption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 9vw 4vw 3vw 4vw;
+            background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 100%);
+            color: #fff;
+        }
+
+        .video-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.4vw;                /* Titel groß */
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+        }
+
+        .video-orchestra {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.7vw;                /* Orchester */
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 0.6vw;
+            text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+        }
+
+        .yt-button {
+            width: 7vw;                      /* Größe YouTube-Button */
+            min-width: 70px;
+            height: auto;
+            flex-shrink: 0;
+            margin-left: 3vw;
+            margin-bottom: 1.5vw;            /* weiter nach oben */
+            transition: transform 0.3s ease;
+        }
+
+        .video-thumbnail:hover .yt-button {
+            transform: scale(1.1);
+        }
+
+        /* Gallery */
+        .gallery {
+            background: #fafafa;
+            padding: 1cm 80px 0 80px;   /* oben 1cm Abstand zum Video, unten 0 (Abstand zu Management steht dort) */
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            grid-auto-flow: dense;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(3) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Management Info */
+        .management {
+            background: #ffffff;
+            padding: 2cm 80px 160px 80px;   /* oben 2cm Abstand zur Gallery */
+        }
+
+        .management-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.3rem;
+            font-weight: 300;
+            letter-spacing: 2.5px;
+            color: #111;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* ===== Management DESKTOP (Mobile bleibt unverändert) ===== */
+        @media (min-width: 641px) {
+            .management-title {
+                font-family: 'Cormorant Garamond', Georgia, serif;
+                font-size: 3.3rem;           /* Überschrift Management */
+                font-weight: 300;
+                letter-spacing: 1px;
+            }
+        }
+
+        .mgmt-desktop {
+            position: relative;
+            text-align: center;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        .mgmt-card + .mgmt-card {
+            margin-top: 70px;              /* Abstand Dacian-Block zum Thomas-Block */
+        }
+
+        .mgmt-name {
+            font-size: 2.15rem;            /* Name groß */
+            font-weight: 300;
+            line-height: 1.25;
+            color: #111;
+            margin: 0 0 6px 0;
+            font-variant-ligatures: common-ligatures discretionary-ligatures;
+        }
+
+        .mgmt-line {
+            font-size: 1.1rem;             /* E-Mail, Firma, Adresse: gleiche Größe */
+            font-weight: 300;
+            line-height: 1.4;              /* Zeilenabstand */
+            color: #222;
+            margin: 0;
+        }
+
+        .mgmt-company {
+            margin-top: 26px;              /* Abstand E-Mail -> Firma */
+        }
+
+        .mgmt-line a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .mgmt-line a:hover {
+            opacity: 0.6;
+        }
+
+        .mgmt-insta {
+            margin-top: 60px;
+        }
+
+        .insta-btn {
+            display: inline-block;
+            line-height: 0;
+            color: #000;                   /* Schwarz */
+            transition: color 0.3s ease;
+        }
+
+        .insta-btn svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .insta-btn:hover {
+            color: #555;
+        }
+
+        .management-container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .management-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 150px;
+            text-align: center;
+        }
+
+        .mgmt-box {
+            padding: 0;
+            border: none;
+            background: transparent;
+        }
+
+        .mgmt-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #111;
+        }
+
+        .mgmt-box .role {
+            font-size: 13px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2.8px;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+
+        .mgmt-box p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 4px;
+            font-weight: 300;
+            letter-spacing: 0.4px;
+        }
+
+        .mgmt-box a {
+            color: #222;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 300;
+            letter-spacing: 0.4px;
+            border-bottom: 1px solid rgba(34,34,34,0.3);
+            transition: all 0.4s ease;
+        }
+
+        .mgmt-box a:hover {
+            color: #666;
+            border-bottom-color: rgba(102,102,102,0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 60px 40px;
+            font-size: 13px;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ccc;
+        }
+
+        /* Display Controls */
+        .desktop-only {
+            display: block;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-name {
+                font-size: 10vw;
+            }
+            .tagline-text {
+                font-size: 4vw;
+            }
+
+            .bio, .dates, .gallery, .management {
+                padding: 80px 50px;
+            }
+
+            .gallery {
+                padding-top: 1cm;
+                padding-bottom: 0;
+            }
+
+            .management {
+                padding-top: 2cm;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .gallery-item:nth-child(3) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            /* Desktop-only verstecken */
+            .desktop-only {
+                display: none;
+            }
+
+            .mobile-only {
+                display: block;
+            }
+
+            /* Mobile Navigation */
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                width: 34px;
+                height: 34px;
+                padding: 0;
+                border-radius: 50%;
+                background: rgba(0,0,0,0.45);
+                top: calc(2.7cm + 8vw + 10px);   /* unter dem Namen */
+                right: 0.5cm;                     /* bündig mit dem Namen */
+            }
+
+            .hamburger span {
+                width: 16px;
+                height: 2px;
+                background: #fff;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(6px) rotate(45deg);
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-6px) rotate(-45deg);
+            }
+
+            .section-title {
+                display: none;
+            }
+
+            /* Mobile Tagline */
+            .tagline.desktop-only {
+                display: none;
+            }
+
+            .tagline.mobile-only {
+                position: relative;
+                background: #ffffff;
+                padding: 40px 30px;
+                max-width: 100%;
+                margin: 0;
+                z-index: 3;
+                margin-top: 0;
+            }
+
+            .tagline.mobile-only .tagline-text {
+                font-size: 7.5vw;
+                line-height: 1.2;
+                word-spacing: 100vw;
+                color: #222;
+                text-align: left;
+            }
+
+            .hero-name {
+                font-size: 8vw;
+            }
+            .tagline-text {
+                font-size: 4.5vw;
+            }
+            .tagline {
+                padding: 60px 30px 15px 30px;
+            }
+
+            .bio, .dates, .gallery, .management {
+                padding: 60px 30px;
+            }
+
+            .bio {
+                padding-top: 0;   /* Abstand Tagline -> Text = Abstand Foto -> Tagline (40px) */
+            }
+
+            .gallery {
+                padding-top: 1cm;
+                padding-bottom: 0;
+            }
+
+            .management {
+                padding-top: 2cm;
+            }
+
+            .bio p {
+                font-size: 15px;
+            }
+
+            .date-range {
+                font-size: 2rem;
+            }
+
+            .date-location {
+                font-size: 1.4rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mgmt-box {
+                padding: 40px;
+            }
+
+            /* Mobile Hero: Höhe = Foto-Höhe, Tagline schließt direkt an */
+            .hero {
+                display: block;
+                height: auto;
+                padding: 0;
+                margin-top: 0;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .hero-photo {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin-top: -0.3cm;   /* Foto-Position (vertikal) */
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .hero-content {
+                position: absolute;
+                top: 1.7cm;
+                left: auto;
+                right: 0.5cm;
+                text-align: right;
+            }
+
+            /* Mobile Dates */
+            .date-entry:nth-child(odd),
+            .date-entry:nth-child(even) {
+                text-align: center;
+            }
+
+            .date-list {
+                gap: 30px;
+            }
+
+            .date-entry {
+                padding-bottom: 30px;
+            }
+
+            /* Mobile Management (gleiches Setup wie Desktop, Größen für Mobile) */
+            .management-title {
+                font-size: 2.6rem;               /* Überschrift Management */
+                letter-spacing: 1px;
+            }
+
+            .mgmt-mobile {
+                text-align: center;
+                font-family: 'Cormorant Garamond', Georgia, serif;
+            }
+
+            .mgmt-mobile .mgmt-card + .mgmt-card {
+                margin-top: 50px;                /* Abstand Dacian-Block zum Thomas-Block */
+            }
+
+            .mgmt-mobile .mgmt-name {
+                font-size: 1.7rem;               /* Name */
+            }
+
+            .mgmt-mobile .mgmt-line {
+                font-size: 1.1rem;               /* E-Mail, Firma, Adresse */
+            }
+
+            .mgmt-mobile .mgmt-company {
+                margin-top: 20px;                /* Abstand E-Mail -> Firma */
+            }
+
+            .mgmt-mobile .mgmt-insta {
+                margin-top: 45px;
+            }
+
+            /* Mobile Video: Beschriftung, Play-Button, YouTube-Logo */
+            .video-caption {
+                padding: 14vw 4vw 4vw 4vw;
+            }
+
+            .video-caption-text {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .video-title {
+                font-size: 4.6vw;            /* Titel */
+                letter-spacing: 0.3px;
+                white-space: nowrap;         /* kein Zeilenumbruch */
+            }
+
+            .video-orchestra {
+                font-size: 3.8vw;            /* Orchester */
+                margin-top: 1vw;
+            }
+
+            .yt-button {
+                width: 11vw;                 /* Play-Button */
+                min-width: 0;
+                margin-left: 3vw;
+                margin-bottom: 2.5vw;        /* weiter nach oben */
+            }
+        }
+
+        /* Section titles for Calendar / Gallery */
+        .block-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 3.3rem;
+            text-align: center;
+            margin: 0 0 40px 0;
+            color: #111;
+        }
+        .dates .block-title { color: #fff; }
+        @media (max-width: 768px) { .block-title { font-size: 2.6rem; margin-bottom: 28px; } }
+
+        .coming-soon {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 0 1cm 0;
+            color: #666;
+        }
+        .dates .coming-soon { color: rgba(255,255,255,0.75); }
+
+        /* Calendar entries + Gallery images are hidden for now (not deleted).
+           To show them again: delete this one rule. */
+        [data-hidden-for-now] { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - DESKTOP -->
+    <nav class="desktop-only">
+        <a href="#about">About</a>
+        <a href="#calendar" data-hidden-for-now>Calendar</a>
+        <a href="#video">Video</a>
+        <a href="#gallery" data-hidden-for-now>Gallery</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hamburger Menu - MOBILE -->
+    <button class="hamburger mobile-only" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">About</a>
+        <a href="#calendar-mobile" data-hidden-for-now>Calendar</a>
+        <a href="#video">Video</a>
+        <a href="#gallery" data-hidden-for-now>Gallery</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <img class="hero-photo mobile-only" src="https://violin.org/wp-content/uploads/2026/06/elli-choi-2026.jpg" alt="Elli Choi">
+        <div class="hero-content">
+            <h1 class="hero-name">Elli Choi</h1>
+        </div>
+    </section>
+
+    <!-- Mobile Tagline (direkt unter dem Foto, auf weißem Hintergrund) -->
+    <section class="tagline mobile-only">
+        <h2 class="tagline-text">Stage. Performance. Emotion.</h2>
+    </section>
+
+    <!-- Tagline Section - DESKTOP -->
+    <section class="tagline desktop-only">
+        <h2 class="tagline-text">Stage. Performance. Emotion.</h2>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="bio">
+        <p>
+            A seasoned performer at the ripe age of twenty-three, award-winning violinist Elli Choi is rising quickly in establishing herself as one of the most captivating violinists of her generation.
+        </p>
+        <p>
+            Choi has performed throughout North America, Europe, Asia, and the Middle East at esteemed venues such as Carnegie Hall, David Geffen Hall and David H. Koch Theater, the Berliner Philharmonie, Kimmel Center's Verizon Hall, Maison Symphonique de Montréal, Tonhalle Zürich, Rudolfinum Dvořák Hall in Prague, BOZAR Brussels, the Abu Dhabi Palace, and Beijing's National Center for the Performing Arts, appearing with major orchestras such as the Orchestre Philarmonique de Monte-Carlo, the Belgian National Orchestra, Orquestra Sinfónica do Porto Casa da Música, the Novosibirsk Philharmonic Orchestra, Sofia Philharmonic Orchestra, Ulster Orchestra, Orchestre Philharmonique Royal de Liège, the Armenian State Symphony Orchestra, and The Juilliard Orchestra.
+        </p>
+        <p>
+            Elli has been invited to perform for several heads of states, including President Emmanuel Macron of France and former Vice President Mike Pence at the United States Department of State, as well as the Duchess of Gloucester at Buckingham Palace. She has also enjoyed performing at distinguished events, most notably the 2019 Lincoln Center Fall Gala honoring John E. Waldron, the 2022 KIND gala "Coming Together for Children Alone" held at the Museum of Natural History in New York City, the annual American Chamber of Commerce EU gala in Brussels, and at the World Children's Day Concert at the Dubai EXPO 2020 as a UNICEF ambassador.
+        </p>
+        <p>
+            Winner of the Monaco World Music Masters in 2016, Choi has since won top prizes at the Qingdao International Violin Competition, the Classic Strings International Competition held in Dubai, the China International Music Competition, and has most recently been awarded Third Prize at the Queen Elisabeth Violin Competition.
+        </p>
+        <p>
+            Elli has finished her undergraduate studies from Columbia University while simultaneously enrolled at the Juilliard School where she has been studying since 2009, and has recently completed her Master's degree as a Kovner Fellow. She has since started studying at Kronberg Academy with Professor Antje Weithaas as part of the Professional Studies under the patronage of the Gingko Foundation.
+        </p>
+        <p>
+            Choi currently plays a J. B. Vuillaume c. 1840 on generous loan.
+        </p>
+    </section>
+
+    <!-- Upcoming Dates - DESKTOP VERSION -->
+    <section class="dates desktop-only" id="calendar">
+        <div class="dates-content">
+            <h2 class="block-title">Calendar</h2>
+            <p class="coming-soon">Update coming soon</p>
+            <div class="date-list" data-hidden-for-now>
+                <div class="date-entry">
+                    <span class="date-range">7–11 Oct</span>
+                    <span class="date-location">Paris</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">12 Oct</span>
+                    <span class="date-location">London</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">13–16 Oct</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">17–19 Oct</span>
+                    <span class="date-location">Schwarzenberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">20–21 Oct</span>
+                    <span class="date-location">Interlaken</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">22–26 Oct</span>
+                    <span class="date-location">Salzburg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">27–31 Oct</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">1–7 Nov</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">8–19 Nov</span>
+                    <span class="date-location">Seoul</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">20–21 Nov</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">22–30 Nov</span>
+                    <span class="date-location">New York</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Dates - MOBILE VERSION -->
+    <section class="dates mobile-only" id="calendar-mobile">
+        <div class="dates-content">
+            <h2 class="block-title">Calendar</h2>
+            <p class="coming-soon">Update coming soon</p>
+            <div class="date-list" data-hidden-for-now>
+                <div class="date-entry">
+                    <span class="date-range">7–11 Oct</span>
+                    <span class="date-location">Paris</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">12 Oct</span>
+                    <span class="date-location">London</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">13–16 Oct</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">17–19 Oct</span>
+                    <span class="date-location">Schwarzenberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">20–21 Oct</span>
+                    <span class="date-location">Interlaken</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">22–26 Oct</span>
+                    <span class="date-location">Salzburg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">27–31 Oct</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">1–7 Nov</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">8–19 Nov</span>
+                    <span class="date-location">Seoul</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">20–21 Nov</span>
+                    <span class="date-location">Kronberg</span>
+                </div>
+                <div class="date-entry">
+                    <span class="date-range">22–30 Nov</span>
+                    <span class="date-location">New York</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+        <a href="https://www.youtube.com/watch?v=Fn9uw2dGYc4" target="_blank" class="video-thumbnail" style="background-image: url('https://concoursreineelisabeth.be/Concours3/documents/QueenElisabethCompetition2024FinalElliChoi65682.jpg');">
+            <!-- Beschriftung + Play-Button unten (Desktop + Mobile) -->
+            <div class="video-caption">
+                <div class="video-caption-text">
+                    <div class="video-title">Shostakovich: Violin Concerto n. 1</div>
+                    <div class="video-orchestra">Belgian National Orchestra</div>
+                </div>
+                <svg class="yt-button" viewBox="0 0 68 48" aria-label="Play">
+                    <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/>
+                    <path d="M45 24 27 14v20" fill="#fff"/>
+                </svg>
+            </div>
+        </a>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <h2 class="block-title">Gallery</h2>
+        <p class="coming-soon">Update coming soon</p>
+        <div class="gallery-grid" data-hidden-for-now>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZU9bccvPVkkrIkk5fBHEqXgFTpD2z_ak8tQ9gQFLh4Q" alt="Elli Choi">
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq5yCViuh5s1mYB7rafASgp_PcsOELLKq0zAADZuGNA" alt="Elli Choi">
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Ya2ggbmfjaXImxSgXc_U1cBTfg5M_5CXtJEW-ZbHGg" alt="Elli Choi">
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT36s6Zj_O0zaQ0DM5meMHKFbtHweIhRh-qy33cmL5UHQ" alt="Elli Choi">
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnEZqYbMJP7WlisYjLSGsrZvH6Y-E3PlCIOV1JODPRoQ" alt="Elli Choi">
+            </div>
+            <!-- Neues Foto: nur Desktop -->
+            <div class="gallery-item desktop-only">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScS8YrOJh6fp9KxZxHwQDz2wxthh9gfc_wVW234lWZvA&amp;s=10" alt="Elli Choi">
+            </div>
+        </div>
+    </section>
+
+    <!-- Management -->
+    <section class="management" id="contact">
+        <div class="management-container">
+            <h2 class="management-title">Management</h2>
+            <!-- MOBILE -->
+            <div class="mgmt-mobile mobile-only">
+                <div class="mgmt-card">
+                    <p class="mgmt-name">Thomas Voigt</p>
+                    <p class="mgmt-line"><a href="mailto:thomas@tvmartists.com">thomas@tvmartists.com</a></p>
+                    <p class="mgmt-line mgmt-company">TVM artists</p>
+                    <p class="mgmt-line">Kurfürstendamm 157–158</p>
+                    <p class="mgmt-line">10709 Berlin</p>
+                    <p class="mgmt-line">Germany</p>
+                    <p class="mgmt-line"><a href="https://tvmartists.com" target="_blank">tvmartists.com</a></p>
+                </div>
+                <div class="mgmt-card">
+                    <p class="mgmt-name">Dacian Predan-Hallabrin</p>
+                    <p class="mgmt-line"><a href="mailto:dacian@predan-hallabrin.com">dacian@predan-hallabrin.com</a></p>
+                    <p class="mgmt-line mgmt-company">Predan-Hallabrin Arts Management</p>
+                    <p class="mgmt-line"><a href="https://www.predan-hallabrin.com" target="_blank">predan-hallabrin.com</a></p>
+                </div>
+                <div class="mgmt-insta">
+                    <a class="insta-btn" href="https://www.instagram.com/ellichhoi" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- DESKTOP -->
+            <div class="mgmt-desktop desktop-only">
+                <div class="mgmt-card">
+                    <p class="mgmt-name">Thomas Voigt</p>
+                    <p class="mgmt-line"><a href="mailto:thomas@tvmartists.com">thomas@tvmartists.com</a></p>
+                    <p class="mgmt-line mgmt-company">TVM artists</p>
+                    <p class="mgmt-line">Kurfürstendamm 157–158</p>
+                    <p class="mgmt-line">10709 Berlin</p>
+                    <p class="mgmt-line">Germany</p>
+                    <p class="mgmt-line"><a href="https://tvmartists.com" target="_blank">tvmartists.com</a></p>
+                </div>
+                <div class="mgmt-card">
+                    <p class="mgmt-name">Dacian Predan-Hallabrin</p>
+                    <p class="mgmt-line"><a href="mailto:dacian@predan-hallabrin.com">dacian@predan-hallabrin.com</a></p>
+                    <p class="mgmt-line mgmt-company">Predan-Hallabrin Arts Management</p>
+                    <p class="mgmt-line"><a href="https://www.predan-hallabrin.com" target="_blank">predan-hallabrin.com</a></p>
+                </div>
+                <div class="mgmt-insta">
+                    <a class="insta-btn" href="https://www.instagram.com/ellichhoi" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Elli Choi</p>
+        <p>Official Website of Elli Choi</p>
+        <p>Photo Credit &copy; Marco Borggreve</p>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburgerBtn.addEventListener('click', function() {
+            hamburgerBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburgerBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
