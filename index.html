@@ -446,8 +446,8 @@
             min-width: 0;
         }
 
-        /* 7 Karten: die letzte, einzelne Karte steht mittig in ihrer Zeile */
-        .conductors-grid .artist-wrapper:last-child:nth-child(odd) {
+        /* 7 Karten: Zeile 1 = 2 Karten, Zeile 2 = nur die 3. Karte (mittig), danach je 2 Karten */
+        .conductors-grid .artist-wrapper:nth-child(3) {
             grid-column: 1 / -1;
             justify-self: center;
             width: min(419px, 100%);
