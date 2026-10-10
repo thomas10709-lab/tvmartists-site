@@ -1,2 +1,2 @@
-# Alter Link ohne Endung -> neue Seite
-RedirectMatch 301 ^/ellichoi/index/?$ /ellichoi/
+# Alte Adressen -> neue Seite (301 = dauerhaft, für Google)
+RedirectMatch 301 ^/ellichoi(/index(\.html)?)?/?$ /elli-choi.html
