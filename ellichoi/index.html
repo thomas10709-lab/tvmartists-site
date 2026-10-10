@@ -132,7 +132,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://violin.org/wp-content/uploads/2026/06/elli-choi-2026.jpg');
+            background-image: url('elli-choi-hero.jpg');
+            background-image: image-set(url('elli-choi-hero.webp') type('image/webp'), url('elli-choi-hero.jpg') type('image/jpeg'));
             background-size: 75%;
             background-position: center -1.95cm;   /* Foto-Position: 0.5mm weiter nach unten */
             background-repeat: no-repeat;
@@ -912,7 +913,10 @@
 
     <!-- Hero Section -->
     <section class="hero" id="about">
-        <img class="hero-photo mobile-only" src="https://violin.org/wp-content/uploads/2026/06/elli-choi-2026.jpg" alt="Elli Choi">
+        <picture class="mobile-only">
+            <source srcset="elli-choi-hero.webp" type="image/webp">
+            <img class="hero-photo" src="elli-choi-hero.jpg" width="800" height="1060" alt="Elli Choi">
+        </picture>
         <div class="hero-content">
             <h1 class="hero-name">Elli Choi</h1>
         </div>
