@@ -1364,7 +1364,7 @@
     </div>
 
     <!-- 2. NEWS KARUSSELL -->
-    <div class="news-carousel-wrapper" id="news">
+    <div class="news-carousel-wrapper" id="news" data-news-key="home" data-category="7">
         <div class="news-carousel-inner">
             <div class="news-carousel-header">News</div>
             <div class="news-carousel-track" id="newsTrack"></div>
@@ -1643,148 +1643,7 @@
         });
     </script>
 
-    <!-- NEWS SCRIPT -->
-    <script>
-        const WP_API_BASE = "https://tvmartists.com/wp-json/wp/v2";
-        const CATEGORY_ID = 7;
-        const INCLUDE_CHILD_CATEGORIES = false;
-        const MAX_ITEMS = 10;
-
-        function stripHtml(html) {
-            const tmp = document.createElement("div");
-            tmp.innerHTML = html;
-            return tmp.textContent || tmp.innerText || "";
-        }
-
-        async function getCategoryIdsToQuery() {
-            if (!INCLUDE_CHILD_CATEGORIES) return [CATEGORY_ID];
-            const childUrl = WP_API_BASE + "/categories?parent=" + CATEGORY_ID + "&per_page=100";
-            const response = await fetch(childUrl);
-            if (!response.ok) return [CATEGORY_ID];
-            const children = await response.json();
-            return [CATEGORY_ID].concat(children.map(c => c.id));
-        }
-
-        async function loadNewsItems() {
-            const categoryIds = await getCategoryIdsToQuery();
-            const url = WP_API_BASE + "/posts?categories=" + categoryIds.join(",") + "&per_page=" + MAX_ITEMS + "&_embed";
-            const response = await fetch(url);
-            if (!response.ok) throw new Error("WordPress API Fehler: " + response.status);
-            let posts = await response.json();
-
-            if (!INCLUDE_CHILD_CATEGORIES) {
-                posts = posts.filter(post => post.categories.indexOf(CATEGORY_ID) !== -1);
-            }
-
-            return posts.map(post => {
-                let image = "";
-                try {
-                    image = post._embedded["wp:featuredmedia"][0].source_url;
-                } catch (e) {
-                    image = "";
-                }
-                return {
-                    image: image,
-                    alt: stripHtml(post.title.rendered),
-                    link: post.link
-                };
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", async function () {
-            const track = document.getElementById("newsTrack");
-            const dotsWrap = document.getElementById("newsDots");
-            const prevBtn = document.getElementById("newsPrev");
-            const nextBtn = document.getElementById("newsNext");
-
-            if (!track) return;
-
-            let newsItems = [];
-            try {
-                newsItems = await loadNewsItems();
-            } catch (e) {
-                track.innerHTML = "<p style='padding:20px; text-align:center;'>News konnten nicht geladen werden.</p>";
-                return;
-            }
-
-            newsItems = newsItems.filter(item => !!item.image);
-
-            if (newsItems.length === 0) {
-                track.innerHTML = "<p style='padding:20px; text-align:center;'>Noch keine News vorhanden.</p>";
-                return;
-            }
-
-            newsItems.forEach(item => {
-                const slide = document.createElement("div");
-                slide.className = "news-slide";
-
-                const img = document.createElement("img");
-                img.src = item.image;
-                img.alt = item.alt || "News";
-                img.loading = "lazy";
-
-                slide.appendChild(img);
-                track.appendChild(slide);
-            });
-
-            const slides = Array.from(track.children);
-            if (slides.length > 0) {
-                slides.forEach((_, i) => {
-                    const dot = document.createElement("div");
-                    dot.className = "news-carousel-dot" + (i === 0 ? " active" : "");
-                    dot.addEventListener("click", () => {
-                        slides[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-                    });
-                    dotsWrap.appendChild(dot);
-                });
-            }
-            const dots = Array.from(dotsWrap.children);
-
-            if (slides.length > 1) {
-                track.scrollLeft = 90;
-            }
-
-            let currentIndex = 0;
-
-            function getClosestIndex() {
-                const trackRect = track.getBoundingClientRect();
-                let closestIndex = 0;
-                let closestDist = Infinity;
-                slides.forEach((slide, i) => {
-                    const rect = slide.getBoundingClientRect();
-                    const dist = Math.abs(rect.left - trackRect.left);
-                    if (dist < closestDist) {
-                        closestDist = dist;
-                        closestIndex = i;
-                    }
-                });
-                return closestIndex;
-            }
-
-            function updateActiveDot() {
-                if (dots.length === 0) return;
-                currentIndex = getClosestIndex();
-                dots.forEach((d, i) => {
-                    d.classList.toggle("active", i === currentIndex);
-                });
-            }
-
-            let scrollTimeout;
-            track.addEventListener("scroll", () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(updateActiveDot, 80);
-            });
-
-            function goToSlide(index) {
-                const clamped = Math.max(0, Math.min(slides.length - 1, index));
-                slides[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-            }
-
-            if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(getClosestIndex() - 1));
-            if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(getClosestIndex() + 1));
-
-            updateActiveDot();
-        });
-    </script>
+    <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json), sonst WordPress -->
+    <script src="news-carousel.js?v=1" defer></script>
 </body>
 </html>
