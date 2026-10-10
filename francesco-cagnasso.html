@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Francesco Cagnasso - TVM Artists</title>
+    <meta name="description" content="Francesco Cagnasso – Italian-Swiss conductor and Music Director of Sursee Theater, formerly Assistant Conductor to Michael Sanderling with the Lucerne Symphony Orchestra. Biography, future engagements and contact via TVM artists.">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="TVM artists">
+    <meta property="og:title" content="Francesco Cagnasso - TVM Artists">
+    <meta property="og:description" content="Francesco Cagnasso – Italian-Swiss conductor and Music Director of Sursee Theater, formerly Assistant Conductor to Michael Sanderling with the Lucerne Symphony Orchestra. Biography, future engagements and contact via TVM artists.">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Francesco Cagnasso", "jobTitle": "Conductor", "sameAs": ["https://www.instagram.com/francesco.cagnasso/", "https://francescocagnasso.com"], "description": "Francesco Cagnasso – Italian-Swiss conductor and Music Director of Sursee Theater, formerly Assistant Conductor to Michael Sanderling with the Lucerne Symphony Orchestra. Biography, future engagements and contact via TVM artists."}</script>
+    <style>
+
+        /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Syne:wght@400;500;600;700&family=Urbanist:wght@200;300;400;500&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1F4270;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --artist-photo-width: 55%;
+            --artist-photo-max-width: 65%;
+            --artist-photo-mobile-width: 80%;
+            --spacing-section: 1.5cm;
+            --font-subtitle: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px 40px 20px;
+            box-sizing: border-box;
+        }
+        .footer-rule {
+            width: min(220px, 60vw);
+            height: 1px;
+            margin: 0 auto 40px auto;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        .footer-insta {
+            display: inline-block;
+            line-height: 0;
+            margin-bottom: 28px;
+            transition: opacity 0.25s ease;
+        }
+        .footer-insta:hover { opacity: 0.7; }
+        .footer-insta img {
+            width: 34px;
+            height: 34px;
+            display: block;
+        }
+        .footer-logo-link {
+            display: block;
+            width: 120px;
+            margin: 0 auto 30px auto;
+            line-height: 0;
+            transition: opacity 0.25s ease;
+        }
+        .footer-logo-link:hover { opacity: 0.7; }
+        .footer-logo {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .footer-copy {
+            font-family: var(--font-subtitle);
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+        .footer-copy a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+        .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
+
+        /* --- ARTIST-SEITE --- */
+        .artist-hero {
+            position: relative;
+            width: 100%;
+            margin: 0 0 14px 0;
+            line-height: 0;
+        }
+        /* Desktop: Name steht schon im Bild, die Überschrift bleibt nur für Suchmaschinen und Screenreader */
+        .hero-name {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .artist-hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Desktop: Name als Text links neben dem Foto */
+        @media (min-width: 769px) {
+            .artist-hero--overlay-desktop .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 4%;
+                top: 79%;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: nowrap;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: clamp(28px, 3.3vw, 52px);
+                line-height: 1.2;
+                letter-spacing: 0.05em;
+                color: #ffffff;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+            }
+        }
+        @media (max-width: 768px) {
+            .artist-hero--overlay-desktop .hero-name { bottom: 24px; font-size: 6.4vw; letter-spacing: 0.04em; }
+        }
+
+        .artist-subtitle {
+            text-align: center;
+            margin: 18px 0 20px 0;
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .bio-photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bio-photo img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .artist-page {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            text-align: left;
+        }
+
+        .artist-page, .container-content {
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            word-break: break-word;
+        }
+
+        /* Buttons: weiß mit blauem Rand und blauer Schrift */
+        .custom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #061d3a !important;
+            font-family: sans-serif !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            line-height: 1;
+            background-color: #ffffff !important;
+            padding: 0 10px;
+            height: 30px;
+            border-radius: 8px;
+            border: 0.5px solid #061d3a !important;
+            margin: 3px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        .custom-btn:hover {
+            background-color: #f0f0f0 !important;
+        }
+        #top-button-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin: 0 0 12px 0;
+        }
+
+        /* Future Projects */
+        #future-projects-wrapper {
+            max-width: 700px;
+            margin: 0 auto 14px auto;
+            text-align: center;
+            padding: 4px 20px 18px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        #future-projects-wrapper .fp-title {
+            font-weight: 400;
+        }
+        #future-projects-wrapper .fp-list {
+            margin-top: 22px;
+        }
+
+        /* News-Karussell */
+        .news-carousel-wrapper {
+            display: block;
+            width: 100%;
+            margin: 0 auto 14px auto;
+            box-sizing: border-box;
+            position: relative;
+            font-family: sans-serif;
+        }
+        .news-carousel-inner {
+            background-color: #f4f7f9;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .news-carousel-header {
+            text-align: center;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-bottom: 0.5px solid rgba(44, 62, 80, 0.2);
+        }
+        .news-carousel-track {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            scroll-padding-left: 24px;
+            scroll-padding-right: 24px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 20px 24px;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+        .news-carousel-track::-webkit-scrollbar { display: none; }
+        .news-slide {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: min(380px, 82vw);
+            box-sizing: border-box;
+        }
+        .news-slide img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+        .news-carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 4px 20px 16px 20px;
+        }
+        .news-carousel-arrow {
+            background: transparent;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+            user-select: none;
+        }
+        .news-carousel-arrow:hover {
+            background-color: #2C3E50;
+            color: #ffffff;
+        }
+        .news-carousel-dots { display: flex; gap: 6px; }
+        .news-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(44, 62, 80, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .news-carousel-dot.active {
+            background-color: #2C3E50;
+            transform: scale(1.2);
+        }
+
+        /* Biografie-Box */
+        .container-content {
+            background-color: #ffffff;
+            color: #2C3E50;
+            padding: 20px;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+        .container-content a { color: #2C3E50; }
+
+        .artist-footer-note {
+            padding-top: 1px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .artist-page {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0 40px 0;
+            }
+            .artist-hero img { object-fit: contain; }
+            /* Handy: Name als Text über dem Foto */
+            .artist-hero::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 34%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+                pointer-events: none;
+            }
+            .hero-name {
+                position: absolute;
+                z-index: 2;
+                left: 0;
+                right: 0;
+                bottom: 52px;
+                width: auto;
+                height: auto;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                text-align: center;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 1.2;
+                letter-spacing: 0.06em;
+                color: #ffffff;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+            }
+            .news-carousel-inner {
+                max-width: none;
+                border-radius: 0;
+                border: none;
+            }
+            .news-carousel-header { font-size: 16px; }
+            .news-carousel-track {
+                padding: 20px 0;
+                scroll-padding-left: 0;
+                scroll-padding-right: 0;
+            }
+            .news-slide { width: min(380px, 85vw); margin: 0 12px; }
+            .news-carousel-nav { padding: 4px 0 16px 0; }
+            .container-content {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                padding: 20px;
+            }
+        }
+
+        /* --- TOP-BANNER: LOGO + NAVIGATION --- */
+        html {
+            scroll-padding-top: 1cm;
+        }
+        .site-banner {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            margin: 0;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease;
+        }
+        .site-banner.is-hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
+        }
+
+        .site-banner-inner {
+            height: 2cm;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .site-logo-img {
+            height: 60px !important;
+            width: auto !important;
+            max-width: 60vw !important;
+            display: block;
+            object-fit: contain;
+        }
+
+        .site-nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .site-nav-desktop a {
+            font-family: sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #12396B !important;
+            text-decoration: none !important;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+        }
+
+        .site-nav-desktop a:hover {
+            opacity: 0.6;
+        }
+
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #12396B !important;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .hamburger-btn.is-open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-btn.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.is-open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .site-nav-mobile {
+            display: none;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .site-nav-mobile a {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #12396B !important;
+            text-decoration: none !important;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(18, 57, 107, 0.1);
+        }
+
+        .site-nav-mobile.is-open {
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 1cm;
+            }
+            .site-banner-inner {
+                height: 2cm;
+                padding: 0 20px;
+            }
+            .site-logo {
+                font-size: 16px;
+            }
+            .site-logo-img {
+                height: 60px !important;
+            }
+            .site-nav-desktop {
+                display: none;
+            }
+            .hamburger-btn {
+                display: flex;
+            }
+            .site-nav-mobile {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
+    <header class="site-banner">
+        <div class="site-banner-inner">
+            <a href="index.html" class="site-logo">
+                <img src="images/logo1.png"
+                     alt="TVM artists" class="site-logo-img" loading="eager">
+            </a>
+
+            <nav class="site-nav-desktop">
+                <a href="index.html#news">News</a>
+                <a href="index.html#artists">Artists</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#touring">Touring</a>
+                <a href="index.html#about-contact">About</a>
+                <a href="index.html#about-contact">Contact</a>
+            </nav>
+
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="site-nav-mobile" id="mobileNav">
+            <a href="index.html#news">News</a>
+            <a href="index.html#artists">Artists</a>
+            <a href="index.html#media">Media</a>
+            <a href="index.html#touring">Touring</a>
+            <a href="index.html#about-contact">About</a>
+            <a href="index.html#about-contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO (Querformat auf dem Desktop, Hochformat auf dem Handy; Name als Text) -->
+    <div class="artist-hero artist-hero--overlay-desktop">
+        <picture>
+            <source media="(max-width: 768px)" srcset="images/cagnasso-mobile-800.webp 800w, images/cagnasso-mobile-1200.webp 1200w, images/cagnasso-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
+            <source media="(max-width: 768px)" srcset="images/cagnasso-mobile-800.jpg 800w, images/cagnasso-mobile-1200.jpg 1200w, images/cagnasso-mobile-1600.jpg 1600w" sizes="100vw">
+            <source srcset="images/cagnasso-hero-1280.webp 1280w, images/cagnasso-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
+            <img src="images/cagnasso-hero-1920.jpg" alt="Francesco Cagnasso" width="1920" height="1080" loading="eager">
+        </picture>
+        <h1 class="hero-name">Francesco Cagnasso</h1>
+    </div>
+
+    <main class="artist-page">
+
+        <!-- POSITION / FUTURE ENGAGEMENTS -->
+        <div id="future-projects-wrapper">
+            <div class="fp-title">Music Director of Sursee Theater</div>
+            <div class="fp-list">
+                Future Engagements<br>
+                Musikkollegium Winterthur<br>
+                Mittelsächsische Philharmonie Freiberg<br>
+                Youth Orchestra Rheinland-Pfalz
+            </div>
+        </div>
+
+        <!-- BUTTON-REIHE -->
+        <div id="top-button-row">
+            <a href="https://tinyurl.com/youtubecagnasso" target="_blank" rel="noopener" class="custom-btn">Videos</a>
+            <a href="https://www.dropbox.com/scl/fo/hyw8jf6tl4lhrspy3cgpb/ABVhKIaZpXsOVdRvJ7S3GUg?rlkey=k7lxm5azzlh6zrs0h4qckr12c&e=4&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
+            <a href="https://francescocagnasso.com" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
+        </div>
+
+        <!-- BIOGRAPHY -->
+        <div class="container-content">
+
+            The Italian-Swiss conductor Francesco Cagnasso is considered one of the most promising young orchestral conductors of his generation. From January 2024 to June 2025, he served as Assistant Conductor to Michael Sanderling with the Lucerne Symphony Orchestra, where he gained significant artistic experience and was closely involved in the orchestra's musical work.<br><br>
+
+            From an early stage of his career, Francesco Cagnasso has collaborated with numerous renowned orchestras in Switzerland and abroad, including the Orchestra della Svizzera Italiana, the Danish National Symphony Orchestra, the Deutsche Staatsphilharmonie Rheinland-Pfalz, the St. Gallen Symphony Orchestra, the Mecklenburg State Orchestra Schwerin, the Hamburg Symphony Orchestra, the Göttingen Symphony Orchestra, the Bodensee Philharmonic Orchestra, the Thessaloniki State Symphony Orchestra, and the Martinů Philharmonic Orchestra. Upcoming engagements include concerts with the Musikkollegium Winterthur.<br><br>
+
+            Francesco Cagnasso is also highly active in the field of music theatre. His recent productions include Benjamin Britten's Peter Grimes (2025) as well as Bohuslav Martinů's Zweimal Alexander and Messertränen. In addition, he has conducted operetta and music theatre works such as Im weißen Rössl, Gräfin Mariza, Der Zigeunerbaron, and Die Herzogin von Chicago.<br><br>
+
+            From 2022 to 2024, he served as assistant to Michael Francis with the Deutsche Staatsphilharmonie Rheinland-Pfalz. Further important assistantships led him to work with François-Xavier Roth at the Gürzenich Orchestra Cologne (2022 – Momentum: Our Future, Now) and with Kent Nagano in Hamburg.<br><br>
+
+            He has attracted international attention through his success in major conducting competitions, reaching the semifinal of the German Conducting Award 2025, the round of sixteen at the Malko Competition for Young Conductors 2024, and the semifinal of the IX Jorma Panula International Conducting Competition 2024. From 2021 to 2023, he was a scholarship holder of the Forum Dirigieren program of the German Music Council.<br><br>
+
+            Francesco Cagnasso has attended masterclasses with Daniele Gatti, Michael Sanderling, Tomáš Netopil, Michael Francis, Johannes Schlaefli, Nicolás Pasquet, and Ole Kristian Ruud. He completed his Master's degree in Orchestral Conducting in 2024 at the Zurich University of the Arts, studying with Johannes Schlaefli and Christoph-Mathias Mueller, following earlier studies at the Hamburg University of Music and Theatre with Ulrich Windfuhr.<br><br>
+
+            Upcoming engagements include concerts with the Musikkollegium Winterthur (Schumann: Manfred / Honegger: Pastorale d'été / Keller: Signale (World Premiere) / Schoeck Violin Concerto), Philharmonie Freiberg (Haydn: Symphony No. 95 / Britten: "A Time There Was" / Webern Langsamer Satz / Hindemith Symphony "Mathis der Maler") and Youth Orchestra Rheinland-Pfalz with Mahler Symphony No. 2.<br><br>
+
+            <div class="artist-footer-note">
+
+                <!-- Instagram -->
+                <div style="margin-top: 25px; margin-bottom: 15px;">
+                    <a href="https://www.instagram.com/francesco.cagnasso/" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <span style="vertical-align: super; margin-left: 8px; font-size: 14px;">Follow on Instagram</span>
+                    </a>
+                </div>
+
+                <div style="font-size: 13px; opacity: 0.9; margin-top: 25px;">
+                    Photo credit: &copy; Marco Borggreve
+                </div>
+
+                <div style="font-size: 13px; line-height: 1.4; margin-top: 15px;">
+                    Contact: Thomas Voigt - <a href="mailto:thomas@tvmartists.com" style="text-decoration: underline;">thomas@tvmartists.com</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-rule"></div>
+        <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
+            <img src="images/insta.png" alt="Instagram">
+        </a>
+        <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
+    </footer>
+
+    <!-- HEADER: BEIM RUNTERSCROLLEN AUSBLENDEN, BEIM HOCHSCROLLEN EINBLENDEN -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.querySelector(".site-banner");
+            const nav = document.getElementById("mobileNav");
+            if (!header) return;
+            let lastY = window.scrollY;
+            let ticking = false;
+
+            function show() { header.classList.remove("is-hidden"); }
+            function hide() { header.classList.add("is-hidden"); }
+
+            window.addEventListener("scroll", function () {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    const y = Math.max(window.scrollY, 0);
+                    const menuOpen = nav && nav.classList.contains("is-open");
+                    if (y <= header.offsetHeight || menuOpen || y < lastY - 4) {
+                        show();
+                    } else if (y > lastY + 4) {
+                        hide();
+                    }
+                    lastY = y;
+                    ticking = false;
+                });
+            }, { passive: true });
+
+            header.addEventListener("focusin", show);
+        });
+    </script>
+
+    <!-- HAMBURGER-MENÜ TOGGLE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.getElementById("hamburgerBtn");
+            const nav = document.getElementById("mobileNav");
+            if (!btn || !nav) return;
+
+            btn.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                btn.classList.toggle("is-open", isOpen);
+                btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    btn.classList.remove("is-open");
+                    btn.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
