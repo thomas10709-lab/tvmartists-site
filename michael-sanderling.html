@@ -324,18 +324,12 @@
         }
         .fp-block-text {
             margin: 0;
-            text-align: justify;
+            text-align: left;
             -webkit-hyphens: none;
             hyphens: none;
         }
-        /* Blocksatz dehnt nur die Abstände zwischen den Orchesternamen (nach dem Komma);
-           die Leerzeichen innerhalb eines Namens bleiben normal breit (1 Leerzeichen) */
-        .fp-block-text .s {
-            display: inline-block;
-            white-space: pre;
-        }
         .fp-block-text .nb {
-            white-space: nowrap;   /* der letzte Name steht nie mit nur einem Wort allein in der Zeile */
+            white-space: nowrap;   /* der letzte Name bleibt zusammen, nie nur ein Wort allein in der Zeile */
         }
         .fp-labels {
             text-align: center;
@@ -757,7 +751,7 @@
         <!-- FUTURE PROJECTS: weiße Schrift auf Blau, Blocktext, ca. 66 % der News-Breite -->
         <div class="fp-block">
             <div class="fp-block-title">Future projects</div>
-            <p class="fp-block-text">Berliner<span class="s"> </span>Philharmoniker, Hong<span class="s"> </span>Kong<span class="s"> </span>Philharmonic<span class="s"> </span>Orchestra, Dallas<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Leipzig<span class="s"> </span>Gewandhaus<span class="s"> </span>Orchestra, NDR<span class="s"> </span>Radio<span class="s"> </span>Philharmonic<span class="s"> </span>Hanover, KBS<span class="s"> </span>Symphony<span class="s"> </span>Orchestra<span class="s"> </span>Seoul, Milwaukee<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Vienna<span class="s"> </span>Symphoniker, Konzerthausorchester<span class="s"> </span>Berlin, Helsinki<span class="s"> </span>Philharmonic<span class="s"> </span>Orchestra, Gothenburg<span class="s"> </span>Symphoniker, Norwegian<span class="s"> </span>Radio<span class="s"> </span>Orchestra, The<span class="s"> </span>Florida<span class="s"> </span>Orchestra, Düsseldorfer<span class="s"> </span>Symphoniker, BBC<span class="s"> </span>Scottish<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Dresden<span class="s"> </span>Philharmonic, Hyogo<span class="s"> </span>PAC<span class="s"> </span>Orchestra, National<span class="s"> </span>Symphony<span class="s"> </span>Orchestra<span class="s"> </span>of<span class="s"> </span>Taiwan, Nagoya<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Osaka<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Musikkollegium<span class="s"> </span>Winterthur, Antwerp<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Guerzenich<span class="s"> </span>Orchestra<span class="s"> </span>Cologne, Essen<span class="s"> </span>Philharmonic, Orquestra<span class="s"> </span>Simfònica<span class="s"> </span>de<span class="s"> </span>Barcelona, Orquesta<span class="s"> </span>Sinfónica<span class="s"> </span>del<span class="s"> </span>Principado<span class="s"> </span>de<span class="s"> </span>Asturias, Orquestra<span class="s"> </span>Sinfónica<span class="s"> </span>do<span class="s"> </span>Porto, Irish<span class="s"> </span>National<span class="s"> </span>Symphony<span class="s"> </span>Orchestra, Shanghai<span class="s"> </span>Philharmonic, <span class="nb">Orquestra<span class="s"> </span>Gulbenkian</span></p>
+            <p class="fp-block-text">Berliner Philharmoniker, Hong Kong Philharmonic Orchestra, Dallas Symphony Orchestra, Leipzig Gewandhaus Orchestra, NDR Radio Philharmonic Hanover, KBS Symphony Orchestra Seoul, Milwaukee Symphony Orchestra, Vienna Symphoniker, Konzerthausorchester Berlin, Helsinki Philharmonic Orchestra, Gothenburg Symphoniker, Norwegian Radio Orchestra, The Florida Orchestra, Düsseldorfer Symphoniker, BBC Scottish Symphony Orchestra, Dresden Philharmonic, Hyogo PAC Orchestra, National Symphony Orchestra of Taiwan, Nagoya Symphony Orchestra, Osaka Symphony Orchestra, Musikkollegium Winterthur, Antwerp Symphony Orchestra, Guerzenich Orchestra Cologne, Essen Philharmonic, Orquestra Simfònica de Barcelona, Orquesta Sinfónica del Principado de Asturias, Orquestra Sinfónica do Porto, Irish National Symphony Orchestra, Shanghai Philharmonic, <span class="nb">Orquestra Gulbenkian</span></p>
         </div>
 
         <div class="fp-labels">Labels: Sony classical, Warner</div>
