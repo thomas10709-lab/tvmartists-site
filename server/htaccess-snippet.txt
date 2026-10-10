@@ -8,7 +8,7 @@ DirectoryIndex index.html index.php
 
 # HTML-Seiten immer neu prüfen lassen, damit Änderungen sofort sichtbar sind
 <IfModule mod_headers.c>
-  <FilesMatch "^(index|imprint|mats-thiersch|gerald-karni|johannes-pierre-bettac|jose-luis-gutierrez|francesco-cagnasso|michael-sanderling)\.html$">
+  <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
