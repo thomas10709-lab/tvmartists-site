@@ -1,0 +1,2 @@
+# Alter Link ohne Endung -> neue Seite
+RedirectMatch 301 ^/ellichoi/index/?$ /ellichoi/
