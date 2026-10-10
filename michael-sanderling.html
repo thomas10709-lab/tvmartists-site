@@ -305,38 +305,42 @@
             margin-top: 22px;
         }
 
-        /* Future-Projects-Container: ca. 66 % der Breite des News-Containers */
-        .fp-box {
+        /* Future projects: weiße Schrift auf Blau, Blocktext in ca. 66 % der News-Breite */
+        .fp-block {
             width: 66%;
-            margin: 0 auto 14px auto;
-            background-color: #ffffff;
-            color: #1b2a3a;
-            border: 0.5px solid #2C3E50;
-            border-radius: 8px;
-            padding: 18px 24px;
-            box-sizing: border-box;
+            margin: 6px auto 22px auto;
+            color: #ffffff;
             font-family: 'Raleway', sans-serif;
-        }
-        .fp-box-title {
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            text-align: center;
-            margin: 0 0 12px 0;
-            color: #1b2a3a;
-        }
-        .fp-box-text {
-            margin: 0;
-            font-size: 14.5px;
+            font-size: 16px;
             font-weight: 300;
             letter-spacing: 0.02em;
-            line-height: 1.7;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .fp-block-title {
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+        .fp-block-text {
+            margin: 0;
             text-align: justify;
             -webkit-hyphens: auto;
             hyphens: auto;
         }
+        .fp-labels {
+            text-align: center;
+            margin: 0 auto 14px auto;
+            padding: 0 20px 18px 20px;
+            color: #ffffff;
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.6;
+        }
         @media (max-width: 768px) {
-            .fp-box { width: 100%; padding: 16px 18px; }
+            .fp-block { width: 100%; padding: 0 20px; box-sizing: border-box; }
         }
 
         /* News-Karussell */
@@ -737,11 +741,17 @@
             <div class="fp-list" style="margin-top: 0;">
                 Chief Conductor<br>
                 Lucerne Symphony Orchestra since 2021<br>
-                Dresden Philharmonic 2011–19<br><br>
-
-                Labels: Sony classical, Warner
+                Dresden Philharmonic 2011–19
             </div>
         </div>
+
+        <!-- FUTURE PROJECTS: weiße Schrift auf Blau, Blocktext, ca. 66 % der News-Breite -->
+        <div class="fp-block">
+            <div class="fp-block-title">Future projects</div>
+            <p class="fp-block-text">Berliner Philharmoniker, Hong Kong Philharmonic Orchestra, Dallas Symphony Orchestra, Leipzig Gewandhaus Orchestra, NDR Radio Philharmonic Hanover, KBS Symphony Orchestra Seoul, Milwaukee Symphony Orchestra, Vienna Symphoniker, Konzerthausorchester Berlin, Helsinki Philharmonic Orchestra, Gothenburg Symphoniker, Norwegian Radio Orchestra, The Florida Orchestra, Düsseldorfer Symphoniker, BBC Scottish Symphony Orchestra, Dresden Philharmonic, Hyogo PAC Orchestra, National Symphony Orchestra of Taiwan, Nagoya Symphony Orchestra, Osaka Symphony Orchestra, Musikkollegium Winterthur, Antwerp Symphony Orchestra, Guerzenich Orchestra Cologne, Essen Philharmonic, Orquestra Simfònica de Barcelona, Orquesta Sinfónica del Principado de Asturias, Orquestra Sinfónica do Porto, Irish National Symphony Orchestra, Shanghai Philharmonic, Orquestra Gulbenkian</p>
+        </div>
+
+        <div class="fp-labels">Labels: Sony classical, Warner</div>
 
         <!-- BUTTON-REIHE -->
         <div id="top-button-row">
@@ -764,12 +774,7 @@
         </div>
 
         <!-- FUTURE PROJECTS: Container (ca. 66 % der News-Breite), Orchester als Blocktext -->
-        <section class="fp-box" aria-labelledby="fpTitle">
-            <h2 id="fpTitle" class="fp-box-title">Future projects</h2>
-            <p class="fp-box-text">Berliner Philharmoniker, Hong Kong Philharmonic Orchestra, Dallas Symphony Orchestra, Leipzig Gewandhaus Orchestra, NDR Radio Philharmonic Hanover, KBS Symphony Orchestra Seoul, Milwaukee Symphony Orchestra, Vienna Symphoniker, Konzerthausorchester Berlin, Helsinki Philharmonic Orchestra, Gothenburg Symphoniker, Norwegian Radio Orchestra, The Florida Orchestra, Düsseldorfer Symphoniker, BBC Scottish Symphony Orchestra, Dresden Philharmonic, Hyogo PAC Orchestra, National Symphony Orchestra of Taiwan, Nagoya Symphony Orchestra, Osaka Symphony Orchestra, Musikkollegium Winterthur, Antwerp Symphony Orchestra, Guerzenich Orchestra Cologne, Essen Philharmonic, Orquestra Simfònica de Barcelona, Orquesta Sinfónica del Principado de Asturias, Orquestra Sinfónica do Porto, Irish National Symphony Orchestra, Shanghai Philharmonic, Orquestra Gulbenkian</p>
-        </section>
-
-        <!-- KALENDER: nächste 3 Termine, "Read more" zeigt die Saison -->
+                <!-- KALENDER: nächste 3 Termine, "Read more" zeigt die Saison -->
         <section id="calendar-preview-wrapper" class="calendar-box" aria-labelledby="calendarTitle">
             <h2 id="calendarTitle" class="calendar-title">Calendar</h2>
             <div id="calendar-preview" class="calendar-list">Lade Termine…</div>
