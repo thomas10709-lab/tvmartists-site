@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Gerald Karni - TVM Artists</title>
-    <meta name="description" content="Gerald Karni – conductor and Conducting Fellow of the San Diego Symphony under Rafael Payare. Biography, orchestras, news and contact via TVM artists.">
+    <title>Johannes Pierre Bettac - TVM Artists</title>
+    <meta name="description" content="Johannes Pierre Bettac – conductor, 2nd Kapellmeister at the Deutsches Nationaltheater Weimar. Biography, calendar, news and contact via TVM artists.">
     <meta property="og:type" content="profile">
     <meta property="og:site_name" content="TVM artists">
-    <meta property="og:title" content="Gerald Karni - TVM Artists">
-    <meta property="og:description" content="Gerald Karni – conductor and Conducting Fellow of the San Diego Symphony under Rafael Payare. Biography, orchestras, news and contact via TVM artists.">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Gerald Karni", "jobTitle": "Conductor", "sameAs": ["https://www.instagram.com/geraldkarni/", "https://geraldkarni.com"], "description": "Gerald Karni – conductor and Conducting Fellow of the San Diego Symphony under Rafael Payare. Biography, orchestras, news and contact via TVM artists."}</script>
+    <meta property="og:title" content="Johannes Pierre Bettac - TVM Artists">
+    <meta property="og:description" content="Johannes Pierre Bettac – conductor, 2nd Kapellmeister at the Deutsches Nationaltheater Weimar. Biography, calendar, news and contact via TVM artists.">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Johannes Pierre Bettac", "jobTitle": "Conductor", "sameAs": ["https://www.instagram.com/johannesbettac/", "https://johannespierrebettac.com/"], "description": "Johannes Pierre Bettac – conductor, 2nd Kapellmeister at the Deutsches Nationaltheater Weimar. Biography, calendar, news and contact via TVM artists."}</script>
     <style>
 
         /* Schriftarten: Urbanist (Hauchfeine Subtitles), Raleway & Syne */
@@ -137,6 +137,54 @@
                 color: #ffffff;
                 text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             }
+        }
+
+        /* Bettac: Name unten mittig über dem dunklen Sakko */
+        @media (min-width: 769px) {
+            .artist-hero--name-bottom .hero-name {
+                left: 50%;
+                top: auto;
+                bottom: 7%;
+                transform: translateX(-50%);
+                font-size: clamp(30px, 3.4vw, 56px);
+            }
+        }
+        @media (max-width: 768px) {
+            .artist-hero--name-bottom .hero-name { font-size: 6.4vw; letter-spacing: 0.04em; }
+        }
+
+        /* Kalender */
+        .calendar-box {
+            max-width: 700px;
+            margin: 0 auto 14px auto;
+            text-align: center;
+            background-color: #ffffff;
+            color: #2C3E50;
+            border: 0.5px solid #2C3E50;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-sizing: border-box;
+        }
+        .calendar-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin: 0 0 12px 0;
+            color: #2C3E50;
+        }
+        .calendar-list {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #2C3E50;
+        }
+        .calendar-event { margin-bottom: 14px; }
+        #calendar-readmore-wrapper { margin-top: 8px; }
+        #calendar-full {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 0.5px solid rgba(44, 62, 80, 0.3);
+        }
+        @media (max-width: 768px) {
+            .calendar-box { margin-left: 12px; margin-right: 12px; }
         }
 
         .artist-page {
@@ -578,43 +626,32 @@
     </header>
 
     <!-- HERO (Querformat auf dem Desktop, Hochformat auf dem Handy; Name als Text) -->
-    <div class="artist-hero artist-hero--overlay-desktop">
+    <div class="artist-hero artist-hero--overlay-desktop artist-hero--name-bottom">
         <picture>
-            <source media="(max-width: 768px)" srcset="images/karni-mobile-800.webp 800w, images/karni-mobile-1200.webp 1200w, images/karni-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
-            <source media="(max-width: 768px)" srcset="images/karni-mobile-800.jpg 800w, images/karni-mobile-1200.jpg 1200w, images/karni-mobile-1600.jpg 1600w" sizes="100vw">
-            <source srcset="images/karni-hero-1280.webp 1280w, images/karni-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
-            <img src="images/karni-hero-1920.jpg" alt="Gerald Karni" width="1920" height="1080" loading="eager">
+            <source media="(max-width: 768px)" srcset="images/bettac-mobile-800.webp 800w, images/bettac-mobile-1200.webp 1200w, images/bettac-mobile-1600.webp 1600w" sizes="100vw" type="image/webp">
+            <source media="(max-width: 768px)" srcset="images/bettac-mobile-800.jpg 800w, images/bettac-mobile-1200.jpg 1200w, images/bettac-mobile-1600.jpg 1600w" sizes="100vw">
+            <source srcset="images/bettac-hero-1280.webp 1280w, images/bettac-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
+            <img src="images/bettac-hero-1920.jpg" alt="Johannes Pierre Bettac" width="1920" height="1080" loading="eager">
         </picture>
-        <h1 class="hero-name">Gerald Karni</h1>
+        <h1 class="hero-name">Johannes Pierre Bettac</h1>
     </div>
 
     <main class="artist-page">
 
-        <!-- ORCHESTRAS -->
+        <!-- KURZTITEL -->
         <div id="future-projects-wrapper">
-            <div class="fp-list" style="margin-top: 0;">
-                Belgrade Philharmonic<br>
-                San Diego Symphony<br>
-                Tucson Symphony<br>
-                Orchestra della Svizzera italiana<br>
-                New York Philharmonic Ensemble<br>
-                Romanian National Radio Orchestra<br>
-                Sønderjyllands Symfoniorkester<br>
-                Lucerne Symphony<br>
-                NDR Elbphilharmonie Orchester<br>
-                Interlochen World Youth Symphony
-            </div>
+            <div class="fp-title">2. Kapellmeister Deutsches Nationaltheater Weimar</div>
         </div>
 
         <!-- BUTTON-REIHE -->
         <div id="top-button-row">
-            <a href="https://www.dropbox.com/scl/fo/icgfehcbnurgwx0a16p0w/AKCfz7vDO8gWOOSHHnuS5S4?rlkey=zjj77ez37us0nebntwg8dgh4t&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
-            <a href="https://www.youtube.com/playlist?list=PLOwEdDKyt7G4" target="_blank" rel="noopener" class="custom-btn">YouTube</a>
-            <a href="https://geraldkarni.com" target="_blank" rel="noopener" class="custom-btn">Official Artist Website</a>
+            <a href="https://youtube.com/playlist?list=PLRL6DaBswqAQ&si=cu2GWr5JxNil8lvE" target="_blank" rel="noopener" class="custom-btn">Videos</a>
+            <a href="https://www.dropbox.com/scl/fo/xa1ut0k0enex4wgtbzln5/AFWfG-DQG73ABhEBBPzfz6Y?rlkey=zzr909ajfnzso84a3dpzjdwlt&dl=0" target="_blank" rel="noopener" class="custom-btn">Presskit</a>
+            <a href="https://johannespierrebettac.com/" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
         </div>
 
-        <!-- NEWS-KARUSSELL (WordPress-Kategorie "Gerald Karni", wird über den Namen gesucht) -->
-        <div class="news-carousel-wrapper" id="newsCarousel" data-category-name="Gerald Karni">
+        <!-- NEWS-KARUSSELL (WordPress-Kategorie 12 = Johannes Pierre Bettac) -->
+        <div class="news-carousel-wrapper" id="newsCarousel" data-category="12">
             <div class="news-carousel-inner">
                 <div class="news-carousel-header">News</div>
                 <div class="news-carousel-track" id="newsTrack"></div>
@@ -626,28 +663,42 @@
             </div>
         </div>
 
+        <!-- KALENDER: nächste 3 Termine, "Read more" zeigt die Saison -->
+        <section id="calendar-preview-wrapper" class="calendar-box" aria-labelledby="calendarTitle">
+            <h2 id="calendarTitle" class="calendar-title">Calendar</h2>
+            <div id="calendar-preview" class="calendar-list">Lade Termine…</div>
+            <div id="calendar-readmore-wrapper" hidden>
+                <button id="btn-readmore" class="custom-btn" type="button" aria-expanded="false" aria-controls="calendar-full">Read more</button>
+            </div>
+            <div id="calendar-full" hidden>
+                <div id="calendar-full-list" class="calendar-list"></div>
+            </div>
+        </section>
+
         <!-- BIOGRAPHY -->
         <div class="container-content">
 
-            <strong>Biography</strong><br><br>
+            Johannes Pierre Bettac (born 1999) has been engaged as 2nd Kapellmeister at the Deutsches Nationaltheater Weimar starting with the 2025/2026 season.<br><br>
 
-            For the 2026/27 season, Gerald Karni marks his second year in the role of Conducting Fellow with the San Diego Symphony Orchestra under the guidance of Music Director Rafael Payare. Raised and educated across Europe and the United States, his international career has rapidly gained momentum through performances and collaborations with leading orchestras across Europe and North America.<br><br>
+            This engagement was preceded by several assistantships at international venues: At the Théâtre Royal de la Monnaie in Brussels, he assisted Alain Altinoglu with the new production of Wagner's Siegfried (director: Pierre Audi). At the Semperoper Dresden, he worked as musical assistant for the revival of Luciano Chailly's Die kahle Sängerin under the musical direction of Thomas Leo Cadenbach.<br><br>
 
-            A significant milestone in his career was his collaboration with the New York Philharmonic, where, while serving as Assistant Conductor, he led the world premiere of Melinda Wagner's Elegy Flywheel at New York's Merkin Hall. Karni is a three-time recipient of the prestigious Career Assistance Award from the Solti Foundation U.S. and was a Conducting Fellow at the Verbier Festival.<br><br>
+            Alongside his work in music theatre, Johannes Pierre Bettac has also built relationships on the concert podium with orchestras such as the Orquesta Sinfónica de Castilla y León, the Orquesta de Extremadura, the Orquesta de Córdoba, the Philharmonie Südwestfalen, the Philharmonisches Orchester Hagen, the Staatskapelle Halle, as well as the Hradec Králové Philharmonic Orchestra, the Bilbao Orkestra Sinfonikoa, and the Basque National Orchestra (Euskadiko Orkestra).<br><br>
 
-            Highlights of the current season include major international projects, including debuts with the Nuremberg Symphony Orchestra, the Tucson Symphony Orchestra, the Brașov Philharmonic, and the MÁV Symphony Orchestra Budapest. In spring 2027, he will continue his collaboration with the San Diego Symphony by assisting Music Director Rafael Payare and the orchestra on their upcoming European tour.<br><br>
+            He also assisted Christoph Eschenbach (Schleswig-Holstein Musik Festival Orchestra), Marie Jacquot (Deutsches Symphonie-Orchester Berlin), and Frank Beermann (Nordwestdeutsche Philharmonie Herford).<br><br>
 
-            His profile as a conductor and sought-after collaborator on the podium has been further shaped through close collaborations with leading orchestras, including the Baltimore Symphony Orchestra, the San Diego Symphony, and the Rundfunk-Sinfonieorchester Berlin, through assistant conducting roles.<br><br>
+            Already during his studies, he worked as an assistant at the Landestheater Detmold on various productions and also led smaller performances. Before his studies, he completed an internship as a répétiteur at Theater Hof. He also gathered important impulses at the Bayreuther Festspiele in 2023 as part of the master course for conductors, where he intensively accompanied the entire rehearsal process.<br><br>
 
-            As a Conducting Fellow at the Verbier Festival in 2022 and 2023, he assisted Sir Simon Rattle, Gábor Takács-Nagy, Gianandrea Noseda, and Klaus Mäkelä. He has since conducted orchestras including the NDR Elbphilharmonie Orchestra, the Lucerne Symphony Orchestra, the Hamburger Camerata at the Elbphilharmonie, the Orchestra della Svizzera Italiana, and the Sønderjyllands Symfoniorkester. In May 2024, he stepped in at short notice to lead a concert week with the Belgrade Philharmonic Orchestra, conducting Strauss's Don Quixote with Daniel Müller-Schott, Debussy's Ibéria, and Márquez's Danzón No. 2. Additional engagements have taken him to the Haifa Symphony Orchestra, the Mozartfest Augsburg, and the Traunsteiner Sommerkonzerte, where he collaborated with soloists Vilde Frang and Maximilian Hornung.<br><br>
+            Johannes Pierre Bettac is also a prize-winner of several competitions. In 2022, he won 1st prize at the 16th Concorso Internazionale per pianisti accompagnatori "Ottorino Respighi" Milano and, in the same year, reached the final of the Ionel Perlea Conducting Competition, in 2023 of the RNCM Conducting Fellowship in Manchester, and in 2026 of the 23rd International Vocal Chamber Music Competition "C. A. Seghizzi" with his duo partner Julia Valero.<br><br>
 
-            Karni began his musical training as a violist, studying with Lawrence Power at the Zurich University of the Arts (ZHdK), before completing his Master's degree in Orchestral Conducting with Marc Kissóczy at the Conservatorio della Svizzera Italiana. While still a student, he won the Silver Medal at the 3rd International Antal Doráti Conducting Competition in Budapest, marking an early breakthrough on the international podium. During his time in Zurich, he founded the Side-by-Side initiative, bringing together musicians from the Tonhalle Orchestra Zurich and the Zurich Opera Orchestra with students. Since 2015, he has also been a member of the West-Eastern Divan Orchestra, where his longstanding collaboration with its founder, Daniel Barenboim, has played a formative role in his artistic development.<br><br>
+            In addition to multiple first prizes and special prizes at the German national level of the "Jugend musiziert" competition in the piano or duo categories, he won the 2020 special prize of the European Union of Music Competitions for Youth (EMCY) at the International Competition for Verfemte Musik.<br><br>
+
+            Johannes Pierre Bettac completed his bachelor's degree under Florian Ludwig at the Hochschule für Musik Detmold. Since 2024, he has been continuing his education in a postgraduate program at the renowned Escuela Superior de Música Reina Sofía in Madrid under Nicolás Pasquet, Jordi Francés, and Miguel Ángel Cañamero, which he will complete in the 2026/2027 season. He received his basic musical training from childhood on with the Augsburger Domsingknaben.<br><br>
 
             <div class="artist-footer-note">
 
                 <!-- Instagram -->
                 <div style="margin-top: 25px; margin-bottom: 15px;">
-                    <a href="https://www.instagram.com/geraldkarni/" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
+                    <a href="https://www.instagram.com/johannesbettac/" target="_blank" rel="noopener" style="display: inline-block; text-decoration: none; color: #2C3E50;">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -655,6 +706,10 @@
                         </svg>
                         <span style="vertical-align: super; margin-left: 8px; font-size: 14px;">Follow on Instagram</span>
                     </a>
+                </div>
+
+                <div style="font-size: 13px; opacity: 0.9; margin-top: 25px;">
+                    &copy; Photography by Julia Valero
                 </div>
 
                 <div style="font-size: 13px; line-height: 1.4; margin-top: 15px;">
@@ -790,6 +845,99 @@
             }).catch(function () {
                 track.innerHTML = "<p style='padding:20px;'>News konnten nicht geladen werden.</p>";
             });
+        });
+    </script>
+
+    <!-- KALENDER: lädt die Termine aus dem Google-Sheet-Feed -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const FEED_URL = "https://script.google.com/macros/s/AKfycbx-l_QkTurXbeyaGjmR1K7asVBsYnvUhJXUZzq73KiQ7-QEWJOrJr-UQb-MbYkWDaO-/exec";
+            const previewEl = document.getElementById("calendar-preview");
+            const fullListEl = document.getElementById("calendar-full-list");
+            const fullWrapper = document.getElementById("calendar-full");
+            const readmoreWrapper = document.getElementById("calendar-readmore-wrapper");
+            const readmoreBtn = document.getElementById("btn-readmore");
+            if (!previewEl) return;
+
+            if (readmoreBtn) {
+                readmoreBtn.addEventListener("click", function () {
+                    const showing = !fullWrapper.hidden;
+                    fullWrapper.hidden = showing;
+                    readmoreBtn.textContent = showing ? "Read more" : "Show less";
+                    readmoreBtn.setAttribute("aria-expanded", showing ? "false" : "true");
+                });
+            }
+
+            function parseGermanDate(str) {
+                const m = str.trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+                if (!m) return null;
+                const d = new Date(parseInt(m[3], 10), parseInt(m[2], 10) - 1, parseInt(m[1], 10));
+                return isNaN(d.getTime()) ? null : d;
+            }
+            function formatGermanDate(d) {
+                return String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear();
+            }
+
+            // Termine werden als DOM-Knoten (Text) aufgebaut, nie als HTML aus dem Feed
+            function renderEvent(ev) {
+                const box = document.createElement("div");
+                box.className = "calendar-event";
+                function line(text, bold) {
+                    if (!text) return;
+                    const el = bold ? document.createElement("strong") : document.createElement("span");
+                    el.textContent = text;
+                    box.appendChild(el);
+                    box.appendChild(document.createElement("br"));
+                }
+                line(formatGermanDate(ev.date), true);
+                line(ev.venue, true);
+                line(ev.piece, false);
+                line(ev.ensemble, false);
+                if (ev.cast) {
+                    ev.cast.split("\n").map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) { line(l, false); });
+                }
+                return box;
+            }
+            function renderList(target, list) {
+                target.textContent = "";
+                list.forEach(function (ev) { target.appendChild(renderEvent(ev)); });
+            }
+
+            fetch(FEED_URL)
+                .then(function (res) { return res.text(); })
+                .then(function (text) {
+                    const blocks = text.trim().split("###EVENT###").filter(function (b) { return b.trim() !== ""; });
+                    const events = [];
+                    blocks.forEach(function (block) {
+                        const parts = block.trim().split("---").map(function (p) { return p.trim(); });
+                        const firstLines = parts[0].split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+                        const dates = (firstLines[0] || "").split(",").map(parseGermanDate).filter(function (d) { return d !== null; });
+                        dates.forEach(function (d) {
+                            events.push({ date: d, venue: firstLines[1] || "", piece: parts[1] || "", ensemble: parts[2] || "", cast: parts[3] || "" });
+                        });
+                    });
+                    events.sort(function (a, b) { return a.date - b.date; });
+
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const next3 = events.filter(function (ev) { return ev.date >= today; }).slice(0, 3);
+
+                    if (next3.length > 0) {
+                        renderList(previewEl, next3);
+                    } else {
+                        previewEl.textContent = "Keine kommenden Termine gefunden.";
+                    }
+
+                    const seasonStartYear = today.getMonth() >= 8 ? today.getFullYear() : today.getFullYear() - 1;
+                    const seasonStart = new Date(seasonStartYear, 8, 1);
+                    const seasonEvents = events.filter(function (ev) { return ev.date >= seasonStart; });
+                    renderList(fullListEl, seasonEvents);
+                    if (seasonEvents.length > 0) readmoreWrapper.hidden = false;
+                })
+                .catch(function (err) {
+                    previewEl.textContent = "Fehler beim Laden der Termine.";
+                    console.error("Kalender-Feed Fehler:", err);
+                });
         });
     </script>
 
