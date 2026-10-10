@@ -867,7 +867,18 @@
         .dates .block-title { color: #fff; }
         @media (max-width: 768px) { .block-title { font-size: 2.6rem; margin-bottom: 28px; } }
 
-        /* Calendar + Gallery are hidden for now (not deleted).
+        .coming-soon {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 0 1cm 0;
+            color: #666;
+        }
+        .dates .coming-soon { color: rgba(255,255,255,0.75); }
+
+        /* Calendar entries + Gallery images are hidden for now (not deleted).
            To show them again: delete this one rule. */
         [data-hidden-for-now] { display: none !important; }
     </style>
@@ -940,10 +951,11 @@
     </section>
 
     <!-- Upcoming Dates - DESKTOP VERSION -->
-    <section class="dates desktop-only" id="calendar" data-hidden-for-now>
+    <section class="dates desktop-only" id="calendar">
         <div class="dates-content">
             <h2 class="block-title">Calendar</h2>
-            <div class="date-list">
+            <p class="coming-soon">Update coming soon</p>
+            <div class="date-list" data-hidden-for-now>
                 <div class="date-entry">
                     <span class="date-range">7–11 Oct</span>
                     <span class="date-location">Paris</span>
@@ -993,10 +1005,11 @@
     </section>
 
     <!-- Upcoming Dates - MOBILE VERSION -->
-    <section class="dates mobile-only" id="calendar-mobile" data-hidden-for-now>
+    <section class="dates mobile-only" id="calendar-mobile">
         <div class="dates-content">
             <h2 class="block-title">Calendar</h2>
-            <div class="date-list">
+            <p class="coming-soon">Update coming soon</p>
+            <div class="date-list" data-hidden-for-now>
                 <div class="date-entry">
                     <span class="date-range">7–11 Oct</span>
                     <span class="date-location">Paris</span>
@@ -1063,9 +1076,10 @@
     </section>
 
     <!-- Gallery -->
-    <section class="gallery" id="gallery" data-hidden-for-now>
+    <section class="gallery" id="gallery">
         <h2 class="block-title">Gallery</h2>
-        <div class="gallery-grid">
+        <p class="coming-soon">Update coming soon</p>
+        <div class="gallery-grid" data-hidden-for-now>
             <div class="gallery-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZU9bccvPVkkrIkk5fBHEqXgFTpD2z_ak8tQ9gQFLh4Q" alt="Elli Choi">
             </div>
