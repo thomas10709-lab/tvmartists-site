@@ -1,10 +1,12 @@
 # ===== BEGIN TVM static site =====
-# Diesen Block GANZ OBEN in die .htaccess von tvmartists.com einfügen (vor "# BEGIN LSCACHE" bzw. vor WordPress).
-
+# Diesen Block GANZ OBEN in die .htaccess von tvmartists.com einfügen (vor allen WordPress-Regeln).
+# Wichtig: MultiViews aus, sonst liefert der Server für /imprint/ (mit Schrägstrich) einen 404,
+# bevor die Weiterleitungen unten geprüft werden.
+Options -MultiViews
 # Statische Startseite zuerst, dann WordPress
 DirectoryIndex index.html index.php
 
-# HTML-Seiten immer neu prüfen lassen (kleine 304-Antworten), damit Änderungen sofort sichtbar sind
+# HTML-Seiten immer neu prüfen lassen, damit Änderungen sofort sichtbar sind
 <IfModule mod_headers.c>
   <FilesMatch "^(index|imprint|mats-thiersch|gerald-karni|johannes-pierre-bettac|jose-luis-gutierrez|francesco-cagnasso|michael-sanderling)\.html$">
     Header set Cache-Control "no-cache"
@@ -12,15 +14,15 @@ DirectoryIndex index.html index.php
 </IfModule>
 
 # Alte WordPress-Adressen -> neue Seiten (301 = dauerhaft, für Google)
+RedirectMatch 301 ^/mats-thiersch/?$            /mats-thiersch.html
+RedirectMatch 301 ^/gerald-karni/?$             /gerald-karni.html
+RedirectMatch 301 ^/johannes-pierre-bettac/?$   /johannes-pierre-bettac.html
+RedirectMatch 301 ^/jose-luis-gutierrez/?$      /jose-luis-gutierrez.html
+RedirectMatch 301 ^/francesco-cagnasso/?$       /francesco-cagnasso.html
+RedirectMatch 301 ^/michael-sanderling/?$       /michael-sanderling.html
+RedirectMatch 301 ^/imprint/?$                  /imprint.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteRule ^mats-thiersch/?$            /mats-thiersch.html          [R=301,L]
-  RewriteRule ^gerald-karni/?$             /gerald-karni.html           [R=301,L]
-  RewriteRule ^johannes-pierre-bettac/?$   /johannes-pierre-bettac.html [R=301,L]
-  RewriteRule ^jose-luis-gutierrez/?$      /jose-luis-gutierrez.html    [R=301,L]
-  RewriteRule ^francesco-cagnasso/?$       /francesco-cagnasso.html     [R=301,L]
-  RewriteRule ^michael-sanderling/?$       /michael-sanderling.html     [R=301,L]
-  RewriteRule ^imprint/?$                  /imprint.html                [R=301,L]
   RewriteRule ^cookie-policy/?$            /imprint.html#cookies        [R=301,L,NE]
 </IfModule>
 # ===== END TVM static site =====
