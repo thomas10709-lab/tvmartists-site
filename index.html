@@ -410,6 +410,17 @@
             white-space: normal !important;
         }
 
+        .wave-divider {
+            width: min(720px, calc(100% - 48px));
+            margin: 1.5cm auto 0 auto;
+        }
+
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+            height: 30px;
+        }
+
         .conductors-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 419px));
@@ -1368,6 +1379,7 @@
 
     <!-- 3. CONDUCTORS (2-SPALTEN GRID, ZUFÄLLIGE REIHENFOLGE) -->
     <div class="conductors-section" id="artists">
+        <h2 class="section-label">Representation</h2>
         <div class="conductors-grid" id="conductorsGrid">
 
             <div class="artist-wrapper">
@@ -1435,6 +1447,12 @@
                 </a>
             </div>
 
+        </div>
+        <!-- leicht geschwungene Trennlinie unter den Karten -->
+        <div class="wave-divider" aria-hidden="true">
+            <svg viewBox="0 0 1200 40" preserveAspectRatio="none" focusable="false">
+                <path d="M0 22 C 200 4, 400 4, 600 20 S 1000 36, 1200 18" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
         </div>
     </div>
 
