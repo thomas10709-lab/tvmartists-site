@@ -1,0 +1,4 @@
+# Testordner nicht bei Google aufnehmen lassen (gehört nach tvmartists.com/neu/.htaccess)
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>

@@ -1,0 +1,8 @@
+# Kürzere Cache-Zeit für unsere Bilder, damit Änderungen schnell sichtbar werden
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType image/jpeg "access plus 1 hour"
+  ExpiresByType image/png "access plus 1 hour"
+  ExpiresByType image/webp "access plus 1 hour"
+</IfModule>
