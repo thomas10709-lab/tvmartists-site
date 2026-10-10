@@ -446,6 +446,13 @@
             min-width: 0;
         }
 
+        /* 7 Karten: Zeile 1 = 2 Karten, Zeile 2 = nur die 3. Karte (mittig), danach je 2 Karten */
+        .conductors-grid .artist-wrapper:nth-child(3) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            width: min(419px, 100%);
+        }
+
         .conductors-grid .artist-wrapper::before {
             display: none !important;
         }
@@ -1378,7 +1385,6 @@
 
     <!-- 3. CONDUCTORS (2-SPALTEN GRID, ZUFÄLLIGE REIHENFOLGE) -->
     <div class="conductors-section" id="artists">
-        <h2 class="section-label">Conductors</h2>
         <div class="conductors-grid" id="conductorsGrid">
 
             <div class="artist-wrapper">
@@ -1434,6 +1440,15 @@
                     <img src="images/thiersch-800.jpg"
                          srcset="images/thiersch-800.webp 800w, images/thiersch-1200.webp 1200w" sizes="(max-width: 768px) 299px, 419px"
                          alt="Mats Thiersch" class="artist-img" loading="eager">
+                </a>
+            </div>
+
+            <div class="artist-wrapper" id="artist-elli-choi">
+                <a href="ellichoi/" class="artist-btn">Elli Choi</a>
+                <a href="ellichoi/" class="artist-photo-link" aria-label="Elli Choi">
+                    <img src="images/elli-choi-800.jpg"
+                         srcset="images/elli-choi-800.webp 800w" sizes="(max-width: 768px) 299px, 419px"
+                         alt="Elli Choi" class="artist-img" loading="eager">
                 </a>
             </div>
 
