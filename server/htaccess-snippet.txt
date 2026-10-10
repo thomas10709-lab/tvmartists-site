@@ -1,0 +1,26 @@
+# ===== BEGIN TVM static site =====
+# Diesen Block GANZ OBEN in die .htaccess von tvmartists.com einfügen (vor "# BEGIN LSCACHE" bzw. vor WordPress).
+
+# Statische Startseite zuerst, dann WordPress
+DirectoryIndex index.html index.php
+
+# HTML-Seiten immer neu prüfen lassen (kleine 304-Antworten), damit Änderungen sofort sichtbar sind
+<IfModule mod_headers.c>
+  <FilesMatch "^(index|imprint|mats-thiersch|gerald-karni|johannes-pierre-bettac|jose-luis-gutierrez|francesco-cagnasso|michael-sanderling)\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# Alte WordPress-Adressen -> neue Seiten (301 = dauerhaft, für Google)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^mats-thiersch/?$            /mats-thiersch.html          [R=301,L]
+  RewriteRule ^gerald-karni/?$             /gerald-karni.html           [R=301,L]
+  RewriteRule ^johannes-pierre-bettac/?$   /johannes-pierre-bettac.html [R=301,L]
+  RewriteRule ^jose-luis-gutierrez/?$      /jose-luis-gutierrez.html    [R=301,L]
+  RewriteRule ^francesco-cagnasso/?$       /francesco-cagnasso.html     [R=301,L]
+  RewriteRule ^michael-sanderling/?$       /michael-sanderling.html     [R=301,L]
+  RewriteRule ^imprint/?$                  /imprint.html                [R=301,L]
+  RewriteRule ^cookie-policy/?$            /imprint.html#cookies        [R=301,L,NE]
+</IfModule>
+# ===== END TVM static site =====
