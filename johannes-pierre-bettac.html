@@ -369,6 +369,18 @@
             box-sizing: border-box;
         }
         .container-content a { color: #2C3E50; }
+        /* feinere Schrift im Text (wie Orchestra Touring / About auf der Startseite) */
+        .container-content {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            color: #1b2a3a;   /* etwas dunkler, damit die feine Schrift auf Weiß gut lesbar bleibt */
+            letter-spacing: 0.02em;
+            line-height: 1.7;
+        }
+        .container-content strong,
+        .container-content b {
+            font-weight: 500;
+        }
 
         .artist-footer-note {
             padding-top: 1px;
