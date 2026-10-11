@@ -25,23 +25,20 @@ hr.rule{border:0;border-top:2px solid var(--line);margin:0}
 
 /* header + hero */
 .hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;
- background:#0e1622 url(images/hero.jpg) center/cover no-repeat;
+ background:#0e1622 url(images/hero.jpg) center top/cover no-repeat;
  background-image:image-set(url(images/hero.webp) type("image/webp"),url(images/hero.jpg) type("image/jpeg"))}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);pointer-events:none}
-header.bar{position:absolute;z-index:5;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:78px var(--pad) 0 92px;gap:24px}
-.logo{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(20px,1.95vw,36px);letter-spacing:.01em;text-transform:uppercase;color:#fff;text-decoration:none;border:3px solid #fff;padding:clamp(10px,1.1vw,20px) clamp(14px,1.6vw,30px);line-height:1.1;white-space:nowrap}
-nav.main{display:flex;align-items:center;gap:32px;font-size:15px;text-transform:uppercase}
+header.bar{position:absolute;z-index:5;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:3.3vw 4.9vw 0 4.35vw;gap:24px}
+.logo{font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(20px,1.89vw,40px);letter-spacing:.01em;text-transform:uppercase;color:#fff;text-decoration:none;border:3px solid #fff;padding:clamp(8px,1.02vw,22px) clamp(14px,1.5vw,30px);line-height:1.1;white-space:nowrap}
+nav.main{display:flex;align-items:center;gap:clamp(18px,1.7vw,36px);font-size:clamp(13px,.78vw,17px);text-transform:uppercase}
 nav.main a{text-decoration:none;color:#fff}
 nav.main a:hover{opacity:.7}
-nav.main svg{width:38px;height:38px;fill:#fff}
+nav.main svg{width:clamp(28px,1.85vw,40px);height:clamp(28px,1.85vw,40px);fill:#fff}
 .burger{display:none;background:none;border:2px solid #fff;color:#fff;padding:8px 12px;font:inherit;text-transform:uppercase;cursor:pointer}
-.labels{position:absolute;z-index:3;right:var(--pad);top:230px;display:flex;gap:clamp(18px,2vw,40px);align-items:flex-start}
+.labels{position:absolute;z-index:3;right:4.8vw;top:11.1vw;display:flex;gap:2vw;align-items:flex-start}
 .labels img{height:auto}
-.labels .lw{width:clamp(80px,8vw,140px)}
-.labels .ls{width:clamp(56px,5vw,96px)}
-.quote{position:absolute;z-index:3;left:max(46.8%,40px);bottom:12%;max-width:min(760px,86vw)}
-.quote p{font-family:Newsreader,Georgia,serif;font-style:italic;font-size:clamp(24px,2.7vw,40px);line-height:1.65;margin:0 0 1.2em;text-shadow:0 1px 8px rgba(0,0,0,.35)}
-.quote small{font-size:20px;font-family:Inter,sans-serif}
+.labels .lw{width:clamp(70px,6.7vw,140px)}
+.labels .ls{width:clamp(48px,4.8vw,100px);margin-top:.25vw}
 
 /* panorama */
 .pano{margin:64px 0 0;aspect-ratio:3/1;max-height:640px;width:100%;background:url(images/orchestra.jpg) center/cover no-repeat,linear-gradient(90deg,#c88a4a,#e6b980,#c88a4a)}
@@ -189,7 +186,6 @@ footer.f{padding-top:90px;padding-bottom:40px}
  nav.main{display:none;position:absolute;right:20px;top:78px;background:rgba(0,0,0,.92);flex-direction:column;align-items:flex-start;padding:22px 26px;gap:16px;z-index:9}
  nav.main.open{display:flex}
  .labels{top:130px;gap:12px;right:20px}
- .quote{left:20px;right:20px;bottom:6%}
  .pano-title{padding-left:20px}
  .cal,.cal.four,.rec,.contact-grid,.tiles,.fp-row{grid-template-columns:1fr}
  .press-card picture{min-height:240px}
@@ -215,10 +211,6 @@ footer.f{padding-top:90px;padding-bottom:40px}
     </nav>
   </header>
   <div class="labels"><a href="#recordings" aria-label="Warner Classics"><picture><source srcset="images/logo-warner.webp" type="image/webp"><img class="lw" src="images/logo-warner.png" alt="Warner Classics" width="520" height="213"></picture></a><a href="#recordings" aria-label="Sony Classical"><picture><source srcset="images/logo-sony.webp" type="image/webp"><img class="ls" src="images/logo-sony.png" alt="Sony Classical" width="360" height="360"></picture></a></div>
-  <div class="quote">
-    <p>Not since Mariss Jansons has Shostakovich’s 10<sup>th</sup> been heard so lyrical, steely, colorful and radiant with joy.</p>
-    <small>Der Standard, Vienna</small>
-  </div>
 </section>
 
 <!-- ============ INTRO ============ -->
