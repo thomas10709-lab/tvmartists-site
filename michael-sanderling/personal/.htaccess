@@ -1,0 +1,22 @@
+# Personal site of Michael Sanderling (served at michaelsanderling.de and at tvmartists.com/michael-sanderling/personal/)
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+  # HTML always revalidated so changes show up immediately
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 week"
+  ExpiresByType image/webp "access plus 1 week"
+  ExpiresByType image/png "access plus 1 week"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+  ExpiresByType text/javascript "access plus 1 day"
+</IfModule>
