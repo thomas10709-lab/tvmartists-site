@@ -25,10 +25,11 @@ hr.rule{border:0;border-top:2px solid var(--line);margin:0}
 
 /* header + hero */
 .hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;
- background:url(images/hero.jpg) center/cover no-repeat,linear-gradient(120deg,#cfd6dd 0%,#1b2a3d 45%,#0e1622 100%)}
+ background:#0e1622 url(images/hero.jpg) center/cover no-repeat;
+ background-image:image-set(url(images/hero.webp) type("image/webp"),url(images/hero.jpg) type("image/jpeg"))}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);pointer-events:none}
 header.bar{position:absolute;z-index:5;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:78px var(--pad) 0 92px;gap:24px}
-.logo{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,36px);letter-spacing:.01em;text-transform:uppercase;color:#fff;text-decoration:none;border:3px solid #fff;padding:18px 28px;line-height:1.1;white-space:nowrap}
+.logo{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(20px,1.95vw,36px);letter-spacing:.01em;text-transform:uppercase;color:#fff;text-decoration:none;border:3px solid #fff;padding:clamp(10px,1.1vw,20px) clamp(14px,1.6vw,30px);line-height:1.1;white-space:nowrap}
 nav.main{display:flex;align-items:center;gap:32px;font-size:15px;text-transform:uppercase}
 nav.main a{text-decoration:none;color:#fff}
 nav.main a:hover{opacity:.7}
@@ -128,6 +129,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
  .rec{grid-template-columns:1fr 1fr}
 }
 @media(max-width:820px){
+ .hero{background-image:url(images/hero-mobile.jpg);background-image:image-set(url(images/hero-mobile.webp) type("image/webp"),url(images/hero-mobile.jpg) type("image/jpeg"));background-position:center top}
  body{font-size:17px}
  header.bar{padding:24px 20px 0 20px;align-items:flex-start}
  .logo{padding:10px 14px;font-size:20px}
