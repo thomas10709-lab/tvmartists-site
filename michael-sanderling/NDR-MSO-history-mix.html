@@ -894,5 +894,17 @@
   apply();
 })();
 </script>
+<style>
+#to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:0;background:#1f5f99;color:#fff;font-size:22px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:50}
+#to-top.show{opacity:.92;visibility:visible}
+#to-top:hover{opacity:1}
+</style>
+<button id="to-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
+<script>
+(function(){var b=document.getElementById('to-top');
+function t(){b.classList.toggle('show',(window.pageYOffset||document.documentElement.scrollTop)>300)}
+window.addEventListener('scroll',t,{passive:true});t();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
 </body>
 </html>
