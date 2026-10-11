@@ -25,7 +25,7 @@
   .chip button { border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 15px; line-height: 1; padding: 0 4px; }
   .list { position: absolute; z-index: 20; left: 0; right: 0; top: 100%; margin: 3px 0 0; padding: 4px 0; list-style: none; background: #fff; color: #1b2a3a; border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,.35); max-height: 280px; overflow-y: auto; }
   .list[hidden] { display: none; }
-  .list li { padding: 6px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .list li { padding: 8px 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; display: flex; align-items: center; gap: 8px; }
   .list li[hidden] { display: none; }
   .list li:hover, .list li.hl { background: #e8f1fa; }
   .list li.sel { font-weight: 600; }
@@ -933,11 +933,14 @@
     else if (e.key === "Enter") { e.preventDefault(); var li = highlighted(cList); if (li) { setComposer(li.getAttribute("data-v")); close(cList, cIn); cIn.blur(); } }
     else if (e.key === "Escape") { close(cList, cIn); cIn.value = composer; }
   });
-  cList.addEventListener("mousedown", function (e) {
+  cList.addEventListener("mousedown", function (e) { e.preventDefault(); });
+  cList.addEventListener("click", function (e) {
     var li = e.target.closest("li"); if (!li || li.classList.contains("none")) return;
-    e.preventDefault(); setComposer(li.getAttribute("data-v")); close(cList, cIn); cIn.blur();
+    setComposer(li.getAttribute("data-v")); close(cList, cIn); cIn.blur();
   });
-  cIn.addEventListener("blur", function () { close(cList, cIn); if (composer) cIn.value = composer; else if (cIn.value) { cIn.value = ""; } });
+  cIn.addEventListener("blur", function () {
+    setTimeout(function () { close(cList, cIn); if (composer) cIn.value = composer; else if (cIn.value) { cIn.value = ""; } }, 160);
+  });
 
   /* ---------- Instrument combobox (multi) ---------- */
   function renderChips() {
@@ -945,7 +948,8 @@
     tags.forEach(function (x) {
       var c = document.createElement("span"); c.className = "chip"; c.appendChild(document.createTextNode(x));
       var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Remove " + x); b.textContent = "×";
-      b.addEventListener("mousedown", function (e) { e.preventDefault(); toggleTag(x); });
+      b.addEventListener("mousedown", function (e) { e.preventDefault(); });
+      b.addEventListener("click", function () { toggleTag(x); });
       c.appendChild(b); chips.appendChild(c);
     });
     Array.prototype.forEach.call(iList.children, function (li) { li.classList.toggle("sel", tags.indexOf(li.getAttribute("data-v")) > -1); });
@@ -965,11 +969,12 @@
     else if (e.key === "Backspace" && !iIn.value && tags.length) { toggleTag(tags[tags.length - 1]); }
     else if (e.key === "Escape") { close(iList, iIn); iIn.blur(); }
   });
-  iList.addEventListener("mousedown", function (e) {
+  iList.addEventListener("mousedown", function (e) { e.preventDefault(); });
+  iList.addEventListener("click", function (e) {
     var li = e.target.closest("li"); if (!li || li.classList.contains("none")) return;
-    e.preventDefault(); toggleTag(li.getAttribute("data-v")); iIn.focus();
+    toggleTag(li.getAttribute("data-v")); iIn.focus();
   });
-  iIn.addEventListener("blur", function () { close(iList, iIn); iIn.value = ""; });
+  iIn.addEventListener("blur", function () { setTimeout(function () { close(iList, iIn); iIn.value = ""; }, 160); });
 
   Array.prototype.forEach.call(document.querySelectorAll('input[name="mode"]'), function (r) {
     r.addEventListener("change", function () { mode = r.value; apply(); });
