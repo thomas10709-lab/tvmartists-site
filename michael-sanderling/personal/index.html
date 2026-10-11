@@ -66,7 +66,15 @@ nav.main svg{width:38px;height:38px;fill:#fff}
 .card h4{font-size:19px;margin:0 0 4px}
 .card ul{list-style:none;margin:0;padding:0;line-height:1.75}
 .card .ph{aspect-ratio:3/4;margin:10px 0}
-.card .post{font-size:20px;line-height:1.3}
+.card .post{font-size:20px;line-height:1.3;margin:10px 0 14px}
+.bs-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bs-av{width:58px;height:58px;border-radius:50%;background:#ddd center/cover no-repeat;flex:none}
+.bs-handle{color:#2a6bb3;text-decoration:none;font-size:19px;word-break:break-all}
+.bs-time{color:#777;font-size:17px}
+.bs-img img{width:100%;border-radius:6px;display:block}
+.bs-more{display:flex;align-items:center;gap:12px;margin:22px 0 0}
+.bs-more a{color:#999}
+.bs-more svg{width:32px;height:28px;fill:#000}
 .card .rd{font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(22px,2vw,30px);text-transform:uppercase;line-height:1.3;margin:20px 0 12px}
 .card .meta{color:var(--mute);font-size:17px}
 
@@ -193,11 +201,11 @@ footer.f{padding-top:90px;padding-bottom:40px}
       <li>Berliner Philharmoniker</li><li>Hong Kong Philharmonic Orchestra</li><li>Dallas Symphony Orchestra</li><li>Leipzig Gewandhaus Orchestra</li><li>NDR Radio Philharmonic Hanover</li><li>KBS Symphony Orchestra Seoul</li><li>Milwaukee Symphony Orchestra</li><li>Vienna Symphoniker</li><li>Konzerthausorchester Berlin</li><li>Helsinki Philharmonic Orchestra</li><li>Gothenburg Symphoniker</li><li>Norwegian Radio Orchestra</li><li>The Florida Orchestra</li><li>Düsseldorfer Symphoniker</li><li>BBC Scottish Symphony Orchestra</li><li>Dresden Philharmonic</li><li>Hyogo PAC Orchestra</li><li>National Symphony Orchestra of Taiwan</li><li>Musikkollegium Winterthur</li><li>Antwerp Symphony Orchestra</li><li>Guerzenich Orchestra Cologne</li><li>Essen Philharmonic</li><li>Nagoya Symphony Orchestra</li><li>Orquestra Simfònica de Barcelona</li><li>Orquesta Sinfónica del Principado de Asturias</li><li>Orquestra Sinfónica do Porto</li><li>Slowenien Philharmonic Orchestra</li><li>Irish National Symphony Orchestra</li>
     </ul>
   </div>
-  <div class="card">
-    <h4 style="font-weight:400;color:#2a6bb3">@michaelsanderling.bsky.social</h4>
-    <p class="post">Michael Sanderling takes the podium with the Milwaukee Symphony Orchestra this September 18 &amp; 19. If you aren’t at Bradley Symphony Center this weekend, you’re missing out.</p>
-    <div class="ph" style="aspect-ratio:4/5">Post image (images/post.jpg)</div>
-    <p><a href="#" target="_blank" rel="noopener" style="color:#999">Read more</a></p>
+  <div class="card" id="bsky-card">
+    <div class="bs-head"><span class="bs-av"></span><a class="bs-handle" href="https://bsky.app/profile/michaelsanderling.bsky.social" target="_blank" rel="noopener">@michaelsanderling.bsky.social</a><span class="bs-time"></span></div>
+    <p class="post" id="bs-text">Michael Sanderling takes the podium with the Milwaukee Symphony Orchestra this September 18 &amp; 19. If you aren’t at Bradley Symphony Center this weekend, you’re missing out.</p>
+    <div class="bs-img" id="bs-img"><div class="ph" style="aspect-ratio:4/5">Post image</div></div>
+    <p class="bs-more"><a href="https://bsky.app/profile/michaelsanderling.bsky.social" target="_blank" rel="noopener">Read more</a> <svg viewBox="0 0 600 530" aria-hidden="true"><path d="M135.7 44.2C202.2 94.1 273.700 195.300 300 247.500c26.300-52.200 97.800-153.400 164.300-203.300C512.300 8.200 590-19.700 590 69.100c0 17.700-10.200 149-16.100 170.300-20.700 74-96.100 92.900-163.200 81.500 117.400 20 147.300 86.200 82.800 152.400-122.500 125.700-176.100-31.500-189.800-71.800-2.500-7.400-3.700-10.800-3.700-7.900 0-2.900-1.200.5-3.700 7.900-13.700 40.300-67.300 197.500-189.800 71.800-64.500-66.200-34.600-132.400 82.800-152.400-67.100 11.400-142.500-7.500-163.200-81.500C20.200 218.100 10 86.800 10 69.100 10-19.700 87.700 8.200 135.700 44.200z"/></svg></p>
   </div>
   <div class="card">
     <div class="ph" style="aspect-ratio:3/2">Press photo (images/press.jpg)</div>
@@ -371,6 +379,20 @@ footer.f{padding-top:90px;padding-bottom:40px}
   document.querySelectorAll('[data-archive]').forEach(function(b){b.addEventListener('click',function(){ab.classList.toggle('open')})});
   document.querySelectorAll('[data-more]').forEach(function(b){b.addEventListener('click',function(){
     var r=b.parentNode.querySelector('.reveal');if(!r)return;var o=r.classList.toggle('open');b.textContent=o?'read less':'read more'})});
+  (function(){
+    var API="https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=michaelsanderling.bsky.social&filter=posts_no_replies&limit=10";
+    function ago(d){var s=(Date.now()-new Date(d))/1000;if(s<3600)return Math.max(1,Math.round(s/60))+" min";if(s<86400)return Math.round(s/3600)+" hours";if(s<1209600)return Math.round(s/86400)+" days";if(s<5184000)return Math.round(s/604800)+" weeks";return Math.round(s/2592000)+" months"}
+    fetch(API).then(function(r){return r.json()}).then(function(j){
+      var it=(j.feed||[]).filter(function(f){return !f.reason&&f.post&&f.post.record&&f.post.record.text})[0];
+      if(!it)return;var p=it.post,card=document.getElementById("bsky-card");
+      document.getElementById("bs-text").textContent=p.record.text;
+      card.querySelector(".bs-time").textContent="· "+ago(p.record.createdAt);
+      if(p.author&&/^https:\/\//.test(p.author.avatar||""))card.querySelector(".bs-av").style.backgroundImage="url('"+p.author.avatar+"')";
+      var box=document.getElementById("bs-img"),im=p.embed&&p.embed.images&&p.embed.images[0];
+      if(im&&/^https:\/\//.test(im.thumb||"")){var e=document.createElement("img");e.src=im.thumb;e.alt=im.alt||"";box.textContent="";box.appendChild(e)}else if(!im){box.textContent=""}
+      var id=(p.uri||"").split("/").pop();if(id)card.querySelector(".bs-more a").href="https://bsky.app/profile/michaelsanderling.bsky.social/post/"+encodeURIComponent(id);
+    }).catch(function(){});
+  })();
   var im=document.getElementById('intro-more'),it=document.getElementById('intro-text');
   im.addEventListener('click',function(){var o=it.classList.toggle('open');im.textContent=o?'read less':'read more';im.setAttribute('aria-expanded',o)});
   var bg=document.querySelector('.burger'),nv=document.querySelector('nav.main');
