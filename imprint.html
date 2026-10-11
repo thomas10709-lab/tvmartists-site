@@ -135,7 +135,7 @@
             box-sizing: border-box;
             margin: 0;
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
-            transition: transform 0.3s ease;
+            transition: transform 0.15s ease-out;
         }
         .site-banner.is-hidden {
             transform: translateY(-100%);
@@ -403,9 +403,9 @@
                 window.requestAnimationFrame(function () {
                     const y = Math.max(window.scrollY, 0);
                     const menuOpen = nav && nav.classList.contains("is-open");
-                    if (y <= header.offsetHeight || menuOpen || y < lastY - 4) {
+                    if (y <= 2 || menuOpen || y < lastY - 4) {
                         show();
-                    } else if (y > lastY + 4) {
+                    } else if (y > lastY + 1) {
                         hide();
                     }
                     lastY = y;
