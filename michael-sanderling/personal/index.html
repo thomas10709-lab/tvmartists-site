@@ -423,7 +423,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
     ["touchstart","click","scroll"].forEach(function(ev){window.addEventListener(ev,function f(){if(v.paused)go();window.removeEventListener(ev,f)},{passive:true})});
   })();
   var im=document.getElementById('intro-more'),it=document.getElementById('intro-text');
-  im.addEventListener('click',function(){var o=it.classList.toggle('open');im.textContent=o?'read less':'read more';im.setAttribute('aria-expanded',o)});
+  im.addEventListener('click',function(){var o=it.classList.toggle('open');im.textContent=o?'read less':'read more';im.setAttribute('aria-expanded',o);if(!o){var n=document.getElementById('news');if(n)n.scrollIntoView({behavior:'smooth',block:'start'})}});
   var bg=document.querySelector('.burger'),nv=document.querySelector('nav.main');
   bg.addEventListener('click',function(){var o=nv.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
   nv.addEventListener('click',function(e){if(e.target.tagName==='A')nv.classList.remove('open')});
