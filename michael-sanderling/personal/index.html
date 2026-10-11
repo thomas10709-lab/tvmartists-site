@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michael Sanderling – Conductor</title>
+<meta name="description" content="Official website of Michael Sanderling – Chief Conductor of the Lucerne Symphony Orchestra.">
+<meta name="robots" content="noindex"><!-- remove when the page goes live -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Khand:wght@500;600&family=Prompt:wght@500;600;700;800&family=Newsreader:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--text:#111;--mute:#555;--head:#b0b0b0;--line:#808080;--bg:#fff;--soft:#f5f5f5;--max:1670px;--pad:clamp(20px,8.4vw,168px)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;font-family:Inter,Arial,sans-serif;font-size:18px;line-height:1.65;color:var(--text);background:var(--bg)}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+h2.sec{font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(46px,7.2vw,104px);line-height:1;letter-spacing:-.01em;color:var(--head);margin:0 0 .5em}
+h3.sub{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(24px,3.2vw,40px);color:var(--head);margin:0 0 1em}
+hr.rule{border:0;border-top:2px solid var(--line);margin:0}
+.btn{display:inline-block;background:#000;color:#fff;font-family:Prompt,sans-serif;font-weight:600;font-size:17px;padding:14px 18px;border:0;cursor:pointer;text-decoration:none;line-height:1.2}
+.btn:hover{background:#333}
+.ph{background:linear-gradient(135deg,#d9d9d9,#bdbdbd);color:#666;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;padding:10px}
+
+/* header + hero */
+.hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;
+ background:url(images/hero.jpg) center/cover no-repeat,linear-gradient(120deg,#cfd6dd 0%,#1b2a3d 45%,#0e1622 100%)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);pointer-events:none}
+header.bar{position:absolute;z-index:5;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:78px var(--pad) 0 92px;gap:24px}
+.logo{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,36px);letter-spacing:.01em;text-transform:uppercase;color:#fff;text-decoration:none;border:3px solid #fff;padding:18px 28px;line-height:1.1;white-space:nowrap}
+nav.main{display:flex;align-items:center;gap:32px;font-size:15px;text-transform:uppercase}
+nav.main a{text-decoration:none;color:#fff}
+nav.main a:hover{opacity:.7}
+nav.main svg{width:38px;height:38px;fill:#fff}
+.burger{display:none;background:none;border:2px solid #fff;color:#fff;padding:8px 12px;font:inherit;text-transform:uppercase;cursor:pointer}
+.labels{position:absolute;z-index:3;right:var(--pad);top:230px;display:flex;gap:30px;align-items:flex-start}
+.labels span{font-family:Prompt,sans-serif;font-weight:700;font-size:20px;border:2px solid #fff;padding:10px 14px;line-height:1.1}
+.quote{position:absolute;z-index:3;left:max(46.8%,40px);bottom:12%;max-width:min(760px,86vw)}
+.quote p{font-family:Newsreader,Georgia,serif;font-style:italic;font-size:clamp(24px,2.7vw,40px);line-height:1.65;margin:0 0 1.2em;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.quote small{font-size:20px;font-family:Inter,sans-serif}
+
+/* panorama */
+.pano{margin:64px 0 0;aspect-ratio:3/1;max-height:640px;width:100%;background:url(images/orchestra.jpg) center/cover no-repeat,linear-gradient(90deg,#c88a4a,#e6b980,#c88a4a)}
+.pano-title{padding:64px var(--pad) 64px max(33%,var(--pad))}
+.pano-title h1{font-family:Khand,sans-serif;font-weight:600;font-size:clamp(46px,6vw,92px);line-height:.95;margin:0;text-transform:uppercase;letter-spacing:.01em}
+.pano-title p{font-family:Khand,sans-serif;font-weight:500;font-size:clamp(20px,2vw,30px);line-height:1.1;margin:.4em 0 0;text-transform:uppercase}
+
+/* intro */
+.intro{padding-top:70px;padding-bottom:50px}
+.intro h3{font-family:Prompt,sans-serif;font-weight:700;color:var(--head);font-size:clamp(24px,2.2vw,34px);margin:0 0 1em}
+.intro p{margin:0 0 1.6em;max-width:1670px}
+
+/* three cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;align-items:start;padding-top:40px;padding-bottom:70px}
+.card{border:1px solid #ddd;padding:34px 36px}
+.card h4{font-size:19px;margin:0 0 4px}
+.card ul{list-style:none;margin:0;padding:0;line-height:1.75}
+.card .ph{aspect-ratio:3/4;margin:10px 0}
+.card .post{font-size:20px;line-height:1.3}
+.card .rd{font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(22px,2vw,30px);text-transform:uppercase;line-height:1.3;margin:20px 0 12px}
+.card .meta{color:var(--mute);font-size:17px}
+
+/* calendar */
+section.block{padding-top:70px;padding-bottom:50px}
+.cal{display:grid;grid-template-columns:repeat(3,1fr);gap:41px;margin-top:20px}
+.cal.four{grid-template-columns:repeat(4,1fr);gap:41px;font-size:16px}
+.ev{border-top:2px solid #000;margin-top:2px;padding:26px 8px 36px}
+.ev time{display:block;font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(26px,2.6vw,42px);line-height:1.1;margin-bottom:.9em;white-space:nowrap}
+.cal.four .ev time{font-size:clamp(22px,2vw,32px)}
+.ev .city{font-family:Prompt,sans-serif;font-weight:700;letter-spacing:.08em;font-size:1.05em}
+.ev .hall{margin-bottom:1.3em}
+.ev .lines,.ev .prog{margin-bottom:1.4em}
+.ev p{margin:0}
+.past-title{margin-top:0}
+.reveal{display:none}
+.reveal.open{display:block}
+.archive .btn{display:block;width:max-content;margin:22px 0}
+.archive-body{margin-top:10px}
+
+/* online concert hall */
+.ocd{background:var(--soft);padding:70px 0 70px}
+.ocd .video{width:100%;aspect-ratio:2000/800;max-height:760px;background:#000;margin:0 0 36px;display:block;object-fit:cover}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{position:relative;display:block;text-decoration:none;color:#000;min-height:290px;padding:30px 30px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.tile .nm{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,50px);line-height:1.05;margin:auto 0}
+.tile .wk{align-self:flex-end;font-family:Prompt,sans-serif;font-weight:500;font-size:19px}
+.tile .play{position:absolute;right:28px;top:22px;width:52px;height:38px;border:2px solid currentColor;border-radius:8px;opacity:.75}
+.tile .play::after{content:"";position:absolute;left:21px;top:9px;border-left:13px solid currentColor;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.tile:hover{outline:3px solid #e1222d}
+
+/* bio */
+.bio{position:relative;padding-top:50px;padding-bottom:40px}
+.bio .lang{position:absolute;right:calc(var(--pad) + 4%);top:30px;font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(200px,28vw,500px);line-height:.8;color:#dedede;z-index:0;user-select:none;pointer-events:none}
+.bio .inner{position:relative;z-index:1}
+.bio h5{font-family:Prompt,sans-serif;font-weight:700;font-size:19px;text-transform:uppercase;margin:0 0 3em;padding-top:2.4em}
+.bio .txt p{margin:0 0 1.4em}
+
+/* recordings */
+.rec{display:grid;grid-template-columns:repeat(4,1fr);gap:34px;margin-top:20px}
+.rec figure{margin:0}
+.rec .cover{aspect-ratio:1/1}
+.rec h4{font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(20px,2vw,29px);text-transform:uppercase;line-height:1.25;margin:26px 0 20px}
+.rec p{margin:0;font-size:18px;line-height:1.75}
+.rec-more{margin-top:50px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:30px}
+.contact-grid h4{font-family:Prompt,sans-serif;font-weight:800;font-size:clamp(28px,3vw,42px);text-transform:uppercase;margin:0 0 1.2em}
+.contact-grid h5{font-weight:700;font-size:19px;text-transform:uppercase;margin:1.6em 0 1.4em}
+.contact-grid p{margin:0 0 1.5em;color:var(--mute);line-height:1.75}
+.contact-grid p.n{color:#000}
+.photo-credit{color:#999;font-size:17px}
+
+footer.f{padding-top:90px;padding-bottom:40px}
+.social{display:flex;gap:18px}
+.social svg{width:30px;height:30px;fill:#000}
+.fl{display:flex;justify-content:space-between;color:#999;font-size:15px;margin-top:70px;gap:20px;flex-wrap:wrap}
+.fl a{color:#999}
+
+#to-top{position:fixed;right:12px;top:50%;margin-top:-22px;width:46px;height:46px;border-radius:50%;border:1px solid #111;background:#fff;color:#000;font-size:22px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:50;line-height:1}
+#to-top.show{opacity:1;visibility:visible}
+
+@media(max-width:1100px){
+ .cal.four{grid-template-columns:repeat(2,1fr)}
+ .cal{grid-template-columns:repeat(2,1fr)}
+ .cards{grid-template-columns:1fr 1fr}
+ .rec{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+ body{font-size:17px}
+ header.bar{padding:24px 20px 0 20px;align-items:flex-start}
+ .logo{padding:10px 14px;font-size:20px}
+ .burger{display:block}
+ nav.main{display:none;position:absolute;right:20px;top:78px;background:rgba(0,0,0,.92);flex-direction:column;align-items:flex-start;padding:22px 26px;gap:16px;z-index:9}
+ nav.main.open{display:flex}
+ .labels{top:130px;gap:12px;right:20px}
+ .labels span{font-size:14px;padding:6px 8px}
+ .quote{left:20px;right:20px;bottom:6%}
+ .pano-title{padding-left:20px}
+ .cards,.cal,.cal.four,.rec,.contact-grid,.tiles{grid-template-columns:1fr}
+ .bio .lang{font-size:46vw;right:10px;top:10px}
+}
+</style>
+</head>
+<body>
+<!-- ============ HEADER + HERO ============ -->
+<section class="hero" id="top">
+  <header class="bar">
+    <a class="logo" href="#top">Michael Sanderling</a>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="main" aria-label="Main">
+      <a href="#news">News</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#concert-hall">Concert Hall</a>
+      <a href="#biography">Biography</a>
+      <a href="#recordings">Recordings</a>
+      <a href="#contact">Contact</a>
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.3 5.7a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg></a>
+    </nav>
+  </header>
+  <div class="labels"><span>WARNER<br>CLASSICS</span><span>SONY<br>CLASSICAL</span></div>
+  <div class="quote">
+    <p>Not since Mariss Jansons has Shostakovich’s 10<sup>th</sup> been heard so lyrical, steely, colorful and radiant with joy.</p>
+    <small>Der Standard, Vienna</small>
+  </div>
+</section>
+
+<!-- ============ ORCHESTRA ============ -->
+<div class="pano" role="img" aria-label="Lucerne Symphony Orchestra"></div>
+<div class="pano-title">
+  <h1>Luzerner<br>Sinfonieorchester</h1>
+  <p>1805<br>Residenzorchester KKL Luzern</p>
+</div>
+
+<!-- ============ INTRO ============ -->
+<section class="intro wrap" id="news">
+  <h3>As an “Architect of Sound”,</h3>
+  <p>Michael Sanderling is one of the most prominent and internationally esteemed conductors of our time. His interpretations of late-Romantic and modern masterpieces set international benchmarks. Shaped by his own background and a former career at the absolute global pinnacle of cellists, his conducting is characterized by a rare symbiosis of uncompromising structural clarity, analytical depth, and a deeply empathetic sense of sound.</p>
+  <p>Following his groundbreaking era as Chief Conductor of the Dresden Philharmonic (2011–2019), which was defined by monumental complete recordings of Shostakovich and Beethoven, he has been leading the historic Lucerne Symphony Orchestra into a new, internationally acclaimed era as Chief Conductor since the 2021/22 season. A visionary sound magician who combines intellectual acuity with stirring emotional power.</p>
+  <hr class="rule">
+</section>
+
+<!-- ============ THREE CARDS ============ -->
+<section class="cards wrap">
+  <div class="card">
+    <h4>Future projects with:</h4>
+    <ul>
+      <li>Berliner Philharmoniker</li><li>Hong Kong Philharmonic Orchestra</li><li>Dallas Symphony Orchestra</li><li>Leipzig Gewandhaus Orchestra</li><li>NDR Radio Philharmonic Hanover</li><li>KBS Symphony Orchestra Seoul</li><li>Milwaukee Symphony Orchestra</li><li>Vienna Symphoniker</li><li>Konzerthausorchester Berlin</li><li>Helsinki Philharmonic Orchestra</li><li>Gothenburg Symphoniker</li><li>Norwegian Radio Orchestra</li><li>The Florida Orchestra</li><li>Düsseldorfer Symphoniker</li><li>BBC Scottish Symphony Orchestra</li><li>Dresden Philharmonic</li><li>Hyogo PAC Orchestra</li><li>National Symphony Orchestra of Taiwan</li><li>Musikkollegium Winterthur</li><li>Antwerp Symphony Orchestra</li><li>Guerzenich Orchestra Cologne</li><li>Essen Philharmonic</li><li>Nagoya Symphony Orchestra</li><li>Orquestra Simfònica de Barcelona</li><li>Orquesta Sinfónica del Principado de Asturias</li><li>Orquestra Sinfónica do Porto</li><li>Slowenien Philharmonic Orchestra</li><li>Irish National Symphony Orchestra</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4 style="font-weight:400;color:#2a6bb3">@michaelsanderling.bsky.social</h4>
+    <p class="post">Michael Sanderling takes the podium with the Milwaukee Symphony Orchestra this September 18 &amp; 19. If you aren’t at Bradley Symphony Center this weekend, you’re missing out.</p>
+    <div class="ph" style="aspect-ratio:4/5">Post image (images/post.jpg)</div>
+    <p><a href="#" target="_blank" rel="noopener" style="color:#999">Read more</a></p>
+  </div>
+  <div class="card">
+    <div class="ph" style="aspect-ratio:3/2">Press photo (images/press.jpg)</div>
+    <div class="rd">La « Cinquième » Symphonie de Brahms ?</div>
+    <p class="meta">Débuts des pianistes néerlandais Arthur et Lucas Jussen à l’Orchestre philharmonique de Berlin. Après les débordements d’allégresse émanant des deux natifs d’Hilversum, confondus avec des artistes de rock, Brahms orchestré par Schönberg remet les pendules à l’heure. Les membres de la glorieuse institution – galvanisés par Michael Sanderling – offrent une maîtrise instrumentale transcendante. … <a href="#" style="color:#1d63c1">Lire la suite de</a></p>
+    <p><strong style="color:#555">Résonances Lyriques</strong></p>
+  </div>
+</section>
+
+<!-- ============ CALENDAR ============ -->
+<section class="block wrap" id="calendar">
+  <hr class="rule" style="margin-bottom:90px">
+  <h2 class="sec">Calendar</h2>
+  <div class="cal" id="cal-next"></div>
+  <hr class="rule" style="margin:70px 0 40px">
+  <h3 class="sub">all concerts of 2026 &amp; 2027</h3>
+  <button class="btn" id="cal-toggle" type="button" aria-expanded="false">show all</button>
+  <div class="reveal" id="cal-all"><div class="cal four" id="cal-grid"></div></div>
+  <hr class="rule" style="margin:40px 0 40px">
+  <div class="archive">
+    <h3 class="sub">archive</h3>
+    <button class="btn" type="button" data-archive="2025/2026">season 2025/2026</button>
+    <button class="btn" type="button" data-archive="2024/2025">season 2024/2025</button>
+    <div class="reveal archive-body" id="archive-body"><p style="color:#777">Archive to be added.</p></div>
+  </div>
+  <hr class="rule" style="margin-top:40px">
+</section>
+
+<!-- ============ ONLINE CONCERT HALL ============ -->
+<section class="ocd" id="concert-hall">
+  <div class="wrap">
+    <h2 class="sec">Online Concert Hall</h2>
+  </div>
+  <video class="video" muted loop playsinline autoplay preload="metadata" poster="images/concert-hall-poster.jpg"><source src="images/concert-hall.mp4" type="video/mp4"></video>
+  <div class="wrap">
+    <div class="tiles">
+      <a class="tile" href="#" style="background:linear-gradient(90deg,#a3f0d8,#85c6f6)"><i class="play"></i><span class="nm" style="color:#000">NDR <span style="color:#4bb8c9">RADIOPHILHARMONIE</span></span><span class="wk">Sibelius: Symphony No. 2</span></a>
+      <a class="tile" href="#" style="background:#fecd00"><i class="play"></i><span class="nm">Berliner<br>Philharmoniker</span><span class="wk">Brahms/Schoenberg: Piano Quartet</span></a>
+      <a class="tile" href="#" style="background:#fff;border:2px solid #e1222d"><i class="play"></i><span class="nm" style="font-family:Georgia,serif;font-size:clamp(22px,2.4vw,34px)">HONG KONG<br>PHILHARMONIC ORCHESTRA</span><span class="wk">Shostakovich: Symphony No. 6</span></a>
+      <a class="tile" href="#" style="background:#e6dcb0"><i class="play"></i><span class="nm" style="letter-spacing:.12em">SWR&raquo;<br>SYMPHONIE<br>ORCHESTER</span><span class="wk">Reger: Mozart Variations</span></a>
+      <a class="tile" href="#" style="background:linear-gradient(90deg,#63dce6,#b2e7f0)"><i class="play"></i><span class="nm" style="color:#0a4a8a;letter-spacing:.06em">DRESDNER<br>PHILHARMONIE</span><span class="wk">Beethoven: Symphony No. 9</span></a>
+      <a class="tile" href="#" style="background:linear-gradient(90deg,#000,#777);color:#fff"><i class="play"></i><span class="nm">TONHALLE<br>ORCHESTER<br>ZÜRICH</span><span class="wk">Tchaikovsky: Symphony No. 4</span></a>
+      <a class="tile" href="#" style="background:linear-gradient(#d8d8e8,#777783 45%,#b9b9bd)"><i class="play"></i><span class="nm" style="font-weight:500">NHKSO<br><small style="font-size:.4em">NHK SYMPHONY ORCHESTRA TOKYO</small></span><span class="wk">Bruckner: Symphony No. 4</span></a>
+      <a class="tile" href="#" style="background:#ecdcdc"><i class="play"></i><span class="nm" style="color:#9b2523">hr SINFONIE<br>ORCHESTER</span><span class="wk">Schumann: Symphony No. 4</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIOGRAPHY ============ -->
+<section class="bio wrap" id="biography">
+  <h2 class="sec" style="margin-top:50px">Biography</h2>
+  <div class="inner">
+    <span class="lang" aria-hidden="true">EN</span>
+    <h5>Biography [English version]</h5>
+    <div class="txt">
+      <p>Since the 2021/22 season, Michael Sanderling has served as chief conductor of the Lucerne Symphony Orchestra. This appointment marked the logical continuation of a long-standing, close partnership aimed at further establishing the orchestra’s international reputation in the late Romantic repertoire—particularly with works by Bruckner, Mahler, and Strauss. Tours throughout Europe, Asia, and South America, as well as innovative projects, attest to the impact of this collaboration. Particular attention was drawn to the multimedia production of Shostakovich’s Symphony No. 10 featuring artist William Kentridge, which, following its premiere at the KKL Lucerne and in Pompeii, enjoyed triumphant performances at the Vienna Konzerthaus and the Philharmonie de Paris.</p>
+      <div class="reveal"><p><!-- TODO: full English biography text --></p></div>
+    </div>
+    <button class="btn" type="button" data-more>read more</button>
+  </div>
+  <hr class="rule" style="margin:60px 0 0">
+</section>
+<section class="bio wrap" id="biografie" style="padding-top:0">
+  <div class="inner" style="position:relative">
+    <span class="lang" aria-hidden="true" style="top:10px">DE</span>
+    <h5>Biografie [German version]</h5>
+    <div class="txt">
+      <p>Seit der Saison 2021/22 prägt Michael Sanderling als Chefdirigent das Luzerner Sinfonieorchester. Die Ernennung war die konsequente Fortführung einer langjährigen, engen Partnerschaft mit dem Ziel, das Orchester im spätromantischen Repertoire – insbesondere mit Werken von Bruckner, Mahler und Strauss – international weiter zu profilieren. Tourneen durch Europa, Asien und Südamerika sowie innovative Projekte zeugen von der Strahlkraft dieser Zusammenarbeit. Besondere Beachtung fand die multimediale Produktion von Schostakowitschs 10. Sinfonie mit dem Künstler William Kentridge, die nach ihrer Premiere im KKL Luzern und in Pompeji triumphale Aufführungen im Wiener Konzerthaus und der Philharmonie de Paris feierte.</p>
+      <div class="reveal"><p><!-- TODO: vollständiger deutscher Biografietext --></p></div>
+    </div>
+    <button class="btn" type="button" data-more>read more</button>
+  </div>
+  <hr class="rule" style="margin:60px 0 0">
+</section>
+
+<!-- ============ RECORDINGS ============ -->
+<section class="block wrap" id="recordings">
+  <h2 class="sec">Recordings</h2>
+  <div class="rec">
+    <figure><div class="cover ph">Cover: Mozart/Say Requiem</div><h4>Mozart/Say · Requiem</h4><p>Luzerner Sinfonieorchester, Rundfunkchor Berlin, Michael Sanderling, Audio CD (2025), WARNER</p></figure>
+    <figure><div class="cover ph">Cover: Brahms Symphonies</div><h4>Brahms · The Symphonies</h4><p>Luzerner Sinfonieorchester, Michael Sanderling, Audio CD (2023), WARNER</p></figure>
+    <figure><div class="cover ph">Cover: Beethoven Nine Symphonies</div><h4>Beethoven · The Nine Symphonies</h4><p>Dresdner Philharmonie, Michael Sanderling, Audio CD (2018), SONY</p></figure>
+    <figure><div class="cover ph">Cover: Shostakovich Fifteen Symphonies</div><h4>Shostakovich · The Fifteen Symphonies</h4><p>Dresdner Philharmonie, Michael Sanderling, Audio CD (2019), SONY</p></figure>
+  </div>
+  <div class="rec-more">
+    <div class="reveal"><div class="rec"><figure><div class="cover ph">Cover: Shostakovich (DVD)</div><h4>Shostakovich</h4><p><!-- TODO: further recordings --></p></figure></div></div>
+    <button class="btn" type="button" data-more>read more</button>
+  </div>
+  <hr class="rule" style="margin-top:50px">
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="block wrap" id="contact">
+  <h2 class="sec" style="margin-top:50px">Contact</h2>
+  <div class="contact-grid">
+    <div>
+      <h4>Management</h4>
+      <h5>General Management</h5>
+      <p class="n">Thomas Voigt</p>
+      <p>TVM artists<br>+49 30 120 7666 896<br>thomas@tvmartists.com<br><a href="https://tvmartists.com">tvmartists.com</a></p>
+      <p>Kindly direct all correspondence to email<br>Postal address in special reasons<br>Kurfürstendamm 157-158<br>c/o Kanzlei Dr. Cobet<br>10709 Berlin</p>
+      <h5>Japan</h5>
+      <p class="n">板垣千佳子 Chikako Itagaki</p>
+      <p>Novellette Artists Management<br>合同会社ノヴェレッテ<br>Tel: 81(0)90-4168-2866<br>chikako.itagaki@novellette-arts.com<br><a href="https://novellette-arts.com">novellette-arts.com</a></p>
+      <h5>Italy</h5>
+      <p class="n">Dacian Predan-Hallabrin</p>
+      <p>PHAM<br>Predan-Hallabrin Arts Management<br>Tel: 40 744-224-228<br>dacian@predan-hallabrin.com<br><a href="https://predan-hallabrin.com">predan-hallabrin.com</a></p>
+    </div>
+    <div>
+      <h4>Office</h4>
+      <h5>Administration</h5>
+      <p class="n" style="color:var(--mute)">Alexandra MacDonald / Gabriel Sommerfeld</p>
+      <p>office@michaelsanderling.com</p>
+      <h5>Presskit</h5>
+      <p><a href="#">Download Area</a></p>
+      <p class="photo-credit">Photo credit: © Marco Borggreve</p>
+    </div>
+  </div>
+</section>
+
+<footer class="f wrap">
+  <div class="social">
+    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a>
+    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.3 5.7a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg></a>
+    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+  </div>
+  <div class="fl"><span>Official Website of Michael Sanderling</span><span><a href="#">Impressum</a> | <a href="#">Datenschutz</a></span></div>
+</footer>
+
+<button id="to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+<script src="calendar-data.js"></script>
+<script>
+(function(){
+  var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function fmt(d){var p=d.split('-');return p[2]+' '+M[+p[1]-1]+' '+p[0]}
+  function ev(e){
+    var ls=e.lines.map(esc).join('<br>'),pr=(e.prog||[]).map(esc).join('<br>');
+    return '<article class="ev"><time datetime="'+e.d+'">'+fmt(e.d)+'</time><div class="city">'+esc(e.city)+'</div><div class="hall">'+esc(e.hall)+'</div><div class="lines">'+ls+'</div>'+(pr?'<div class="prog">'+pr+'</div>':'')+'</article>';
+  }
+  var all=(window.CALENDAR||[]).slice().sort(function(a,b){return a.d<b.d?-1:1}),
+      today=new Date().toISOString().slice(0,10),
+      next=all.filter(function(e){return e.d>=today}).slice(0,3);
+  document.getElementById('cal-next').innerHTML=next.map(ev).join('');
+  document.getElementById('cal-grid').innerHTML=all.map(ev).join('');
+  var tg=document.getElementById('cal-toggle'),box=document.getElementById('cal-all');
+  tg.addEventListener('click',function(){var o=box.classList.toggle('open');tg.textContent=o?'close current season':'show all';tg.setAttribute('aria-expanded',o)});
+  var ab=document.getElementById('archive-body');
+  document.querySelectorAll('[data-archive]').forEach(function(b){b.addEventListener('click',function(){ab.classList.toggle('open')})});
+  document.querySelectorAll('[data-more]').forEach(function(b){b.addEventListener('click',function(){
+    var r=b.parentNode.querySelector('.reveal');if(!r)return;var o=r.classList.toggle('open');b.textContent=o?'read less':'read more'})});
+  var bg=document.querySelector('.burger'),nv=document.querySelector('nav.main');
+  bg.addEventListener('click',function(){var o=nv.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
+  nv.addEventListener('click',function(e){if(e.target.tagName==='A')nv.classList.remove('open')});
+  var up=document.getElementById('to-top');
+  function t(){up.classList.toggle('show',(window.pageYOffset||document.documentElement.scrollTop)>400)}
+  window.addEventListener('scroll',t,{passive:true});t();
+  up.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+})();
+</script>
+</body>
+</html>
