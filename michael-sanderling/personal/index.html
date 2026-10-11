@@ -91,12 +91,14 @@ section.block{padding-top:70px;padding-bottom:50px}
 .ocd{background:var(--soft);padding:70px 0 70px}
 .ocd .video{width:100%;aspect-ratio:2000/800;max-height:760px;background:#000;margin:0 0 36px;display:block;object-fit:cover}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.tile{position:relative;display:block;text-decoration:none;color:#000;min-height:290px;padding:30px 30px 20px;display:flex;flex-direction:column;justify-content:space-between}
-.tile .nm{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,50px);line-height:1.05;margin:auto 0}
+.tile{position:relative;display:block;text-decoration:none;color:#000;aspect-ratio:2000/695;min-height:0;overflow:hidden;padding:2% 3% 1.5%;display:flex;flex-direction:column;justify-content:space-between}
+.tile .nm{font-family:Prompt,sans-serif;font-weight:600;font-size:clamp(18px,2.4vw,40px);line-height:1.05;margin:auto 0}
 .tile .wk{align-self:flex-end;font-family:Prompt,sans-serif;font-weight:500;font-size:19px}
 .tile .play{position:absolute;right:28px;top:22px;width:52px;height:38px;border:2px solid currentColor;border-radius:8px;opacity:.75}
 .tile .play::after{content:"";position:absolute;left:21px;top:9px;border-left:13px solid currentColor;border-top:8px solid transparent;border-bottom:8px solid transparent}
 .tile:hover{outline:3px solid #e1222d}
+.tile.img{padding:0;display:block}
+.tile.img img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* bio */
 .bio{position:relative;padding-top:50px;padding-bottom:40px}
@@ -232,13 +234,13 @@ footer.f{padding-top:90px;padding-bottom:40px}
   <video class="video" muted loop playsinline autoplay preload="metadata" poster="images/concert-hall-poster.jpg"><source src="images/concert-hall.mp4" type="video/mp4"></video>
   <div class="wrap">
     <div class="tiles">
-      <a class="tile" href="https://www.youtube.com/watch?v=OANAFs_yfGI&t=1" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#a3f0d8,#85c6f6)"><i class="play"></i><span class="nm" style="color:#000">NDR <span style="color:#4bb8c9">RADIOPHILHARMONIE</span></span><span class="wk">Sibelius: Symphony No. 2</span></a>
-      <a class="tile" href="https://www.digitalconcerthall.com/de/concert/56395" target="_blank" rel="noopener" style="background:#fecd00"><i class="play"></i><span class="nm">Berliner<br>Philharmoniker</span><span class="wk">Brahms/Schoenberg: Piano Quartet</span></a>
-      <a class="tile" href="https://www.youtube.com/watch?v=QE9nBLc6li4&list=RDQE9nBLc6li4&start_radio=1" target="_blank" rel="noopener" style="background:#fff;border:2px solid #e1222d"><i class="play"></i><span class="nm" style="font-family:Georgia,serif;font-size:clamp(22px,2.4vw,34px)">HONG KONG<br>PHILHARMONIC ORCHESTRA</span><span class="wk">Shostakovich: Symphony No. 6</span></a>
-      <a class="tile" href="https://www.ardmediathek.de/video/ard-klassik/reger-mozart-variationen-swr-symphonieorchester-michael-sanderling-swr-kultur/ard/Y3JpZDovL3N3ci5kZS9hZXgvbzE4NjU4ODY" target="_blank" rel="noopener" style="background:#e6dcb0"><i class="play"></i><span class="nm" style="letter-spacing:.12em">SWR&raquo;<br>SYMPHONIE<br>ORCHESTER</span><span class="wk">Reger: Mozart Variations</span></a>
-      <a class="tile" href="https://www.youtube.com/watch?v=PgnKjHvRAAY" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#63dce6,#b2e7f0)"><i class="play"></i><span class="nm" style="color:#0a4a8a;letter-spacing:.06em">DRESDNER<br>PHILHARMONIE</span><span class="wk">Beethoven: Symphony No. 9</span></a>
+      <a class="tile img" href="https://www.youtube.com/watch?v=OANAFs_yfGI&t=1" target="_blank" rel="noopener"><picture><source srcset="images/tile-ndr.webp" type="image/webp"><img src="images/tile-ndr.jpg" alt="NDR Radiophilharmonie – Sibelius: Symphony No. 2" width="1400" height="487" loading="lazy"></picture></a>
+      <a class="tile img" href="https://www.digitalconcerthall.com/de/concert/56395" target="_blank" rel="noopener"><picture><source srcset="images/tile-berliner.webp" type="image/webp"><img src="images/tile-berliner.jpg" alt="Berliner Philharmoniker – Brahms/Schoenberg: Piano Quartet" width="1400" height="487" loading="lazy"></picture></a>
+      <a class="tile" href="https://www.youtube.com/watch?v=QE9nBLc6li4&list=RDQE9nBLc6li4&start_radio=1" target="_blank" rel="noopener" style="background:#fff;border:2px solid #e1222d"><i class="play"></i><span class="nm" style="font-family:Georgia,serif;font-size:clamp(16px,1.9vw,30px)">HONG KONG<br>PHILHARMONIC ORCHESTRA</span><span class="wk">Shostakovich: Symphony No. 6</span></a>
+      <a class="tile img" href="https://www.ardmediathek.de/video/ard-klassik/reger-mozart-variationen-swr-symphonieorchester-michael-sanderling-swr-kultur/ard/Y3JpZDovL3N3ci5kZS9hZXgvbzE4NjU4ODY" target="_blank" rel="noopener"><picture><source srcset="images/tile-swr.webp" type="image/webp"><img src="images/tile-swr.jpg" alt="SWR Symphonieorchester – Reger: Mozart Variations" width="1400" height="487" loading="lazy"></picture></a>
+      <a class="tile img" href="https://www.youtube.com/watch?v=PgnKjHvRAAY" target="_blank" rel="noopener"><picture><source srcset="images/tile-dresden.webp" type="image/webp"><img src="images/tile-dresden.jpg" alt="Dresdner Philharmonie – Beethoven: Symphony No. 9" width="1400" height="487" loading="lazy"></picture></a>
       <a class="tile" href="https://www.youtube.com/watch?v=k4M1ADsqrwo&t=2683s" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#000,#777);color:#fff"><i class="play"></i><span class="nm">TONHALLE<br>ORCHESTER<br>ZÜRICH</span><span class="wk">Tchaikovsky: Symphony No. 4</span></a>
-      <a class="tile" href="https://www.youtube.com/watch?v=xVtPlToWjFs&t=8s" target="_blank" rel="noopener" style="background:linear-gradient(#d8d8e8,#777783 45%,#b9b9bd)"><i class="play"></i><span class="nm" style="font-weight:500">NHKSO<br><small style="font-size:.4em">NHK SYMPHONY ORCHESTRA TOKYO</small></span><span class="wk">Bruckner: Symphony No. 4</span></a>
+      <a class="tile img" href="https://www.youtube.com/watch?v=xVtPlToWjFs&t=8s" target="_blank" rel="noopener"><picture><source srcset="images/tile-nhkso.webp" type="image/webp"><img src="images/tile-nhkso.jpg" alt="NHK Symphony Orchestra Tokyo – Bruckner: Symphony No. 4" width="1400" height="487" loading="lazy"></picture></a>
       <a class="tile" href="https://www.youtube.com/watch?v=2UIdP79Pg9Y&list=RD2UIdP79Pg9Y&start_radio=1" target="_blank" rel="noopener" style="background:#ecdcdc"><i class="play"></i><span class="nm" style="color:#9b2523">hr SINFONIE<br>ORCHESTER</span><span class="wk">Schumann: Symphony No. 4</span></a>
     </div>
   </div>
