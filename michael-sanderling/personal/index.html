@@ -200,6 +200,12 @@ footer.f{padding-top:90px;padding-bottom:40px}
 
 #to-top{position:fixed;right:12px;top:50%;margin-top:-22px;width:46px;height:46px;border-radius:50%;border:1px solid #111;background:#fff;color:#000;font-size:22px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:50;line-height:1}
 #to-top.show{opacity:1;visibility:visible}
+#to-top{border:0;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+#to-top svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+#to-top circle{fill:none;stroke-width:3}
+#to-top .trk{stroke:#ddd}
+#to-top .prg{stroke:#111;stroke-linecap:round}
+#to-top span{position:relative}
 
 @media (min-width:821px){
 .fp-text{font-size:22px}
@@ -441,7 +447,7 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
   <div class="fl"><span>Official Website of Michael Sanderling</span><span><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></span></div>
 </footer>
 
-<button id="to-top" type="button" aria-label="Back to top">&#8593;</button>
+<button id="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 46 46" aria-hidden="true"><circle class="trk" cx="23" cy="23" r="21"/><circle class="prg" cx="23" cy="23" r="21" stroke-dasharray="131.95" stroke-dashoffset="131.95"/></svg><span>&#8593;</span></button>
 
 <script src="news-carousel.js" defer></script>
 <script src="archive-data.js"></script>
@@ -520,8 +526,9 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
   bg.addEventListener('click',function(){var o=nv.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
   nv.addEventListener('click',function(e){if(e.target.tagName==='A')nv.classList.remove('open')});
   var up=document.getElementById('to-top');
-  function t(){up.classList.toggle('show',(window.pageYOffset||document.documentElement.scrollTop)>400)}
-  window.addEventListener('scroll',t,{passive:true});t();
+  var pg=up.querySelector('.prg');
+  function t(){var y=window.pageYOffset||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;up.classList.toggle('show',y>400);pg.style.strokeDashoffset=131.95*(1-(h>0?Math.min(1,y/h):0))}
+  window.addEventListener('scroll',t,{passive:true});window.addEventListener('resize',t);t();
   up.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
 })();
 </script>
