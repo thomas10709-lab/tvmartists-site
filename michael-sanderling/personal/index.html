@@ -60,8 +60,25 @@ nav.main svg{width:38px;height:38px;fill:#fff}
 .collapsible.open{max-height:none}
 .collapsible.open::after{display:none}
 .btn-sm{font-size:14px;padding:8px 12px;margin-top:18px}
+/* future projects + news carousel */
+.news{padding-top:20px;padding-bottom:30px}
+.fp-block{max-width:900px;margin:0 auto 40px;text-align:center}
+.fp-title{font-family:Prompt,sans-serif;font-weight:700;color:var(--head);font-size:clamp(24px,2.2vw,34px);margin:0 0 .6em}
+.fp-text{margin:0;font-size:16px;line-height:1.8;color:#222}
+.news-carousel-inner{background:#f4f7f9;color:#2C3E50;border:.5px solid #2C3E50;border-radius:8px;max-width:1000px;margin:0 auto;overflow:hidden}
+.news-carousel-header{text-align:center;padding:10px 24px;font-size:14px;font-weight:600;letter-spacing:.05em;border-bottom:.5px solid rgba(44,62,80,.2)}
+.news-carousel-track{display:flex;flex-direction:row;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-left:24px;scroll-padding-right:24px;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:20px 24px;gap:20px}
+.news-carousel-track::-webkit-scrollbar{display:none}
+.news-slide{flex:0 0 auto;scroll-snap-align:start;width:min(380px,82vw)}
+.news-slide img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;display:block}
+.news-carousel-nav{display:flex;justify-content:center;align-items:center;gap:16px;padding:4px 20px 16px}
+.news-carousel-arrow{border:.5px solid #2C3E50;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;user-select:none}
+.news-carousel-arrow:hover{background:#2C3E50;color:#fff}
+.news-carousel-dots{display:flex;gap:6px}
+.news-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(44,62,80,.3);cursor:pointer}
+.news-carousel-dot.active{background:#2C3E50;transform:scale(1.2)}
 /* three cards */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;align-items:start;padding-top:40px;padding-bottom:70px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;align-items:start;padding-top:40px;padding-bottom:70px}
 .card{border:1px solid #ddd;padding:34px 36px}
 .card h4{font-size:19px;margin:0 0 4px}
 .card ul{list-style:none;margin:0;padding:0;line-height:1.75}
@@ -193,14 +210,27 @@ footer.f{padding-top:90px;padding-bottom:40px}
   <hr class="rule" style="margin-top:50px">
 </section>
 
+<!-- ============ FUTURE PROJECTS + NEWS CAROUSEL ============ -->
+<section class="news wrap">
+  <div class="fp-block">
+    <h3 class="fp-title">Future projects</h3>
+    <p class="fp-text">Berliner Philharmoniker, Hong Kong Philharmonic Orchestra, Dallas Symphony Orchestra, Leipzig Gewandhaus Orchestra, NDR Radio Philharmonic Hanover, KBS Symphony Orchestra Seoul, Milwaukee Symphony Orchestra, Vienna Symphoniker, Konzerthausorchester Berlin, Helsinki Philharmonic Orchestra, Gothenburg Symphoniker, Norwegian Radio Orchestra, The Florida Orchestra, Düsseldorfer Symphoniker, BBC Scottish Symphony Orchestra, Dresden Philharmonic, Hyogo PAC Orchestra, National Symphony Orchestra of Taiwan, Nagoya Symphony Orchestra, Osaka Symphony Orchestra, Musikkollegium Winterthur, Antwerp Symphony Orchestra, Guerzenich Orchestra Cologne, Essen Philharmonic, Orquestra Simfònica de Barcelona, Orquesta Sinfónica del Principado de Asturias, Orquestra Sinfónica do Porto, Irish National Symphony Orchestra, Shanghai Philharmonic, <span class="nb">Orquestra Gulbenkian</span></p>
+  </div>
+  <div class="news-carousel-wrapper" id="newsCarousel" data-news-key="michael-sanderling" data-news-base="../../" data-category="11">
+    <div class="news-carousel-inner">
+      <div class="news-carousel-header">News</div>
+      <div class="news-carousel-track" id="newsTrack"></div>
+      <div class="news-carousel-nav">
+        <div class="news-carousel-arrow" id="newsPrev" role="button" aria-label="Previous">&#8249;</div>
+        <div class="news-carousel-dots" id="newsDots"></div>
+        <div class="news-carousel-arrow" id="newsNext" role="button" aria-label="Next">&#8250;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ THREE CARDS ============ -->
 <section class="cards wrap">
-  <div class="card">
-    <h4>Future projects with:</h4>
-    <ul>
-      <li>Berliner Philharmoniker</li><li>Hong Kong Philharmonic Orchestra</li><li>Dallas Symphony Orchestra</li><li>Leipzig Gewandhaus Orchestra</li><li>NDR Radio Philharmonic Hanover</li><li>KBS Symphony Orchestra Seoul</li><li>Milwaukee Symphony Orchestra</li><li>Vienna Symphoniker</li><li>Konzerthausorchester Berlin</li><li>Helsinki Philharmonic Orchestra</li><li>Gothenburg Symphoniker</li><li>Norwegian Radio Orchestra</li><li>The Florida Orchestra</li><li>Düsseldorfer Symphoniker</li><li>BBC Scottish Symphony Orchestra</li><li>Dresden Philharmonic</li><li>Hyogo PAC Orchestra</li><li>National Symphony Orchestra of Taiwan</li><li>Musikkollegium Winterthur</li><li>Antwerp Symphony Orchestra</li><li>Guerzenich Orchestra Cologne</li><li>Essen Philharmonic</li><li>Nagoya Symphony Orchestra</li><li>Orquestra Simfònica de Barcelona</li><li>Orquesta Sinfónica del Principado de Asturias</li><li>Orquestra Sinfónica do Porto</li><li>Slowenien Philharmonic Orchestra</li><li>Irish National Symphony Orchestra</li>
-    </ul>
-  </div>
   <div class="card" id="bsky-card">
     <div class="bs-head"><span class="bs-av"></span><a class="bs-handle" href="https://bsky.app/profile/michaelsanderling.bsky.social" target="_blank" rel="noopener">@michaelsanderling.bsky.social</a><span class="bs-time"></span></div>
     <p class="post" id="bs-text">Michael Sanderling takes the podium with the Milwaukee Symphony Orchestra this September 18 &amp; 19. If you aren’t at Bradley Symphony Center this weekend, you’re missing out.</p>
@@ -337,6 +367,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
 
 <button id="to-top" type="button" aria-label="Back to top">&#8593;</button>
 
+<script src="news-carousel.js" defer></script>
 <script>
 (function(){
   var FEED_URL="https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec";
