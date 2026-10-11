@@ -116,8 +116,11 @@ section.block{padding-top:70px;padding-bottom:50px}
 .past-title{margin-top:0}
 .reveal{display:none}
 .reveal.open{display:block}
-.archive .btn{display:block;width:max-content;margin:22px 0}
-.archive-body{margin-top:10px}
+.archive .season{margin:0 0 22px}
+.archive .season-btn{display:block;width:max-content}
+.archive .reveal .cal{margin-top:6px}
+.btn-text{background:none;border:0;padding:0;margin:14px 0 6px;font:600 14px Prompt,sans-serif;color:#333;cursor:pointer}
+.btn-text:hover{text-decoration:underline}
 
 /* calendar: one step smaller */
 #calendar .ev{font-size:16px}
@@ -266,11 +269,16 @@ footer.f{padding-top:90px;padding-bottom:40px}
   <button class="btn" id="cal-toggle" type="button" aria-expanded="false">show all</button>
   <div class="reveal" id="cal-all"><div class="cal four" id="cal-grid"></div></div>
   <hr class="rule" style="margin:40px 0 40px">
-  <div class="archive">
+  <div class="archive" id="archive">
     <h3 class="sub">archive</h3>
-    <button class="btn" type="button" data-archive="2025/2026">season 2025/2026</button>
-    <button class="btn" type="button" data-archive="2024/2025">season 2024/2025</button>
-    <div class="reveal archive-body" id="archive-body"><p style="color:#777">Archive to be added.</p></div>
+    <div class="season" data-season="2025">
+      <button class="btn season-btn" type="button" aria-expanded="false">season 2025/2026</button>
+      <div class="reveal"><div class="cal four season-grid"></div><button class="btn-text season-close" type="button">close season 2025/2026</button></div>
+    </div>
+    <div class="season" data-season="2024">
+      <button class="btn season-btn" type="button" aria-expanded="false">season 2024/2025</button>
+      <div class="reveal"><div class="cal four season-grid"></div><button class="btn-text season-close" type="button">close season 2024/2025</button></div>
+    </div>
   </div>
   <hr class="rule" style="margin-top:40px">
 </section>
@@ -414,11 +422,20 @@ footer.f{padding-top:90px;padding-bottom:40px}
     if(nx.length)fill(nextEl,nx);else nextEl.textContent="No upcoming concerts found.";
     var from=new Date(2026,0,1);
     fill(gridEl,events.filter(function(e){return e.pd>=from}));
+    document.querySelectorAll('#archive .season').forEach(function(box){
+      var y=parseInt(box.dataset.season,10),a=new Date(y,7,1),z=new Date(y+1,6,31,23,59),g=box.querySelector('.season-grid');
+      var list=events.filter(function(e){return e.pd>=a&&e.pd<=z}).sort(function(p,q){return p.pd-q.pd});
+      if(list.length)fill(g,list);else g.textContent="No concerts listed for this season.";
+    });
   }).catch(function(){nextEl.textContent="The calendar could not be loaded."});
   var tg=document.getElementById('cal-toggle'),box=document.getElementById('cal-all');
   tg.addEventListener('click',function(){var o=box.classList.toggle('open');tg.textContent=o?'close current season':'show all';tg.setAttribute('aria-expanded',o)});
-  var ab=document.getElementById('archive-body');
-  document.querySelectorAll('[data-archive]').forEach(function(b){b.addEventListener('click',function(){ab.classList.toggle('open')})});
+  document.querySelectorAll('#archive .season').forEach(function(box){
+    var btn=box.querySelector('.season-btn'),rv=box.querySelector('.reveal'),label=btn.textContent;
+    function set(o){rv.classList.toggle('open',o);btn.textContent=o?label.replace('season','close season'):label;btn.setAttribute('aria-expanded',o);}
+    btn.addEventListener('click',function(){set(!rv.classList.contains('open'))});
+    box.querySelector('.season-close').addEventListener('click',function(){set(false);btn.scrollIntoView({behavior:'smooth',block:'center'})});
+  });
   document.querySelectorAll('[data-more]').forEach(function(b){b.addEventListener('click',function(){
     var r=b.parentNode.querySelector('.reveal');if(!r)return;var o=r.classList.toggle('open');b.textContent=o?'read less':'read more'})});
   (function(){
