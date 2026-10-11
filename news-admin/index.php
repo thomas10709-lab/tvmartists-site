@@ -190,6 +190,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
+                if ($action === 'add_card') {
+                    $cats = valid_cats($_POST['cats'] ?? [], $PAGES);
+                    $url  = clean_link((string)($_POST['url'] ?? ''));
+                    $dateIn = (string)($_POST['date'] ?? '');
+                    $when = $dateIn !== '' ? input_to_ts($dateIn) : null;
+                    if (!$cats) {
+                        flash('err', 'Bitte mindestens eine Seite auswählen.');
+                    } elseif ($url === '') {
+                        flash('err', 'Bitte eine gültige Adresse (https://…) eingeben.');
+                    } else {
+                        $page = http_get($url);
+                        if (!is_array($page)) {
+                            flash('err', $page);
+                        } else {
+                            $m = parse_link_meta($page[0], $page[1], $url);
+                            if ($m['title'] === '') {
+                                flash('err', 'Auf dieser Seite wurde kein Titel gefunden.');
+                            } else {
+                                $id = gmdate('Ymd-His') . '-' . bin2hex(random_bytes(3));
+                                $imgPath = ''; $webpPath = ''; $iw = 0; $ih = 0; $imgNote = '';
+                                if ($m['image'] !== '') {
+                                    $pic = http_get($m['image'], 8000000);
+                                    if (is_array($pic)) {
+                                        $tmp = tempnam(sys_get_temp_dir(), 'card');
+                                        file_put_contents($tmp, $pic[0]);
+                                        $res = process_image($tmp, $IMG . '/' . $id);
+                                        @unlink($tmp);
+                                        if (is_array($res)) {
+                                            $imgPath = 'news-data/img/' . $id . '.jpg';
+                                            $webpPath = $res['webp'] ? 'news-data/img/' . $id . '.webp' : '';
+                                            $iw = $res['w']; $ih = $res['h'];
+                                        } else { $imgNote = ' (Bild nicht übernommen: ' . $res . ')'; }
+                                    } else { $imgNote = ' (Bild nicht übernommen: ' . $pic . ')'; }
+                                }
+                                $item = [
+                                    'id'     => $id,
+                                    'ts'     => $when ?? gmdate('c'),
+                                    'type'   => 'card',
+                                    'title'  => $m['title'],
+                                    'text'   => $m['text'],
+                                    'source' => $m['source'],
+                                    'alt'    => $m['title'],
+                                    'link'   => $url,
+                                    'image'  => $imgPath,
+                                    'webp'   => $webpPath,
+                                    'w'      => $iw,
+                                    'h'      => $ih,
+                                    'cats'   => $cats,
+                                ];
+                                with_lock($DATA, function () use ($JSON, $item) {
+                                    $all = load_news($JSON);
+                                    $all[] = $item;
+                                    save_news($JSON, $all);
+                                });
+                                flash('ok', 'Karte „' . $m['title'] . '" wurde veröffentlicht.' . $imgNote);
+                            }
+                        }
+                    }
+                }
+
                 if ($action === 'update' || $action === 'delete' || $action === 'bump') {
                     $id = (string)($_POST['id'] ?? '');
                     if (!preg_match('/^\d{8}-\d{6}-[a-f0-9]{6}$/', $id)) {
@@ -302,11 +362,12 @@ $csrf = $_SESSION['csrf'];
   .item { display:grid; grid-template-columns: 110px 1fr; gap:14px; padding:14px 0; border-top:1px solid #e1e8f0; }
   .item:first-of-type { border-top:0; }
   .item img { width:110px; height:138px; object-fit:cover; border-radius:6px; background:#eef2f7; }
+  .item .noimg { width:110px; height:138px; border-radius:6px; background:#eef2f7; color:#456; font-size:12px; padding:8px; overflow:hidden; }
   .meta { font-size:13px; color:#51647a; margin-bottom:6px; }
   .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
   .top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
   .del label { display:inline-flex; align-items:center; gap:6px; font-weight:400; margin:0; }
-  @media (max-width:560px) { .item { grid-template-columns: 80px 1fr; } .item img { width:80px; height:100px; } }
+  @media (max-width:560px) { .item { grid-template-columns: 80px 1fr; } .item img, .item .noimg { width:80px; height:100px; } }
 </style>
 </head>
 <body>
@@ -378,6 +439,30 @@ unset P H</pre>
   </div>
 
   <div class="card">
+    <h2>Link-Karte aus einer Webseite (z. B. Pressekritik)</h2>
+    <form method="post">
+      <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
+      <input type="hidden" name="action" value="add_card">
+
+      <label for="url">Adresse des Artikels</label>
+      <input id="url" type="url" name="url" placeholder="https://…" required>
+      <div class="hint">Titel, Auszug, Bild und Name der Seite werden automatisch von dort gelesen. Im Karussell erscheint eine Karte, die beim Klick den Artikel öffnet.</div>
+
+      <label>Auf welchen Seiten soll sie erscheinen?</label>
+      <div class="cats">
+        <?php foreach ($PAGES as $key => $label): ?>
+          <label><input type="checkbox" name="cats[]" value="<?= e($key) ?>"> <?= e($label) ?></label>
+        <?php endforeach; ?>
+      </div>
+
+      <label for="cdate">Datum (optional, bestimmt die Reihenfolge; leer = jetzt)</label>
+      <input id="cdate" type="datetime-local" name="date">
+
+      <div class="row"><button type="submit">Karte anlegen</button></div>
+    </form>
+  </div>
+
+  <div class="card">
     <h2>Vorhandene News (<?= count($news) ?>)</h2>
     <div class="cats filter">
       <a class="chip <?= $filter === '' ? 'on' : '' ?>" href="./">Alle (<?= count($news) ?>)</a>
@@ -389,7 +474,7 @@ unset P H</pre>
     <?php if (!$news): ?><p class="hint">Noch keine eigenen News. Solange hier nichts steht, zeigen die Seiten die alten News aus WordPress.</p><?php endif; ?>
     <?php foreach ($view as $pos => $it): $id = (string)($it['id'] ?? ''); $cats = (array)($it['cats'] ?? []); ?>
       <div class="item">
-        <img src="../<?= e((string)($it['image'] ?? '')) ?>" alt="">
+        <?php if (!empty($it['image'])): ?><img src="../<?= e((string)$it['image']) ?>" alt=""><?php else: ?><div class="noimg"><?= e((string)($it['title'] ?? 'Karte')) ?></div><?php endif; ?>
         <div>
           <div class="meta">
             <?php if ($filter !== ''): ?><strong>Platz <?= $pos + 1 ?></strong> &middot; <?php endif; ?>
