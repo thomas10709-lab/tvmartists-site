@@ -34,7 +34,7 @@ nav.main{display:flex;align-items:center;gap:clamp(18px,1.7vw,36px);font-size:cl
 nav.main a{text-decoration:none;color:#fff}
 nav.main a:hover{opacity:.7}
 nav.main svg{width:clamp(28px,1.85vw,40px);height:clamp(28px,1.85vw,40px);fill:#fff}
-.burger{display:none;background:none;border:2px solid #fff;padding:12px 11px;cursor:pointer;width:50px;height:46px;flex-direction:column;justify-content:space-between}
+.burger{display:none;background:none;border:0;padding:8px 6px;cursor:pointer;width:34px;height:32px;flex-direction:column;justify-content:space-between;box-sizing:content-box}
 .burger span{display:block;height:2px;background:#fff;width:100%}
 .hero-title{position:absolute;z-index:3;left:max(46.8%,40px);bottom:14%;margin:0;max-width:min(760px,86vw);font-family:Newsreader,Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(24px,2.7vw,44px);line-height:1.45;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)}
 .labels{position:absolute;z-index:3;right:4.8vw;top:11.1vw;display:flex;gap:2vw;align-items:flex-start}
@@ -191,17 +191,17 @@ footer.f{padding-top:90px;padding-bottom:40px}
  .rec{grid-template-columns:1fr 1fr}
 }
 @media(max-width:820px){
- .hero{background-image:url(images/hero-mobile.jpg);background-image:image-set(url(images/hero-mobile.webp) type("image/webp"),url(images/hero-mobile.jpg) type("image/jpeg"));background-position:center top}
+ .hero{background-image:url(images/hero-mobile-tall.jpg);background-image:image-set(url(images/hero-mobile-tall.webp) type("image/webp"),url(images/hero-mobile-tall.jpg) type("image/jpeg"));background-position:center bottom;background-size:auto 110%}
  body{font-size:17px}
  header.bar{padding:24px 20px 0 20px;flex-direction:column;align-items:center;justify-content:flex-start;gap:14px}
  .logo{padding:10px 16px;font-size:clamp(17px,5vw,22px);text-align:center}
  .burger{display:flex;margin:0 auto}
  nav.main{display:none;position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 8px);background:rgba(0,0,0,.92);flex-direction:column;align-items:center;padding:22px 34px;gap:16px;z-index:9;font-size:15px;white-space:nowrap}
  nav.main.open{display:flex}
- .labels{top:auto;bottom:4%;left:20px;right:auto;gap:18px;align-items:center}
+ .labels{top:auto;bottom:6%;left:0;right:0;justify-content:center;gap:22px;align-items:center}
  .labels .lw{width:92px}
  .labels .ls{width:60px;margin-top:0}
- .hero-title{left:20px;right:20px;bottom:15%;font-size:clamp(22px,6.2vw,30px)}
+ .hero-title{left:0;right:0;max-width:none;text-align:center;bottom:27%;font-size:clamp(22px,6.2vw,30px)}
  .pano-title{padding-left:20px}
  .cal,.cal.four,.rec,.contact-grid,.tiles,.fp-row{grid-template-columns:1fr}
  .press-card picture{min-height:240px}
