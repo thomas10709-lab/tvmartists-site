@@ -430,7 +430,10 @@ footer.f{padding-top:90px;padding-bottom:40px}
   }
   function fill(target,list){target.textContent="";list.forEach(function(e){target.appendChild(render(e))})}
   var nextEl=document.getElementById("cal-next"),gridEl=document.getElementById("cal-grid");
-  fetch(FEED_URL).then(function(r){return r.text()}).then(function(text){
+  var dbg=/[?&]caldebug/.test(location.search);
+  function dbgBox(t){var pre=document.createElement("pre");pre.style.cssText="position:fixed;z-index:999;left:10px;top:10px;right:10px;bottom:10px;overflow:auto;background:#fff;color:#000;border:2px solid #c00;padding:14px;font:12px/1.4 monospace;white-space:pre-wrap";pre.textContent=t;document.body.appendChild(pre)}
+  fetch(FEED_URL).then(function(r){if(dbg&&!r.ok)dbgBox("Feed answered with HTTP "+r.status);return r.text()}).then(function(text){
+    if(dbg&&text.indexOf("###EVENT###")<0)dbgBox("Feed returned no events. First 400 characters:\n\n"+text.slice(0,400));
     var all0=text.trim().split("###EVENT###").filter(function(b){return b.trim()!==""}).map(function(b){
       var parts=b.trim().split("---").map(function(p){return p.trim()}),fl=parts[0].split("\n").map(function(s){return s.trim()});
       return{date:fl[0]||"",city:fl[1]||"",venue:parts[1]||"",orchestra:parts[2]||"",program:parts[3]||"",pd:pdate(fl[0]||"")};
@@ -447,7 +450,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
     if(nx.length)fill(nextEl,nx);else nextEl.textContent="No upcoming concerts found.";
     var from=new Date(2026,0,1);
     fill(gridEl,events.filter(function(e){return e.pd>=from}));
-  }).catch(function(){nextEl.textContent="The calendar could not be loaded."});
+  }).catch(function(err){nextEl.textContent="The calendar could not be loaded.";if(dbg)dbgBox("Feed request failed: "+err)});
   var tg=document.getElementById('cal-toggle'),box=document.getElementById('cal-all');
   tg.addEventListener('click',function(){var o=box.classList.toggle('open');tg.textContent=o?'close current season':'show all';tg.setAttribute('aria-expanded',o)});
   // Fixed archive (archive-data.js): independent of the Google Sheet
