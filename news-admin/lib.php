@@ -44,6 +44,12 @@ Options -Indexes
   <FilesMatch "^news\.json$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  # Allow the Sanderling site on its own domain to read the news list
+  SetEnvIf Origin "^https://(www\.)?michaelsanderling\.de$" CORS_ORIGIN=$0
+  <FilesMatch "^news\.json$">
+    Header set Access-Control-Allow-Origin "%{CORS_ORIGIN}e" env=CORS_ORIGIN
+    Header append Vary Origin
+  </FilesMatch>
 </IfModule>
 
 HT);
