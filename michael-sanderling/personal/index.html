@@ -137,7 +137,10 @@ section.block{padding-top:70px;padding-bottom:50px}
 
 /* bio */
 .bio{position:relative;padding-top:50px;padding-bottom:40px}
-.bio .lang{position:absolute;right:calc(var(--pad) + 4%);top:30px;font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(200px,28vw,500px);line-height:.8;color:#dedede;z-index:-1;user-select:none;pointer-events:none}
+.bio{--lf:clamp(200px,28vw,500px)}
+#biografie{padding-top:calc(var(--lf) * .72 - 70px)!important}
+.bio .txt{position:relative}
+.bio .lang{position:absolute;right:4%;top:calc(23px + .067em);transform:translateY(-100%);font-family:Prompt,sans-serif;font-weight:600;font-size:var(--lf);line-height:.8;color:#dedede;z-index:-1;user-select:none;pointer-events:none}
 .bio .inner{position:relative;z-index:1}
 .bio h5{font-family:Prompt,sans-serif;font-weight:700;font-size:19px;text-transform:uppercase;margin:0 0 3em;padding-top:2.4em}
 .bio .txt p{margin:0 0 1.4em}
@@ -185,7 +188,8 @@ footer.f{padding-top:90px;padding-bottom:40px}
  .pano-title{padding-left:20px}
  .cal,.cal.four,.rec,.contact-grid,.tiles,.fp-row{grid-template-columns:1fr}
  .press-card picture{min-height:240px}
- .bio .lang{font-size:46vw;right:10px;top:10px}
+ .bio{--lf:46vw}
+ .bio .lang{right:0}
 }
 </style>
 </head>
@@ -292,9 +296,9 @@ footer.f{padding-top:90px;padding-bottom:40px}
 <section class="bio wrap" id="biography">
   <h2 class="sec" style="margin-top:50px">Biography</h2>
   <div class="inner">
-    <span class="lang" aria-hidden="true">EN</span>
     <h5>Biography [English version]</h5>
     <div class="txt">
+      <span class="lang" aria-hidden="true">EN</span>
       <p>Since the 2021/22 season, Michael Sanderling has served as chief conductor of the Lucerne Symphony Orchestra. This appointment marked the logical continuation of a long-standing, close partnership aimed at further establishing the orchestra’s international reputation in the late Romantic repertoire—particularly with works by Bruckner, Mahler, and Strauss. Tours throughout Europe, Asia, and South America, as well as innovative projects, attest to the impact of this collaboration. Particular attention was drawn to the multimedia production of Shostakovich’s Symphony No. 10 featuring artist William Kentridge, which, following its premiere at the KKL Lucerne and in Pompeii, enjoyed triumphant performances at the Vienna Konzerthaus and the Philharmonie de Paris.</p>
       <div class="reveal"><p><!-- TODO: full English biography text --></p></div>
     </div>
@@ -304,9 +308,9 @@ footer.f{padding-top:90px;padding-bottom:40px}
 </section>
 <section class="bio wrap" id="biografie" style="padding-top:0">
   <div class="inner" style="position:relative">
-    <span class="lang" aria-hidden="true" style="top:10px">DE</span>
     <h5>Biografie [German version]</h5>
     <div class="txt">
+      <span class="lang" aria-hidden="true">DE</span>
       <p>Seit der Saison 2021/22 prägt Michael Sanderling als Chefdirigent das Luzerner Sinfonieorchester. Die Ernennung war die konsequente Fortführung einer langjährigen, engen Partnerschaft mit dem Ziel, das Orchester im spätromantischen Repertoire – insbesondere mit Werken von Bruckner, Mahler und Strauss – international weiter zu profilieren. Tourneen durch Europa, Asien und Südamerika sowie innovative Projekte zeugen von der Strahlkraft dieser Zusammenarbeit. Besondere Beachtung fand die multimediale Produktion von Schostakowitschs 10. Sinfonie mit dem Künstler William Kentridge, die nach ihrer Premiere im KKL Luzern und in Pompeji triumphale Aufführungen im Wiener Konzerthaus und der Philharmonie de Paris feierte.</p>
       <div class="reveal"><p><!-- TODO: vollständiger deutscher Biografietext --></p></div>
     </div>
