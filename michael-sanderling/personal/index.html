@@ -431,7 +431,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
       var parts=b.trim().split("---").map(function(p){return p.trim()}),fl=parts[0].split("\n").map(function(s){return s.trim()});
       return{date:fl[0]||"",city:fl[1]||"",venue:parts[1]||"",orchestra:parts[2]||"",program:parts[3]||"",pd:pdate(fl[0]||"")};
     });
-    var events=all0.filter(function(e){return e.city!==""&&e.pd!==null});
+    var events=all0.filter(function(e){return e.city!==""&&e.pd!==null}).map(function(e,i){e.i=i;return e}).sort(function(a,b){return (a.pd-b.pd)||(a.i-b.i)});
     if(/[?&]caldebug/.test(location.search)){
       var pre=document.createElement("pre");pre.style.cssText="position:fixed;z-index:999;left:10px;top:10px;right:10px;bottom:10px;overflow:auto;background:#fff;color:#000;border:2px solid #c00;padding:14px;font:12px/1.4 monospace;white-space:pre-wrap";
       var bad=all0.filter(function(e){return !(e.city!==""&&e.pd!==null)});
