@@ -34,11 +34,11 @@
     }).then(function (all) {
       if (!Array.isArray(all)) { return []; }
       return all.filter(function (it) {
-        return it && it.image && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
+        return it && (it.image || it.type === "card") && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
       }).sort(function (a, b) {
         return String(b.ts || "").localeCompare(String(a.ts || ""));
       }).slice(0, MAX_ITEMS).map(function (it) {
-        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: it.link || "" };
+        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
       });
     }).catch(function () { return []; });
   }
@@ -78,6 +78,49 @@
     });
   }
 
+  // --- Link-Karte (Pressekritik o. ä.): Bild, Titel, Auszug, Quelle ---------------
+  function injectCardStyles() {
+    if (document.getElementById("news-card-styles")) { return; }
+    var st = document.createElement("style");
+    st.id = "news-card-styles";
+    st.textContent =
+      ".news-card-slide{display:flex}" +
+      ".news-card{display:flex;flex-direction:column;width:100%;background:#fff;border:1px solid #d9e1e8;border-radius:8px;overflow:hidden;color:#2C3E50;text-decoration:none}" +
+      ".news-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.12)}" +
+      ".news-card img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:0;display:block}" +
+      ".news-card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}" +
+      ".news-card-title{font-size:19px;font-weight:700;line-height:1.25;text-transform:uppercase;margin:0}" +
+      ".news-card-text{font-size:14px;line-height:1.5;color:#556;margin:0;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}" +
+      ".news-card-foot{margin-top:auto;font-size:13px;display:flex;justify-content:space-between;gap:10px}" +
+      ".news-card-src{font-weight:600}" +
+      ".news-card-more{text-decoration:underline;color:#1d63c1}";
+    document.head.appendChild(st);
+  }
+
+  function buildCard(it) {
+    injectCardStyles();
+    var a = document.createElement(it.link ? "a" : "div");
+    a.className = "news-card";
+    if (it.link) { a.href = it.link; a.target = "_blank"; a.rel = "noopener noreferrer"; }
+    if (it.image) {
+      var img = document.createElement("img");
+      img.src = it.image; img.alt = it.alt || it.title || ""; img.loading = "lazy";
+      if (it.webp) {
+        var pic = document.createElement("picture"), src = document.createElement("source");
+        src.type = "image/webp"; src.srcset = it.webp;
+        pic.appendChild(src); pic.appendChild(img); a.appendChild(pic);
+      } else { a.appendChild(img); }
+    }
+    var body = document.createElement("div"); body.className = "news-card-body";
+    var h = document.createElement("h3"); h.className = "news-card-title"; h.textContent = it.title; body.appendChild(h);
+    if (it.text) { var p = document.createElement("p"); p.className = "news-card-text"; p.textContent = it.text; body.appendChild(p); }
+    var foot = document.createElement("div"); foot.className = "news-card-foot";
+    var s = document.createElement("span"); s.className = "news-card-src"; s.textContent = it.source || ""; foot.appendChild(s);
+    if (it.link) { var m = document.createElement("span"); m.className = "news-card-more"; m.textContent = "Read more"; foot.appendChild(m); }
+    body.appendChild(foot); a.appendChild(body);
+    return a;
+  }
+
   // --- Anzeige ------------------------------------------------------------------
   ready(function () {
     var wrapper = document.querySelector(".news-carousel-wrapper");
@@ -90,7 +133,7 @@
     loadOwn(wrapper.dataset.newsKey || "").then(function (items) {
       return items.length ? items : loadWp(wrapper);
     }).then(function (items) {
-      items = items.filter(function (it) { return !!it.image; });
+      items = items.filter(function (it) { return !!it.image || it.type === "card"; });
       if (items.length === 0) {
         track.innerHTML = "<p style='padding:20px; text-align:center;'>Noch keine News vorhanden.</p>";
         return;
@@ -99,6 +142,13 @@
       items.forEach(function (it) {
         var slide = document.createElement("div");
         slide.className = "news-slide";
+
+        if (it.type === "card") {
+          slide.className = "news-slide news-card-slide";
+          slide.appendChild(buildCard(it));
+          track.appendChild(slide);
+          return;
+        }
 
         var img = document.createElement("img");
         img.src = it.image;
