@@ -148,7 +148,12 @@ section.block{padding-top:70px;padding-bottom:50px}
 /* recordings */
 .rec{display:grid;grid-template-columns:repeat(4,1fr);gap:34px;margin-top:20px}
 .rec figure{margin:0}
-.rec .cover{aspect-ratio:1/1}
+.rec .cover{aspect-ratio:1/1;background:#eee;overflow:hidden}
+.rec .cover picture{display:block;width:100%;height:100%}
+.rec .cover img{width:100%;height:100%;object-fit:cover;display:block}
+.rec .cover.tall{aspect-ratio:auto}
+.rec .cover.tall img{height:auto}
+.rec-more .btn{margin-top:30px}
 .rec h4{font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(20px,2vw,29px);text-transform:uppercase;line-height:1.25;margin:26px 0 20px}
 .rec p{margin:0;font-size:18px;line-height:1.75}
 .rec-more{margin-top:50px}
@@ -323,13 +328,13 @@ footer.f{padding-top:90px;padding-bottom:40px}
 <section class="block wrap" id="recordings">
   <h2 class="sec">Recordings</h2>
   <div class="rec">
-    <figure><div class="cover ph">Cover: Mozart/Say Requiem</div><h4>Mozart/Say · Requiem</h4><p>Luzerner Sinfonieorchester, Rundfunkchor Berlin, Michael Sanderling, Audio CD (2025), WARNER</p></figure>
-    <figure><div class="cover ph">Cover: Brahms Symphonies</div><h4>Brahms · The Symphonies</h4><p>Luzerner Sinfonieorchester, Michael Sanderling, Audio CD (2023), WARNER</p></figure>
-    <figure><div class="cover ph">Cover: Beethoven Nine Symphonies</div><h4>Beethoven · The Nine Symphonies</h4><p>Dresdner Philharmonie, Michael Sanderling, Audio CD (2018), SONY</p></figure>
-    <figure><div class="cover ph">Cover: Shostakovich Fifteen Symphonies</div><h4>Shostakovich · The Fifteen Symphonies</h4><p>Dresdner Philharmonie, Michael Sanderling, Audio CD (2019), SONY</p></figure>
+    <figure><div class="cover"><picture><source srcset="images/cover-mozart-requiem.webp" type="image/webp"><img src="images/cover-mozart-requiem.jpg" alt="Mozart/Say Requiem" width="768" height="768" loading="lazy"></picture></div><h4>Mozart/Say · Requiem</h4><p>Luzerner Sinfonieorchester, Rundfunkchor Berlin, Michael Sanderling, Audio CD (2025), WARNER</p></figure>
+    <figure><div class="cover"><picture><source srcset="images/cover-brahms.webp" type="image/webp"><img src="images/cover-brahms.jpg" alt="Brahms – The Four Symphonies" width="768" height="768" loading="lazy"></picture></div><h4>Brahms · The Symphonies</h4><p>Luzerner Sinfonieorchester, Michael Sanderling, Audio CD (2023), WARNER</p></figure>
+    <figure><div class="cover"><picture><source srcset="images/cover-beethoven.webp" type="image/webp"><img src="images/cover-beethoven.jpg" alt="Beethoven – The Nine Symphonies" width="768" height="768" loading="lazy"></picture></div><h4>Beethoven · The Nine Symphonies</h4><p>Dresdner Philharmonie, Michael Sanderling, Audio CD (2018), SONY</p></figure>
+    <figure><div class="cover"><picture><source srcset="images/cover-shostakovich-15.webp" type="image/webp"><img src="images/cover-shostakovich-15.jpg" alt="Shostakovich – The Fifteen Symphonies" width="768" height="768" loading="lazy"></picture></div><h4>Shostakovich · The Fifteen Symphonies</h4><p>Dresdner Philharmonie, Michael Sanderling, Audio CD (2019), SONY</p></figure>
   </div>
   <div class="rec-more">
-    <div class="reveal"><div class="rec"><figure><div class="cover ph">Cover: Shostakovich (DVD)</div><h4>Shostakovich</h4><p><!-- TODO: further recordings --></p></figure></div></div>
+    <div class="reveal"><div class="rec"><figure><div class="cover tall"><picture><source srcset="images/cover-shostakovich-dvd.webp" type="image/webp"><img src="images/cover-shostakovich-dvd.jpg" alt="Michael Sanderling conducts Shostakovich (DVD)" width="729" height="1024" loading="lazy"></picture></div><h4>Shostakovich · Symphony No. 15</h4><p>Dresdner Philharmonie, Michael Sanderling, DVD, EUROARTS</p></figure></div></div>
     <button class="btn" type="button" data-more>read more</button>
   </div>
   <hr class="rule" style="margin-top:50px">
