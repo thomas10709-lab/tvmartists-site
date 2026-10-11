@@ -273,7 +273,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
   <div class="wrap">
     <h2 class="sec">Online Concert Hall</h2>
   </div>
-  <video class="video" muted loop playsinline autoplay preload="metadata" poster="images/concert-hall-poster.jpg"><source src="images/concert-hall.mp4" type="video/mp4"></video>
+  <video class="video" id="ocd-video" muted loop playsinline autoplay preload="auto" disablepictureinpicture><source src="images/concert-hall.mp4" type="video/mp4"></video>
   <div class="wrap">
     <div class="tiles">
       <a class="tile img" href="https://www.youtube.com/watch?v=OANAFs_yfGI&t=1" target="_blank" rel="noopener"><picture><source srcset="images/tile-ndr.webp" type="image/webp"><img src="images/tile-ndr.jpg" alt="NDR Radiophilharmonie – Sibelius: Symphony No. 2" width="1400" height="487" loading="lazy"></picture></a>
@@ -414,6 +414,13 @@ footer.f{padding-top:90px;padding-bottom:40px}
   document.querySelectorAll('[data-archive]').forEach(function(b){b.addEventListener('click',function(){ab.classList.toggle('open')})});
   document.querySelectorAll('[data-more]').forEach(function(b){b.addEventListener('click',function(){
     var r=b.parentNode.querySelector('.reveal');if(!r)return;var o=r.classList.toggle('open');b.textContent=o?'read less':'read more'})});
+  (function(){
+    var v=document.getElementById("ocd-video");if(!v)return;
+    v.muted=true;
+    function go(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    go();v.addEventListener("loadeddata",go);v.addEventListener("canplay",go);
+    ["touchstart","click","scroll"].forEach(function(ev){window.addEventListener(ev,function f(){if(v.paused)go();window.removeEventListener(ev,f)},{passive:true})});
+  })();
   var im=document.getElementById('intro-more'),it=document.getElementById('intro-text');
   im.addEventListener('click',function(){var o=it.classList.toggle('open');im.textContent=o?'read less':'read more';im.setAttribute('aria-expanded',o)});
   var bg=document.querySelector('.burger'),nv=document.querySelector('nav.main');
