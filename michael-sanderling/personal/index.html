@@ -112,6 +112,7 @@ section.block{padding-top:70px;padding-bottom:50px}
 .ev .city{font-family:Prompt,sans-serif;font-weight:700;letter-spacing:.08em;font-size:1.05em}
 .ev .hall{margin-bottom:1.3em}
 .ev .lines,.ev .prog{margin-bottom:1.4em}
+.ev .hall:empty{display:none}
 .ev p{margin:0}
 .past-title{margin-top:0}
 .reveal{display:none}
@@ -387,6 +388,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
 <button id="to-top" type="button" aria-label="Back to top">&#8593;</button>
 
 <script src="news-carousel.js" defer></script>
+<script src="archive-data.js"></script>
 <script>
 (function(){
   var FEED_URL="https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec";
@@ -429,14 +431,15 @@ footer.f{padding-top:90px;padding-bottom:40px}
     if(nx.length)fill(nextEl,nx);else nextEl.textContent="No upcoming concerts found.";
     var from=new Date(2026,0,1);
     fill(gridEl,events.filter(function(e){return e.pd>=from}));
-    document.querySelectorAll('#archive .season').forEach(function(box){
-      var y=parseInt(box.dataset.season,10),a=new Date(y,7,1),z=new Date(y+1,6,31,23,59),g=box.querySelector('.season-grid');
-      var list=events.filter(function(e){return e.pd>=a&&e.pd<=z}).sort(function(p,q){return p.pd-q.pd});
-      if(list.length)fill(g,list);else g.textContent="No concerts listed for this season.";
-    });
   }).catch(function(){nextEl.textContent="The calendar could not be loaded."});
   var tg=document.getElementById('cal-toggle'),box=document.getElementById('cal-all');
   tg.addEventListener('click',function(){var o=box.classList.toggle('open');tg.textContent=o?'close current season':'show all';tg.setAttribute('aria-expanded',o)});
+  // Fixed archive (archive-data.js): independent of the Google Sheet
+  document.querySelectorAll('#archive .season').forEach(function(box){
+    var list=(window.ARCHIVE||{})[box.dataset.season]||[],g=box.querySelector('.season-grid');
+    if(!list.length){g.textContent="No concerts listed for this season.";return}
+    fill(g,list.map(function(e){return{date:e.d,city:e.city,venue:e.hall||"",orchestra:e.lines.join("\n"),program:e.prog.join("\n")}}));
+  });
   document.querySelectorAll('#archive .season').forEach(function(box){
     var btn=box.querySelector('.season-btn'),rv=box.querySelector('.reveal'),label=btn.textContent;
     function set(o){rv.classList.toggle('open',o);btn.textContent=o?label.replace('season','close season'):label;btn.setAttribute('aria-expanded',o);}
