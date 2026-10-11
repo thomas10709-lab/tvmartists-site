@@ -61,7 +61,7 @@ nav.main svg{width:clamp(28px,1.85vw,40px);height:clamp(28px,1.85vw,40px);fill:#
 .collapsible.open::after{display:none}
 .btn-sm{font-size:14px;padding:8px 12px;margin-top:18px}
 /* future projects + news carousel */
-.news{padding-top:30px;padding-bottom:30px}
+.news{padding-top:30px;padding-bottom:0}
 .fp-row{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr);gap:40px;align-items:stretch;margin-top:44px}
 .fp-block{text-align:left}
 .fp-title{font-family:Prompt,sans-serif;font-weight:700;color:var(--head);font-size:clamp(24px,2.2vw,34px);margin:0 0 .6em}
@@ -107,7 +107,10 @@ nav.main svg{width:clamp(28px,1.85vw,40px);height:clamp(28px,1.85vw,40px);fill:#
 
 /* calendar */
 section.block{padding-top:70px;padding-bottom:50px}
+#contact{padding-top:40px}
 .cal{display:grid;grid-template-columns:repeat(3,1fr);gap:41px;margin-top:20px}
+#cal-next{gap:18px}
+#calendar{padding-top:30px}
 .cal.four{grid-template-columns:repeat(4,1fr);gap:41px;font-size:16px}
 .ev{border-top:2px solid #000;margin-top:2px;padding:26px 8px 36px}
 .ev time{display:block;font-family:Prompt,sans-serif;font-weight:700;font-size:clamp(26px,2.6vw,42px);line-height:1.1;margin-bottom:.9em;white-space:nowrap}
@@ -277,7 +280,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
 
 <!-- ============ CALENDAR ============ -->
 <section class="block wrap" id="calendar">
-  <h2 class="sec" style="margin-top:20px">Calendar</h2>
+  <h2 class="sec" style="margin-top:0">Calendar</h2>
   <div class="cal" id="cal-next"></div>
   <hr class="rule" style="margin:70px 0 40px">
   <h3 class="sub">all concerts of 2026 &amp; 2027</h3>
@@ -361,7 +364,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
 
 <!-- ============ CONTACT ============ -->
 <section class="block wrap" id="contact">
-  <h2 class="sec" style="margin-top:50px">Contact</h2>
+  <h2 class="sec" style="margin-top:0">Contact</h2>
   <div class="contact-grid">
     <div>
       <h4>Management</h4>
