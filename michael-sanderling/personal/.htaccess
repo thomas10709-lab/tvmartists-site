@@ -20,3 +20,5 @@ DirectoryIndex index.html
   ExpiresByType application/javascript "access plus 1 day"
   ExpiresByType text/javascript "access plus 1 day"
 </IfModule>
+
+ErrorDocument 404 /404.html
