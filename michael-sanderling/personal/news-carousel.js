@@ -29,12 +29,22 @@
   function abs(base, p) { return !p || /^(https?:)?\/\//.test(p) ? p : base + p; }
 
   // --- Quelle 1: eigene Liste ---------------------------------------------
-  function loadOwn(key, base) {
+  // base darf mehrere Kandidaten enthalten, getrennt durch "|" (z. B. "|../../"): der erste, der news.json liefert, gewinnt.
+  function loadOwn(key, bases) {
     if (!key) { return Promise.resolve([]); }
-    return fetch(base + "news-data/news.json", { cache: "no-cache" }).then(function (res) {
-      if (!res.ok) { return []; }
-      return res.json();
-    }).then(function (all) {
+    var list = String(bases || "").split("|");
+    function attempt(i) {
+      if (i >= list.length) { return Promise.resolve([]); }
+      var base = list[i];
+      return fetch(base + "news-data/news.json", { cache: "no-cache" }).then(function (res) {
+        if (!res.ok) { throw new Error("no news.json at " + base); }
+        return res.json();
+      }).then(function (all) { return build(all, key, base); }).catch(function () { return attempt(i + 1); });
+    }
+    return attempt(0);
+  }
+  function build(all, key, base) {
+    return Promise.resolve(all).then(function (all) {
       if (!Array.isArray(all)) { return []; }
       return all.filter(function (it) {
         return it && (it.image || it.type === "card") && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
@@ -43,7 +53,7 @@
       }).slice(0, MAX_ITEMS).map(function (it) {
         return { image: abs(base, it.image), webp: abs(base, it.webp || ""), alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
       });
-    }).catch(function () { return []; });
+    });
   }
 
   // --- Quelle 2: WordPress (Ausweichlösung) -----------------------------------
