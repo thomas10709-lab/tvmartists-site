@@ -390,12 +390,12 @@ footer.f{padding-top:90px;padding-bottom:40px}
 <script>
 (function(){
   var FEED_URL="https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec";
-  var MM={JAN:0,FEB:1,MAR:2,APR:3,MAI:4,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OKT:9,OCT:9,NOV:10,DEZ:11,DEC:11};
+  var MM={JAN:0,FEB:1,MAR:2,APR:3,MAI:4,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OKT:9,OCT:9,NOV:10,DEZ:11,DEC:11,MRZ:2,MÄR:2};
   function pdate(str){
     if(!str)return null;
     var f=str.split("–")[0].split("-")[0].trim(),p=f.split(" ").filter(Boolean);
     if(p.length<3)return null;
-    var d=parseInt(p[0],10),m=MM[p[1].toUpperCase()],y=parseInt(p[p.length-1],10);
+    var d=parseInt(p[0],10),m=MM[p[1].toUpperCase().replace(/[.,]/g,'').slice(0,3)],y=parseInt(p[p.length-1],10);
     if(isNaN(d)||m===undefined||isNaN(y))return null;
     return new Date(y,m,d);
   }
@@ -413,10 +413,17 @@ footer.f{padding-top:90px;padding-bottom:40px}
   function fill(target,list){target.textContent="";list.forEach(function(e){target.appendChild(render(e))})}
   var nextEl=document.getElementById("cal-next"),gridEl=document.getElementById("cal-grid");
   fetch(FEED_URL).then(function(r){return r.text()}).then(function(text){
-    var events=text.trim().split("###EVENT###").filter(function(b){return b.trim()!==""}).map(function(b){
+    var all0=text.trim().split("###EVENT###").filter(function(b){return b.trim()!==""}).map(function(b){
       var parts=b.trim().split("---").map(function(p){return p.trim()}),fl=parts[0].split("\n").map(function(s){return s.trim()});
       return{date:fl[0]||"",city:fl[1]||"",venue:parts[1]||"",orchestra:parts[2]||"",program:parts[3]||"",pd:pdate(fl[0]||"")};
-    }).filter(function(e){return e.city!==""&&e.pd!==null});
+    });
+    var events=all0.filter(function(e){return e.city!==""&&e.pd!==null});
+    if(/[?&]caldebug/.test(location.search)){
+      var pre=document.createElement("pre");pre.style.cssText="position:fixed;z-index:999;left:10px;top:10px;right:10px;bottom:10px;overflow:auto;background:#fff;color:#000;border:2px solid #c00;padding:14px;font:12px/1.4 monospace;white-space:pre-wrap";
+      var bad=all0.filter(function(e){return !(e.city!==""&&e.pd!==null)});
+      pre.textContent="Calendar feed check (close with reload)\nblocks: "+all0.length+", usable: "+events.length+", skipped: "+bad.length+"\n\nSKIPPED (first line / city):\n"+bad.map(function(e){return "- ["+e.date+"] / ["+e.city+"]"}).join("\n")+"\n\nUSABLE dates:\n"+events.map(function(e){return e.date+" | "+e.city}).join("\n");
+      document.body.appendChild(pre);
+    }
     var today=new Date();today.setHours(0,0,0,0);
     var nx=events.filter(function(e){return e.pd>=today}).slice(0,3);
     if(nx.length)fill(nextEl,nx);else nextEl.textContent="No upcoming concerts found.";
