@@ -325,21 +325,42 @@ footer.f{padding-top:90px;padding-bottom:40px}
 
 <button id="to-top" type="button" aria-label="Back to top">&#8593;</button>
 
-<script src="calendar-data.js"></script>
 <script>
 (function(){
-  var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-  function fmt(d){var p=d.split('-');return p[2]+' '+M[+p[1]-1]+' '+p[0]}
-  function ev(e){
-    var ls=e.lines.map(esc).join('<br>'),pr=(e.prog||[]).map(esc).join('<br>');
-    return '<article class="ev"><time datetime="'+e.d+'">'+fmt(e.d)+'</time><div class="city">'+esc(e.city)+'</div><div class="hall">'+esc(e.hall)+'</div><div class="lines">'+ls+'</div>'+(pr?'<div class="prog">'+pr+'</div>':'')+'</article>';
+  var FEED_URL="https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec";
+  var MM={JAN:0,FEB:1,MAR:2,APR:3,MAI:4,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OKT:9,OCT:9,NOV:10,DEZ:11,DEC:11};
+  function pdate(str){
+    if(!str)return null;
+    var f=str.split("–")[0].split("-")[0].trim(),p=f.split(" ").filter(Boolean);
+    if(p.length<3)return null;
+    var d=parseInt(p[0],10),m=MM[p[1].toUpperCase()],y=parseInt(p[p.length-1],10);
+    if(isNaN(d)||m===undefined||isNaN(y))return null;
+    return new Date(y,m,d);
   }
-  var all=(window.CALENDAR||[]).slice().sort(function(a,b){return a.d<b.d?-1:1}),
-      today=new Date().toISOString().slice(0,10),
-      next=all.filter(function(e){return e.d>=today}).slice(0,3);
-  document.getElementById('cal-next').innerHTML=next.map(ev).join('');
-  document.getElementById('cal-grid').innerHTML=all.map(ev).join('');
+  function lines(t){return(t||"").split("\n").map(function(l){return l.trim()}).filter(Boolean)}
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+  function block(cls,list){var d=el("div",cls);list.forEach(function(l,i){if(i)d.appendChild(document.createElement("br"));d.appendChild(document.createTextNode(l))});return d}
+  function render(e){
+    var a=el("article","ev"),t=el("time",null,e.date);a.appendChild(t);
+    a.appendChild(el("div","city",e.city));
+    a.appendChild(block("hall",lines(e.venue)));
+    if(e.orchestra)a.appendChild(block("lines",lines(e.orchestra)));
+    if(e.program)a.appendChild(block("prog",lines(e.program)));
+    return a;
+  }
+  function fill(target,list){target.textContent="";list.forEach(function(e){target.appendChild(render(e))})}
+  var nextEl=document.getElementById("cal-next"),gridEl=document.getElementById("cal-grid");
+  fetch(FEED_URL).then(function(r){return r.text()}).then(function(text){
+    var events=text.trim().split("###EVENT###").filter(function(b){return b.trim()!==""}).map(function(b){
+      var parts=b.trim().split("---").map(function(p){return p.trim()}),fl=parts[0].split("\n").map(function(s){return s.trim()});
+      return{date:fl[0]||"",city:fl[1]||"",venue:parts[1]||"",orchestra:parts[2]||"",program:parts[3]||"",pd:pdate(fl[0]||"")};
+    }).filter(function(e){return e.city!==""&&e.pd!==null});
+    var today=new Date();today.setHours(0,0,0,0);
+    var nx=events.filter(function(e){return e.pd>=today}).slice(0,3);
+    if(nx.length)fill(nextEl,nx);else nextEl.textContent="No upcoming concerts found.";
+    var from=new Date(2026,0,1);
+    fill(gridEl,events.filter(function(e){return e.pd>=from}));
+  }).catch(function(){nextEl.textContent="The calendar could not be loaded."});
   var tg=document.getElementById('cal-toggle'),box=document.getElementById('cal-all');
   tg.addEventListener('click',function(){var o=box.classList.toggle('open');tg.textContent=o?'close current season':'show all';tg.setAttribute('aria-expanded',o)});
   var ab=document.getElementById('archive-body');
