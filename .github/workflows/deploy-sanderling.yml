@@ -1,14 +1,15 @@
 name: Deploy Sanderling site
 
-# Copies michael-sanderling/personal/ to the web server of michaelsanderling.de (separate hosting package)
-# after every merge to main that touches that folder.
+# Uploads michael-sanderling/personal/ by FTP over TLS (FTPS) to the web server of michaelsanderling.de
+# (separate hosting package without SSH) after every merge to main that touches that folder.
+#
 # Secrets (Settings > Secrets and variables > Actions); without them the run is skipped:
-#   SANDERLING_HOST         server name, e.g. w0123456.kasserver.com
-#   SANDERLING_USER         SSH user
-#   SANDERLING_SSH_KEY      private SSH key (ed25519)
-#   SANDERLING_KNOWN_HOSTS  output of: ssh-keyscan <host>
-#   SANDERLING_PATH         target folder on the server, e.g. /www/htdocs/w0123456/michaelsanderling.de/
-# Files that exist only on the server (images/concert-hall.mp4, news-data symlink, ...) are never deleted.
+#   SANDERLING_FTP_HOST      FTP server, e.g. w01c2840.kasserver.com
+#   SANDERLING_FTP_USER      FTP user (best: a dedicated FTP user that can only see the folder michaelsanderling.de)
+#   SANDERLING_FTP_PASSWORD  its password
+#   SANDERLING_FTP_PATH      (optional) target folder on the FTP server, default "/"
+#
+# Nothing is ever deleted on the server: files that exist only there (images/concert-hall.mp4, ...) stay untouched.
 on:
   push:
     branches: [main]
@@ -29,22 +30,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Upload to the Sanderling server
+      - name: Upload to the Sanderling server (FTPS)
         env:
-          HOST: ${{ secrets.SANDERLING_HOST }}
-          USER_NAME: ${{ secrets.SANDERLING_USER }}
-          KEY: ${{ secrets.SANDERLING_SSH_KEY }}
-          KNOWN_HOSTS: ${{ secrets.SANDERLING_KNOWN_HOSTS }}
-          TARGET: ${{ secrets.SANDERLING_PATH }}
+          FTP_HOST: ${{ secrets.SANDERLING_FTP_HOST }}
+          FTP_USER: ${{ secrets.SANDERLING_FTP_USER }}
+          FTP_PASS: ${{ secrets.SANDERLING_FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.SANDERLING_FTP_PATH }}
         run: |
-          if [ -z "$HOST" ] || [ -z "$USER_NAME" ] || [ -z "$KEY" ] || [ -z "$KNOWN_HOSTS" ] || [ -z "$TARGET" ]; then
-            echo "Sanderling deploy secrets are missing - run skipped."
+          if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
+            echo "Sanderling FTP secrets are missing - run skipped."
             exit 0
           fi
-          install -m 700 -d ~/.ssh
-          printf '%s\n' "$KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
-          rsync -rltz --no-perms --chmod=D755,F644 \
-            -e "ssh -o BatchMode=yes -o StrictHostKeyChecking=yes" \
-            michael-sanderling/personal/ "$USER_NAME@$HOST:$TARGET"
+          REMOTE="${FTP_PATH:-/}"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          lftp -u "$FTP_USER,$FTP_PASS" "ftp://$FTP_HOST" <<LFTP
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set net:max-retries 3
+          set net:timeout 30
+          mirror --reverse --parallel=3 --no-perms --verbose michael-sanderling/personal "$REMOTE"
+          bye
+          LFTP
