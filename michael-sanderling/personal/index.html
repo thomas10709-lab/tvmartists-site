@@ -35,8 +35,10 @@ nav.main a{text-decoration:none;color:#fff}
 nav.main a:hover{opacity:.7}
 nav.main svg{width:38px;height:38px;fill:#fff}
 .burger{display:none;background:none;border:2px solid #fff;color:#fff;padding:8px 12px;font:inherit;text-transform:uppercase;cursor:pointer}
-.labels{position:absolute;z-index:3;right:var(--pad);top:230px;display:flex;gap:30px;align-items:flex-start}
-.labels span{font-family:Prompt,sans-serif;font-weight:700;font-size:20px;border:2px solid #fff;padding:10px 14px;line-height:1.1}
+.labels{position:absolute;z-index:3;right:var(--pad);top:230px;display:flex;gap:clamp(18px,2vw,40px);align-items:flex-start}
+.labels img{height:auto}
+.labels .lw{width:clamp(80px,8vw,140px)}
+.labels .ls{width:clamp(56px,5vw,96px)}
 .quote{position:absolute;z-index:3;left:max(46.8%,40px);bottom:12%;max-width:min(760px,86vw)}
 .quote p{font-family:Newsreader,Georgia,serif;font-style:italic;font-size:clamp(24px,2.7vw,40px);line-height:1.65;margin:0 0 1.2em;text-shadow:0 1px 8px rgba(0,0,0,.35)}
 .quote small{font-size:20px;font-family:Inter,sans-serif}
@@ -137,7 +139,6 @@ footer.f{padding-top:90px;padding-bottom:40px}
  nav.main{display:none;position:absolute;right:20px;top:78px;background:rgba(0,0,0,.92);flex-direction:column;align-items:flex-start;padding:22px 26px;gap:16px;z-index:9}
  nav.main.open{display:flex}
  .labels{top:130px;gap:12px;right:20px}
- .labels span{font-size:14px;padding:6px 8px}
  .quote{left:20px;right:20px;bottom:6%}
  .pano-title{padding-left:20px}
  .cards,.cal,.cal.four,.rec,.contact-grid,.tiles{grid-template-columns:1fr}
@@ -161,7 +162,7 @@ footer.f{padding-top:90px;padding-bottom:40px}
       <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.3 5.7a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg></a>
     </nav>
   </header>
-  <div class="labels"><span>WARNER<br>CLASSICS</span><span>SONY<br>CLASSICAL</span></div>
+  <div class="labels"><a href="#recordings" aria-label="Warner Classics"><picture><source srcset="images/logo-warner.webp" type="image/webp"><img class="lw" src="images/logo-warner.png" alt="Warner Classics" width="520" height="213"></picture></a><a href="#recordings" aria-label="Sony Classical"><picture><source srcset="images/logo-sony.webp" type="image/webp"><img class="ls" src="images/logo-sony.png" alt="Sony Classical" width="360" height="360"></picture></a></div>
   <div class="quote">
     <p>Not since Mariss Jansons has Shostakovich’s 10<sup>th</sup> been heard so lyrical, steely, colorful and radiant with joy.</p>
     <small>Der Standard, Vienna</small>
