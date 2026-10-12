@@ -1004,6 +1004,7 @@
             if (!header) return;
             let lastY = window.scrollY;
             let ticking = false;
+            let revealed = false;
 
             function show() { header.classList.remove("is-hidden"); }
             function hide() { header.classList.add("is-hidden"); }
@@ -1013,11 +1014,19 @@
                 ticking = true;
                 window.requestAnimationFrame(function () {
                     const y = Math.max(window.scrollY, 0);
+                    const h = header.offsetHeight;
                     const menuOpen = nav && nav.classList.contains("is-open");
-                    if (y <= 10 || menuOpen || y < lastY - 2) {
-                        show();
-                    } else if (y > lastY + 1) {
-                        hide();
+                    if (y <= 0 || (y <= h && y > lastY + 1)) revealed = false;
+                    if (y <= h && !menuOpen && !revealed) {
+                        // oben: Kopfzeile wandert 1:1 mit der Seite (kein Spalt, keine Verzögerung)
+                        header.style.transition = "none";
+                        header.style.transform = "translateY(" + (-y) + "px)";
+                        header.classList.remove("is-hidden");
+                    } else {
+                        header.style.transition = "";
+                        header.style.transform = "";
+                        if (menuOpen || y < lastY - 2) { revealed = true; show(); }
+                        else if (y > lastY + 1) { revealed = false; hide(); }
                     }
                     lastY = y;
                     ticking = false;
