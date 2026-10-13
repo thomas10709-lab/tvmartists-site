@@ -343,8 +343,13 @@
         .fp-block-text .nb {
             white-space: nowrap;   /* der letzte Name bleibt zusammen, nie nur ein Wort allein in der Zeile */
         }
+        .fp-labels img { width: auto; height: 46px; display: block; }
+        .fp-labels img + img { height: 38px; }
         .fp-labels {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
             margin: 0 auto 14px auto;
             padding: 0 20px 18px 20px;
             color: #ffffff;
@@ -760,7 +765,10 @@
             <p class="fp-block-text">Berliner Philharmoniker, Hong Kong Philharmonic Orchestra, Dallas Symphony Orchestra, Leipzig Gewandhaus Orchestra, NDR Radio Philharmonic Hanover, KBS Symphony Orchestra Seoul, Milwaukee Symphony Orchestra, Vienna Symphoniker, Konzerthausorchester Berlin, Helsinki Philharmonic Orchestra, Gothenburg Symphoniker, Norwegian Radio Orchestra, The Florida Orchestra, Düsseldorfer Symphoniker, BBC Scottish Symphony Orchestra, Dresden Philharmonic, Hyogo PAC Orchestra, National Symphony Orchestra of Taiwan, Nagoya Symphony Orchestra, Osaka Symphony Orchestra, Musikkollegium Winterthur, Antwerp Symphony Orchestra, Guerzenich Orchestra Cologne, Essen Philharmonic, Orquestra Simfònica de Barcelona, Orquesta Sinfónica del Principado de Asturias, Orquestra Sinfónica do Porto, Irish National Symphony Orchestra, Shanghai Philharmonic, <span class="nb">Orquestra Gulbenkian</span></p>
         </div>
 
-        <div class="fp-labels">Labels: Sony classical, Warner</div>
+        <div class="fp-labels">
+            <img src="images/logo-sony-classical.png" alt="Sony Classical" width="480" height="480">
+            <img src="images/logo-warner-classics.png" alt="Warner Classics" width="600" height="246">
+        </div>
 
         <!-- BUTTON-REIHE -->
         <div id="top-button-row">
