@@ -236,7 +236,7 @@
           if (!entries[0].isIntersecting) { return; }
           io.disconnect();
           if (cancelled || track.scrollLeft > 40) { return; }
-          var start = track.scrollLeft, dist = 70, half = 450;
+          var start = track.scrollLeft, dist = 140, half = 550;
           var prevSnap = track.style.scrollSnapType;
           track.style.scrollSnapType = "none";
           var t0 = null;
