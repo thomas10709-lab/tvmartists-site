@@ -25,21 +25,33 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #1B3B67;
+            background-color: #17355E;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
-            animation: bg-breathe 60s ease-in-out infinite alternate;
         }
 
-        /* Hintergrundblau wird sehr langsam und gleitend heller und dunkler */
+        /* Hintergrundblau wird sehr langsam und gleitend heller und dunkler.
+           Eigene feste Ebene mit Opacity-Animation (kein Repaint, keine Streifen). */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-color: #234A7D;
+            opacity: 0;
+            animation: bg-breathe 60s ease-in-out infinite alternate;
+            will-change: opacity;
+        }
+
         @keyframes bg-breathe {
-            from { background-color: #17355E; }
-            to   { background-color: #234A7D; }
+            from { opacity: 0; }
+            to   { opacity: 1; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            body { animation: none; }
+            body::before { animation: none; opacity: 0.4; }
         }
 
         :root {
