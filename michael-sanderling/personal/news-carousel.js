@@ -235,6 +235,42 @@
             updateActiveDot();
           });
         });
+        hintOnFirstView();
+      }
+
+      // Handy: Beim ersten Erreichen der News kurz nach rechts anscrollen und zurück (Wisch-Hinweis)
+      function hintOnFirstView() {
+        if (window.innerWidth > 768 || !("IntersectionObserver" in window)) { return; }
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+        var cancelled = false;
+        function cancel() { cancelled = true; }
+        track.addEventListener("touchstart", cancel, { passive: true, once: true });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) { return; }
+          io.disconnect();
+          if (cancelled || track.scrollLeft > 40) { return; }
+          var start = track.scrollLeft, dist = 70, half = 450;
+          var prevSnap = track.style.scrollSnapType;
+          track.style.scrollSnapType = "none";
+          var t0 = null;
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ts) {
+            if (cancelled) { track.style.scrollSnapType = prevSnap; return; }
+            if (t0 === null) { t0 = ts; }
+            var p = (ts - t0) / (half * 2);
+            if (p >= 1) {
+              track.scrollLeft = start;
+              track.style.scrollSnapType = prevSnap;
+              updateActiveDot();
+              return;
+            }
+            var f = p < 0.5 ? ease(p * 2) : 1 - ease((p - 0.5) * 2);
+            track.scrollLeft = start + dist * f;
+            requestAnimationFrame(step);
+          }
+          setTimeout(function () { requestAnimationFrame(step); }, 350);
+        }, { threshold: 0.6 });
+        io.observe(track);
       }
     }).catch(function () {
       track.innerHTML = "<p style='padding:20px; text-align:center;'>News konnten nicht geladen werden.</p>";
