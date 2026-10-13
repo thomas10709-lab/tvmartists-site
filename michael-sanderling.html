@@ -119,6 +119,23 @@
             display: block;
         }
 
+        /* Desktop: Label-Logos oben rechts im Hero */
+        .hero-labels { display: none; }
+        @media (min-width: 769px) {
+            .hero-labels {
+                position: absolute;
+                z-index: 2;
+                top: 4%;
+                right: 3%;
+                display: flex;
+                align-items: center;
+                gap: clamp(14px, 1.8vw, 30px);
+                filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
+            }
+            .hero-labels img { width: auto; height: clamp(40px, 5vw, 80px); }
+            .hero-labels img:first-child { height: clamp(34px, 4.2vw, 68px); }
+        }
+
         /* Desktop: Name als Text links neben dem Foto */
         @media (min-width: 769px) {
             .artist-hero--overlay-desktop .hero-name {
@@ -472,7 +489,7 @@
                 margin: 10px 0 40px 0;
             }
             .artist-hero img { object-fit: contain; }
-            /* Handy: Name als Text über dem Foto */
+        /* Handy: Name als Text über dem Foto */
             .artist-hero::after {
                 content: "";
                 position: absolute;
@@ -723,9 +740,14 @@
         <picture>
             <source media="(max-width: 768px)" srcset="images/sanderling-mobile-800.webp 800w, images/sanderling-mobile-1067.webp 1067w" sizes="100vw" type="image/webp">
             <source media="(max-width: 768px)" srcset="images/sanderling-mobile-800.jpg 800w, images/sanderling-mobile-1067.jpg 1067w" sizes="100vw">
-            <img src="images/sanderling/C-Marco-Borggreve_Sanderling_Michael_06-scaled.jpeg" alt="Michael Sanderling" loading="eager">
+            <source srcset="images/sanderling-hero-1280.webp 1280w, images/sanderling-hero-1920.webp 1920w" sizes="100vw" type="image/webp">
+            <img src="images/sanderling-hero-1920.jpg" srcset="images/sanderling-hero-1280.jpg 1280w, images/sanderling-hero-1920.jpg 1920w" sizes="100vw" alt="Michael Sanderling" width="1920" height="1281" loading="eager">
         </picture>
         <h1 class="hero-name">Michael Sanderling</h1>
+        <div class="hero-labels">
+            <img src="images/logo-warner-classics.png" alt="Warner Classics" width="600" height="246">
+            <img src="images/logo-sony-classical.png" alt="Sony Classical" width="480" height="480">
+        </div>
     </div>
 
     <main class="artist-page">
