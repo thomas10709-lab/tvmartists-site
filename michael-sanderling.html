@@ -165,21 +165,6 @@
                 text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
             }
         }
-        /* Handy: Name steht im Hochformat-Bild, die Überschrift bleibt nur für Suchmaschinen */
-        @media (max-width: 768px) {
-            .artist-hero--wp::after { display: none; }
-            .artist-hero--wp .hero-name {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                font-size: 1px;
-                text-shadow: none;
-            }
-        }
-
         .bio-headline {
             text-align: center;
             font-size: 16px;
@@ -736,7 +721,8 @@
     <!-- HERO (Bilder vorerst von WP) -->
     <div class="artist-hero artist-hero--wp">
         <picture>
-            <source media="(max-width: 768px)" srcset="images/sanderling/Sanderling-Hero-Mobile.png">
+            <source media="(max-width: 768px)" srcset="images/sanderling-mobile-800.webp 800w, images/sanderling-mobile-1067.webp 1067w" sizes="100vw" type="image/webp">
+            <source media="(max-width: 768px)" srcset="images/sanderling-mobile-800.jpg 800w, images/sanderling-mobile-1067.jpg 1067w" sizes="100vw">
             <img src="images/sanderling/C-Marco-Borggreve_Sanderling_Michael_06-scaled.jpeg" alt="Michael Sanderling" loading="eager">
         </picture>
         <h1 class="hero-name">Michael Sanderling</h1>
