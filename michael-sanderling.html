@@ -119,6 +119,11 @@
             display: block;
         }
 
+        /* Desktop: Foto unten um 1 cm beschnitten */
+        @media (min-width: 769px) {
+            .artist-hero--wp { overflow: hidden; }
+            .artist-hero--wp img { margin-bottom: -1cm; }
+        }
         /* Desktop: Label-Logos oben rechts im Hero */
         .hero-labels { display: none; }
         @media (min-width: 769px) {
