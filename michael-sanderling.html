@@ -489,36 +489,24 @@
                 margin: 10px 0 40px 0;
             }
             .artist-hero img { object-fit: contain; }
-        /* Handy: Name als Text über dem Foto */
-            .artist-hero::after {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                height: 34%;
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
-                pointer-events: none;
-            }
+            /* Handy: Name als Text unter dem Foto auf der blauen Fläche */
+            .artist-hero::after { display: none; }
             .hero-name {
-                position: absolute;
-                z-index: 2;
-                left: 0;
-                right: 0;
-                bottom: 24px;
+                position: static;
                 width: auto;
                 height: auto;
                 margin: 0;
+                padding: 22px 16px 6px 16px;
                 overflow: visible;
                 clip: auto;
+                white-space: normal;
                 text-align: center;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 500;
-                font-size: 32px;
+                font-size: clamp(26px, 8.2vw, 36px);
                 line-height: 1.2;
                 letter-spacing: 0.06em;
                 color: #ffffff;
-                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
             }
             .news-carousel-inner {
                 max-width: none;
