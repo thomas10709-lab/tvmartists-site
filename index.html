@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* Hintergrundblau wird sehr langsam und gleitend heller und dunkler.
+        /* Hintergrundblau dreht in 2 Minuten sanft ins helle Blautürkis und zurück.
            Eigene Ebene mit Opacity-Animation (kein Repaint der Seite). */
         body::before {
             content: "";
@@ -43,14 +43,14 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            background-color: #2C5895;
+            background-color: #2B6C9C;
             opacity: 0;
-            animation: bg-breathe 60s ease-in-out infinite alternate;
+            animation: bg-breathe 120s ease-in-out infinite;
         }
 
         @keyframes bg-breathe {
-            from { opacity: 0; }
-            to   { opacity: 1; }
+            0%, 100% { opacity: 0; }
+            50%      { opacity: 1; }
         }
 
         @media (prefers-reduced-motion: reduce) {
