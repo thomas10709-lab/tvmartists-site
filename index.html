@@ -125,7 +125,7 @@
             position: relative;
             z-index: 3;
             text-align: center;
-            padding: 20px;
+            padding: 0;   /* leer – sonst liegt der Hero-Overlay (5 % schwarz) als dunkler Streifen unter dem Bild */
         }
 
         /* --- HERO SUBTITLE --- */
@@ -133,7 +133,7 @@
             width: 100%;
             text-align: center;
             margin: 0;
-            padding: 1.1cm 20px 1.8cm 20px;
+            padding: calc(1.1cm + 40px) 20px 1.8cm 20px;
             box-sizing: border-box;
         }
 
@@ -159,7 +159,7 @@
 
         @media (max-width: 768px) {
             .hero-subtitle-wrapper {
-                padding: 0.2cm 20px 1.1cm 20px;
+                padding: calc(0.2cm + 40px) 20px 1.1cm 20px;
             }
             .hero-subtitle-line2 {
                 font-size: min(17px, 4.2vw);   /* beide Zeilen bleiben wie am Desktop auf einer Zeile */
