@@ -861,6 +861,7 @@
                 letter-spacing: 0.3px;
                 white-space: nowrap;         /* kein Zeilenumbruch */
             }
+            .video-title.video-title--wrap { white-space: normal; }   /* lange Titelzeile darf umbrechen */
 
             .video-orchestra {
                 font-size: 3.8vw;            /* Orchester */
@@ -1147,8 +1148,7 @@
         <a href="https://www.youtube.com/watch?v=W8nfr92rAxc" target="_blank" rel="noopener" class="video-thumbnail" style="background-image: url('https://i.ytimg.com/vi/W8nfr92rAxc/maxresdefault.jpg'), url('https://i.ytimg.com/vi/W8nfr92rAxc/hqdefault.jpg');">
             <div class="video-caption">
                 <div class="video-caption-text">
-                    <div class="video-title">Indianapolis 2026</div>
-                    <div class="video-orchestra">Mozart: Violin Concerto No. 3</div>
+                    <div class="video-title video-title--wrap">Indianapolis 2026 – Mozart: Violin Concerto No. 3</div>
                     <div class="video-work">East Coast Chamber Orchestra</div>
                 </div>
                 <svg class="yt-button" viewBox="0 0 68 48" aria-label="Play">
