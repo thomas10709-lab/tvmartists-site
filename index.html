@@ -29,16 +29,17 @@
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
+            animation: bg-breathe 60s ease-in-out infinite alternate;
         }
 
-        /* Dezentes Sternenglitzern im Hintergrund */
-        #sparkle-bg {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        /* Hintergrundblau wird sehr langsam und gleitend heller und dunkler */
+        @keyframes bg-breathe {
+            from { background-color: #17355E; }
+            to   { background-color: #234A7D; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body { animation: none; }
         }
 
         :root {
@@ -1378,7 +1379,6 @@
     </style>
 </head>
 <body>
-    <canvas id="sparkle-bg" aria-hidden="true"></canvas>
 
     <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
     <header class="site-banner">
@@ -1752,50 +1752,6 @@
     </script>
 
     <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json), sonst WordPress -->
-    <script>
-    (function () {
-        var c = document.getElementById('sparkle-bg');
-        if (!c || !c.getContext) return;
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var ctx = c.getContext('2d'), stars = [], w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-        function make() {
-            return {
-                x: Math.random() * w, y: Math.random() * h,
-                r: 0.5 + Math.random() * 1.1,
-                max: 0.10 + Math.random() * 0.20,   // sehr geringe Deckkraft
-                speed: 0.00025 + Math.random() * 0.0005,
-                t: Math.random(),
-                dx: (Math.random() - 0.5) * 0.008, dy: (Math.random() - 0.5) * 0.008
-            };
-        }
-        function resize() {
-            w = window.innerWidth; h = window.innerHeight;
-            c.width = w * dpr; c.height = h * dpr;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            var n = Math.round(Math.min(70, Math.max(25, w * h / 18000)));
-            stars = []; for (var i = 0; i < n; i++) stars.push(make());
-        }
-        var last = performance.now();
-        function frame(now) {
-            var dt = Math.min(now - last, 100); last = now;
-            ctx.clearRect(0, 0, w, h);
-            for (var i = 0; i < stars.length; i++) {
-                var s = stars[i];
-                s.t += s.speed * dt; s.x += s.dx * dt; s.y += s.dy * dt;
-                if (s.t >= 1) { stars[i] = s = make(); s.t = 0; }
-                var a = s.max * Math.sin(Math.PI * s.t);   // sanft ein- und ausblenden
-                ctx.beginPath();
-                ctx.fillStyle = 'rgba(255,255,255,' + a.toFixed(3) + ')';
-                ctx.arc(s.x, s.y, s.r, 0, 6.2832);
-                ctx.fill();
-            }
-            requestAnimationFrame(frame);
-        }
-        resize();
-        window.addEventListener('resize', resize);
-        requestAnimationFrame(frame);
-    })();
-    </script>
     <script src="news-carousel.js?v=3" defer></script>
 </body>
 </html>
