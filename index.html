@@ -32,8 +32,8 @@
             overflow-x: hidden;
         }
 
-        /* Hintergrundblau dreht in 2 Minuten sanft ins helle Blautürkis und zurück.
-           Eigene Ebene mit Opacity-Animation (kein Repaint der Seite). */
+        /* Hintergrund wandert sehr langsam durch mehrere Farbtöne:
+           Dunkelblau → Blautürkis → sanftes Rosa → dunkles Rot-Violett → zurück zum Blau. */
         body::before {
             content: "";
             position: absolute;
@@ -43,18 +43,19 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            background-color: #2B6C9C;
-            opacity: 0;
-            animation: bg-breathe 120s ease-in-out infinite;
+            background-color: #17355E;
+            animation: bg-breathe 240s ease-in-out infinite;
         }
 
         @keyframes bg-breathe {
-            0%, 100% { opacity: 0; }
-            50%      { opacity: 1; }
+            0%, 100% { background-color: #17355E; }
+            25%      { background-color: #2B6C9C; }
+            50%      { background-color: #6E78AC; }
+            75%      { background-color: #43285A; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            body::before { animation: none; opacity: 0.4; }
+            body::before { animation: none; }
         }
 
         :root {
