@@ -582,6 +582,31 @@
             }
         }
     </style>
+    <script src="bg-sync.js?v=1"></script>
+    <style>
+        /* Hintergrund wandert wie auf der Startseite durch die Farbtöne (synchron über bg-sync.js) */
+        body { position: relative; }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-color: #17355E;
+            animation: bg-breathe 60s ease-in-out infinite;
+            animation-delay: var(--bg-delay, 0s);
+        }
+        @keyframes bg-breathe {
+            0%, 100% { background-color: #17355E; }
+            25%      { background-color: #2B6C9C; }
+            50%      { background-color: #6E78AC; }
+            75%      { background-color: #43285A; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body::before { animation: none; }
+        }
+    </style>
 </head>
 <body>
 
