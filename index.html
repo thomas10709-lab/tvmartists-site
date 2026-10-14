@@ -58,25 +58,6 @@
             body::before { animation: none; }
         }
 
-        /* Zartes Hintergrundvideo (stumm, Schleife), schimmert durch das Farbspiel */
-        #bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0;
-            mix-blend-mode: screen;
-            filter: blur(3px);
-            transform: scale(1.04);
-            transition: opacity 3s ease;
-        }
-        #bg-video.is-ready { opacity: 0.3; }
-        @media (max-width: 768px) { #bg-video { display: none; } }
-
         :root {
             --artist-photo-width: 55%;
             --artist-photo-max-width: 65%;
@@ -1414,7 +1395,6 @@
     </style>
 </head>
 <body>
-    <video id="bg-video" muted loop playsinline aria-hidden="true" tabindex="-1" disablepictureinpicture preload="none"></video>
 
     <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
     <header class="site-banner">
@@ -1788,25 +1768,6 @@
     </script>
 
     <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json), sonst WordPress -->
-    <script>
-    // Hintergrundvideo (nur Desktop) erst nach dem Laden der Seite holen; aus bei Datensparmodus / reduzierter Bewegung
-    window.addEventListener('load', function () {
-        var v = document.getElementById('bg-video');
-        if (!v) return;
-        var conn = navigator.connection || {};
-        if (conn.saveData) return;
-        if (window.matchMedia && !window.matchMedia('(min-width: 769px)').matches) return;   // nicht auf dem Handy
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var src = v.canPlayType('video/webm; codecs="vp9"') ? 'images/bg-conductor.webm' : 'images/bg-conductor.mp4';
-        v.muted = true;
-        v.addEventListener('canplay', function () {
-            var p = v.play();
-            if (p && p.then) p.then(function () { v.classList.add('is-ready'); }).catch(function () {});
-        }, { once: true });
-        v.src = src;
-        v.load();
-    });
-    </script>
     <script src="news-carousel.js?v=3" defer></script>
 </body>
 </html>
