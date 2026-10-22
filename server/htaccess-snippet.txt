@@ -1,10 +1,18 @@
 # ===== BEGIN TVM static site =====
-# Diesen Block GANZ OBEN in die .htaccess von tvmartists.com einfügen (vor allen WordPress-Regeln).
+# Nach dem Entfernen von WordPress: die komplette .htaccess von tvmartists.com durch diesen Block ersetzen
+# (den alten "# BEGIN WordPress ... # END WordPress"-Abschnitt und alles Übrige löschen).
 # Wichtig: MultiViews aus, sonst liefert der Server für /imprint/ (mit Schrägstrich) einen 404,
 # bevor die Weiterleitungen unten geprüft werden.
 Options -MultiViews
-# Statische Startseite zuerst, dann WordPress
-DirectoryIndex index.html index.php
+# Startseite ist statisch (news-admin/ setzt sich mit eigener .htaccess auf index.php)
+DirectoryIndex index.html
+
+# Versteckte Dateien und Ordner (.git, .env, .htaccess, ...) nie ausliefern; .well-known bleibt erreichbar
+RedirectMatch 404 "(^|/)\.(?!well-known(/|$))"
+
+# Alte WordPress-Adressen: dauerhaft weg (410), damit Bots und Suchmaschinen sie vergessen
+RedirectMatch 410 "^/(wp-admin|wp-includes|wp-json)(/|$)"
+RedirectMatch 410 "^/(wp-login|wp-cron|wp-comments-post|wp-signup|wp-trackback|xmlrpc)\.php$"
 
 # HTML-Seiten immer neu prüfen lassen, damit Änderungen sofort sichtbar sind
 <IfModule mod_headers.c>
