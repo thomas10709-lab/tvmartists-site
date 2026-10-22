@@ -267,9 +267,35 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
  .rec h4{margin:22px 0 4px}
  .rec-more{margin-top:0}
 }
+#loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0e1622;transition:opacity .5s ease,visibility .5s}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+#loader svg{width:64px;height:64px}
+#loader .face{fill:none;stroke:#fff;stroke-width:3}
+#loader .tick{stroke:#fff;stroke-width:3;stroke-linecap:round}
+#loader .hand{stroke:#fff;stroke-width:3.5;stroke-linecap:round;transform-origin:32px 32px}
+#loader .min{animation:ld-spin 1.4s linear infinite}
+#loader .hr{animation:ld-spin 16.8s linear infinite}
+@keyframes ld-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#loader .min{animation-duration:4s}#loader .hr{animation-duration:48s}}
 </style>
+<noscript><style>#loader{display:none}</style></noscript>
 </head>
 <body>
+<!-- Ladeanzeige: drehende Uhr, bis das Hero-Foto geladen ist (Fallback: spaetestens nach 8 s) -->
+<div id="loader" role="status" aria-label="Loading"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="face" cx="32" cy="32" r="28"/><path class="tick" d="M32 8v4M56 32h-4M32 56v-4M8 32h4"/><line class="hand hr" x1="32" y1="32" x2="32" y2="19"/><line class="hand min" x1="32" y1="32" x2="32" y2="12"/></svg></div>
+<script>
+(function(){
+  var el=document.getElementById('loader'),gone=false;
+  function hide(){if(gone)return;gone=true;el.classList.add('done');setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},700)}
+  setTimeout(hide,8000);
+  var mobile=window.matchMedia&&window.matchMedia('(max-width:820px)').matches;
+  var base='images/'+(mobile?'hero-mobile-tall':'hero-wide');
+  var img=new Image();
+  img.onload=hide;
+  img.onerror=function(){var j=new Image();j.onload=j.onerror=hide;j.src=base+'.jpg'};
+  img.src=base+'.webp';
+})();
+</script>
 <!-- ============ HEADER + HERO ============ -->
 <section class="hero" id="top">
   <header class="bar">
