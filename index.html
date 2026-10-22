@@ -1393,10 +1393,31 @@
                 margin-right: 0 !important;
             }
         }
+
+        /* Ladeanzeige: drehender Kreis, bis das Hero-Foto geladen ist */
+        #loader { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; background: #17355E; transition: opacity .5s ease, visibility .5s; }
+        #loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+        #loader .ring { width: 56px; height: 56px; border: 3px solid rgba(255,255,255,.22); border-top-color: #fff; border-radius: 50%; animation: ld-spin .9s linear infinite; }
+        @keyframes ld-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { #loader .ring { animation-duration: 3s; } }
     </style>
+    <noscript><style>#loader { display: none; }</style></noscript>
     <script src="bg-sync.js?v=2"></script>
 </head>
 <body>
+    <!-- Ladeanzeige: drehender Kreis, bis das Hero-Foto geladen ist (Fallback: spaetestens nach 8 s) -->
+    <div id="loader" role="status" aria-label="Loading"><div class="ring"></div></div>
+    <script>
+    (function () {
+        var el = document.getElementById('loader'), gone = false;
+        function hide() { if (gone) return; gone = true; el.classList.add('done'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 700); }
+        setTimeout(hide, 8000);
+        var mobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+        var img = new Image();
+        img.onload = img.onerror = hide;
+        img.src = 'images/' + (mobile ? 'hero-mobile.png' : 'hero-desktop.png');
+    })();
+    </script>
 
     <!-- 0. TOP-BANNER: LOGO + NAVIGATION -->
     <header class="site-banner">
