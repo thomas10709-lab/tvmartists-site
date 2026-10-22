@@ -1,14 +1,11 @@
 /*
  * News-Karussell für tvmartists.com
- * Quelle 1: news-data/news.json (wird über news-admin/ gepflegt)
- * Quelle 2 (Ausweichlösung, solange für diese Seite noch keine eigenen News da sind): WordPress
+ * Quelle: news-data/news.json (wird über news-admin/ gepflegt)
  * Der Wrapper (.news-carousel-wrapper) trägt data-news-key (home oder der Seitenname)
- * und optional data-category (WP-ID) bzw. data-category-name (WP-Kategoriename).
  */
 (function () {
   "use strict";
 
-  var WP_API_BASE = "https://tvmartists.com/wp-json/wp/v2";
   var MAX_ITEMS = 10;
 
   function ready(fn) {
@@ -28,7 +25,7 @@
   // Relative Bildpfade aus news.json beziehen sich auf die Wurzel (base).
   function abs(base, p) { return !p || /^(https?:)?\/\//.test(p) ? p : base + p; }
 
-  // --- Quelle 1: eigene Liste ---------------------------------------------
+  // --- Quelle: eigene Liste ---------------------------------------------
   // base darf mehrere Kandidaten enthalten, getrennt durch "|" (z. B. "|../../"): der erste, der news.json liefert, gewinnt.
   function loadOwn(key, bases) {
     if (!key) { return Promise.resolve([]); }
@@ -52,41 +49,6 @@
         return String(b.ts || "").localeCompare(String(a.ts || ""));
       }).slice(0, MAX_ITEMS).map(function (it) {
         return { image: abs(base, it.image), webp: abs(base, it.webp || ""), alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
-      });
-    });
-  }
-
-  // --- Quelle 2: WordPress (Ausweichlösung) -----------------------------------
-  function wpCategoryId(wrapper) {
-    var id = parseInt(wrapper.dataset.category, 10);
-    if (id) { return Promise.resolve(id); }
-    var name = wrapper.dataset.categoryName || "";
-    if (!name) { return Promise.resolve(0); }
-    var keyword = name.split(" ").pop();
-    return fetch(WP_API_BASE + "/categories?per_page=100&search=" + encodeURIComponent(keyword)).then(function (r) {
-      if (!r.ok) { throw new Error("Kategorie-Suche fehlgeschlagen: " + r.status); }
-      return r.json();
-    }).then(function (cats) {
-      var wanted = normalize(name);
-      var match = cats.find(function (c) { return normalize(c.name) === wanted; }) ||
-                  cats.find(function (c) { return normalize(c.name).indexOf(normalize(keyword)) !== -1; });
-      if (!match) { throw new Error("Kategorie nicht gefunden"); }
-      return match.id;
-    });
-  }
-
-  function loadWp(wrapper) {
-    return wpCategoryId(wrapper).then(function (catId) {
-      if (!catId) { return []; }
-      return fetch(WP_API_BASE + "/posts?categories=" + catId + "&per_page=" + MAX_ITEMS + "&_embed").then(function (r) {
-        if (!r.ok) { throw new Error("WordPress API Fehler: " + r.status); }
-        return r.json();
-      }).then(function (posts) {
-        return posts.filter(function (p) { return (p.categories || []).indexOf(catId) !== -1; }).map(function (p) {
-          var image = "";
-          try { image = p._embedded["wp:featuredmedia"][0].source_url; } catch (e) { image = ""; }
-          return { image: image, webp: "", alt: stripHtml(p.title.rendered), link: "" };
-        });
       });
     });
   }
@@ -144,7 +106,7 @@
     if (!wrapper || !track) { return; }
 
     loadOwn(wrapper.dataset.newsKey || "", wrapper.dataset.newsBase || "").then(function (items) {
-      return items.length ? items : loadWp(wrapper);
+      return items;
     }).then(function (items) {
       items = items.filter(function (it) { return !!it.image || it.type === "card"; });
       if (items.length === 0) {
