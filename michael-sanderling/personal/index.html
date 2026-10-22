@@ -269,20 +269,15 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
 }
 #loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0e1622;transition:opacity .5s ease,visibility .5s}
 #loader.done{opacity:0;visibility:hidden;pointer-events:none}
-#loader svg{width:64px;height:64px}
-#loader .face{fill:none;stroke:#fff;stroke-width:3}
-#loader .tick{stroke:#fff;stroke-width:3;stroke-linecap:round}
-#loader .hand{stroke:#fff;stroke-width:3.5;stroke-linecap:round;transform-origin:32px 32px}
-#loader .min{animation:ld-spin 1.4s linear infinite}
-#loader .hr{animation:ld-spin 16.8s linear infinite}
+#loader .ring{width:56px;height:56px;border:3px solid rgba(255,255,255,.22);border-top-color:#fff;border-radius:50%;animation:ld-spin .9s linear infinite}
 @keyframes ld-spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){#loader .min{animation-duration:4s}#loader .hr{animation-duration:48s}}
+@media (prefers-reduced-motion:reduce){#loader .ring{animation-duration:3s}}
 </style>
 <noscript><style>#loader{display:none}</style></noscript>
 </head>
 <body>
-<!-- Ladeanzeige: drehende Uhr, bis das Hero-Foto geladen ist (Fallback: spaetestens nach 8 s) -->
-<div id="loader" role="status" aria-label="Loading"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="face" cx="32" cy="32" r="28"/><path class="tick" d="M32 8v4M56 32h-4M32 56v-4M8 32h4"/><line class="hand hr" x1="32" y1="32" x2="32" y2="19"/><line class="hand min" x1="32" y1="32" x2="32" y2="12"/></svg></div>
+<!-- Ladeanzeige: drehender Kreis, bis das Hero-Foto geladen ist (Fallback: spaetestens nach 8 s) -->
+<div id="loader" role="status" aria-label="Loading"><div class="ring"></div></div>
 <script>
 (function(){
   var el=document.getElementById('loader'),gone=false;
