@@ -942,6 +942,15 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const FEED_URL = "https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec";
+            // Termine kommen aus dem Zwischenspeicher auf dem eigenen Server (schnell, max. 5 Minuten alt, siehe termine.php);
+            // ist er nicht erreichbar, wird wie bisher direkt bei Google geholt.
+            const CACHE_URL = "termine.php?a=sanderling";
+            function loadFeed() {
+                return fetch(CACHE_URL)
+                    .then(function (res) { if (!res.ok) throw new Error("cache " + res.status); return res.text(); })
+                    .then(function (text) { if (text.indexOf("###EVENT###") < 0) throw new Error("cache empty"); return text; })
+                    .catch(function () { return fetch(FEED_URL).then(function (res) { return res.text(); }); });
+            }
             const monthMap = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAI: 4, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OKT: 9, OCT: 9, NOV: 10, DEZ: 11, DEC: 11 };
             const previewEl = document.getElementById("calendar-preview");
             const fullListEl = document.getElementById("calendar-full-list");
@@ -997,8 +1006,7 @@
                 list.forEach(function (ev) { target.appendChild(renderEvent(ev)); });
             }
 
-            fetch(FEED_URL)
-                .then(function (res) { return res.text(); })
+            loadFeed()
                 .then(function (text) {
                     const blocks = text.trim().split("###EVENT###").filter(function (b) { return b.trim() !== ""; });
                     const events = blocks.map(function (block) {

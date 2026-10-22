@@ -499,7 +499,10 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
   var nextEl=document.getElementById("cal-next"),gridEl=document.getElementById("cal-grid");
   var dbg=/[?&]caldebug/.test(location.search);
   function dbgBox(t){var pre=document.createElement("pre");pre.style.cssText="position:fixed;z-index:999;left:10px;top:10px;right:10px;bottom:10px;overflow:auto;background:#fff;color:#000;border:2px solid #c00;padding:14px;font:12px/1.4 monospace;white-space:pre-wrap";pre.textContent=t;document.body.appendChild(pre)}
-  fetch(FEED_URL).then(function(r){if(dbg&&!r.ok)dbgBox("Feed answered with HTTP "+r.status);return r.text()}).then(function(text){
+  // Termine kommen aus dem Zwischenspeicher von tvmartists.com (schnell, max. 5 Minuten alt); ist er nicht erreichbar, direkt bei Google wie bisher.
+  var CACHE_URL="https://tvmartists.com/termine.php?a=sanderling";
+  function loadFeed(){return fetch(CACHE_URL).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){if(t.indexOf("###EVENT###")<0)throw 0;return t}).catch(function(){return fetch(FEED_URL).then(function(r){if(dbg&&!r.ok)dbgBox("Feed answered with HTTP "+r.status);return r.text()})})}
+  loadFeed().then(function(text){
     if(dbg&&text.indexOf("###EVENT###")<0)dbgBox("Feed returned no events. First 400 characters:\n\n"+text.slice(0,400));
     var all0=text.trim().split("###EVENT###").filter(function(b){return b.trim()!==""}).map(function(b){
       var parts=b.trim().split("---").map(function(p){return p.trim()}),fl=parts[0].split("\n").map(function(s){return s.trim()});

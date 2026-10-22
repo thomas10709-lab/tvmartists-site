@@ -783,6 +783,15 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const FEED_URL = "https://script.google.com/macros/s/AKfycbx-l_QkTurXbeyaGjmR1K7asVBsYnvUhJXUZzq73KiQ7-QEWJOrJr-UQb-MbYkWDaO-/exec";
+            // Termine kommen aus dem Zwischenspeicher auf dem eigenen Server (schnell, max. 5 Minuten alt, siehe termine.php);
+            // ist er nicht erreichbar, wird wie bisher direkt bei Google geholt.
+            const CACHE_URL = "termine.php?a=bettac";
+            function loadFeed() {
+                return fetch(CACHE_URL)
+                    .then(function (res) { if (!res.ok) throw new Error("cache " + res.status); return res.text(); })
+                    .then(function (text) { if (text.indexOf("###EVENT###") < 0) throw new Error("cache empty"); return text; })
+                    .catch(function () { return fetch(FEED_URL).then(function (res) { return res.text(); }); });
+            }
             const previewEl = document.getElementById("calendar-preview");
             const fullListEl = document.getElementById("calendar-full-list");
             const fullWrapper = document.getElementById("calendar-full");
@@ -834,8 +843,7 @@
                 list.forEach(function (ev) { target.appendChild(renderEvent(ev)); });
             }
 
-            fetch(FEED_URL)
-                .then(function (res) { return res.text(); })
+            loadFeed()
                 .then(function (text) {
                     const blocks = text.trim().split("###EVENT###").filter(function (b) { return b.trim() !== ""; });
                     const events = [];
