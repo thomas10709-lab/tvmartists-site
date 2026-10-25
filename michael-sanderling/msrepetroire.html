@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>MS repertoire – score material notes</title>
+<style>
+  body { font: 15px/1.45 'Raleway', -apple-system, 'Segoe UI', Arial, sans-serif; margin: 0; padding: 24px 16px 64px; background: #1f4270; color: #fff; }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 500; letter-spacing: .04em; margin: 0 0 6px; }
+  .hint { color: #cfe3f5; margin: 0 0 18px; font-size: 14px; }
+  .filters { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 8px; padding: 14px 16px 12px; margin: 0 0 16px; }
+  .frow { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px 18px; }
+  @media (max-width: 820px) { .frow { grid-template-columns: 1fr; } }
+  .field label { display: block; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: #cfe3f5; margin: 0 0 5px; }
+  .field input, .field select { width: 100%; box-sizing: border-box; font: inherit; color: #1b2a3a; background: #fff; border: 0; border-radius: 6px; padding: 9px 10px; min-height: 38px; }
+  .field input:focus, .field select:focus { outline: 0; box-shadow: 0 0 0 2px #7fb2e5; }
+  .fbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 10px; color: #cfe3f5; font-size: 13.5px; }
+  .fbar label { cursor: pointer; }
+  .fbar button { border: 1px solid rgba(255,255,255,.45); background: transparent; color: #fff; border-radius: 6px; padding: 5px 12px; cursor: pointer; font: inherit; }
+  .fbar button:hover { background: rgba(255,255,255,.12); }
+  #count { margin-left: auto; }
+  .edit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 14px; font-size: 13.5px; color: #cfe3f5; }
+  .edit input { font: inherit; padding: 6px 10px; border: 0; border-radius: 6px; width: 190px; color: #1b2a3a; }
+  .edit button { border: 1px solid rgba(255,255,255,.45); background: #2c5f98; color: #fff; border-radius: 6px; padding: 6px 14px; cursor: pointer; font: inherit; }
+  .edit button:hover { background: #3a73b3; }
+  .edit .msg { color: #ffd9a8; }
+  .edit .ok { color: #b9f0c9; }
+  .tablewrap { overflow-x: auto; border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 780px; background: #fff; color: #1b2a3a; }
+  th { background: #cfe3f5; color: #12396b; text-align: left; padding: 10px 12px; cursor: pointer; user-select: none; position: sticky; top: 0; white-space: nowrap; }
+  th:hover { background: #b9d6f0; }
+  th .ar { display: inline-block; width: 1em; margin-left: 4px; }
+  td { padding: 8px 12px; border-top: 1px solid #e3ebf3; vertical-align: top; }
+  tr:hover td { background: #f4f8fc; }
+  td.comp { white-space: nowrap; font-weight: 600; }
+  td.det, td.cat { color: #5a6b7b; font-size: 13.5px; }
+  td.cat { white-space: nowrap; }
+  td.cm { min-width: 280px; width: 36%; }
+  .cm textarea { width: 100%; box-sizing: border-box; font: inherit; font-size: 14px; color: #1b2a3a; border: 1px solid #c9d8e8; border-radius: 6px; padding: 6px 8px; resize: none; overflow: hidden; background: #fbfdff; min-height: 34px; display: block; }
+  .cm textarea:focus { outline: 0; border-color: #1f6fd6; box-shadow: 0 0 0 2px rgba(31,111,214,.2); }
+  .cm textarea[readonly] { border-color: transparent; background: transparent; padding-left: 0; cursor: default; }
+  .cm .st { font-size: 12px; min-height: 15px; margin-top: 2px; color: #6b7b8b; }
+  .cm .st.err { color: #b3261e; }
+  .cm .st.ok { color: #1c7a3a; }
+  .none { padding: 26px; text-align: center; color: #5a6b7b; background: #fff; border-radius: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Repertoire – notes on the score material</h1>
+  <p class="hint">Click a column heading to sort. The comment column keeps your notes on the score material permanently.</p>
+
+  <div class="filters">
+    <div class="frow">
+      <div class="field"><label for="q">Search</label><input id="q" type="search" placeholder="Composer, work, comment …" autocomplete="off"></div>
+      <div class="field"><label for="fk">Category</label><select id="fk"><option value="">All categories</option></select></div>
+      <div class="field"><label for="fc">Composer</label><select id="fc"><option value="">All composers</option></select></div>
+    </div>
+    <div class="fbar">
+      <label><input type="checkbox" id="onlyc"> Only works with a comment</label>
+      <button type="button" id="reset">Reset filters</button>
+      <span id="count"></span>
+    </div>
+  </div>
+
+  <div class="edit" id="edit">
+    <span id="editstate">Loading comments …</span>
+    <input id="pw" type="password" placeholder="Editing password" autocomplete="current-password" hidden>
+    <button id="unlock" type="button" hidden>Unlock editing</button>
+    <button id="lock" type="button" hidden>Lock</button>
+    <span class="msg" id="pwmsg"></span>
+  </div>
+
+  <div class="tablewrap">
+    <table id="tbl">
+      <thead><tr>
+        <th data-s="c">Composer<span class="ar"></span></th>
+        <th data-s="t">Work<span class="ar"></span></th>
+        <th data-s="k">Category<span class="ar"></span></th>
+        <th data-s="d">Details<span class="ar"></span></th>
+        <th data-s="m">Comment (score material)<span class="ar"></span></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="none" id="none" hidden>No works match the filters.</div>
+</div>
+
+<script>
+const WORKS = [{"c":"Beethoven","t":"Symphony No. 1 in C major","k":"Symphonic","d":"Op. 21"},{"c":"Beethoven","t":"Symphony No. 2 in D major","k":"Symphonic","d":"Op. 36"},{"c":"Beethoven","t":"Symphony No. 3 in E-flat major","k":"Symphonic","d":"'Eroica', Op. 55"},{"c":"Beethoven","t":"Symphony No. 4 in B-flat major","k":"Symphonic","d":"Op. 60"},{"c":"Beethoven","t":"Symphony No. 5 in C minor","k":"Symphonic","d":"Op. 67"},{"c":"Beethoven","t":"Symphony No. 6 in F major","k":"Symphonic","d":"'Pastoral', Op. 68"},{"c":"Beethoven","t":"Symphony No. 7 in A major","k":"Symphonic","d":"Op. 92"},{"c":"Beethoven","t":"Symphony No. 8 in F major","k":"Symphonic","d":"Op. 93"},{"c":"Beethoven","t":"Symphony No. 9 in D minor","k":"Symphonic","d":"'Choral', Op. 125"},{"c":"Brahms","t":"Symphony No. 1 in C minor","k":"Symphonic","d":"Op. 68"},{"c":"Brahms","t":"Symphony No. 2 in D major","k":"Symphonic","d":"Op. 73"},{"c":"Brahms","t":"Symphony No. 3 in F major","k":"Symphonic","d":"Op. 90"},{"c":"Brahms","t":"Symphony No. 4 in E minor","k":"Symphonic","d":"Op. 98"},{"c":"Bruckner","t":"Symphony No. 4 in E-flat major","k":"Symphonic","d":"'Romantic'"},{"c":"Bruckner","t":"Symphony No. 7 in E major","k":"Symphonic","d":""},{"c":"Bruckner","t":"Symphony No. 8 in C minor","k":"Symphonic","d":""},{"c":"Bruckner","t":"Symphony No. 9 in D minor","k":"Symphonic","d":""},{"c":"Dvořák","t":"Symphony No. 7 in D minor","k":"Symphonic","d":"Op. 70"},{"c":"Dvořák","t":"Symphony No. 8 in G major","k":"Symphonic","d":"Op. 88"},{"c":"Dvořák","t":"Symphony No. 9 in E minor","k":"Symphonic","d":"'From the New World', Op. 95"},{"c":"Franck","t":"Symphony in D minor","k":"Symphonic","d":""},{"c":"Haydn","t":"Symphony No. 64 in A major","k":"Symphonic","d":"'Tempora mutantur'"},{"c":"Haydn","t":"Symphony No. 82 in C major","k":"Symphonic","d":"'The Bear' (Paris)"},{"c":"Haydn","t":"Symphony No. 83 in G minor","k":"Symphonic","d":"'The Hen' (Paris)"},{"c":"Haydn","t":"Symphony No. 84 in E-flat major","k":"Symphonic","d":"(Paris)"},{"c":"Haydn","t":"Symphony No. 85 in B-flat major","k":"Symphonic","d":"'La Reine' (Paris)"},{"c":"Haydn","t":"Symphony No. 86 in D major","k":"Symphonic","d":"(Paris)"},{"c":"Haydn","t":"Symphony No. 87 in A major","k":"Symphonic","d":"(Paris)"},{"c":"Haydn","t":"Symphony No. 88 in G major","k":"Symphonic","d":""},{"c":"Haydn","t":"Symphony No. 89 in F major","k":"Symphonic","d":""},{"c":"Haydn","t":"Symphony No. 90 in C major","k":"Symphonic","d":""},{"c":"Haydn","t":"Symphony No. 91 in E-flat major","k":"Symphonic","d":""},{"c":"Haydn","t":"Symphony No. 92 in G major","k":"Symphonic","d":"'Oxford'"},{"c":"Haydn","t":"Symphony No. 93 in D major","k":"Symphonic","d":"(London)"},{"c":"Haydn","t":"Symphony No. 94 in G major","k":"Symphonic","d":"'Surprise' (London)"},{"c":"Haydn","t":"Symphony No. 95 in C minor","k":"Symphonic","d":"(London)"},{"c":"Haydn","t":"Symphony No. 96 in D major","k":"Symphonic","d":"'Miracle' (London)"},{"c":"Haydn","t":"Symphony No. 97 in C major","k":"Symphonic","d":"(London)"},{"c":"Haydn","t":"Symphony No. 98 in B-flat major","k":"Symphonic","d":"(London)"},{"c":"Haydn","t":"Symphony No. 99 in E-flat major","k":"Symphonic","d":"(London)"},{"c":"Haydn","t":"Symphony No. 100 in G major","k":"Symphonic","d":"'Military' (London)"},{"c":"Haydn","t":"Symphony No. 101 in D major","k":"Symphonic","d":"'Clock' (London)"},{"c":"Haydn","t":"Symphony No. 102 in B-flat major","k":"Symphonic","d":"(London)"},{"c":"Haydn","t":"Symphony No. 103 in E-flat major","k":"Symphonic","d":"'Drumroll' (London)"},{"c":"Haydn","t":"Symphony No. 104 in D major","k":"Symphonic","d":"'London'"},{"c":"Mahler","t":"Symphony No. 1 in D major","k":"Symphonic","d":"'Titan'"},{"c":"Mahler","t":"Symphony No. 2 in C minor","k":"Symphonic","d":"'Resurrection'"},{"c":"Mahler","t":"Symphony No. 3 in D minor","k":"Symphonic","d":""},{"c":"Mahler","t":"Symphony No. 4 in G major","k":"Symphonic","d":""},{"c":"Mahler","t":"Symphony No. 5 in C-sharp minor","k":"Symphonic","d":""},{"c":"Mahler","t":"Symphony No. 6 in A minor","k":"Symphonic","d":"'Tragic'"},{"c":"Mahler","t":"Symphony No. 7","k":"Symphonic","d":"'Song of the Night'"},{"c":"Mahler","t":"Symphony No. 8 in E-flat major","k":"Symphonic","d":"'Symphony of a Thousand'"},{"c":"Mahler","t":"Symphony No. 9","k":"Symphonic","d":""},{"c":"Mahler","t":"Symphony No. 10","k":"Symphonic","d":"(unfinished, Cooke performing version)"},{"c":"Mahler","t":"Das Lied von der Erde","k":"Symphonic","d":"song-symphony"},{"c":"Mendelssohn","t":"Symphony No. 3 in A minor","k":"Symphonic","d":"'Scottish'"},{"c":"Mendelssohn","t":"Symphony No. 4 in A major","k":"Symphonic","d":"'Italian'"},{"c":"Mozart","t":"Symphony No. 25 in G minor","k":"Symphonic","d":"K. 183"},{"c":"Mozart","t":"Symphony No. 29 in A major","k":"Symphonic","d":"K. 201"},{"c":"Mozart","t":"Symphony No. 35 in D major","k":"Symphonic","d":"'Haffner', K. 385"},{"c":"Mozart","t":"Symphony No. 38 in D major","k":"Symphonic","d":"'Prague', K. 504"},{"c":"Mozart","t":"Symphony No. 39 in E-flat major","k":"Symphonic","d":"K. 543"},{"c":"Mozart","t":"Symphony No. 40 in G minor","k":"Symphonic","d":"K. 550"},{"c":"Mozart","t":"Symphony No. 41 in C major","k":"Symphonic","d":"'Jupiter', K. 551"},{"c":"Nielsen","t":"Symphony No. 2","k":"Symphonic","d":"'The Four Temperaments'"},{"c":"Nielsen","t":"Symphony No. 4","k":"Symphonic","d":"'The Inextinguishable'"},{"c":"Prokofiev","t":"Symphony No. 1 in D major","k":"Symphonic","d":"'Classical', Op. 25"},{"c":"Prokofiev","t":"Symphony No. 5 in B-flat major","k":"Symphonic","d":"Op. 100"},{"c":"Rachmaninoff","t":"Symphony No. 2 in E minor","k":"Symphonic","d":"Op. 27"},{"c":"Saint-Saëns","t":"Symphony No. 3 in C minor","k":"Symphonic","d":"'Organ', Op. 78"},{"c":"Schubert","t":"Symphony No. 8 in B minor","k":"Symphonic","d":"'Unfinished', D. 759"},{"c":"Schubert","t":"Symphony No. 9 in C major","k":"Symphonic","d":"'The Great', D. 944"},{"c":"Schumann","t":"Symphony No. 1 in B-flat major","k":"Symphonic","d":"'Spring', Op. 38"},{"c":"Schumann","t":"Symphony No. 3 in E-flat major","k":"Symphonic","d":"'Rhenish', Op. 97"},{"c":"Schumann","t":"Symphony No. 4 in D minor","k":"Symphonic","d":"Op. 120"},{"c":"Shostakovich","t":"Symphony No. 1 in F minor","k":"Symphonic","d":"Op. 10"},{"c":"Shostakovich","t":"Symphony No. 2","k":"Symphonic","d":"'To October', Op. 14"},{"c":"Shostakovich","t":"Symphony No. 3 in E-flat major","k":"Symphonic","d":"'The First of May', Op. 20"},{"c":"Shostakovich","t":"Symphony No. 4 in C minor","k":"Symphonic","d":"Op. 43"},{"c":"Shostakovich","t":"Symphony No. 5 in D minor","k":"Symphonic","d":"Op. 47"},{"c":"Shostakovich","t":"Symphony No. 6 in B minor","k":"Symphonic","d":"Op. 54"},{"c":"Shostakovich","t":"Symphony No. 7 in C major","k":"Symphonic","d":"'Leningrad', Op. 60"},{"c":"Shostakovich","t":"Symphony No. 8 in C minor","k":"Symphonic","d":"Op. 65"},{"c":"Shostakovich","t":"Symphony No. 9 in E-flat major","k":"Symphonic","d":"Op. 70"},{"c":"Shostakovich","t":"Symphony No. 10 in E minor","k":"Symphonic","d":"Op. 93"},{"c":"Shostakovich","t":"Symphony No. 11 in G minor","k":"Symphonic","d":"'The Year 1905', Op. 103"},{"c":"Shostakovich","t":"Symphony No. 12 in D minor","k":"Symphonic","d":"'The Year 1917', Op. 112"},{"c":"Shostakovich","t":"Symphony No. 13 in B-flat minor","k":"Symphonic","d":"'Babi Yar', Op. 113"},{"c":"Shostakovich","t":"Symphony No. 14","k":"Symphonic","d":"Op. 135"},{"c":"Shostakovich","t":"Symphony No. 15 in A major","k":"Symphonic","d":"Op. 141"},{"c":"Sibelius","t":"Symphony No. 2 in D major","k":"Symphonic","d":"Op. 43"},{"c":"Sibelius","t":"Symphony No. 5 in E-flat major","k":"Symphonic","d":"Op. 82"},{"c":"Tchaikovsky","t":"Symphony No. 4 in F minor","k":"Symphonic","d":"Op. 36"},{"c":"Tchaikovsky","t":"Symphony No. 5 in E minor","k":"Symphonic","d":"Op. 64"},{"c":"Tchaikovsky","t":"Symphony No. 6 in B minor","k":"Symphonic","d":"'Pathétique', Op. 74"},{"c":"Berlioz","t":"Symphonie fantastique","k":"Symphonic","d":"Op. 14"},{"c":"Beethoven","t":"Egmont Overture","k":"Overture","d":"Op. 84"},{"c":"Beethoven","t":"Coriolan Overture","k":"Overture","d":"Op. 62"},{"c":"Beethoven","t":"Leonore Overture No. 3","k":"Overture","d":"Op. 72b"},{"c":"Beethoven","t":"Fidelio Overture","k":"Overture","d":"Op. 72c"},{"c":"Berlioz","t":"Le Carnaval romain (Roman Carnival Overture)","k":"Overture","d":"Op. 9"},{"c":"Berlioz","t":"Le Corsaire Overture","k":"Overture","d":"Op. 21"},{"c":"Brahms","t":"Academic Festival Overture","k":"Overture","d":"Op. 80"},{"c":"Brahms","t":"Tragic Overture","k":"Overture","d":"Op. 81"},{"c":"Dvořák","t":"Carnival Overture","k":"Overture","d":"Op. 92"},{"c":"Glinka","t":"Ruslan and Lyudmila Overture","k":"Overture","d":""},{"c":"Mendelssohn","t":"A Midsummer Night's Dream Overture","k":"Overture","d":"Op. 21"},{"c":"Mendelssohn","t":"The Hebrides Overture","k":"Overture","d":"'Fingal's Cave', Op. 26"},{"c":"Mozart","t":"Overture to Le nozze di Figaro","k":"Overture","d":"K. 492"},{"c":"Mozart","t":"Overture to Don Giovanni","k":"Overture","d":"K. 527"},{"c":"Mozart","t":"Overture to Die Zauberflöte","k":"Overture","d":"K. 620"},{"c":"Rossini","t":"Overture to Il barbiere di Siviglia","k":"Overture","d":""},{"c":"Rossini","t":"Overture to Guillaume Tell","k":"Overture","d":"'William Tell'"},{"c":"Rossini","t":"Overture to La gazza ladra","k":"Overture","d":""},{"c":"Smetana","t":"Overture to The Bartered Bride","k":"Overture","d":""},{"c":"Smetana","t":"Vltava (Die Moldau)","k":"Overture","d":"from Má vlast"},{"c":"Suppé","t":"Poet and Peasant Overture","k":"Overture","d":""},{"c":"Suppé","t":"Light Cavalry Overture","k":"Overture","d":""},{"c":"Tchaikovsky","t":"Romeo and Juliet","k":"Overture","d":"Overture-Fantasy"},{"c":"Tchaikovsky","t":"1812 Overture","k":"Overture","d":"Op. 49"},{"c":"Verdi","t":"Overture to La forza del destino","k":"Overture","d":""},{"c":"Verdi","t":"Overture to Nabucco","k":"Overture","d":""},{"c":"Wagner","t":"Overture to Tannhäuser","k":"Overture","d":""},{"c":"Wagner","t":"Overture to Der fliegende Holländer","k":"Overture","d":""},{"c":"Wagner","t":"Overture to Rienzi","k":"Overture","d":""},{"c":"Weber","t":"Overture to Der Freischütz","k":"Overture","d":""},{"c":"Weber","t":"Overture to Oberon","k":"Overture","d":""},{"c":"R. Strauss","t":"Don Juan","k":"Orchestral Work","d":"Op. 20"},{"c":"R. Strauss","t":"Tod und Verklärung","k":"Orchestral Work","d":"'Death and Transfiguration', Op. 24"},{"c":"R. Strauss","t":"Till Eulenspiegels lustige Streiche","k":"Orchestral Work","d":"Op. 28"},{"c":"R. Strauss","t":"Also sprach Zarathustra","k":"Orchestral Work","d":"Op. 30"},{"c":"R. Strauss","t":"Don Quixote","k":"Orchestral Work","d":"Op. 35"},{"c":"R. Strauss","t":"Ein Heldenleben","k":"Orchestral Work","d":"Op. 40"},{"c":"R. Strauss","t":"Sinfonia domestica","k":"Orchestral Work","d":"Op. 53"},{"c":"R. Strauss","t":"Eine Alpensinfonie","k":"Orchestral Work","d":"Op. 64"},{"c":"R. Strauss","t":"Metamorphosen","k":"Orchestral Work","d":"for 23 solo strings"},{"c":"R. Strauss","t":"Burleske in D minor","k":"Orchestral Work","d":"for piano and orchestra"},{"c":"Elgar","t":"Enigma Variations","k":"Orchestral Work","d":"'Variations on an Original Theme', Op. 36"},{"c":"Elgar","t":"Pomp and Circumstance Marches","k":"Orchestral Work","d":"Op. 39"},{"c":"Ravel","t":"Boléro","k":"Orchestral Work","d":""},{"c":"Ravel","t":"La valse","k":"Orchestral Work","d":""},{"c":"Ravel","t":"Daphnis et Chloé","k":"Orchestral Work","d":"Suite No. 2"},{"c":"Ravel","t":"Rapsodie espagnole","k":"Orchestral Work","d":""},{"c":"Ravel","t":"Ma mère l'Oye","k":"Orchestral Work","d":"'Mother Goose' Suite"},{"c":"Ravel","t":"Pavane pour une infante défunte","k":"Orchestral Work","d":""},{"c":"Ravel","t":"Alborada del gracioso","k":"Orchestral Work","d":"orchestral version"},{"c":"Ravel","t":"Le tombeau de Couperin","k":"Orchestral Work","d":"orchestral version"},{"c":"Debussy","t":"La mer","k":"Orchestral Work","d":""},{"c":"Debussy","t":"Prélude à l'après-midi d'un faune","k":"Orchestral Work","d":""},{"c":"Debussy","t":"Nocturnes","k":"Orchestral Work","d":""},{"c":"Debussy","t":"Images pour orchestre","k":"Orchestral Work","d":""},{"c":"Britten","t":"The Young Person's Guide to the Orchestra","k":"Orchestral Work","d":"Op. 34"},{"c":"Britten","t":"Four Sea Interludes","k":"Orchestral Work","d":"from Peter Grimes, Op. 33a"},{"c":"Britten","t":"Simple Symphony","k":"Orchestral Work","d":"Op. 4"},{"c":"Britten","t":"Sinfonia da Requiem","k":"Orchestral Work","d":"Op. 20"},{"c":"Sibelius","t":"Finlandia","k":"Orchestral Work","d":"Op. 26"},{"c":"Sibelius","t":"The Swan of Tuonela","k":"Orchestral Work","d":"Op. 22 No. 2"},{"c":"Dukas","t":"L'apprenti sorcier","k":"Orchestral Work","d":"'The Sorcerer's Apprentice'"},{"c":"Rimsky-Korsakov","t":"Scheherazade","k":"Orchestral Work","d":"Op. 35"},{"c":"Rimsky-Korsakov","t":"Capriccio Espagnol","k":"Orchestral Work","d":"Op. 34"},{"c":"Mussorgsky/Ravel","t":"Pictures at an Exhibition","k":"Orchestral Work","d":"orchestrated by Ravel"},{"c":"Respighi","t":"Pini di Roma","k":"Orchestral Work","d":"'Pines of Rome'"},{"c":"Respighi","t":"Fontane di Roma","k":"Orchestral Work","d":"'Fountains of Rome'"},{"c":"Holst","t":"The Planets","k":"Orchestral Work","d":"Op. 32"},{"c":"Copland","t":"Appalachian Spring","k":"Orchestral Work","d":""},{"c":"Copland","t":"Fanfare for the Common Man","k":"Orchestral Work","d":""},{"c":"Bartók","t":"Concerto for Orchestra","k":"Orchestral Work","d":""},{"c":"Stravinsky","t":"The Firebird Suite","k":"Orchestral Work","d":"'L'oiseau de feu'"},{"c":"Stravinsky","t":"Petrushka","k":"Orchestral Work","d":""},{"c":"Stravinsky","t":"The Rite of Spring","k":"Orchestral Work","d":"'Le sacre du printemps'"},{"c":"Mahler","t":"Lieder eines fahrenden Gesellen","k":"Song Cycle / Vocal-Orchestral","d":"'Songs of a Wayfarer'"},{"c":"Mahler","t":"Kindertotenlieder","k":"Song Cycle / Vocal-Orchestral","d":"'Songs on the Death of Children'"},{"c":"Mahler","t":"Rückert-Lieder","k":"Song Cycle / Vocal-Orchestral","d":""},{"c":"Mahler","t":"Des Knaben Wunderhorn","k":"Song Cycle / Vocal-Orchestral","d":"orchestral songs"},{"c":"R. Strauss","t":"Vier letzte Lieder","k":"Song Cycle / Vocal-Orchestral","d":"'Four Last Songs'"},{"c":"Berlioz","t":"Les nuits d'été","k":"Song Cycle / Vocal-Orchestral","d":"'Summer Nights', Op. 7"},{"c":"Ravel","t":"Shéhérazade","k":"Song Cycle / Vocal-Orchestral","d":"song cycle"},{"c":"Brahms / arr. Schoenberg","t":"Piano Quartet No. 1 in G minor","k":"Chamber-to-Orchestra","d":"Op. 25, orchestrated by Schoenberg"},{"c":"Barber","t":"Violin Concerto","k":"Instrumental Concerto","d":"Op. 14"},{"c":"Beethoven","t":"Piano Concerto No. 3 in C minor","k":"Instrumental Concerto","d":"Op. 37"},{"c":"Beethoven","t":"Piano Concerto No. 4 in G major","k":"Instrumental Concerto","d":"Op. 58"},{"c":"Beethoven","t":"Piano Concerto No. 5 in E-flat major","k":"Instrumental Concerto","d":"'Emperor', Op. 73"},{"c":"Beethoven","t":"Violin Concerto in D major","k":"Instrumental Concerto","d":"Op. 61"},{"c":"Beethoven","t":"Triple Concerto in C major","k":"Instrumental Concerto","d":"Op. 56"},{"c":"Brahms","t":"Piano Concerto No. 1 in D minor","k":"Instrumental Concerto","d":"Op. 15"},{"c":"Brahms","t":"Piano Concerto No. 2 in B-flat major","k":"Instrumental Concerto","d":"Op. 83"},{"c":"Brahms","t":"Violin Concerto in D major","k":"Instrumental Concerto","d":"Op. 77"},{"c":"Brahms","t":"Double Concerto in A minor","k":"Instrumental Concerto","d":"for violin and cello, Op. 102"},{"c":"Bruch","t":"Violin Concerto No. 1 in G minor","k":"Instrumental Concerto","d":"Op. 26"},{"c":"Bruch","t":"Scottish Fantasy","k":"Instrumental Concerto","d":"for violin, Op. 46"},{"c":"Chopin","t":"Piano Concerto No. 1 in E minor","k":"Instrumental Concerto","d":"Op. 11"},{"c":"Chopin","t":"Piano Concerto No. 2 in F minor","k":"Instrumental Concerto","d":"Op. 21"},{"c":"Dvořák","t":"Cello Concerto in B minor","k":"Instrumental Concerto","d":"Op. 104"},{"c":"Dvořák","t":"Violin Concerto in A minor","k":"Instrumental Concerto","d":"Op. 53"},{"c":"Elgar","t":"Cello Concerto in E minor","k":"Instrumental Concerto","d":"Op. 85"},{"c":"Elgar","t":"Violin Concerto in B minor","k":"Instrumental Concerto","d":"Op. 61"},{"c":"Grieg","t":"Piano Concerto in A minor","k":"Instrumental Concerto","d":"Op. 16"},{"c":"Haydn","t":"Cello Concerto No. 1 in C major","k":"Instrumental Concerto","d":"Hob. VIIb:1"},{"c":"Haydn","t":"Cello Concerto No. 2 in D major","k":"Instrumental Concerto","d":"Hob. VIIb:2"},{"c":"Haydn","t":"Trumpet Concerto in E-flat major","k":"Instrumental Concerto","d":"Hob. VIIe:1"},{"c":"Liszt","t":"Piano Concerto No. 1 in E-flat major","k":"Instrumental Concerto","d":""},{"c":"Liszt","t":"Piano Concerto No. 2 in A major","k":"Instrumental Concerto","d":""},{"c":"Mendelssohn","t":"Violin Concerto in E minor","k":"Instrumental Concerto","d":"Op. 64"},{"c":"Mendelssohn","t":"Piano Concerto No. 1 in G minor","k":"Instrumental Concerto","d":"Op. 25"},{"c":"Mozart","t":"Piano Concerto No. 9 in E-flat major","k":"Instrumental Concerto","d":"'Jeunehomme', K. 271"},{"c":"Mozart","t":"Piano Concerto No. 17 in G major","k":"Instrumental Concerto","d":"K. 453"},{"c":"Mozart","t":"Piano Concerto No. 20 in D minor","k":"Instrumental Concerto","d":"K. 466"},{"c":"Mozart","t":"Piano Concerto No. 21 in C major","k":"Instrumental Concerto","d":"K. 467"},{"c":"Mozart","t":"Piano Concerto No. 23 in A major","k":"Instrumental Concerto","d":"K. 488"},{"c":"Mozart","t":"Piano Concerto No. 24 in C minor","k":"Instrumental Concerto","d":"K. 491"},{"c":"Mozart","t":"Piano Concerto No. 27 in B-flat major","k":"Instrumental Concerto","d":"K. 595"},{"c":"Mozart","t":"Violin Concerto No. 3 in G major","k":"Instrumental Concerto","d":"K. 216"},{"c":"Mozart","t":"Violin Concerto No. 4 in D major","k":"Instrumental Concerto","d":"K. 218"},{"c":"Mozart","t":"Violin Concerto No. 5 in A major","k":"Instrumental Concerto","d":"'Turkish', K. 219"},{"c":"Mozart","t":"Clarinet Concerto in A major","k":"Instrumental Concerto","d":"K. 622"},{"c":"Mozart","t":"Flute Concerto No. 2 in D major","k":"Instrumental Concerto","d":"K. 314"},{"c":"Mozart","t":"Horn Concerto No. 4 in E-flat major","k":"Instrumental Concerto","d":"K. 495"},{"c":"Mozart","t":"Sinfonia Concertante in E-flat major","k":"Instrumental Concerto","d":"for violin & viola, K. 364"},{"c":"Prokofiev","t":"Piano Concerto No. 1 in D-flat major","k":"Instrumental Concerto","d":"Op. 10"},{"c":"Prokofiev","t":"Piano Concerto No. 2 in G minor","k":"Instrumental Concerto","d":"Op. 16"},{"c":"Prokofiev","t":"Piano Concerto No. 3 in C major","k":"Instrumental Concerto","d":"Op. 26"},{"c":"Prokofiev","t":"Piano Concerto No. 4 in B-flat major","k":"Instrumental Concerto","d":"for left hand, Op. 53"},{"c":"Prokofiev","t":"Piano Concerto No. 5 in G major","k":"Instrumental Concerto","d":"Op. 55"},{"c":"Prokofiev","t":"Violin Concerto No. 1 in D major","k":"Instrumental Concerto","d":"Op. 19"},{"c":"Prokofiev","t":"Violin Concerto No. 2 in G minor","k":"Instrumental Concerto","d":"Op. 63"},{"c":"Rachmaninoff","t":"Piano Concerto No. 1 in F-sharp minor","k":"Instrumental Concerto","d":"Op. 1"},{"c":"Rachmaninoff","t":"Piano Concerto No. 2 in C minor","k":"Instrumental Concerto","d":"Op. 18"},{"c":"Rachmaninoff","t":"Piano Concerto No. 3 in D minor","k":"Instrumental Concerto","d":"Op. 30"},{"c":"Rachmaninoff","t":"Rhapsody on a Theme of Paganini","k":"Instrumental Concerto","d":"Op. 43"},{"c":"Ravel","t":"Piano Concerto in G major","k":"Instrumental Concerto","d":""},{"c":"Ravel","t":"Piano Concerto for the Left Hand","k":"Instrumental Concerto","d":""},{"c":"Saint-Saëns","t":"Piano Concerto No. 2 in G minor","k":"Instrumental Concerto","d":"Op. 22"},{"c":"Saint-Saëns","t":"Cello Concerto No. 1 in A minor","k":"Instrumental Concerto","d":"Op. 33"},{"c":"Saint-Saëns","t":"Violin Concerto No. 3 in B minor","k":"Instrumental Concerto","d":"Op. 61"},{"c":"Saint-Saëns","t":"Introduction et Rondo capriccioso","k":"Instrumental Concerto","d":"for violin, Op. 28"},{"c":"Schumann","t":"Piano Concerto in A minor","k":"Instrumental Concerto","d":"Op. 54"},{"c":"Schumann","t":"Cello Concerto in A minor","k":"Instrumental Concerto","d":"Op. 129"},{"c":"Sibelius","t":"Violin Concerto in D minor","k":"Instrumental Concerto","d":"Op. 47"},{"c":"Shostakovich","t":"Piano Concerto No. 1 in C minor","k":"Instrumental Concerto","d":"Op. 35"},{"c":"Shostakovich","t":"Piano Concerto No. 2 in F major","k":"Instrumental Concerto","d":"Op. 102"},{"c":"Shostakovich","t":"Violin Concerto No. 1 in A minor","k":"Instrumental Concerto","d":"Op. 77"},{"c":"Shostakovich","t":"Violin Concerto No. 2 in C-sharp minor","k":"Instrumental Concerto","d":"Op. 129"},{"c":"Shostakovich","t":"Cello Concerto No. 1 in E-flat major","k":"Instrumental Concerto","d":"Op. 107"},{"c":"Shostakovich","t":"Cello Concerto No. 2 in G major","k":"Instrumental Concerto","d":"Op. 126"},{"c":"Tchaikovsky","t":"Piano Concerto No. 1 in B-flat minor","k":"Instrumental Concerto","d":"Op. 23"},{"c":"Tchaikovsky","t":"Violin Concerto in D major","k":"Instrumental Concerto","d":"Op. 35"},{"c":"Tchaikovsky","t":"Variations on a Rococo Theme","k":"Instrumental Concerto","d":"for cello, Op. 33"},{"c":"Verdi","t":"La traviata","k":"Opera","d":""},{"c":"Verdi","t":"Rigoletto","k":"Opera","d":""},{"c":"Verdi","t":"Il trovatore","k":"Opera","d":""},{"c":"Verdi","t":"Aida","k":"Opera","d":""},{"c":"Verdi","t":"Nabucco","k":"Opera","d":""},{"c":"Verdi","t":"Otello","k":"Opera","d":""},{"c":"Verdi","t":"Falstaff","k":"Opera","d":""},{"c":"Verdi","t":"Don Carlos","k":"Opera","d":""},{"c":"Verdi","t":"Un ballo in maschera","k":"Opera","d":""},{"c":"Puccini","t":"La bohème","k":"Opera","d":""},{"c":"Puccini","t":"Tosca","k":"Opera","d":""},{"c":"Puccini","t":"Madama Butterfly","k":"Opera","d":""},{"c":"Puccini","t":"Turandot","k":"Opera","d":""},{"c":"Puccini","t":"Manon Lescaut","k":"Opera","d":""},{"c":"Mozart","t":"Le nozze di Figaro","k":"Opera","d":"K. 492"},{"c":"Mozart","t":"Don Giovanni","k":"Opera","d":"K. 527"},{"c":"Mozart","t":"Die Zauberflöte","k":"Opera","d":"K. 620"},{"c":"Mozart","t":"Così fan tutte","k":"Opera","d":"K. 588"},{"c":"Mozart","t":"Die Entführung aus dem Serail","k":"Opera","d":"K. 384"},{"c":"Wagner","t":"Das Rheingold","k":"Opera","d":"Der Ring des Nibelungen"},{"c":"Wagner","t":"Die Walküre","k":"Opera","d":"Der Ring des Nibelungen"},{"c":"Wagner","t":"Siegfried","k":"Opera","d":"Der Ring des Nibelungen"},{"c":"Wagner","t":"Götterdämmerung","k":"Opera","d":"Der Ring des Nibelungen"},{"c":"Wagner","t":"Tristan und Isolde","k":"Opera","d":""},{"c":"Wagner","t":"Die Meistersinger von Nürnberg","k":"Opera","d":""},{"c":"Wagner","t":"Lohengrin","k":"Opera","d":""},{"c":"Wagner","t":"Tannhäuser","k":"Opera","d":""},{"c":"Wagner","t":"Der fliegende Holländer","k":"Opera","d":""},{"c":"Wagner","t":"Parsifal","k":"Opera","d":""},{"c":"Bizet","t":"Carmen","k":"Opera","d":""},{"c":"Rossini","t":"Il barbiere di Siviglia","k":"Opera","d":""},{"c":"Rossini","t":"La Cenerentola","k":"Opera","d":""},{"c":"Donizetti","t":"Lucia di Lammermoor","k":"Opera","d":""},{"c":"Donizetti","t":"L'elisir d'amore","k":"Opera","d":""},{"c":"Donizetti","t":"Don Pasquale","k":"Opera","d":""},{"c":"R. Strauss","t":"Der Rosenkavalier","k":"Opera","d":""},{"c":"R. Strauss","t":"Salome","k":"Opera","d":""},{"c":"R. Strauss","t":"Elektra","k":"Opera","d":""},{"c":"R. Strauss","t":"Ariadne auf Naxos","k":"Opera","d":""},{"c":"R. Strauss","t":"Arabella","k":"Opera","d":""},{"c":"R. Strauss","t":"Capriccio","k":"Opera","d":""},{"c":"Humperdinck","t":"Hänsel und Gretel","k":"Opera","d":""},{"c":"Beethoven","t":"Fidelio","k":"Opera","d":"Op. 72"},{"c":"Tchaikovsky","t":"Eugene Onegin","k":"Opera","d":""},{"c":"Tchaikovsky","t":"The Queen of Spades","k":"Opera","d":""},{"c":"Mussorgsky","t":"Boris Godunov","k":"Opera","d":""},{"c":"Janáček","t":"Jenůfa","k":"Opera","d":""},{"c":"Janáček","t":"The Cunning Little Vixen","k":"Opera","d":""},{"c":"Britten","t":"Peter Grimes","k":"Opera","d":""},{"c":"Britten","t":"Billy Budd","k":"Opera","d":""},{"c":"Britten","t":"The Turn of the Screw","k":"Opera","d":""},{"c":"Gounod","t":"Faust","k":"Opera","d":""},{"c":"Offenbach","t":"Les contes d'Hoffmann","k":"Opera","d":""},{"c":"Leoncavallo","t":"Pagliacci","k":"Opera","d":""},{"c":"Mascagni","t":"Cavalleria rusticana","k":"Opera","d":""},{"c":"Bellini","t":"Norma","k":"Opera","d":""},{"c":"Weber","t":"Der Freischütz","k":"Opera","d":""},{"c":"Berg","t":"Wozzeck","k":"Opera","d":""},{"c":"Berg","t":"Lulu","k":"Opera","d":""},{"c":"Bach","t":"Mass in B minor","k":"Mass / Oratorio / Requiem","d":"BWV 232"},{"c":"Bach","t":"St Matthew Passion","k":"Mass / Oratorio / Requiem","d":"BWV 244"},{"c":"Bach","t":"St John Passion","k":"Mass / Oratorio / Requiem","d":"BWV 245"},{"c":"Bach","t":"Christmas Oratorio","k":"Mass / Oratorio / Requiem","d":"BWV 248"},{"c":"Beethoven","t":"Missa Solemnis in D major","k":"Mass / Oratorio / Requiem","d":"Op. 123"},{"c":"Mozart","t":"Requiem in D minor","k":"Mass / Oratorio / Requiem","d":"K. 626"},{"c":"Mozart","t":"Great Mass in C minor","k":"Mass / Oratorio / Requiem","d":"K. 427"},{"c":"Mozart","t":"Coronation Mass in C major","k":"Mass / Oratorio / Requiem","d":"K. 317"},{"c":"Verdi","t":"Messa da Requiem","k":"Mass / Oratorio / Requiem","d":""},{"c":"Verdi","t":"Four Sacred Pieces","k":"Mass / Oratorio / Requiem","d":"'Quattro pezzi sacri'"},{"c":"Brahms","t":"Ein deutsches Requiem","k":"Mass / Oratorio / Requiem","d":"Op. 45"},{"c":"Fauré","t":"Requiem","k":"Mass / Oratorio / Requiem","d":"Op. 48"},{"c":"Handel","t":"Messiah","k":"Mass / Oratorio / Requiem","d":"HWV 56"},{"c":"Haydn","t":"Die Schöpfung","k":"Mass / Oratorio / Requiem","d":"'The Creation'"},{"c":"Haydn","t":"Die Jahreszeiten","k":"Mass / Oratorio / Requiem","d":"'The Seasons'"},{"c":"Haydn","t":"Nelson Mass","k":"Mass / Oratorio / Requiem","d":""},{"c":"Orff","t":"Carmina Burana","k":"Mass / Oratorio / Requiem","d":""},{"c":"Britten","t":"War Requiem","k":"Mass / Oratorio / Requiem","d":"Op. 66"},{"c":"Dvořák","t":"Requiem","k":"Mass / Oratorio / Requiem","d":"Op. 89"},{"c":"Dvořák","t":"Stabat Mater","k":"Mass / Oratorio / Requiem","d":"Op. 58"},{"c":"Rossini","t":"Stabat Mater","k":"Mass / Oratorio / Requiem","d":""},{"c":"Rossini","t":"Petite messe solennelle","k":"Mass / Oratorio / Requiem","d":""},{"c":"Elgar","t":"The Dream of Gerontius","k":"Mass / Oratorio / Requiem","d":"Op. 38"},{"c":"Mendelssohn","t":"Elijah","k":"Mass / Oratorio / Requiem","d":"Op. 70"},{"c":"Stravinsky","t":"Symphony of Psalms","k":"Mass / Oratorio / Requiem","d":""}];
+const API = 'https://tvmartists.com/msrepertoire-notes.php';
+
+// Stable key per work (composer + title), same on every device
+function keyOf(w) {
+  const s = w.c + '|' + w.t;
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < s.length; i++) { const ch = s.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+WORKS.forEach(w => { w.key = keyOf(w); });
+
+const $ = (id) => document.getElementById(id);
+const state = { sort: 'c', dir: 1, notes: {}, editable: false, unlocked: false, password: '' };
+try { state.password = sessionStorage.getItem('msrep_pw') || ''; } catch (e) {}
+const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+function fillSelect(sel, values) {
+  Array.from(new Set(values)).sort(collator.compare).forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); });
+}
+fillSelect($('fk'), WORKS.map(w => w.k));
+fillSelect($('fc'), WORKS.map(w => w.c));
+
+function noteOf(w) { return (state.notes[w.key] && state.notes[w.key].t) || ''; }
+
+function visibleWorks() {
+  const q = $('q').value.trim().toLowerCase(), k = $('fk').value, c = $('fc').value, only = $('onlyc').checked;
+  let list = WORKS.filter(w => (!k || w.k === k) && (!c || w.c === c) && (!only || noteOf(w))
+    && (!q || (w.c + ' ' + w.t + ' ' + w.k + ' ' + w.d + ' ' + noteOf(w)).toLowerCase().includes(q)));
+  const s = state.sort, d = state.dir;
+  list.sort((a, b) => {
+    let r;
+    if (s === 'm') { const am = noteOf(a), bm = noteOf(b); r = (am ? 0 : 1) - (bm ? 0 : 1); if (!r) r = collator.compare(am, bm); }
+    else r = collator.compare(a[s], b[s]);
+    if (!r) r = collator.compare(a.c, b.c) || collator.compare(a.t, b.t);
+    return r * d;
+  });
+  return list;
+}
+
+function render() {
+  const list = visibleWorks();
+  const body = $('rows'); body.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  list.forEach(w => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td class="comp">' + esc(w.c) + '</td><td>' + esc(w.t) + '</td><td class="cat">' + esc(w.k) + '</td><td class="det">' + esc(w.d) + '</td><td class="cm"><textarea rows="1" maxlength="2000" placeholder="' + (state.unlocked ? 'Add a note …' : '') + '"></textarea><div class="st"></div></td>';
+    const ta = tr.querySelector('textarea'), st = tr.querySelector('.st');
+    ta.value = noteOf(w);
+    ta.readOnly = !state.unlocked;
+    ta.addEventListener('input', () => grow(ta));
+    ta.addEventListener('blur', () => save(w, ta, st));
+    frag.appendChild(tr);
+  });
+  body.appendChild(frag);
+  body.querySelectorAll('textarea').forEach(grow);
+  $('count').textContent = list.length + ' of ' + WORKS.length + ' works' + (Object.keys(state.notes).length ? ' · ' + Object.keys(state.notes).length + ' with comment' : '');
+  $('none').hidden = list.length > 0;
+  $('tbl').hidden = list.length === 0;
+  document.querySelectorAll('th').forEach(th => { th.querySelector('.ar').textContent = th.dataset.s === state.sort ? (state.dir > 0 ? '▲' : '▼') : ''; });
+}
+function grow(ta) { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight + 2) + 'px'; }
+
+async function save(w, ta, st) {
+  if (!state.unlocked) return;
+  const text = ta.value.trim();
+  if (text === noteOf(w)) return;
+  st.className = 'st'; st.textContent = 'Saving …';
+  try {
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: w.key, text, password: state.password, meta: { c: w.c, w: w.t } }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) {
+      st.className = 'st err'; st.textContent = j.error || 'Could not save.';
+      if (r.status === 403) lockEditing('The password was not accepted. Please unlock again.');
+      return;
+    }
+    if (text) state.notes[w.key] = { t: text, u: j.u }; else delete state.notes[w.key];
+    st.className = 'st ok'; st.textContent = 'Saved ✓';
+    setTimeout(() => { if (st.textContent === 'Saved ✓') st.textContent = ''; }, 2500);
+  } catch (e) { st.className = 'st err'; st.textContent = 'No connection - not saved. Please try again.'; }
+}
+
+function setEditUi() {
+  $('pw').hidden = state.unlocked || !state.editable;
+  $('unlock').hidden = state.unlocked || !state.editable;
+  $('lock').hidden = !state.unlocked;
+  $('editstate').textContent = !state.editable ? 'Comments are read-only (editing is not set up yet).' : (state.unlocked ? 'Editing is unlocked. Changes are saved when you leave a comment field.' : 'Comments are read-only. Enter the password to edit.');
+}
+async function unlock() {
+  const pw = $('pw').value || state.password;
+  if (!pw) return;
+  $('pwmsg').textContent = ''; $('pwmsg').className = 'msg';
+  try {
+    // a harmless test: saving an empty note for a non-existent key checks the password without changing anything
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ check: true, key: 'check0', text: '', password: pw }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { $('pwmsg').textContent = j.error || 'Password not accepted.'; state.unlocked = false; setEditUi(); render(); return; }
+    state.password = pw; state.unlocked = true; $('pw').value = '';
+    try { sessionStorage.setItem('msrep_pw', pw); } catch (e) {}
+    setEditUi(); render();
+  } catch (e) { $('pwmsg').textContent = 'No connection.'; }
+}
+function lockEditing(message) {
+  state.unlocked = false; state.password = '';
+  try { sessionStorage.removeItem('msrep_pw'); } catch (e) {}
+  $('pwmsg').textContent = message || '';
+  setEditUi(); render();
+}
+
+async function load() {
+  try {
+    const r = await fetch(API, { cache: 'no-store' });
+    const j = await r.json();
+    state.notes = j.notes || {}; state.editable = !!j.editable;
+    setEditUi();
+    if (state.editable && state.password) await unlock();
+  } catch (e) {
+    $('editstate').textContent = 'Comments could not be loaded. Please reload the page.';
+  }
+  render();
+}
+
+document.querySelectorAll('th').forEach(th => th.addEventListener('click', () => {
+  const s = th.dataset.s; if (state.sort === s) state.dir = -state.dir; else { state.sort = s; state.dir = 1; }
+  render();
+}));
+['q', 'fk', 'fc', 'onlyc'].forEach(id => $(id).addEventListener('input', render));
+$('reset').addEventListener('click', () => { $('q').value = ''; $('fk').value = ''; $('fc').value = ''; $('onlyc').checked = false; render(); });
+$('unlock').addEventListener('click', unlock);
+$('pw').addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+$('lock').addEventListener('click', () => lockEditing(''));
+render(); load();
+</script>
+</body>
+</html>
