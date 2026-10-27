@@ -244,6 +244,27 @@
             letter-spacing: 0.3px;
         }
 
+        /* Biografie mobil: nach ca. 30 % Text "Read more" */
+        .bio-toggle { display: none; }
+        @media (max-width: 640px) {
+            .bio.is-collapsible .bio-toggle {
+                display: inline-block;
+                margin: 4px 0 0;
+                padding: 10px 22px;
+                background: transparent;
+                border: 1px solid #12396B;
+                color: #12396B;
+                font: inherit;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                cursor: pointer;
+            }
+            .bio.is-collapsible.is-collapsed .bio-rest,
+            .bio.is-collapsible.is-collapsed p.bio-after { display: none; }
+            .bio .bio-ellipsis { display: none; }
+            .bio.is-collapsible.is-collapsed .bio-ellipsis { display: inline; }
+        }
+
         /* Upcoming Dates */
         .dates {
             background: linear-gradient(135deg, #0a0e1f 0%, #1a1f3a 100%);
@@ -1016,7 +1037,42 @@
         <p>
             Choi currently plays a J. B. Vuillaume c. 1840 on generous loan.
         </p>
+        <button type="button" class="bio-toggle" aria-expanded="false">Read more</button>
     </section>
+    <script>
+    (function () {
+        var bio = document.querySelector('.bio');
+        var btn = bio && bio.querySelector('.bio-toggle');
+        if (!bio || !btn) return;
+        var ps = Array.prototype.slice.call(bio.querySelectorAll('p'));
+        var total = ps.reduce(function (n, p) { return n + p.textContent.trim().length; }, 0);
+        var limit = total * 0.3, count = 0;
+        for (var i = 0; i < ps.length; i++) {
+            var text = ps[i].textContent.trim();
+            if (count + text.length < limit) { count += text.length; continue; }
+            var cut = text.indexOf(' ', limit - count);
+            if (cut < 0) return;
+            ps[i].innerHTML = '';
+            ps[i].appendChild(document.createTextNode(text.slice(0, cut)));
+            var dots = document.createElement('span');
+            dots.className = 'bio-ellipsis';
+            dots.textContent = '\u2026';
+            ps[i].appendChild(dots);
+            var rest = document.createElement('span');
+            rest.className = 'bio-rest';
+            rest.textContent = text.slice(cut);
+            ps[i].appendChild(rest);
+            for (var j = i + 1; j < ps.length; j++) ps[j].classList.add('bio-after');
+            break;
+        }
+        bio.classList.add('is-collapsible', 'is-collapsed');
+        btn.addEventListener('click', function () {
+            var collapsed = bio.classList.toggle('is-collapsed');
+            btn.textContent = collapsed ? 'Read more' : 'Show less';
+            btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        });
+    })();
+    </script>
 
     <!-- Upcoming Dates - DESKTOP VERSION -->
     <section class="dates desktop-only" id="calendar">
