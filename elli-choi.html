@@ -122,7 +122,7 @@
         /* Desktop: Name als Text links neben dem Foto */
         @media (min-width: 769px) {
             /* Foto etwas weiter weggezoomt, links und rechts je ein anthrazitfarbener Streifen (wie auf ellichoi.com) */
-            .artist-hero--overlay-desktop { background: #262626; }
+            .artist-hero--overlay-desktop { background: #262626; padding-top: 2cm; }   /* 2 cm Abstand oben: Foto sitzt 2 cm tiefer */
             .artist-hero--overlay-desktop img {
                 width: 84%;
                 margin: 0 auto;
@@ -135,7 +135,7 @@
                 position: absolute;
                 z-index: 2;
                 left: calc(30% - 2cm);
-                top: calc(30% + 3cm);
+                top: calc(30% + 2.4cm);   /* Name bleibt auf gleicher Hoehe, obwohl der Hero um 2 cm hoeher wurde */
                 width: auto;
                 height: auto;
                 margin: 0;
@@ -761,7 +761,7 @@
                 </div>
 
                 <div style="font-size: 13px; opacity: 0.9; margin-top: 25px;">
-                    Photo credit: &copy; Marco Borggreve
+                    Photo credit: &copy; Indianapolis Violin Competition
                 </div>
 
                 <div style="font-size: 13px; line-height: 1.4; margin-top: 15px;">
