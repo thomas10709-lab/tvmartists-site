@@ -1,10 +1,9 @@
 name: Deploy Elli Choi site
 
-# Baut aus elli-choi.html die Startseite fuer ellichoi.com und laedt sie per FTP ueber TLS (FTPS) auf den Server der Domain ellichoi.com
-# (eigener All-Inkl-Account) - nach jedem Merge nach main, der die Seite, ihre Bilder oder den Ordner ellichoi-site/ aendert.
+# Laedt die eigene Startseite von ellichoi.com (ellichoi-site/index.html) per FTP ueber TLS (FTPS) auf den Server der Domain
+# ellichoi.com (eigener All-Inkl-Account) - nach jedem Merge nach main, der diese Seite oder ihre Bilder aendert.
 #
-# Die Seite liegt im Repo nur einmal (elli-choi.html, fuer tvmartists.com). Beim Hochladen werden darin die Adressen
-# (canonical, Open Graph, Schema.org) auf https://ellichoi.com/ umgeschrieben; das Original bleibt unveraendert.
+# Achtung: Das ist NICHT die Elli-Choi-Seite von tvmartists.com (elli-choi.html im Hauptordner, Design der Agentur-Seiten).
 #
 # Secrets (Settings > Secrets and variables > Actions); fehlen sie, wird der Lauf uebersprungen:
 #   ELLICHOI_FTP_HOST      FTP-Server, z. B. w01c2840.kasserver.com
@@ -17,8 +16,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'elli-choi.html'
-      - 'images/elli-choi-*'
+      - 'images/elli-choi-hero.*'
+      - 'images/elli-choi-800.*'
       - 'ellichoi-site/**'
       - '.github/workflows/deploy-ellichoi.yml'
   workflow_dispatch:
@@ -39,10 +38,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist/images
-          sed -e 's#https://tvmartists.com/elli-choi\.html#https://ellichoi.com/#g' \
-              -e 's#https://tvmartists.com/images/elli-choi-#https://ellichoi.com/images/elli-choi-#g' \
-              elli-choi.html > dist/index.html
-          cp images/elli-choi-* dist/images/
+          cp ellichoi-site/index.html dist/index.html
+          cp images/elli-choi-hero.jpg images/elli-choi-hero.webp images/elli-choi-800.jpg images/elli-choi-800.webp dist/images/
           cp ellichoi-site/.htaccess ellichoi-site/robots.txt ellichoi-site/sitemap.xml dist/
           # Kontrolle: auf der neuen Domain darf keine canonical-Adresse mehr auf tvmartists.com zeigen
           if grep -q 'rel="canonical" href="https://tvmartists.com' dist/index.html; then echo "canonical wurde nicht umgeschrieben"; exit 1; fi
