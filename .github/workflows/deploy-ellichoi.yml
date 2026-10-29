@@ -1,0 +1,73 @@
+name: Deploy Elli Choi site
+
+# Baut aus elli-choi.html die Startseite fuer ellichoi.com und laedt sie per FTP ueber TLS (FTPS) auf den Server der Domain ellichoi.com
+# (eigener All-Inkl-Account) - nach jedem Merge nach main, der die Seite, ihre Bilder oder den Ordner ellichoi-site/ aendert.
+#
+# Die Seite liegt im Repo nur einmal (elli-choi.html, fuer tvmartists.com). Beim Hochladen werden darin die Adressen
+# (canonical, Open Graph, Schema.org) auf https://ellichoi.com/ umgeschrieben; das Original bleibt unveraendert.
+#
+# Secrets (Settings > Secrets and variables > Actions); fehlen sie, wird der Lauf uebersprungen:
+#   ELLICHOI_FTP_HOST      FTP-Server, z. B. w01c2840.kasserver.com
+#   ELLICHOI_FTP_USER      FTP-Benutzer (am besten ein eigener, der nur den Ordner von ellichoi.com sieht)
+#   ELLICHOI_FTP_PASSWORD  dessen Passwort
+#   ELLICHOI_FTP_PATH      (optional) Zielordner auf dem FTP-Server, Standard "/"
+#
+# Es wird nie etwas auf dem Server geloescht: Dateien, die nur dort liegen, bleiben unberuehrt.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'elli-choi.html'
+      - 'images/elli-choi-*'
+      - 'ellichoi-site/**'
+      - '.github/workflows/deploy-ellichoi.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ellichoi
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the ellichoi.com folder
+        run: |
+          set -euo pipefail
+          mkdir -p dist/images
+          sed -e 's#https://tvmartists.com/elli-choi\.html#https://ellichoi.com/#g' \
+              -e 's#https://tvmartists.com/images/elli-choi-#https://ellichoi.com/images/elli-choi-#g' \
+              elli-choi.html > dist/index.html
+          cp images/elli-choi-* dist/images/
+          cp ellichoi-site/.htaccess ellichoi-site/robots.txt ellichoi-site/sitemap.xml dist/
+          # Kontrolle: auf der neuen Domain darf keine canonical-Adresse mehr auf tvmartists.com zeigen
+          if grep -q 'rel="canonical" href="https://tvmartists.com' dist/index.html; then echo "canonical wurde nicht umgeschrieben"; exit 1; fi
+          grep -q 'rel="canonical" href="https://ellichoi.com/"' dist/index.html
+          ls -la dist dist/images
+      - name: Upload to the ellichoi.com server (FTPS)
+        env:
+          FTP_HOST: ${{ secrets.ELLICHOI_FTP_HOST }}
+          FTP_USER: ${{ secrets.ELLICHOI_FTP_USER }}
+          FTP_PASS: ${{ secrets.ELLICHOI_FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.ELLICHOI_FTP_PATH }}
+        run: |
+          if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
+            echo "ellichoi.com FTP secrets are missing - run skipped."
+            exit 0
+          fi
+          REMOTE="${FTP_PATH:-/}"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          lftp -u "$FTP_USER,$FTP_PASS" "ftp://$FTP_HOST" <<LFTP
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set net:max-retries 3
+          set net:timeout 30
+          mirror --reverse --parallel=3 --no-perms --verbose dist "$REMOTE"
+          bye
+          LFTP
