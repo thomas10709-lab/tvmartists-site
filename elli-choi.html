@@ -592,14 +592,14 @@
             }
         }
 
-        /* Videos: Vorschaubilder in sinnvoller Breite (zwei nebeneinander, auf dem Handy untereinander) */
+        /* Videos: untereinander, in der Breite der Biografie-Box */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 24px;
-            max-width: 720px;
-            margin: 36px auto 0 auto;
-            padding: 0 4px;
+            grid-template-columns: 1fr;
+            gap: 36px;
+            width: 100%;
+            margin: 36px 0 0 0;
+            padding: 0;
             scroll-margin-top: 90px;
         }
         .video-card { display: block; text-decoration: none; color: #ffffff; text-align: left; }
@@ -618,7 +618,9 @@
         .video-title { display: block; margin-top: 10px; font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 15px; line-height: 1.35; letter-spacing: 0.02em; }
         .video-sub { display: block; margin-top: 3px; font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 13px; line-height: 1.4; opacity: 0.9; }
         @media (max-width: 768px) {
-            .video-grid { grid-template-columns: 1fr; gap: 28px; max-width: 480px; margin-top: 28px; padding: 0 16px; }
+            .video-grid { gap: 28px; margin-top: 28px; }
+            .video-frame { border-radius: 0; }
+            .video-title, .video-sub { padding: 0 20px; }
         }
     </style>
     <script src="bg-sync.js?v=2"></script>
