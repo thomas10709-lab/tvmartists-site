@@ -121,13 +121,18 @@
 
         /* Desktop: Name als Text links neben dem Foto */
         @media (min-width: 769px) {
-            /* Foto etwas nach links gerueckt (rechter Rand bleibt, Bild leicht vergroessert) */
-            .artist-hero--overlay-desktop { overflow: hidden; }
-            .artist-hero--overlay-desktop img { transform: scale(1.12); transform-origin: 100% 0; }
+            /* Foto etwas weiter weggezoomt, links und rechts je ein anthrazitfarbener Streifen (wie auf ellichoi.com) */
+            .artist-hero--overlay-desktop { background: #262626; }
+            .artist-hero--overlay-desktop img {
+                width: 84%;
+                margin: 0 auto;
+                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+                mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+            }
             .artist-hero--overlay-desktop .hero-name {
                 position: absolute;
                 z-index: 2;
-                left: 31%;
+                left: 30%;
                 top: 30%;
                 width: auto;
                 height: auto;
