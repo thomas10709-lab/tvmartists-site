@@ -65,6 +65,8 @@ jobs:
           set ssl:verify-certificate yes
           set net:max-retries 3
           set net:timeout 30
-          mirror --reverse --parallel=3 --no-perms --verbose dist "$REMOTE"
+          lcd dist
+          cd "$REMOTE"
+          mirror --reverse --parallel=3 --no-perms --verbose
           bye
           LFTP
