@@ -613,14 +613,23 @@
             background-position: center;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
         }
-        .video-play { position: absolute; left: 50%; top: 50%; width: 56px; height: 40px; transform: translate(-50%, -50%); opacity: 0.92; transition: opacity .2s, transform .2s; }
-        .video-card:hover .video-play { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
-        .video-title { display: block; margin-top: 10px; font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 15px; line-height: 1.35; letter-spacing: 0.02em; }
-        .video-sub { display: block; margin-top: 3px; font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 13px; line-height: 1.4; opacity: 0.9; }
+        /* Beschriftung direkt auf dem Vorschaubild (wie auf ellichoi.com): Titel und Orchester unten links, Play-Button unten rechts */
+        .video-frame { overflow: hidden; }
+        .video-play { z-index: 2; position: absolute; right: 3%; bottom: 6%; width: 7%; min-width: 48px; height: auto; opacity: 0.92; transition: opacity .2s, transform .2s; }
+        .video-card:hover .video-play { opacity: 1; transform: scale(1.08); }
+        .video-caption {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            display: block; padding: 9% 14% 3.5% 3.5%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0) 100%);
+            line-height: 1.2;
+        }
+        .video-title { display: block; font-family: 'Raleway', sans-serif; font-weight: 500; font-size: clamp(14px, 2.7vw, 30px); line-height: 1.15; letter-spacing: 0.02em; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
+        .video-sub { display: block; margin-top: 0.4em; font-family: 'Raleway', sans-serif; font-weight: 300; font-size: clamp(12px, 1.9vw, 20px); line-height: 1.25; letter-spacing: 0.04em; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
         @media (max-width: 768px) {
             .video-grid { gap: 28px; margin-top: 28px; }
             .video-frame { border-radius: 0; }
-            .video-title, .video-sub { padding: 0 20px; }
+            .video-title { font-size: 4.2vw; }
+            .video-sub { font-size: 3.4vw; }
         }
     </style>
     <script src="bg-sync.js?v=2"></script>
@@ -766,16 +775,20 @@
             <a href="https://www.youtube.com/watch?v=Fn9uw2dGYc4" target="_blank" rel="noopener" class="video-card" aria-label="Play video: Shostakovich Violin Concerto No. 1">
                 <span class="video-frame" style="background-image: url('https://concoursreineelisabeth.be/Concours3/documents/QueenElisabethCompetition2024FinalElliChoi65682.jpg');">
                     <svg class="video-play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+                    <span class="video-caption">
+                        <span class="video-title">Shostakovich: Violin Concerto No.&nbsp;1</span>
+                        <span class="video-sub">Belgian National Orchestra &ndash; Anthony Hermus (conductor)</span>
+                    </span>
                 </span>
-                <span class="video-title">Shostakovich: Violin Concerto No.&nbsp;1</span>
-                <span class="video-sub">Belgian National Orchestra &ndash; Anthony Hermus (conductor)</span>
             </a>
             <a href="https://www.youtube.com/watch?v=W8nfr92rAxc" target="_blank" rel="noopener" class="video-card" aria-label="Play video: Mozart Violin Concerto No. 3, Indianapolis 2026">
                 <span class="video-frame" style="background-image: url('https://i.ytimg.com/vi/W8nfr92rAxc/hqdefault.jpg');">
                     <svg class="video-play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+                    <span class="video-caption">
+                        <span class="video-title">Indianapolis 2026 &ndash; Mozart: Violin Concerto No.&nbsp;3</span>
+                        <span class="video-sub">East Coast Chamber Orchestra</span>
+                    </span>
                 </span>
-                <span class="video-title">Indianapolis 2026 &ndash; Mozart: Violin Concerto No.&nbsp;3</span>
-                <span class="video-sub">East Coast Chamber Orchestra</span>
             </a>
         </div>
 
