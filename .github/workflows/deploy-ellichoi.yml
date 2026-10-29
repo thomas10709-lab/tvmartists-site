@@ -18,6 +18,7 @@ on:
     paths:
       - 'images/elli-choi-hero.*'
       - 'images/elli-choi-800.*'
+      - 'images/elli-choi-video-mozart1.jpg'
       - 'ellichoi-site/**'
       - '.github/workflows/deploy-ellichoi.yml'
   workflow_dispatch:
@@ -39,7 +40,7 @@ jobs:
           set -euo pipefail
           mkdir -p dist/images
           cp ellichoi-site/index.html dist/index.html
-          cp images/elli-choi-hero.jpg images/elli-choi-hero.webp images/elli-choi-800.jpg images/elli-choi-800.webp dist/images/
+          cp images/elli-choi-hero.jpg images/elli-choi-hero.webp images/elli-choi-800.jpg images/elli-choi-800.webp images/elli-choi-video-mozart1.jpg dist/images/
           cp ellichoi-site/.htaccess ellichoi-site/robots.txt ellichoi-site/sitemap.xml dist/
           # Kontrolle: auf der neuen Domain darf keine canonical-Adresse mehr auf tvmartists.com zeigen
           if grep -q 'rel="canonical" href="https://tvmartists.com' dist/index.html; then echo "canonical wurde nicht umgeschrieben"; exit 1; fi
