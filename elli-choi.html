@@ -126,13 +126,15 @@
             .artist-hero--overlay-desktop img {
                 width: 84%;
                 margin: 0 auto;
+                position: relative;
+                left: -2cm;   /* Foto 2 cm weiter nach links */
                 -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
                 mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
             }
             .artist-hero--overlay-desktop .hero-name {
                 position: absolute;
                 z-index: 2;
-                left: 30%;
+                left: calc(30% - 2cm);
                 top: 30%;
                 width: auto;
                 height: auto;
