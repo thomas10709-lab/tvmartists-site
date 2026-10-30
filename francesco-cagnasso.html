@@ -666,6 +666,19 @@
             <a href="https://francescocagnasso.com" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
         </div>
 
+        <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json, Seite "francesco-cagnasso" in news-admin) -->
+        <div class="news-carousel-wrapper" id="newsCarousel" data-news-key="francesco-cagnasso">
+            <div class="news-carousel-inner">
+                <div class="news-carousel-header">News</div>
+                <div class="news-carousel-track" id="newsTrack"></div>
+                <div class="news-carousel-nav">
+                    <div class="news-carousel-arrow" id="newsPrev" aria-label="Zurück">&#8249;</div>
+                    <div class="news-carousel-dots" id="newsDots"></div>
+                    <div class="news-carousel-arrow" id="newsNext" aria-label="Weiter">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
         <!-- BIOGRAPHY -->
         <div class="container-content">
 
@@ -718,6 +731,9 @@
         <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
         <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
     </footer>
+
+    <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json) -->
+    <script src="news-carousel.js?v=3" defer></script>
 
     <!-- HEADER: BEIM RUNTERSCROLLEN AUSBLENDEN, BEIM HOCHSCROLLEN EINBLENDEN -->
     <script>
