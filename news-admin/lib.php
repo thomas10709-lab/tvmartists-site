@@ -14,6 +14,7 @@ function news_pages(): array
     'home'                   => 'Hauptseite',
     'mats-thiersch'          => 'Mats Thiersch',
     'gerald-karni'           => 'Gerald Karni',
+    'francesco-cagnasso'     => 'Francesco Cagnasso',
     'johannes-pierre-bettac' => 'Johannes Pierre Bettac',
     'jose-luis-gutierrez'    => 'José Luis Gutiérrez',
     'michael-sanderling'     => 'Michael Sanderling',
