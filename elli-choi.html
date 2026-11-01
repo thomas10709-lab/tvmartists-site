@@ -122,7 +122,7 @@
         /* Desktop: Name als Text links neben dem Foto */
         @media (min-width: 769px) {
             /* Foto etwas weiter weggezoomt, links und rechts je ein anthrazitfarbener Streifen (wie auf ellichoi.com) */
-            .artist-hero--overlay-desktop { background: #262626; padding-top: 2cm; }   /* 2 cm Abstand oben: Foto sitzt 2 cm tiefer */
+            .artist-hero--overlay-desktop { background: #262626; padding-top: 0; }   /* kein dunkler Balken mehr ueber dem Foto */
             .artist-hero--overlay-desktop img {
                 width: 84%;
                 margin: 0 auto;
@@ -134,8 +134,8 @@
             .artist-hero--overlay-desktop .hero-name {
                 position: absolute;
                 z-index: 2;
-                left: calc(30% - 2cm);
-                top: calc(30% + 2.4cm);   /* Name bleibt auf gleicher Hoehe, obwohl der Hero um 2 cm hoeher wurde */
+                left: calc(30% - 3cm);   /* 1 cm weiter links als vorher */
+                top: 62%;                /* untere Haelfte des Fotos */
                 width: auto;
                 height: auto;
                 margin: 0;
