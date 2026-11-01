@@ -371,6 +371,29 @@
             height: 0.85em;   /* halbe Zeile statt voller Leerzeile */
         }
 
+        /* Biografie: Absaetze, am Handy nach ca. 30 % Text "Read more" */
+        .container-content .bio-text p { margin: 0 0 0.85em 0; }
+        .bio-toggle { display: none; }
+        @media (max-width: 768px) {
+            .bio-text.is-collapsible .bio-toggle {
+                display: inline-block;
+                margin: 2px 0 0;
+                padding: 10px 22px;
+                background: transparent;
+                border: 1px solid #2C3E50;
+                border-radius: 4px;
+                color: #2C3E50;
+                font: inherit;
+                font-size: 14px;
+                letter-spacing: 0.04em;
+                cursor: pointer;
+            }
+            .bio-text.is-collapsible.is-collapsed .bio-rest,
+            .bio-text.is-collapsible.is-collapsed p.bio-after { display: none; }
+            .bio-text .bio-ellipsis { display: none; }
+            .bio-text.is-collapsible.is-collapsed .bio-ellipsis { display: inline; }
+        }
+
         .artist-footer-note {
             padding-top: 1px;
             text-align: center;
@@ -737,27 +760,36 @@
 
         <!-- BIOGRAPHY -->
         <div class="container-content">
-
-
-            A seasoned performer at the ripe age of twenty-five, award-winning violinist Elli Choi is already a standout figure in the world of classical music, quickly establishing herself as one of the most talented violinists of her generation.<br><span class="para-gap"></span>
-
-            Choi has performed throughout North America, Europe, Asia, and the Middle East at esteemed venues such as Lincoln Center’s David Geffen Hall and David H. Koch Theater, the Berliner Philharmonie, the Concertgebouw Amsterdam, Kimmel Center’s Verizon Hall, Maison Symphonique de Montréal, Tonhalle Zürich, Rudolfinum Dvořák Hall in Prague, BOZAR Brussels, the Abu Dhabi Palace, and Beijing’s National Center for the Performing Arts.<br><span class="para-gap"></span>
-
-            Elli Choi appears with major orchestras such as the Orchestre Philarmonique de Monte-Carlo, the Belgian National Orchestra, the Ulster Orchestra, Indianapolis Symphony Orchestra, the Orchestra dell’Accademia Teatro alla Scala, Orchestre Philharmonique Royal de Liège, the Novosibirsk Philharmonic Orchestra, Sofia Philharmonic Orchestra, Salzburg Chamber Soloists, Camerata Bern, Armenian State Orchestra and the Juilliard Orchestra. She has worked with conductors including Massimo Zanetti, Hugh Wolff, Leonard Slatkin, Gabriel Bebeșelea, Anthony Hermus, and Nayden Todorov.<br><span class="para-gap"></span>
-
-            Recent and upcoming highlights include her debuts at the Concertgebouw Amsterdam performing Bruch’s Violin Concerto with the Ulster Orchestra, at the Casa da Musica in Porto alongside the Orquestra Sinfónica do Porto Casa da Música performing Brahms’ Violin Concerto, at the Auditorio de Zaragoza with the Orquestra Reino de Aragón performing Vivaldi’s The Four Seasons, as well as performing Bruch’s Violin Concerto with the Belgian National Orchestra in celebration of Belgium's National Day.<br><span class="para-gap"></span>
-
-            As part of a European tour with the Romanian Symphony Orchestra under the direction of Gabriel Bebeșelea, Elli Choi will return to Amsterdam’s Concertgebouw and make her orchestral debut at Vienna’s Musikverein during the 2026/27 season.<br><span class="para-gap"></span>
-
-            In October 2026, Elli Choi has been awarded the Silver Medal at the 12th International Violin Competition of Indianapolis.<br><span class="para-gap"></span>
-
-            She is also winner of the Monaco World Music Masters in 2016, and has since won top prizes at the Qingdao International Violin Competition, the Classic Strings International Competition held in Dubai, the China International Music Competition. In 2024 she has been awarded Third Prize at the Queen Elisabeth Violin Competition.<br><span class="para-gap"></span>
-
-            Elli Choi has been invited to perform for several heads of states, including President Emmanuel Macron of France and former Vice President Mike Pence at the United States Department of State, as well as the Duchess of Gloucester at Buckingham Palace. She has also enjoyed performing at distinguished events, most notably the 2019 Lincoln Center Fall Gala honoring John E. Waldron, the 2022 KIND gala “Coming Together for Children Alone” held at the Museum of Natural History in New York City, the annual American Chamber of Commerce EU gala in Brussels, and at the World Children’s Day Concert at the Dubai EXPO 2020 as a UNICEF ambassador.<br><span class="para-gap"></span>
-
-            Elli completed her undergraduate studies from Columbia University while simultaneously enrolled at the Juilliard School where she studied since 2009, and has recently received her Master's degree as a Kovner Fellow under the tutelage of Li Lin. She has since started studying at Kronberg Academy with Professor Antje Weithaas and Boris Garlitsky as part of the Professional Studies under the patronage of the Gingko Foundation and J&amp;A Beare's.<br><span class="para-gap"></span>
-
-            Choi currently plays a J. B. Vuillaume c. 1840 on generous loan.<br><span class="para-gap"></span>
+            <div class="bio-text">
+                <p>
+                    In her mid-twenties, award-winning violinist Elli Choi has already established herself as one of the most talented violinists of her generation.
+                </p>
+                <p>
+                    Elli has performed with leading orchestras including the Orchestre Philharmonique de Monte-Carlo, the Belgian National Orchestra, the Ulster Orchestra, the Indianapolis Symphony Orchestra, the Orchestra dell’Accademia Teatro alla Scala, the Orchestre Philharmonique Royal de Liège, the Novosibirsk Philharmonic Orchestra, the Sofia Philharmonic Orchestra, the Salzburg Chamber Soloists, the Camerata Bern, the Armenian State Orchestra, and the Juilliard Orchestra, working with conductors such as Massimo Zanetti, Hugh Wolff, Leonard Slatkin, Gabriel Bebeșelea, Anthony Hermus, and Nayden Todorov.
+                </p>
+                <p>
+                    Her career has taken her across North America, Europe, Asia, and the Middle East, to venues including David Geffen Hall and the David H. Koch Theater at Lincoln Center, the Berliner Philharmonie, the Concertgebouw Amsterdam, Verizon Hall at the Kimmel Center, the Maison Symphonique de Montréal, the Tonhalle Zürich, the Dvořák Hall at the Rudolfinum in Prague, BOZAR in Brussels, the Emirates Palace in Abu Dhabi, and the National Center for the Performing Arts in Beijing.
+                </p>
+                <p>
+                    Recent and upcoming highlights include her debuts at the Concertgebouw Amsterdam with the Ulster Orchestra, performing Bruch’s Violin Concerto; at the Casa da Música in Porto with the Orquestra Sinfónica do Porto Casa da Música, performing Brahms’ Violin Concerto; and at the Auditorio de Zaragoza with the Orquestra Reino de Aragón, performing Vivaldi’s The Four Seasons. She also performed Bruch’s Violin Concerto with the Belgian National Orchestra in celebration of Belgium’s National Day.
+                </p>
+                <p>
+                    In the 2026/27 season, Elli Choi returns to the Concertgebouw Amsterdam as part of a European tour with the Romanian Symphony Orchestra under Gabriel Bebeșelea, and makes her debut at Vienna’s Musikverein.
+                </p>
+                <p>
+                    In 2026, she won the Silver Medal at the International Violin Competition of Indianapolis, and in 2024 she was awarded Third Prize at the Queen Elisabeth Competition in Brussels. She has also won First Prize at the China International Music Competition (2024), the Dubai Violin Competition (2024), and the Qingdao International Violin Competition. Her early success includes winning the Monaco World Music Masters in 2016.
+                </p>
+                <p>
+                    Elli Choi has been invited to perform for several heads of state, including French President Emmanuel Macron and, at the U.S. Department of State, former Vice President Mike Pence, as well as the Duchess of Gloucester at Buckingham Palace. Her performances at special events include the 2019 Lincoln Center Fall Gala honoring John E. Waldron, the 2022 KIND gala “Coming Together for Children Alone” at the American Museum of Natural History in New York, the annual American Chamber of Commerce EU gala in Brussels, and the World Children’s Day Concert at Dubai Expo 2020, where she appeared as a UNICEF ambassador.
+                </p>
+                <p>
+                    Elli studied at the Juilliard School from 2009 and completed her Master’s degree in Violin there in 2024 as a Kovner Fellow under Li Lin. In parallel, she earned a Bachelor’s degree in Economics and History from Columbia University. She is currently enrolled in the Professional Studies program at the Kronberg Academy, where she studies with Antje Weithaas and Boris Garlitsky, supported by the Gingko Foundation and J&amp;A Beare’s.
+                </p>
+                <p>
+                    She currently plays a J. B. Vuillaume violin, c. 1840, on generous loan.
+                </p>
+                <button type="button" class="bio-toggle" aria-expanded="false">Read more</button>
+            </div>
 
             <div class="artist-footer-note">
 
@@ -923,6 +955,42 @@
         });
         box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
         box.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); });
+    })();
+    </script>
+
+    <!-- BIOGRAFIE: AM HANDY NACH CA. 30 % TEXT "READ MORE" -->
+    <script>
+    (function () {
+        var bio = document.querySelector('.bio-text');
+        var btn = bio && bio.querySelector('.bio-toggle');
+        if (!bio || !btn) return;
+        var ps = Array.prototype.slice.call(bio.querySelectorAll('p'));
+        var total = ps.reduce(function (n, p) { return n + p.textContent.trim().length; }, 0);
+        var limit = total * 0.3, count = 0;
+        for (var i = 0; i < ps.length; i++) {
+            var text = ps[i].textContent.trim();
+            if (count + text.length < limit) { count += text.length; continue; }
+            var cut = text.indexOf(' ', limit - count);
+            if (cut < 0) return;
+            ps[i].innerHTML = '';
+            ps[i].appendChild(document.createTextNode(text.slice(0, cut)));
+            var dots = document.createElement('span');
+            dots.className = 'bio-ellipsis';
+            dots.textContent = '\u2026';
+            ps[i].appendChild(dots);
+            var rest = document.createElement('span');
+            rest.className = 'bio-rest';
+            rest.textContent = text.slice(cut);
+            ps[i].appendChild(rest);
+            for (var j = i + 1; j < ps.length; j++) ps[j].classList.add('bio-after');
+            break;
+        }
+        bio.classList.add('is-collapsible', 'is-collapsed');
+        btn.addEventListener('click', function () {
+            var collapsed = bio.classList.toggle('is-collapsed');
+            btn.textContent = collapsed ? 'Read more' : 'Show less';
+            btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        });
     })();
     </script>
 </body>
