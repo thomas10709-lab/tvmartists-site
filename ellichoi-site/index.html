@@ -695,6 +695,21 @@
             }
         }
 
+        /* Desktop: gleiches Querformat-Foto wie auf tvmartists.com (Kopf rechts, links Platz fuer den Namen); Handy bleibt unveraendert */
+        @media (min-width: 641px) {
+            .hero { height: auto; aspect-ratio: 16 / 9; display: block; }
+            .hero::before {
+                background-image: url('images/elli-choi-hero2-1920.jpg');
+                background-image: image-set(url('images/elli-choi-hero2-1920.webp') type('image/webp'), url('images/elli-choi-hero2-1920.jpg') type('image/jpeg'));
+                background-size: cover;
+                background-position: center;
+                filter: none;
+            }
+            .hero::after { display: none; }
+            .hero .hero-content { position: absolute; top: 58%; left: 7%; }
+            .hero .hero-name { font-size: 6.4vw; }
+        }
+
         @media (max-width: 640px) {
             /* Desktop-only verstecken */
             .desktop-only {
