@@ -1,0 +1,65 @@
+name: Deploy Predan Voigt site
+
+# Laedt die Seite von predanvoigt.com (Ordner predanvoigt-site/) per FTP ueber TLS (FTPS) auf den Server der Domain
+# predanvoigt.com (eigener All-Inkl-Unteraccount) - nach jedem Merge nach main, der diesen Ordner aendert.
+#
+# Secrets (Settings > Secrets and variables > Actions); fehlen sie, wird der Lauf uebersprungen:
+#   PREDANVOIGT_FTP_HOST      FTP-Server, z. B. w01c2840.kasserver.com
+#   PREDANVOIGT_FTP_USER      FTP-Benutzer (am besten ein eigener, der nur den Ordner von predanvoigt.com sieht)
+#   PREDANVOIGT_FTP_PASSWORD  dessen Passwort
+#   PREDANVOIGT_FTP_PATH      (optional) Zielordner auf dem FTP-Server, Standard "/"
+#
+# Es wird nie etwas auf dem Server geloescht: Dateien, die nur dort liegen, bleiben unberuehrt.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'predanvoigt-site/**'
+      - '.github/workflows/deploy-predanvoigt.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-predanvoigt
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the predanvoigt.com folder
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp -r predanvoigt-site/. dist/
+          # Kontrolle: die Startseite muss die richtige sein
+          grep -q 'Predan Voigt Productions' dist/index.html
+          ls -la dist
+      - name: Upload to the predanvoigt.com server (FTPS)
+        env:
+          FTP_HOST: ${{ secrets.PREDANVOIGT_FTP_HOST }}
+          FTP_USER: ${{ secrets.PREDANVOIGT_FTP_USER }}
+          FTP_PASS: ${{ secrets.PREDANVOIGT_FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.PREDANVOIGT_FTP_PATH }}
+        run: |
+          if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
+            echo "predanvoigt.com FTP secrets are missing - run skipped."
+            exit 0
+          fi
+          REMOTE="${FTP_PATH:-/}"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          lftp -u "$FTP_USER,$FTP_PASS" "ftp://$FTP_HOST" <<LFTP
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set net:max-retries 3
+          set net:timeout 30
+          lcd dist
+          cd "$REMOTE"
+          mirror --reverse --parallel=3 --no-perms --verbose
+          bye
+          LFTP
