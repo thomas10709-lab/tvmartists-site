@@ -729,9 +729,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 4px;
-                width: 34px;
-                height: 34px;
+                gap: 3px;
+                width: 27px;
+                height: 27px;
                 padding: 0;
                 border-radius: 50%;
                 background: rgba(0,0,0,0.45);
@@ -740,17 +740,17 @@
             }
 
             .hamburger span {
-                width: 16px;
+                width: 13px;
                 height: 2px;
                 background: #fff;
             }
 
             .hamburger.active span:nth-child(1) {
-                transform: translateY(6px) rotate(45deg);
+                transform: translateY(5px) rotate(45deg);
             }
 
             .hamburger.active span:nth-child(3) {
-                transform: translateY(-6px) rotate(-45deg);
+                transform: translateY(-5px) rotate(-45deg);
             }
 
             .section-title {
@@ -1339,17 +1339,26 @@
     </footer>
 
     <script>
-        // Handy: Name so gross, dass der Abstand links genauso gross ist wie rechts (Text bleibt linksbuendig, fuellt die Breite zwischen den Raendern)
+        // Handy: Name fuellt 80 % der Breite zwischen den Raendern, die linke Kante des "E" liegt optisch genau unter der des "S" von "Stage."
         (function () {
             var h = document.querySelector('.hero .hero-name');
+            var tag = document.querySelector('#about-mobile .tagline-text');
             if (!h) return;
+            var ctx = document.createElement('canvas').getContext('2d');
+            function inkLeft(el, ch) {   // Abstand zwischen Textanfang und linker Kante der Buchstabenform
+                var cs = getComputedStyle(el);
+                ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+                var m = ctx.measureText(ch);
+                return -(m.actualBoundingBoxLeft || 0);
+            }
             function fit() {
-                if (window.innerWidth > 640) { h.style.fontSize = ''; h.style.display = ''; h.style.whiteSpace = ''; return; }
+                if (window.innerWidth > 640) { h.style.fontSize = ''; h.style.display = ''; h.style.whiteSpace = ''; h.style.marginLeft = ''; return; }
                 var box = h.parentElement, cs = getComputedStyle(box);
                 var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-                h.style.display = 'inline-block'; h.style.whiteSpace = 'nowrap'; h.style.fontSize = '100px';
+                h.style.display = 'inline-block'; h.style.whiteSpace = 'nowrap'; h.style.marginLeft = '0'; h.style.fontSize = '100px';
                 var w = h.getBoundingClientRect().width;
-                if (w > 0 && avail > 0) h.style.fontSize = (100 * avail / w) + 'px';
+                if (w > 0 && avail > 0) h.style.fontSize = (100 * 0.8 * avail / w) + 'px';
+                if (tag) h.style.marginLeft = (inkLeft(tag, 'S') - inkLeft(h, 'E')) + 'px';
             }
             fit();
             if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
