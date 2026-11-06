@@ -735,8 +735,8 @@
                 padding: 0;
                 border-radius: 50%;
                 background: rgba(0,0,0,0.45);
-                top: calc(2.7cm + 8vw + 10px);   /* unter dem Namen */
-                right: 0.5cm;                     /* bündig mit dem Namen */
+                top: 12px;       /* oben rechts in der Ecke */
+                right: 12px;
             }
 
             .hamburger span {
@@ -863,7 +863,8 @@
             .hero .hero-name {
                 color: #111;
                 text-shadow: none;
-                font-size: 12vw;
+                font-size: 21vw;   /* Ausgangswert; das Skript unten passt die Schrift genau an die Breite an */
+                letter-spacing: 0;
                 line-height: 1.05;
             }
 
@@ -1336,6 +1337,27 @@
         <p>Official Website of Elli Choi</p>
         <p>Photo Credit &copy; Gio Pic Time</p>
     </footer>
+
+    <script>
+        // Handy: Name so gross, dass der Abstand links genauso gross ist wie rechts (Text bleibt linksbuendig, fuellt die Breite zwischen den Raendern)
+        (function () {
+            var h = document.querySelector('.hero .hero-name');
+            if (!h) return;
+            function fit() {
+                if (window.innerWidth > 640) { h.style.fontSize = ''; h.style.display = ''; h.style.whiteSpace = ''; return; }
+                var box = h.parentElement, cs = getComputedStyle(box);
+                var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+                h.style.display = 'inline-block'; h.style.whiteSpace = 'nowrap'; h.style.fontSize = '100px';
+                var w = h.getBoundingClientRect().width;
+                if (w > 0 && avail > 0) h.style.fontSize = (100 * avail / w) + 'px';
+            }
+            fit();
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+            window.addEventListener('load', fit);
+            window.addEventListener('resize', fit);
+            window.addEventListener('orientationchange', fit);
+        })();
+    </script>
 
     <script>
         const hamburgerBtn = document.getElementById('hamburgerBtn');
