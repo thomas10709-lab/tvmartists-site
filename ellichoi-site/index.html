@@ -765,7 +765,7 @@
             .tagline.mobile-only {
                 position: relative;
                 background: #ffffff;
-                padding: 40px 30px;
+                padding: 12px 30px 40px 30px;
                 max-width: 100%;
                 margin: 0;
                 z-index: 3;
@@ -850,18 +850,21 @@
                 display: none;
             }
 
+            /* Handy: Name steht UNTER dem Foto, linksbuendig, direkt ueber "Stage. Performance. Emotion." */
+            .hero { background: #ffffff; }
             .hero-content {
-                position: absolute;
-                top: 1.7cm;
+                position: static;
                 left: auto;
-                right: 0.5cm;
-                text-align: right;
+                top: auto;
+                right: auto;
+                padding: 26px 30px 0 30px;
+                text-align: left;
             }
-
-            /* Handy-Hero hat jetzt weissen Hintergrund: Name dunkel statt weiss */
             .hero .hero-name {
                 color: #111;
                 text-shadow: none;
+                font-size: 12vw;
+                line-height: 1.05;
             }
 
             /* Mobile Dates */
