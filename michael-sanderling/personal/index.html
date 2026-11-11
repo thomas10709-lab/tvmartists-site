@@ -208,9 +208,9 @@ footer.f{padding-top:90px;padding-bottom:40px}
 #to-top span{position:relative}
 
 @media (min-width:821px){
-.fp-text{font-size:15px;line-height:1.7}
-.fp-row{grid-template-columns:minmax(0,4fr) minmax(0,4.2fr)}
-.fp-block{padding-right:70px}
+.fp-text{font-size:clamp(16px,1.3vw,20px);line-height:1.7}
+.fp-row{grid-template-columns:minmax(0,4fr) minmax(0,5.2fr)}
+.fp-block{padding-right:70px;display:flex;flex-direction:column;justify-content:space-between}
 #calendar .ev{font-size:17.5px}
 #calendar .cal.four .ev{font-size:16px}
 .bio .txt p{font-size:22px}
@@ -223,8 +223,8 @@ footer.f{padding-top:90px;padding-bottom:40px}
 #calendar .btn{font-size:17px;padding:14px 18px}
 nav.main{font-size:clamp(15px,.92vw,20px)}
 .ev .city{font-size:1.25em}
-.press-card{margin-top:70px;align-self:start}
-.press-card picture{min-height:440px}
+.press-card{margin-top:70px;align-self:stretch}
+.press-card picture{min-height:300px}
 .press-card img{object-position:50% 20%}
 #calendar{padding-top:70px}
 .ocd{padding-top:100px}
