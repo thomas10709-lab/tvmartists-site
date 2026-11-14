@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 
 require __DIR__ . '/lib.php';
+const ARTICLE_URL    = 'https://tvmartists.com/news-article.html?id=';   // eigene Seite je Text-News
 const MAX_FAILS      = 8;                  // Fehlversuche ...
 const FAIL_WINDOW    = 900;                // ... innerhalb von 15 Minuten
 
@@ -190,6 +191,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
+                if ($action === 'add_article') {
+                    $cats  = valid_cats($_POST['cats'] ?? [], $PAGES);
+                    $title = clean_text((string)($_POST['title'] ?? ''), 200);
+                    $body  = clean_body((string)($_POST['body'] ?? ''), 20000);
+                    $dateIn = (string)($_POST['date'] ?? '');
+                    $when = $dateIn !== '' ? input_to_ts($dateIn) : null;
+                    $file = $_FILES['image'] ?? null;
+                    if (!$cats) {
+                        flash('err', 'Bitte mindestens eine Seite auswählen.');
+                    } elseif ($title === '' || $body === '') {
+                        flash('err', 'Bitte Titel und Text eingeben.');
+                    } elseif (!$file || (int)($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+                        flash('err', 'Bitte ein Bild auswählen.');
+                    } elseif ((int)$file['error'] !== UPLOAD_ERR_OK) {
+                        flash('err', 'Upload fehlgeschlagen (Fehler ' . (int)$file['error'] . ', evtl. zu groß).');
+                    } elseif ((int)$file['size'] > MAX_FILE_BYTES) {
+                        flash('err', 'Das Bild ist größer als 25 MB.');
+                    } else {
+                        $id = gmdate('Ymd-His') . '-' . bin2hex(random_bytes(3));
+                        $res = process_image((string)$file['tmp_name'], $IMG . '/' . $id);
+                        if (!is_array($res)) {
+                            flash('err', $res);
+                        } else {
+                            $item = [
+                                'id'    => $id,
+                                'ts'    => $when ?? gmdate('c'),
+                                'type'  => 'article',
+                                'title' => $title,
+                                'text'  => $body,
+                                'alt'   => $title,
+                                'link'  => ARTICLE_URL . $id,
+                                'image' => 'news-data/img/' . $id . '.jpg',
+                                'webp'  => $res['webp'] ? 'news-data/img/' . $id . '.webp' : '',
+                                'w'     => $res['w'],
+                                'h'     => $res['h'],
+                                'cats'  => $cats,
+                            ];
+                            with_lock($DATA, function () use ($JSON, $item) {
+                                $all = load_news($JSON);
+                                $all[] = $item;
+                                save_news($JSON, $all);
+                            });
+                            flash('ok', 'News „' . $title . '" wurde veröffentlicht. Das Bild im Karussell führt jetzt zur eigenen Seite.');
+                        }
+                    }
+                }
+
                 if ($action === 'add_card') {
                     $cats = valid_cats($_POST['cats'] ?? [], $PAGES);
                     $url  = clean_link((string)($_POST['url'] ?? ''));
@@ -258,17 +306,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $cats = valid_cats($_POST['cats'] ?? [], $PAGES);
                         $alt  = clean_text((string)($_POST['alt'] ?? ''), 200);
                         $link = clean_link((string)($_POST['link'] ?? ''));
+                        $title = clean_text((string)($_POST['title'] ?? ''), 200);
+                        $body  = clean_body((string)($_POST['body'] ?? ''), 20000);
                         $dateIn  = (string)($_POST['date'] ?? '');
                         $newTs = ($dateIn !== '' && $dateIn !== (string)($_POST['date_orig'] ?? '')) ? input_to_ts($dateIn) : null;
                         if (!$cats) {
                             flash('err', 'Es muss mindestens eine Seite ausgewählt bleiben. Zum Entfernen bitte „Löschen" nutzen.');
                         } else {
-                            with_lock($DATA, function () use ($JSON, $id, $cats, $alt, $link, $newTs) {
+                            with_lock($DATA, function () use ($JSON, $id, $cats, $alt, $link, $newTs, $title, $body) {
                                 $all = load_news($JSON);
                                 foreach ($all as &$it) {
                                     if (($it['id'] ?? '') === $id) {
-                                        $it['cats'] = $cats; $it['link'] = $link;
-                                        if ($alt !== '') { $it['alt'] = $alt; }
+                                        $it['cats'] = $cats;
+                                        if (($it['type'] ?? '') === 'article') {
+                                            if ($title !== '') { $it['title'] = $title; $it['alt'] = $title; }
+                                            if ($body !== '') { $it['text'] = $body; }
+                                        } else {
+                                            $it['link'] = $link;
+                                            if ($alt !== '') { $it['alt'] = $alt; }
+                                        }
                                         if ($newTs !== null) { $it['ts'] = $newTs; }
                                     }
                                 }
@@ -342,8 +398,9 @@ $csrf = $_SESSION['csrf'];
   h2 { font-size: 18px; margin: 0 0 12px; color: var(--blue); }
   .sub { color: var(--soft); margin: 0 0 20px; font-size: 14px; }
   .card { background: var(--card); color: var(--ink); border-radius: 10px; padding: 18px; margin-bottom: 18px; }
+  textarea { font: inherit; resize: vertical; }
   label { display:block; font-weight:600; margin: 12px 0 4px; font-size: 14px; }
-  input[type=text], input[type=url], input[type=password], input[type=file], input[type=datetime-local] { width:100%; padding:10px; border:1px solid #9bb2cc; border-radius:8px; font-size:16px; background:#fff; color:var(--ink); }
+  input[type=text], input[type=url], input[type=password], input[type=file], input[type=datetime-local], textarea { width:100%; padding:10px; border:1px solid #9bb2cc; border-radius:8px; font-size:16px; background:#fff; color:var(--ink); }
   .cats { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:6px; }
   .cats label { display:flex; align-items:center; gap:8px; font-weight:400; margin:0; padding:6px 10px; border:1px solid #c5d4e6; border-radius:8px; cursor:pointer; }
   .cats input { width:18px; height:18px; }
@@ -412,6 +469,37 @@ unset P H</pre>
 
 <?php else: ?>
   <div class="card">
+    <h2>News mit Bild und Text</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
+      <input type="hidden" name="action" value="add_article">
+
+      <label for="atitle">Titel</label>
+      <input id="atitle" type="text" name="title" maxlength="200" placeholder="z. B. Mats Thiersch gewinnt den Concours de Genève" required>
+
+      <label for="abody">Text</label>
+      <textarea id="abody" name="body" rows="10" maxlength="20000" placeholder="Hier den News-Text schreiben. Eine Leerzeile beginnt einen neuen Absatz." required></textarea>
+      <div class="hint">Nur reiner Text. Eine Leerzeile erzeugt einen neuen Absatz. Die News bekommt eine eigene Seite und erscheint im „News“-Button der gewählten Künstler.</div>
+
+      <label for="aimage">Bild (JPG, PNG oder WebP)</label>
+      <input id="aimage" type="file" name="image" accept="image/jpeg,image/png,image/webp" required>
+      <div class="hint">Das Bild erscheint im Karussell und führt beim Klick zur Seite mit dem Text.</div>
+
+      <label>Auf welchen Seiten soll sie erscheinen?</label>
+      <div class="cats">
+        <?php foreach ($PAGES as $key => $label): ?>
+          <label><input type="checkbox" name="cats[]" value="<?= e($key) ?>"> <?= e($label) ?></label>
+        <?php endforeach; ?>
+      </div>
+
+      <label for="adate">Datum (optional, bestimmt die Reihenfolge; leer = jetzt)</label>
+      <input id="adate" type="datetime-local" name="date">
+
+      <div class="row"><button type="submit">Veröffentlichen</button></div>
+    </form>
+  </div>
+
+  <div class="card">
     <h2>Neue Bilder hochladen</h2>
     <form method="post" enctype="multipart/form-data">
       <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
@@ -479,6 +567,7 @@ unset P H</pre>
           <div class="meta">
             <?php if ($filter !== ''): ?><strong>Platz <?= $pos + 1 ?></strong> &middot; <?php endif; ?>
             <?= e(implode(', ', array_map(fn($c) => $PAGES[$c] ?? $c, $cats))) ?>
+            <?php if (($it['type'] ?? '') === 'article'): ?><span class="badge" style="background:#12396B;color:#fff;">Text-News</span><?php endif; ?>
             <?php if ($filter !== '' && $pos >= MAX_SHOWN): ?><span class="badge">wird nicht angezeigt</span><?php endif; ?>
           </div>
           <form method="post">
@@ -493,10 +582,18 @@ unset P H</pre>
             <label>Veröffentlicht am (bestimmt die Reihenfolge: neueste zuerst)</label>
             <input type="datetime-local" name="date" value="<?= e(ts_to_input((string)($it['ts'] ?? ''))) ?>">
             <input type="hidden" name="date_orig" value="<?= e(ts_to_input((string)($it['ts'] ?? ''))) ?>">
+            <?php if (($it['type'] ?? '') === 'article'): ?>
+            <label>Titel</label>
+            <input type="text" name="title" maxlength="200" value="<?= e((string)($it['title'] ?? '')) ?>">
+            <label>Text</label>
+            <textarea name="body" rows="8" maxlength="20000"><?= e((string)($it['text'] ?? '')) ?></textarea>
+            <div class="hint"><a href="../news-article.html?id=<?= e($id) ?>" target="_blank" rel="noopener" style="color:#12396B;">Eigene Seite ansehen</a></div>
+            <?php else: ?>
             <label>Beschreibung</label>
             <input type="text" name="alt" maxlength="200" value="<?= e((string)($it['alt'] ?? '')) ?>">
             <label>Link</label>
             <input type="url" name="link" value="<?= e((string)($it['link'] ?? '')) ?>" placeholder="https://…">
+            <?php endif; ?>
             <div class="row">
               <button type="submit" name="action" value="update">Speichern</button>
               <button class="light" type="submit" name="action" value="bump">Nach vorn (jetzt)</button>

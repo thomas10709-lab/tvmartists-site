@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News | TVM artists</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="description" content="News from TVM artists.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body { background-color: #1F4270; color: #ffffff; font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .article-page { max-width: 760px; margin: 0 auto; padding: 56px 20px 30px; }
+        .back-link { display: inline-block; color: #cfe3f5; font-size: 14px; letter-spacing: 0.03em; text-decoration: none; margin-bottom: 26px; }
+        .back-link:hover { text-decoration: underline; }
+        .article-img { display: block; width: 100%; height: auto; border-radius: 8px; margin: 0 0 26px; }
+        .article-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #cfe3f5; margin: 0 0 10px; }
+        h1 { font-weight: 500; font-size: clamp(26px, 4.6vw, 38px); line-height: 1.25; margin: 0 0 24px; }
+        .article-text { font-size: 17px; font-weight: 300; line-height: 1.75; letter-spacing: 0.01em; }
+        .article-text p { margin: 0 0 1.1em; }
+        .empty { text-align: center; padding: 40px 0; color: #cfe3f5; font-weight: 300; }
+        .site-footer { text-align: center; padding: 30px 20px 40px; font-size: 12px; color: rgba(255,255,255,0.75); }
+        .site-footer a { color: inherit; }
+        .footer-rule { width: min(220px, 60vw); height: 1px; margin: 0 auto 24px; background: rgba(255,255,255,0.85); }
+    </style>
+</head>
+<body>
+    <main class="article-page">
+        <a class="back-link" id="backLink" href="index.html">&larr; TVM artists</a>
+        <div id="article"></div>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-rule"></div>
+        <a href="https://tvmartists.com/">TVM artists</a> &ndash; &copy; 2026 &ndash; <a href="imprint.html">imprint</a>
+    </footer>
+    <script>
+    (function () {
+        "use strict";
+        var ARTISTS = {
+            "mats-thiersch": ["Mats Thiersch", "mats-thiersch.html"],
+            "gerald-karni": ["Gerald Karni", "gerald-karni.html"],
+            "francesco-cagnasso": ["Francesco Cagnasso", "francesco-cagnasso.html"],
+            "johannes-pierre-bettac": ["Johannes Pierre Bettac", "johannes-pierre-bettac.html"],
+            "jose-luis-gutierrez": ["José Luis Gutiérrez", "jose-luis-gutierrez.html"],
+            "michael-sanderling": ["Michael Sanderling", "michael-sanderling.html"]
+        };
+        var id = new URLSearchParams(location.search).get("id") || "";
+        var box = document.getElementById("article");
+        function el(tag, cls, text) {
+            var n = document.createElement(tag);
+            if (cls) { n.className = cls; }
+            if (text) { n.textContent = text; }
+            return n;
+        }
+        function fail(msg) { box.appendChild(el("p", "empty", msg)); }
+        if (!/^\d{8}-\d{6}-[a-f0-9]{6}$/.test(id)) { fail("This news item could not be found."); return; }
+        fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (all) {
+            var it = (Array.isArray(all) ? all : []).filter(function (x) { return x && x.id === id && x.type === "article"; })[0];
+            if (!it) { fail("This news item could not be found."); return; }
+            var cats = Array.isArray(it.cats) ? it.cats : [];
+            var artist = cats.filter(function (c) { return ARTISTS[c]; })[0];
+            var back = document.getElementById("backLink");
+            if (artist) { back.href = "news.html?artist=" + encodeURIComponent(artist); back.textContent = "\u2190 " + ARTISTS[artist][0] + " \u2013 News"; }
+            document.title = (it.title || "News") + " | TVM artists";
+            if (it.image) {
+                var img = document.createElement("img");
+                img.className = "article-img"; img.src = it.image; img.alt = it.alt || it.title || "";
+                if (it.w && it.h) { img.width = it.w; img.height = it.h; }
+                if (it.webp) {
+                    var pic = document.createElement("picture"), s = document.createElement("source");
+                    s.type = "image/webp"; s.srcset = it.webp; pic.appendChild(s); pic.appendChild(img); box.appendChild(pic);
+                } else { box.appendChild(img); }
+            }
+            var d = new Date(it.ts);
+            if (!isNaN(d)) { box.appendChild(el("p", "article-date", d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }))); }
+            box.appendChild(el("h1", "", it.title || ""));
+            var text = el("div", "article-text");
+            String(it.text || "").split(/\n{2,}/).forEach(function (par) {
+                if (!par.trim()) { return; }
+                var p = el("p", "", par.trim()); p.style.whiteSpace = "pre-line"; text.appendChild(p);
+            });
+            box.appendChild(text);
+        }).catch(function () { fail("The news could not be loaded."); });
+    })();
+    </script>
+</body>
+</html>
