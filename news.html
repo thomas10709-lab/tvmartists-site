@@ -142,7 +142,10 @@
             return pic;
         }
         function excerpt(t) {
-            t = String(t || "").replace(/\[([^\]\n]+)\]\(https?:\/\/[^\s)]+\)/g, "$1").replace(/\s+/g, " ").trim();
+            // Namenszeile ("By …") am Anfang überspringen: sie steht auf der Artikelseite und bei "Latest News"
+            var paras = String(t || "").replace(/\r\n?/g, "\n").trim().split(/\n{2,}/);
+            if (paras.length > 1 && /^by\s/i.test(paras[0].trim()) && paras[0].trim().length <= 160) { paras.shift(); }
+            t = paras.join(" ").replace(/\[([^\]\n]+)\]\(https?:\/\/[^\s)]+\)/g, "$1").replace(/\s+/g, " ").trim();
             return t.length > 220 ? t.slice(0, 220).replace(/\s+\S*$/, "") + "\u2026" : t;
         }
         function entry(it) {
