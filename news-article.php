@@ -150,8 +150,8 @@ if ($it) {
 <?php endif; ?>
             <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?= tvm_e((new DateTimeImmutable($ts))->format('j F Y')) ?></time></p>
             <div class="article-text">
-<?php foreach (preg_split('/\n{2,}/', $text) ?: [] as $par): if (trim($par) === '') { continue; } ?>
-                <p><?= tvm_linkify(trim($par)) ?></p>
+<?php $bylineShown = tvm_byline($text); foreach (preg_split('/\n{2,}/', $text) ?: [] as $i => $par): if (trim($par) === '') { continue; } ?>
+                <p><?= tvm_linkify($i === 0 && $bylineShown !== '' ? $bylineShown : trim($par)) ?></p>
 <?php endforeach; ?>
             </div>
         </article>
@@ -160,7 +160,7 @@ if ($it) {
     <footer class="site-footer">
         <div class="footer-rule"></div>
         <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
-            <img src="images/insta.png" alt="Instagram">
+            <img src="images/insta-white.png" alt="Instagram">
         </a>
         <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
         <p class="footer-copy">&copy; <?= date('Y') ?> TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>

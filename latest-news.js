@@ -24,7 +24,9 @@
   function byline(text) {
     var paras = String(text || "").replace(/\r\n?/g, "\n").trim().split(/\n{2,}/);
     var first = (paras[0] || "").trim();
-    return (paras.length > 1 && /^by\s/i.test(first) && first.length <= 160) ? first.replace(/\s+/g, " ") : "";
+    if (!(paras.length > 1 && /^by\s/i.test(first) && first.length <= 160)) { return ""; }
+    // Datum am Ende weglassen: "By …, 14 November 2026:" -> "By …:"
+    return first.replace(/\s+/g, " ").replace(/,?\s*\d{1,2}\.?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December|Januar|Februar|M\u00e4rz|Mai|Juni|Juli|Oktober|Dezember)\s+\d{4}(?=\s*:?\s*$)/i, "");
   }
 
   ready(function () {
