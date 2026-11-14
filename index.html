@@ -181,6 +181,45 @@
             }
         }
 
+        /* --- LATEST NEWS (neueste Text-News über den Artists) --- */
+        .latest-news {
+            max-width: 1000px;
+            margin: 0 auto var(--spacing-section) auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        .ln-card {
+            background-color: #cfe3f5;
+            color: #12396B;
+            border-radius: 8px;
+            padding: 26px 28px 28px 28px;
+            text-align: left;
+        }
+        .ln-title {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            font-size: clamp(22px, 3vw, 30px);
+            line-height: 1.25;
+            letter-spacing: 0.01em;
+            margin: 0 0 18px 0;
+        }
+        .ln-title a, .ln-more { color: inherit; }
+        .ln-title a { text-decoration: none; }
+        .ln-img { display: block; }
+        .ln-img img { display: block; width: 100%; height: auto; border-radius: 6px; }
+        .ln-text {
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 18px 0 8px 0;
+        }
+        .ln-more { font-family: 'Raleway', sans-serif; font-size: 15px; font-weight: 600; text-decoration: underline; }
+        @media (max-width: 768px) {
+            .latest-news { padding: 0 14px; margin-top: 34px; }
+            .ln-card { padding: 20px 18px 22px 18px; }
+        }
+
         /* --- NEWS KARUSSELL --- */
         .news-carousel-wrapper {
             display: block !important;
@@ -1496,6 +1535,9 @@
         </div>
     </div>
 
+    <!-- 2b. LATEST NEWS: home.php setzt hier serverseitig die neueste Text-News ein; ohne home.php füllt latest-news.js den Platz -->
+    <div id="latestNews"><!--LATEST_NEWS--></div>
+
     <!-- 3. CONDUCTORS (2-SPALTEN GRID, ZUFÄLLIGE REIHENFOLGE) -->
     <div class="conductors-section" id="artists">
         <h2 class="section-label">Artists</h2>
@@ -1755,5 +1797,6 @@
 
     <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json), sonst WordPress -->
     <script src="news-carousel.js?v=3" defer></script>
+    <script src="latest-news.js?v=1" defer></script>
 </body>
 </html>

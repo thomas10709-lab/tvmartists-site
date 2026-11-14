@@ -33,15 +33,27 @@
       return res.json();
     }).then(function (all) {
       if (!Array.isArray(all)) { return []; }
-      return all.filter(function (it) {
+      var list = all.filter(function (it) {
         return it && (it.image || it.type === "card") && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
       }).sort(function (a, b) {
         return String(b.ts || "").localeCompare(String(a.ts || ""));
-      }).slice(0, MAX_ITEMS).map(function (it) {
+      });
+      var hadOwn = list.length > 0;
+      // Startseite: die neueste Text-News steht oben als "Latest News" und fehlt deshalb im Karussell
+      if (key === "home") {
+        var skipped = false;
+        list = list.filter(function (it) {
+          if (!skipped && it.type === "article") { skipped = true; return false; }
+          return true;
+        });
+      }
+      var out = list.slice(0, MAX_ITEMS).map(function (it) {
         // Text-News: Bild führt auf die eigene Seite (gleiches Fenster)
         var own = it.type === "article" && it.id;
         return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: own ? "news-article.php?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
       });
+      out.hadOwn = hadOwn;
+      return out;
     }).catch(function () { return []; });
   }
 
@@ -132,10 +144,17 @@
     var nextBtn = document.getElementById("newsNext");
     if (!wrapper || !track) { return; }
 
+    var hadOwn = false;
     loadOwn(wrapper.dataset.newsKey || "").then(function (items) {
-      return items.length ? items : loadWp(wrapper);
+      hadOwn = !!items.hadOwn;
+      return (items.length || hadOwn) ? items : loadWp(wrapper);
     }).then(function (items) {
       items = items.filter(function (it) { return !!it.image || it.type === "card"; });
+      if (items.length === 0 && hadOwn) {
+        // alle eigenen News stehen anderswo (z. B. als Latest News): Karussell ausblenden
+        wrapper.style.setProperty("display", "none", "important");
+        return;
+      }
       if (items.length === 0) {
         track.innerHTML = "<p style='padding:20px; text-align:center;'>Noch keine News vorhanden.</p>";
         return;

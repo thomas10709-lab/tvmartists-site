@@ -24,5 +24,7 @@ RedirectMatch 301 ^/imprint/?$                  /imprint.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteRule ^cookie-policy/?$            /imprint.html#cookies        [R=301,L,NE]
+  # Startseite über home.php ausliefern: setzt serverseitig den "Latest News"-Block in index.html ein
+  RewriteRule ^$                           /home.php                    [L]
 </IfModule>
 # ===== END TVM static site =====
