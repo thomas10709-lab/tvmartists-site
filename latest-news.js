@@ -44,6 +44,11 @@
       var il = el("a", "ln-img"); il.href = url;
       var img = document.createElement("img"); img.src = a.image; img.alt = a.alt || a.title || ""; img.loading = "lazy";
       if (a.w && a.h) { img.width = a.w; img.height = a.h; }
+      // Hochformat-Bilder: unten 40 % abschneiden (dort steht oft eingebrannte Schrift)
+      if (a.w && a.h && a.h > a.w) {
+        img.style.aspectRatio = a.w + " / " + Math.round(a.h * 0.6);
+        img.style.objectFit = "cover"; img.style.objectPosition = "50% 0";
+      }
       if (a.webp) {
         var pic = document.createElement("picture"), so = document.createElement("source");
         so.type = "image/webp"; so.srcset = a.webp; pic.appendChild(so); pic.appendChild(img); il.appendChild(pic);

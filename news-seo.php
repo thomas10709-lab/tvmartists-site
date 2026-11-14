@@ -111,7 +111,10 @@ function tvm_latest_news_html(): string
     $by    = tvm_byline((string)($a['text'] ?? ''));
     $alt   = (string)($a['alt'] ?? $title);
     $size  = (!empty($a['w']) && !empty($a['h'])) ? ' width="' . (int)$a['w'] . '" height="' . (int)$a['h'] . '"' : '';
-    $pic   = '<img src="' . tvm_e((string)$a['image']) . '" alt="' . tvm_e($alt) . '"' . $size . ' loading="lazy">';
+    // Hochformat-Bilder: unten 40 % abschneiden (dort steht oft eingebrannte Schrift) -> es bleiben die oberen 60 %
+    $crop  = (!empty($a['w']) && !empty($a['h']) && (int)$a['h'] > (int)$a['w'])
+        ? ' style="aspect-ratio:' . (int)$a['w'] . ' / ' . (int)round((int)$a['h'] * 0.6) . ';object-fit:cover;object-position:50% 0"' : '';
+    $pic   = '<img src="' . tvm_e((string)$a['image']) . '" alt="' . tvm_e($alt) . '"' . $size . $crop . ' loading="lazy">';
     if (!empty($a['webp'])) {
         $pic = '<picture><source type="image/webp" srcset="' . tvm_e((string)$a['webp']) . '">' . $pic . '</picture>';
     }
