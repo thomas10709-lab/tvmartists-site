@@ -35,9 +35,21 @@ function tvm_iso(string $ts): string
     try { return (new DateTimeImmutable($ts))->format('c'); } catch (Throwable $e) { return gmdate('c'); }
 }
 
-function tvm_description(string $text, int $max = 200): string
+/**
+ * Beschreibung für Google (Suchergebnis, Open Graph): beginnt mit dem Inhalt der News.
+ * Eine kurze Namenszeile am Anfang ("By Name, Funktion, Datum:") wird übersprungen und bleibt nur im Artikeltext.
+ * Google zeigt etwa 155 Zeichen; es wird an einer Wortgrenze gekürzt.
+ */
+function tvm_description(string $text, int $max = 155): string
 {
-    $s = trim((string)preg_replace('/\s+/u', ' ', $text));
+    $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
+    if (count($paras) > 1 && preg_match('/^by\s/iu', trim($paras[0])) && mb_strlen(trim($paras[0])) <= 160) {
+        array_shift($paras);
+    }
+    $s = trim((string)preg_replace('/\s+/u', ' ', implode(' ', $paras)));
     if (mb_strlen($s) <= $max) { return $s; }
-    return rtrim(mb_substr($s, 0, $max - 1), " ,.;:-") . '…';
+    $cut = mb_substr($s, 0, $max - 1);
+    $space = mb_strrpos($cut, ' ');
+    if ($space !== false && $space > (int)($max * 0.6)) { $cut = mb_substr($cut, 0, $space); }
+    return rtrim($cut, " ,.;:-") . '…';
 }
