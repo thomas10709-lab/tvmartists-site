@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 require __DIR__ . '/lib.php';
-const ARTICLE_URL    = 'https://tvmartists.com/news-article.html?id=';   // eigene Seite je Text-News
+const ARTICLE_URL    = 'https://tvmartists.com/news-article.php?id=';   // eigene Seite je Text-News
 const MAX_FAILS      = 8;                  // Fehlversuche ...
 const FAIL_WINDOW    = 900;                // ... innerhalb von 15 Minuten
 
@@ -630,7 +630,7 @@ unset P H</pre>
             <input type="text" name="title" maxlength="200" value="<?= e((string)($it['title'] ?? '')) ?>">
             <label>Text</label>
             <textarea name="body" rows="8" maxlength="20000"><?= e((string)($it['text'] ?? '')) ?></textarea>
-            <div class="hint"><a href="../news-article.html?id=<?= e($id) ?>" target="_blank" rel="noopener" style="color:#12396B;">Eigene Seite ansehen</a></div>
+            <div class="hint"><a href="../news-article.php?id=<?= e($id) ?>" target="_blank" rel="noopener" style="color:#12396B;">Eigene Seite ansehen</a></div>
             <?php elseif (($it['type'] ?? '') === 'card'): ?>
             <label>Titel</label>
             <input type="text" name="title" maxlength="200" value="<?= e((string)($it['title'] ?? '')) ?>">

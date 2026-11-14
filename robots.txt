@@ -6,3 +6,5 @@ Disallow: /neu/
 Disallow: /news-admin/
 
 Sitemap: https://tvmartists.com/sitemap.xml
+Sitemap: https://tvmartists.com/sitemap-articles.php
+Sitemap: https://tvmartists.com/sitemap-news.php

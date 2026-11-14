@@ -40,7 +40,7 @@
       }).slice(0, MAX_ITEMS).map(function (it) {
         // Text-News: Bild führt auf die eigene Seite (gleiches Fenster)
         var own = it.type === "article" && it.id;
-        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: own ? "news-article.html?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
+        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: own ? "news-article.php?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
       });
     }).catch(function () { return []; });
   }
