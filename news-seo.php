@@ -79,3 +79,37 @@ function tvm_strip_links(string $text): string
     return (string)preg_replace('/\[([^\]\n]{1,200})\]\(https?:\/\/[^\s)]+\)/u', '$1', $text);
 }
 
+/** Neueste Text-News, die auf der Hauptseite erscheinen soll (Kategorie "home") */
+function tvm_latest_home_article(): ?array
+{
+    foreach (tvm_articles() as $a) {
+        if (in_array('home', (array)($a['cats'] ?? []), true)) { return $a; }
+    }
+    return null;
+}
+
+/** Block "Latest News" für die Startseite (serverseitig); leer, wenn es keine passende News gibt */
+function tvm_latest_news_html(): string
+{
+    $a = tvm_latest_home_article();
+    if (!$a || empty($a['image'])) { return ''; }
+    $id    = (string)$a['id'];
+    $url   = 'news-article.php?id=' . rawurlencode($id);
+    $title = trim((string)($a['title'] ?? ''));
+    $text  = tvm_description((string)($a['text'] ?? ''), 420);
+    $alt   = (string)($a['alt'] ?? $title);
+    $size  = (!empty($a['w']) && !empty($a['h'])) ? ' width="' . (int)$a['w'] . '" height="' . (int)$a['h'] . '"' : '';
+    $pic   = '<img src="' . tvm_e((string)$a['image']) . '" alt="' . tvm_e($alt) . '"' . $size . ' loading="lazy">';
+    if (!empty($a['webp'])) {
+        $pic = '<picture><source type="image/webp" srcset="' . tvm_e((string)$a['webp']) . '">' . $pic . '</picture>';
+    }
+    return '<section class="latest-news" aria-labelledby="latest-news-h">'
+        . '<h2 class="section-label" id="latest-news-h">Latest News</h2>'
+        . '<article class="ln-card">'
+        . '<h3 class="ln-title"><a href="' . tvm_e($url) . '">' . tvm_e($title) . '</a></h3>'
+        . '<a class="ln-img" href="' . tvm_e($url) . '">' . $pic . '</a>'
+        . '<p class="ln-text">' . tvm_e($text) . '</p>'
+        . '<a class="ln-more" href="' . tvm_e($url) . '">Read more</a>'
+        . '</article></section>';
+}
+
