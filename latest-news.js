@@ -20,6 +20,13 @@
     return cut.replace(/[ ,.;:-]+$/, "") + "\u2026";
   }
 
+  // Namenszeile ("By …") am Anfang des Textes
+  function byline(text) {
+    var paras = String(text || "").replace(/\r\n?/g, "\n").trim().split(/\n{2,}/);
+    var first = (paras[0] || "").trim();
+    return (paras.length > 1 && /^by\s/i.test(first) && first.length <= 160) ? first.replace(/\s+/g, " ") : "";
+  }
+
   ready(function () {
     var slot = document.getElementById("latestNews");
     if (!slot || slot.querySelector(".ln-card")) { return; }
@@ -42,6 +49,8 @@
         so.type = "image/webp"; so.srcset = a.webp; pic.appendChild(so); pic.appendChild(img); il.appendChild(pic);
       } else { il.appendChild(img); }
       card.appendChild(il);
+      var by = byline(a.text);
+      if (by) { card.appendChild(el("p", "ln-by", by)); }
       card.appendChild(el("p", "ln-text", excerpt(a.text, 420)));
       var more = el("a", "ln-more", "Read more"); more.href = url; card.appendChild(more);
       sec.appendChild(card);
