@@ -26,9 +26,10 @@
         h1 { font-weight: 300; font-size: clamp(30px, 5vw, 46px); letter-spacing: 0.04em; margin: 0 0 6px; }
         .sub { font-weight: 300; font-size: 18px; letter-spacing: 0.06em; color: #cfe3f5; margin: 0 0 40px; }
         .news-entry { display: flex; align-items: stretch; background: #f4f7f9; color: #2C3E50; border-radius: 8px; overflow: hidden; margin: 0 0 18px; }
-        .news-entry a.img-link { flex: 0 0 220px; position: relative; display: block; min-height: 150px; }
+        /* Thumbnail im Querformat 4:3, oben ausgerichtet: Schrift am unteren Bildrand (Titel, "read more", Namenszeile) bleibt außerhalb des Ausschnitts */
+        .news-entry a.img-link { flex: 0 0 220px; align-self: flex-start; aspect-ratio: 4 / 3; position: relative; display: block; margin: 14px 0 14px 14px; border-radius: 6px; overflow: hidden; }
         .news-entry picture { display: block; position: absolute; inset: 0; }
-        .news-entry img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .news-entry img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
         .news-body { flex: 1; min-width: 0; padding: 16px 20px 18px; }
         .news-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #6b7c8c; margin: 0 0 8px; }
         .news-title { font-size: 21px; font-weight: 600; line-height: 1.3; margin: 0 0 10px; }
@@ -37,7 +38,7 @@
         .news-src { font-weight: 600; }
         .news-entry a.more { color: #1d63c1; text-decoration: underline; }
         @media (max-width: 600px) {
-            .news-entry a.img-link { flex-basis: 108px; min-height: 120px; }
+            .news-entry a.img-link { flex-basis: 112px; margin: 10px 0 10px 10px; }
             .news-body { padding: 12px 14px 14px; }
             .news-title { font-size: 17px; }
             .news-text { font-size: 14px; line-height: 1.55; }
