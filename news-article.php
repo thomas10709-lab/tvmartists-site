@@ -160,7 +160,7 @@ if ($it) {
     <footer class="site-footer">
         <div class="footer-rule"></div>
         <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
-            <img src="images/insta.png" alt="Instagram">
+            <img src="images/insta-white.png" alt="Instagram">
         </a>
         <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
         <p class="footer-copy">&copy; <?= date('Y') ?> TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
