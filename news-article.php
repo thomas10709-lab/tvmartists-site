@@ -96,6 +96,31 @@ if ($it) {
         .site-footer a { color: inherit; }
         .footer-rule { width: min(220px, 60vw); height: 1px; margin: 0 auto 24px; background: rgba(255,255,255,0.85); }
     </style>
+    <script src="bg-sync.js?v=2"></script>
+    <style>
+        /* Hintergrund wandert wie auf den Künstlerseiten durch die Farbtöne (synchron über bg-sync.js) */
+        body { position: relative; min-height: 100vh; }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-color: #17355E;
+            animation: bg-breathe 60s ease-in-out infinite;
+            animation-delay: var(--bg-delay, 0s);
+        }
+        @keyframes bg-breathe {
+            0%, 100% { background-color: #17355E; }
+            25%      { background-color: #2B6C9C; }
+            50%      { background-color: #6E78AC; }
+            75%      { background-color: #43285A; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body::before { animation: none; }
+        }
+    </style>
 </head>
 <body>
     <main class="article-page">
