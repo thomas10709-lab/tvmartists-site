@@ -132,7 +132,7 @@
             return pic;
         }
         function excerpt(t) {
-            t = String(t || "").replace(/\s+/g, " ").trim();
+            t = String(t || "").replace(/\[([^\]\n]+)\]\(https?:\/\/[^\s)]+\)/g, "$1").replace(/\s+/g, " ").trim();
             return t.length > 220 ? t.slice(0, 220).replace(/\s+\S*$/, "") + "\u2026" : t;
         }
         function entry(it) {

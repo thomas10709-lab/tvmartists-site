@@ -519,7 +519,7 @@ unset P H</pre>
 
       <label for="abody">Text</label>
       <textarea id="abody" name="body" rows="10" maxlength="20000" placeholder="Hier den News-Text schreiben. Eine Leerzeile beginnt einen neuen Absatz." required></textarea>
-      <div class="hint">Nur reiner Text. Eine Leerzeile erzeugt einen neuen Absatz. Die News bekommt eine eigene Seite und erscheint im „News“-Button der gewählten Künstler.</div>
+      <div class="hint">Nur reiner Text. Eine Leerzeile erzeugt einen neuen Absatz. Link auf ein Wort: [YouTube](https://www.youtube.com/watch?v=…) – oder einfach die Adresse https://… einfügen. Die News bekommt eine eigene Seite und erscheint im „News“-Button der gewählten Künstler.</div>
 
       <label for="aimage">Bild (JPG, PNG oder WebP)</label>
       <input id="aimage" type="file" name="image" accept="image/jpeg,image/png,image/webp" required>

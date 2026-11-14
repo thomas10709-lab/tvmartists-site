@@ -46,10 +46,36 @@ function tvm_description(string $text, int $max = 155): string
     if (count($paras) > 1 && preg_match('/^by\s/iu', trim($paras[0])) && mb_strlen(trim($paras[0])) <= 160) {
         array_shift($paras);
     }
-    $s = trim((string)preg_replace('/\s+/u', ' ', implode(' ', $paras)));
+    $s = trim((string)preg_replace('/\s+/u', ' ', tvm_strip_links(implode(' ', $paras))));
     if (mb_strlen($s) <= $max) { return $s; }
     $cut = mb_substr($s, 0, $max - 1);
     $space = mb_strrpos($cut, ' ');
     if ($space !== false && $space > (int)($max * 0.6)) { $cut = mb_substr($cut, 0, $space); }
     return rtrim($cut, " ,.;:-") . '…';
 }
+
+/**
+ * Text für die Anzeige: HTML wird maskiert, Links werden klickbar.
+ * Schreibweise im Text: [Wort](https://…) macht das Wort zum Link; eine nackte Adresse https://… wird ebenfalls zum Link.
+ * Nur http/https; Links öffnen in neuem Tab.
+ */
+function tvm_linkify(string $plain): string
+{
+    $e = tvm_e($plain);
+    $e = preg_replace_callback('/\[([^\]\n]{1,200})\]\((https?:\/\/[^\s)]+)\)/u', function ($m) {
+        return '<a href="' . $m[2] . '" target="_blank" rel="noopener noreferrer">' . $m[1] . '</a>';
+    }, $e) ?? $e;
+    $e = preg_replace_callback('/(?<![">])\bhttps?:\/\/[^\s<]+/u', function ($m) {
+        $u = $m[0]; $trail = '';
+        while ($u !== '' && preg_match('/[.,;:!?)]$/u', $u)) { $trail = substr($u, -1) . $trail; $u = substr($u, 0, -1); }
+        return '<a href="' . $u . '" target="_blank" rel="noopener noreferrer">' . $u . '</a>' . $trail;
+    }, $e) ?? $e;
+    return $e;
+}
+
+/** Link-Schreibweise [Wort](https://…) für Beschreibungen/Auszüge auf das Wort kürzen */
+function tvm_strip_links(string $text): string
+{
+    return (string)preg_replace('/\[([^\]\n]{1,200})\]\(https?:\/\/[^\s)]+\)/u', '$1', $text);
+}
+
