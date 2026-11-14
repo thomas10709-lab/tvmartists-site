@@ -88,6 +88,17 @@ function tvm_latest_home_article(): ?array
     return null;
 }
 
+/** Namenszeile am Anfang des Textes ("By Name, Funktion, Datum:"), sonst leer */
+function tvm_byline(string $text): string
+{
+    $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
+    $first = trim((string)($paras[0] ?? ''));
+    if (count($paras) > 1 && preg_match('/^by\s/iu', $first) && mb_strlen($first) <= 160) {
+        return (string)preg_replace('/\s+/u', ' ', $first);
+    }
+    return '';
+}
+
 /** Block "Latest News" für die Startseite (serverseitig); leer, wenn es keine passende News gibt */
 function tvm_latest_news_html(): string
 {
@@ -97,6 +108,7 @@ function tvm_latest_news_html(): string
     $url   = 'news-article.php?id=' . rawurlencode($id);
     $title = trim((string)($a['title'] ?? ''));
     $text  = tvm_description((string)($a['text'] ?? ''), 420);
+    $by    = tvm_byline((string)($a['text'] ?? ''));
     $alt   = (string)($a['alt'] ?? $title);
     $size  = (!empty($a['w']) && !empty($a['h'])) ? ' width="' . (int)$a['w'] . '" height="' . (int)$a['h'] . '"' : '';
     $pic   = '<img src="' . tvm_e((string)$a['image']) . '" alt="' . tvm_e($alt) . '"' . $size . ' loading="lazy">';
@@ -108,6 +120,7 @@ function tvm_latest_news_html(): string
         . '<article class="ln-card">'
         . '<h3 class="ln-title"><a href="' . tvm_e($url) . '">' . tvm_e($title) . '</a></h3>'
         . '<a class="ln-img" href="' . tvm_e($url) . '">' . $pic . '</a>'
+        . ($by !== '' ? '<p class="ln-by">' . tvm_e($by) . '</p>' : '')
         . '<p class="ln-text">' . tvm_e($text) . '</p>'
         . '<a class="ln-more" href="' . tvm_e($url) . '">Read more</a>'
         . '</article></section>';
