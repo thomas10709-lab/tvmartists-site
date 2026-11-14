@@ -91,6 +91,9 @@ if ($it) {
         h1 { font-weight: 500; font-size: clamp(26px, 4.6vw, 38px); line-height: 1.25; margin: 0 0 24px; }
         .article-text { font-size: 17px; font-weight: 300; line-height: 1.75; letter-spacing: 0.01em; }
         .article-text p { margin: 0 0 1.1em; white-space: pre-line; }
+        /* Links im Text: weiß und unterstrichen (statt Browser-Blau, das auf dem blauen Hintergrund kaum lesbar ist) */
+        .article-text a, .article-text a:visited { color: #ffffff; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+        .article-text a:hover { opacity: 0.8; }
         .empty { text-align: center; padding: 40px 0; color: #cfe3f5; font-weight: 300; }
         .site-footer { width: 100%; text-align: center; padding: 30px 20px 40px; box-sizing: border-box; }
         .footer-rule { width: min(220px, 60vw); height: 1px; margin: 0 auto 40px; background: rgba(255,255,255,0.85); }
