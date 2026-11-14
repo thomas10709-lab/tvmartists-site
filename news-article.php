@@ -144,7 +144,7 @@ if ($it) {
             <h1><?= tvm_e($title) ?></h1>
 <?php if ($img !== ''): ?>
             <?php if (!empty($it['webp'])): ?><picture><source type="image/webp" srcset="<?= tvm_e((string)$it['webp']) ?>"><?php endif; ?>
-            <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e((string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?>>
+            <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e((string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?><?= tvm_image_crop_style($it) ?>>
             <?php if (!empty($it['webp'])): ?></picture><?php endif; ?>
 
 <?php endif; ?>
