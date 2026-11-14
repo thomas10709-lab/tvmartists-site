@@ -38,7 +38,9 @@
       }).sort(function (a, b) {
         return String(b.ts || "").localeCompare(String(a.ts || ""));
       }).slice(0, MAX_ITEMS).map(function (it) {
-        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
+        // Text-News: Bild führt auf die eigene Seite (gleiches Fenster)
+        var own = it.type === "article" && it.id;
+        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: own ? "news-article.html?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
       });
     }).catch(function () { return []; });
   }
@@ -168,8 +170,10 @@
         if (it.link) {
           var a = document.createElement("a");
           a.href = it.link;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
+          if (!it.internal) {
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+          }
           a.appendChild(visual);
           visual = a;
         }

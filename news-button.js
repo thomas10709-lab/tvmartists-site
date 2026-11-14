@@ -1,7 +1,7 @@
 /*
  * "News"-Button auf den Künstlerseiten (tvmartists.com)
  * Erscheint ganz links in der Button-Reihe, aber erst, wenn für diesen Künstler
- * mindestens eine eigene News vorliegt (news-data/news.json, gepflegt über news-admin/).
+ * mindestens eine News MIT TEXT (type "article") vorliegt (news-data/news.json, gepflegt über news-admin/).
  * Der Künstler wird wie beim Karussell über data-news-key am .news-carousel-wrapper erkannt.
  */
 (function () {
@@ -18,7 +18,7 @@
       return res.ok ? res.json() : [];
     }).then(function (all) {
       var has = Array.isArray(all) && all.some(function (it) {
-        return it && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
+        return it && it.type === "article" && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
       });
       if (!has) { return; }
       var a = document.createElement("a");

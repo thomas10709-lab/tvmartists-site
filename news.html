@@ -87,31 +87,27 @@
             pic.appendChild(s); pic.appendChild(img);
             return pic;
         }
+        function excerpt(t) {
+            t = String(t || "").replace(/\s+/g, " ").trim();
+            return t.length > 220 ? t.slice(0, 220).replace(/\s+\S*$/, "") + "\u2026" : t;
+        }
         function entry(it) {
+            var url = "news-article.html?id=" + encodeURIComponent(it.id);
             var box = el("article", "news-entry");
-            var link = safeUrl(it.link);
             if (it.image) {
-                if (link && it.type !== "card") {
-                    var a = el("a", "img-link"); a.href = link; a.target = "_blank"; a.rel = "noopener noreferrer";
-                    a.appendChild(picture(it)); box.appendChild(a);
-                } else { box.appendChild(picture(it)); }
+                var a = el("a", "img-link"); a.href = url;
+                a.appendChild(picture(it)); box.appendChild(a);
             }
             var body = el("div", "news-body");
             var date = fmtDate(it.ts);
             if (date) { body.appendChild(el("p", "news-date", date)); }
-            var title = it.title || (it.type === "card" ? "" : it.alt);
-            if (title) { body.appendChild(el("h2", "news-title", title)); }
-            if (it.text && it.text !== it.source) { body.appendChild(el("p", "news-text", it.text)); }
-            if (it.source || (link && it.type === "card")) {
-                var foot = el("div", "news-foot");
-                foot.appendChild(el("span", "news-src", it.source || ""));
-                if (link) {
-                    var m = el("a", "more", "Read more"); m.href = link; m.target = "_blank"; m.rel = "noopener noreferrer";
-                    foot.appendChild(m);
-                }
-                body.appendChild(foot);
-            }
-            if (body.childNodes.length) { box.appendChild(body); }
+            var h = el("h2", "news-title"); var ta = el("a", "", it.title || it.alt || "News"); ta.href = url; ta.style.color = "inherit"; ta.style.textDecoration = "none";
+            h.appendChild(ta); body.appendChild(h);
+            if (it.text) { body.appendChild(el("p", "news-text", excerpt(it.text))); }
+            var foot = el("div", "news-foot"); foot.appendChild(el("span", "news-src", ""));
+            var m = el("a", "more", "Read more"); m.href = url; foot.appendChild(m);
+            body.appendChild(foot);
+            box.appendChild(body);
             return box;
         }
         if (!ARTISTS[key]) {
@@ -127,7 +123,7 @@
         fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
         .then(function (all) {
             var items = (Array.isArray(all) ? all : []).filter(function (it) {
-                return it && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
+                return it && it.type === "article" && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
             }).sort(function (a, b) { return String(b.ts || "").localeCompare(String(a.ts || "")); });
             if (!items.length) { list.appendChild(el("p", "empty", "No news yet.")); return; }
             items.forEach(function (it) { list.appendChild(entry(it)); });

@@ -132,6 +132,16 @@ function clean_text(string $s, int $max): string
     return mb_substr($s, 0, $max);
 }
 
+/** Mehrzeiliger Text (z. B. News-Artikel): Tags entfernen, Absätze (Leerzeilen) behalten */
+function clean_body(string $s, int $max): string
+{
+    $s = strip_tags(str_replace(["\r\n", "\r"], "\n", $s));
+    $s = preg_replace('/[ \t]+/u', ' ', $s) ?? '';
+    $s = preg_replace('/ ?\n ?/u', "\n", $s) ?? '';
+    $s = preg_replace('/\n{3,}/', "\n\n", $s) ?? '';
+    return mb_substr(trim($s), 0, $max);
+}
+
 
 /* ------------------------------------------------------------------------
  * Link-Karten: Titel, Auszug, Bild und Quelle einer fremden Seite holen
