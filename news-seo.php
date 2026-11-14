@@ -105,9 +105,16 @@ function tvm_byline(string $text): string
     $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
     $first = trim((string)($paras[0] ?? ''));
     if (count($paras) > 1 && preg_match('/^by\s/iu', $first) && mb_strlen($first) <= 160) {
-        return (string)preg_replace('/\s+/u', ' ', $first);
+        return tvm_strip_byline_date((string)preg_replace('/\s+/u', ' ', $first));
     }
     return '';
+}
+
+/** Datum am Ende der Namenszeile weglassen: "By …, 14 November 2026:" -> "By …:" (das Datum steht separat auf der Seite) */
+function tvm_strip_byline_date(string $line): string
+{
+    $months = 'January|February|March|April|May|June|July|August|September|October|November|December|Januar|Februar|M\x{00E4}rz|Mai|Juni|Juli|Oktober|Dezember';
+    return (string)preg_replace('/,?\s*\d{1,2}\.?\s+(?:' . $months . ')\s+\d{4}(?=\s*:?\s*$)/iu', '', $line);
 }
 
 /** Block "Latest News" für die Startseite (serverseitig); leer, wenn es keine passende News gibt */

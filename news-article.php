@@ -150,8 +150,8 @@ if ($it) {
 <?php endif; ?>
             <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?= tvm_e((new DateTimeImmutable($ts))->format('j F Y')) ?></time></p>
             <div class="article-text">
-<?php foreach (preg_split('/\n{2,}/', $text) ?: [] as $par): if (trim($par) === '') { continue; } ?>
-                <p><?= tvm_linkify(trim($par)) ?></p>
+<?php $bylineShown = tvm_byline($text); foreach (preg_split('/\n{2,}/', $text) ?: [] as $i => $par): if (trim($par) === '') { continue; } ?>
+                <p><?= tvm_linkify($i === 0 && $bylineShown !== '' ? $bylineShown : trim($par)) ?></p>
 <?php endforeach; ?>
             </div>
         </article>
