@@ -310,17 +310,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $body  = clean_body((string)($_POST['body'] ?? ''), 20000);
                         $dateIn  = (string)($_POST['date'] ?? '');
                         $newTs = ($dateIn !== '' && $dateIn !== (string)($_POST['date_orig'] ?? '')) ? input_to_ts($dateIn) : null;
+                        $file = $_FILES['image'] ?? null;
+                        $hasFile = $file && (int)($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
+                        $newImg = null;
+                        $imgErr = '';
                         if (!$cats) {
                             flash('err', 'Es muss mindestens eine Seite ausgewählt bleiben. Zum Entfernen bitte „Löschen" nutzen.');
                         } else {
-                            with_lock($DATA, function () use ($JSON, $id, $cats, $alt, $link, $newTs, $title, $body) {
+                            if ($hasFile) {
+                                if ((int)$file['error'] !== UPLOAD_ERR_OK) {
+                                    $imgErr = 'Upload fehlgeschlagen (Fehler ' . (int)$file['error'] . ', evtl. zu groß).';
+                                } elseif ((int)$file['size'] > MAX_FILE_BYTES) {
+                                    $imgErr = 'Das Bild ist größer als 25 MB.';
+                                } else {
+                                    // Erst in eine Zwischendatei schreiben: das alte Bild bleibt, falls etwas schiefgeht.
+                                    $tmpBase = $IMG . '/' . $id . '.new';
+                                    $res = process_image((string)$file['tmp_name'], $tmpBase);
+                                    if (!is_array($res)) {
+                                        $imgErr = $res;
+                                        @unlink($tmpBase . '.jpg'); @unlink($tmpBase . '.webp');
+                                    } else {
+                                        $newImg = $res;
+                                    }
+                                }
+                            }
+                            with_lock($DATA, function () use ($JSON, $id, $cats, $alt, $link, $newTs, $title, $body, $newImg, $IMG) {
                                 $all = load_news($JSON);
                                 foreach ($all as &$it) {
                                     if (($it['id'] ?? '') === $id) {
                                         $it['cats'] = $cats;
+                                        if ($newImg !== null) {
+                                            $base = $IMG . '/' . $id;
+                                            rename($base . '.new.jpg', $base . '.jpg');
+                                            if ($newImg['webp']) { rename($base . '.new.webp', $base . '.webp'); } else { @unlink($base . '.webp'); }
+                                            // ?v=… sorgt dafür, dass Browser das neue Bild laden und nicht das alte aus dem Cache zeigen
+                                            $v = '?v=' . time();
+                                            $it['image'] = 'news-data/img/' . $id . '.jpg' . $v;
+                                            $it['webp']  = $newImg['webp'] ? 'news-data/img/' . $id . '.webp' . $v : '';
+                                            $it['w'] = $newImg['w'];
+                                            $it['h'] = $newImg['h'];
+                                        }
                                         if (($it['type'] ?? '') === 'article') {
                                             if ($title !== '') { $it['title'] = $title; $it['alt'] = $title; }
                                             if ($body !== '') { $it['text'] = $body; }
+                                        } elseif (($it['type'] ?? '') === 'card') {
+                                            $it['link'] = $link;
+                                            if ($title !== '') { $it['title'] = $title; $it['alt'] = $title; }
+                                            $it['text'] = $body;
                                         } else {
                                             $it['link'] = $link;
                                             if ($alt !== '') { $it['alt'] = $alt; }
@@ -331,7 +367,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 unset($it);
                                 save_news($JSON, $all);
                             });
-                            flash('ok', 'Änderung gespeichert.');
+                            if ($imgErr !== '') {
+                                flash('err', 'Das Bild wurde nicht ersetzt: ' . $imgErr . ' Die übrigen Änderungen sind gespeichert.');
+                            } else {
+                                flash('ok', $newImg !== null ? 'Änderung gespeichert, das Bild wurde ersetzt.' : 'Änderung gespeichert.');
+                            }
                         }
                     } elseif ($action === 'bump') {
                         with_lock($DATA, function () use ($JSON, $id) {
@@ -570,10 +610,13 @@ unset P H</pre>
             <?php if (($it['type'] ?? '') === 'article'): ?><span class="badge" style="background:#12396B;color:#fff;">Text-News</span><?php endif; ?>
             <?php if ($filter !== '' && $pos >= MAX_SHOWN): ?><span class="badge">wird nicht angezeigt</span><?php endif; ?>
           </div>
-          <form method="post">
+          <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
             <input type="hidden" name="id" value="<?= e($id) ?>">
             <input type="hidden" name="seite" value="<?= e($filter) ?>">
+            <label>Bild ersetzen (optional; JPG, PNG oder WebP)</label>
+            <input type="file" name="image" accept="image/jpeg,image/png,image/webp">
+            <div class="hint">Leer lassen, um das Bild zu behalten. Datum, Seiten, Link und Text bleiben beim Ersetzen erhalten.</div>
             <div class="cats">
               <?php foreach ($PAGES as $key => $label): ?>
                 <label><input type="checkbox" name="cats[]" value="<?= e($key) ?>" <?= in_array($key, $cats, true) ? 'checked' : '' ?>> <?= e($label) ?></label>
@@ -588,6 +631,13 @@ unset P H</pre>
             <label>Text</label>
             <textarea name="body" rows="8" maxlength="20000"><?= e((string)($it['text'] ?? '')) ?></textarea>
             <div class="hint"><a href="../news-article.html?id=<?= e($id) ?>" target="_blank" rel="noopener" style="color:#12396B;">Eigene Seite ansehen</a></div>
+            <?php elseif (($it['type'] ?? '') === 'card'): ?>
+            <label>Titel</label>
+            <input type="text" name="title" maxlength="200" value="<?= e((string)($it['title'] ?? '')) ?>">
+            <label>Text</label>
+            <textarea name="body" rows="5" maxlength="20000"><?= e((string)($it['text'] ?? '')) ?></textarea>
+            <label>Link</label>
+            <input type="url" name="link" value="<?= e((string)($it['link'] ?? '')) ?>" placeholder="https://…">
             <?php else: ?>
             <label>Beschreibung</label>
             <input type="text" name="alt" maxlength="200" value="<?= e((string)($it['alt'] ?? '')) ?>">
