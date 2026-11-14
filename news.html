@@ -77,11 +77,17 @@
             50%      { background-color: #6E78AC; }
             75%      { background-color: #43285A; }
         }
-        /* Hinter dem Seitenrand (Überscrollen am oberen/unteren Rand, besonders auf dem Handy): dunkles Brombeer aus dem Farbverlauf statt Blau */
-        html { background-color: #43285A; }
+        /* Hinter dem Seitenrand (Überscrollen am oberen/unteren Rand, besonders auf dem Handy): derselbe Farbverlauf wie die Seite,
+           aber in umgekehrter Richtung (gleicher Takt, über bg-sync.js synchron) */
+        html {
+            background-color: #17355E;
+            animation: bg-breathe 60s ease-in-out infinite reverse;
+            animation-delay: var(--bg-delay, 0s);
+        }
         body { background-color: transparent; }
         @media (prefers-reduced-motion: reduce) {
             body::before { animation: none; }
+            html { animation: none; background-color: #43285A; }
         }
     </style>
 </head>
