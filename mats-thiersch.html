@@ -555,10 +555,10 @@
             75%      { background-color: #43285A; }
         }
         /* Hinter dem Seitenrand (Überscrollen am oberen/unteren Rand, besonders auf dem Handy): derselbe Farbverlauf wie die Seite,
-           aber in umgekehrter Richtung (gleicher Takt, über bg-sync.js synchron) */
+           in derselben Richtung und im selben Takt (über bg-sync.js synchron) */
         html {
             background-color: #17355E;
-            animation: bg-breathe 60s ease-in-out infinite reverse;
+            animation: bg-breathe 60s ease-in-out infinite;
             animation-delay: var(--bg-delay, 0s);
         }
         body { background-color: transparent; }
