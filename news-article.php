@@ -86,8 +86,8 @@ if ($it) {
         .article-page { max-width: 760px; margin: 0 auto; padding: 56px 20px 30px; }
         .back-link { display: inline-block; color: #cfe3f5; font-size: 14px; letter-spacing: 0.03em; text-decoration: none; margin-bottom: 26px; }
         .back-link:hover { text-decoration: underline; }
-        .article-img { display: block; width: 100%; height: auto; border-radius: 8px; margin: 0 0 26px; }
-        .article-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #cfe3f5; margin: 0 0 10px; }
+        .article-img { display: block; width: 100%; height: auto; border-radius: 8px; margin: 0 0 18px; }
+        .article-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #cfe3f5; margin: 0 0 22px; }
         h1 { font-weight: 500; font-size: clamp(26px, 4.6vw, 38px); line-height: 1.25; margin: 0 0 24px; }
         .article-text { font-size: 17px; font-weight: 300; line-height: 1.75; letter-spacing: 0.01em; }
         .article-text p { margin: 0 0 1.1em; white-space: pre-line; }
@@ -141,6 +141,7 @@ if ($it) {
         <p class="empty">This news item could not be found.</p>
 <?php else: ?>
         <article>
+            <h1><?= tvm_e($title) ?></h1>
 <?php if ($img !== ''): ?>
             <?php if (!empty($it['webp'])): ?><picture><source type="image/webp" srcset="<?= tvm_e((string)$it['webp']) ?>"><?php endif; ?>
             <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e((string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?>>
@@ -148,7 +149,6 @@ if ($it) {
 
 <?php endif; ?>
             <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?= tvm_e((new DateTimeImmutable($ts))->format('j F Y')) ?></time></p>
-            <h1><?= tvm_e($title) ?></h1>
             <div class="article-text">
 <?php foreach (preg_split('/\n{2,}/', $text) ?: [] as $par): if (trim($par) === '') { continue; } ?>
                 <p><?= tvm_e(trim($par)) ?></p>
