@@ -91,6 +91,10 @@ if ($it) {
         h1 { font-weight: 500; font-size: clamp(26px, 4.6vw, 38px); line-height: 1.25; margin: 0 0 24px; }
         .article-text { font-size: 17px; font-weight: 300; line-height: 1.75; letter-spacing: 0.01em; }
         .article-text p { margin: 0 0 1.1em; white-space: pre-line; }
+        @media (max-width: 600px) {
+            /* Namenszeile am Handy so klein, dass sie in eine Zeile passt */
+            .article-text p.article-byline { font-size: clamp(11px, 3.6vw, 17px); letter-spacing: 0; white-space: nowrap; }
+        }
         /* Links im Text: weiß und unterstrichen (statt Browser-Blau, das auf dem blauen Hintergrund kaum lesbar ist) */
         .article-text a, .article-text a:visited { color: #ffffff; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
         .article-text a:hover { opacity: 0.8; }
@@ -163,7 +167,7 @@ if ($it) {
             <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?= tvm_e((new DateTimeImmutable($ts))->format('j F Y')) ?></time></p>
             <div class="article-text">
 <?php $bylineShown = tvm_byline($text); foreach (preg_split('/\n{2,}/', $text) ?: [] as $i => $par): if (trim($par) === '') { continue; } ?>
-                <p><?= tvm_linkify($i === 0 && $bylineShown !== '' ? $bylineShown : trim($par)) ?></p>
+                <p<?= $i === 0 && $bylineShown !== '' ? ' class="article-byline"' : '' ?>><?= tvm_linkify($i === 0 && $bylineShown !== '' ? $bylineShown : trim($par)) ?></p>
 <?php endforeach; ?>
             </div>
         </article>
