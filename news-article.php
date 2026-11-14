@@ -93,7 +93,7 @@ if ($it) {
         .article-text p { margin: 0 0 1.1em; white-space: pre-line; }
         @media (max-width: 600px) {
             /* Namenszeile am Handy so klein, dass sie in eine Zeile passt */
-            .article-text p.article-byline { font-size: clamp(10px, 3.1vw, 15px); letter-spacing: 0; white-space: nowrap; }
+            .article-text p.article-byline { font-size: clamp(9px, 2.8vw, 15px); letter-spacing: 0; white-space: nowrap; }
         }
         /* Links im Text: weiß und unterstrichen (statt Browser-Blau, das auf dem blauen Hintergrund kaum lesbar ist) */
         .article-text a, .article-text a:visited { color: #ffffff; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
