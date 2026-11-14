@@ -27,9 +27,17 @@
         .article-text { font-size: 17px; font-weight: 300; line-height: 1.75; letter-spacing: 0.01em; }
         .article-text p { margin: 0 0 1.1em; }
         .empty { text-align: center; padding: 40px 0; color: #cfe3f5; font-weight: 300; }
-        .site-footer { text-align: center; padding: 30px 20px 40px; font-size: 12px; color: rgba(255,255,255,0.75); }
-        .site-footer a { color: inherit; }
-        .footer-rule { width: min(220px, 60vw); height: 1px; margin: 0 auto 24px; background: rgba(255,255,255,0.85); }
+        .site-footer { width: 100%; text-align: center; padding: 30px 20px 40px; box-sizing: border-box; }
+        .footer-rule { width: min(220px, 60vw); height: 1px; margin: 0 auto 40px; background: rgba(255,255,255,0.85); }
+        .footer-insta { display: inline-block; line-height: 0; margin-bottom: 28px; transition: opacity 0.25s ease; }
+        .footer-insta:hover { opacity: 0.7; }
+        .footer-insta img { width: 34px; height: 34px; display: block; }
+        .footer-logo-link { display: block; width: 120px; margin: 0 auto 30px; line-height: 0; transition: opacity 0.25s ease; }
+        .footer-logo-link:hover { opacity: 0.7; }
+        .footer-logo { display: block; width: 100%; height: auto; }
+        .footer-copy { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 13px; letter-spacing: 0.04em; color: rgba(255,255,255,0.9); margin: 0; }
+        .footer-copy a { color: rgba(255,255,255,0.9); text-decoration: none; transition: opacity 0.25s ease; }
+        .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -39,7 +47,11 @@
     </main>
     <footer class="site-footer">
         <div class="footer-rule"></div>
-        <a href="https://tvmartists.com/">TVM artists</a> &ndash; &copy; 2026 &ndash; <a href="imprint.html">imprint</a>
+        <a href="https://www.instagram.com/tvm.artists" class="footer-insta" target="_blank" rel="noopener" aria-label="TVM artists on Instagram">
+            <img src="images/insta.png" alt="Instagram">
+        </a>
+        <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
+        <p class="footer-copy">&copy; 2026 TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
     </footer>
     <script>
     (function () {
