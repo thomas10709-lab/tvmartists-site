@@ -79,6 +79,17 @@ function tvm_strip_links(string $text): string
     return (string)preg_replace('/\[([^\]\n]{1,200})\]\(https?:\/\/[^\s)]+\)/u', '$1', $text);
 }
 
+/**
+ * Hochformat-Bilder: unten 40 % abschneiden (dort steht oft eingebrannte Schrift) -> es bleiben die oberen 60 %.
+ * Gibt das style-Attribut für das <img> zurück (leer bei Querformat oder unbekannter Größe).
+ */
+function tvm_image_crop_style(array $it): string
+{
+    $w = (int)($it['w'] ?? 0); $h = (int)($it['h'] ?? 0);
+    if ($w <= 0 || $h <= $w) { return ''; }
+    return ' style="aspect-ratio:' . $w . ' / ' . (int)round($h * 0.6) . ';object-fit:cover;object-position:50% 0"';
+}
+
 /** Neueste Text-News, die auf der Hauptseite erscheinen soll (Kategorie "home") */
 function tvm_latest_home_article(): ?array
 {
@@ -111,7 +122,8 @@ function tvm_latest_news_html(): string
     $by    = tvm_byline((string)($a['text'] ?? ''));
     $alt   = (string)($a['alt'] ?? $title);
     $size  = (!empty($a['w']) && !empty($a['h'])) ? ' width="' . (int)$a['w'] . '" height="' . (int)$a['h'] . '"' : '';
-    $pic   = '<img src="' . tvm_e((string)$a['image']) . '" alt="' . tvm_e($alt) . '"' . $size . ' loading="lazy">';
+    $crop  = tvm_image_crop_style($a);
+    $pic   = '<img src="' . tvm_e((string)$a['image']) . '" alt="' . tvm_e($alt) . '"' . $size . $crop . ' loading="lazy">';
     if (!empty($a['webp'])) {
         $pic = '<picture><source type="image/webp" srcset="' . tvm_e((string)$a['webp']) . '">' . $pic . '</picture>';
     }
