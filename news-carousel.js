@@ -39,14 +39,6 @@
         return String(b.ts || "").localeCompare(String(a.ts || ""));
       });
       var hadOwn = list.length > 0;
-      // Startseite: die neueste Text-News steht oben als "Latest News" und fehlt deshalb im Karussell
-      if (key === "home") {
-        var skipped = false;
-        list = list.filter(function (it) {
-          if (!skipped && it.type === "article") { skipped = true; return false; }
-          return true;
-        });
-      }
       var out = list.slice(0, MAX_ITEMS).map(function (it) {
         // Text-News: Bild führt auf die eigene Seite (gleiches Fenster)
         var own = it.type === "article" && it.id;
