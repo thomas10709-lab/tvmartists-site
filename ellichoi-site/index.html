@@ -317,21 +317,17 @@
             letter-spacing: 1.5px;
         }
 
-        /* Calendar: kommende Konzerte, zentriert untereinander */
+        /* Calendar: kommende Konzerte, zentriert untereinander - nur zwei Schriftstile: Datum (wie die Ueberschrift) und ein ruhiger Montserrat-Text */
         .concert-list { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .concert { padding: 34px 0 38px; position: relative; width: 100%; }
         .concert + .concert::before { content: ""; display: block; width: 56px; height: 1px; background: rgba(255,255,255,0.28); margin: 0 auto 38px; }
         .concert.is-first::before { display: none !important; }
-        .concert-date { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; letter-spacing: 2px; color: #fff; line-height: 1.15; margin-bottom: 10px; }
-        .concert-place { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 6px; }
-        .concert-venue { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.35rem; color: rgba(255,255,255,0.82); margin-bottom: 14px; }
-        .concert-orch { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; color: #fff; letter-spacing: 0.5px; margin-top: 12px; }
-        .concert-venue + .concert-orch { margin-top: 0; }
-        .concert-work { font-family: 'Montserrat', sans-serif; font-size: 0.92rem; font-weight: 300; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); margin-top: 6px; }
+        .concert-date { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 400; letter-spacing: 2px; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+        .concert-place, .concert-venue, .concert-orch, .concert-work { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.04em; line-height: 1.75; color: rgba(255,255,255,0.78); }
+        .concert-orch { color: #fff; }
         @media (max-width: 768px) {
             .concert-date { font-size: 2rem; }
-            .concert-orch { font-size: 1.35rem; }
-            .concert-place { font-size: 0.74rem; letter-spacing: 0.18em; }
+            .concert-place, .concert-venue, .concert-orch, .concert-work { font-size: 0.95rem; }
         }
 
         /* Video Section */
