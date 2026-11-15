@@ -13,7 +13,57 @@
 <meta property="og:url" content="https://michaelsanderling.de/">
 <meta property="og:image" content="https://michaelsanderling.de/images/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Michael Sanderling", "jobTitle": "Conductor", "description": "Chief Conductor of the Lucerne Symphony Orchestra", "url": "https://michaelsanderling.de/", "image": "https://michaelsanderling.de/images/hero.jpg", "worksFor": {"@type": "Organization", "name": "Luzerner Sinfonieorchester"}, "sameAs": ["https://instagram.com/sanderlingconductor"]}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://michaelsanderling.de/#profilepage",
+      "url": "https://michaelsanderling.de/",
+      "name": "Michael Sanderling – Conductor, Chief Conductor of the Lucerne Symphony Orchestra",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://michaelsanderling.de/#website",
+        "name": "Michael Sanderling",
+        "url": "https://michaelsanderling.de/"
+      },
+      "mainEntity": {
+        "@id": "https://michaelsanderling.de/#michael-sanderling"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://michaelsanderling.de/#michael-sanderling",
+      "name": "Michael Sanderling",
+      "jobTitle": "Conductor",
+      "description": "Chief Conductor of the Lucerne Symphony Orchestra",
+      "url": "https://michaelsanderling.de/",
+      "mainEntityOfPage": {
+        "@id": "https://michaelsanderling.de/#profilepage"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://michaelsanderling.de/images/hero.jpg",
+        "caption": "Michael Sanderling, conductor"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Luzerner Sinfonieorchester"
+      },
+      "knowsAbout": [
+        "Conducting",
+        "Classical music"
+      ],
+      "sameAs": [
+        "https://instagram.com/sanderlingconductor",
+        "https://tvmartists.com/michael-sanderling.html"
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
