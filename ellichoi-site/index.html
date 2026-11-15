@@ -317,6 +317,23 @@
             letter-spacing: 1.5px;
         }
 
+        /* Calendar: kommende Konzerte, zentriert untereinander */
+        .concert-list { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .concert { padding: 34px 0 38px; position: relative; width: 100%; }
+        .concert + .concert::before { content: ""; display: block; width: 56px; height: 1px; background: rgba(255,255,255,0.28); margin: 0 auto 38px; }
+        .concert.is-first::before { display: none !important; }
+        .concert-date { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; letter-spacing: 2px; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+        .concert-place { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 6px; }
+        .concert-venue { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.35rem; color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+        .concert-orch { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; color: #fff; letter-spacing: 0.5px; margin-top: 12px; }
+        .concert-venue + .concert-orch { margin-top: 0; }
+        .concert-work { font-family: 'Montserrat', sans-serif; font-size: 0.92rem; font-weight: 300; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); margin-top: 6px; }
+        @media (max-width: 768px) {
+            .concert-date { font-size: 2rem; }
+            .concert-orch { font-size: 1.35rem; }
+            .concert-place { font-size: 0.74rem; letter-spacing: 0.18em; }
+        }
+
         /* Video Section */
         .video-section {
             background: #f5f5f5;
@@ -1134,52 +1151,99 @@
     <section class="dates desktop-only" id="calendar">
         <div class="dates-content">
             <h2 class="block-title">Calendar</h2>
-            <p class="coming-soon">Update coming soon</p>
-            <div class="date-list" data-hidden-for-now>
-                <div class="date-entry">
-                    <span class="date-range">7–11 Oct</span>
-                    <span class="date-location">Paris</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">12 Oct</span>
-                    <span class="date-location">London</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">13–16 Oct</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">17–19 Oct</span>
-                    <span class="date-location">Schwarzenberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">20–21 Oct</span>
-                    <span class="date-location">Interlaken</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">22–26 Oct</span>
-                    <span class="date-location">Salzburg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">27–31 Oct</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">1–7 Nov</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">8–19 Nov</span>
-                    <span class="date-location">Seoul</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">20–21 Nov</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">22–30 Nov</span>
-                    <span class="date-location">New York</span>
-                </div>
+            <div class="concert-list">
+                <article class="concert" data-end="2026-11-02">
+                    <time class="concert-date" datetime="2026-11-02">2 November 2026</time>
+                    <div class="concert-place">Frankfurt, Germany</div>
+                    <div class="concert-venue">Volksbühne</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Grieg, Bach, Schubert, Strauss, Brahms</div>
+                </article>
+                <article class="concert" data-end="2026-12-02">
+                    <time class="concert-date" datetime="2026-12-02">2 December 2026</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Carl Bechstein Saal</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Strauss: Metamorphosen Septet</div>
+                </article>
+                <article class="concert" data-end="2027-01-13">
+                    <time class="concert-date" datetime="2027-01-13">13 January 2027</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Carl Bechstein Saal</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Ligeti, Tchaikovsky</div>
+                </article>
+                <article class="concert" data-end="2027-01-31">
+                    <time class="concert-date" datetime="2027-01-31">31 January 2027</time>
+                    <div class="concert-place">Catania, Italy</div>
+                    <div class="concert-venue">Teatro Metropolitan</div>
+                    <div class="concert-orch">La Sinfonica “Vincenzo Bellini”</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-02-26">
+                    <time class="concert-date" datetime="2027-02-26">26 February 2027</time>
+                    <div class="concert-place">Novi Sad, Serbia</div>
+                    <div class="concert-orch">Vojvodina Symphony Orchestra</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-03-04">
+                    <time class="concert-date" datetime="2027-03-04">4 March 2027</time>
+                    <div class="concert-place">Skopje, North Macedonia</div>
+                    <div class="concert-orch">Philharmonic Orchestra of North Macedonia</div>
+                    <div class="concert-work">Sibelius: Violin Concerto</div>
+                </article>
+                <article class="concert" data-end="2027-03-14">
+                    <time class="concert-date" datetime="2027-03-14">12–14 March 2027</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Casals Forum</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Various composers</div>
+                </article>
+                <article class="concert" data-end="2027-03-17">
+                    <time class="concert-date" datetime="2027-03-17">17 March 2027</time>
+                    <div class="concert-place">Chicago, USA</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">TBD</div>
+                </article>
+                <article class="concert" data-end="2027-03-23">
+                    <time class="concert-date" datetime="2027-03-23">23 March 2027</time>
+                    <div class="concert-place">Indianapolis, USA</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">TBD</div>
+                </article>
+                <article class="concert" data-end="2027-04-21">
+                    <time class="concert-date" datetime="2027-04-21">21 April 2027</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Carl Bechstein Saal</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Enescu: Octet</div>
+                </article>
+                <article class="concert" data-end="2027-05-02">
+                    <time class="concert-date" datetime="2027-05-02">2 May 2027</time>
+                    <div class="concert-place">Vienna, Austria</div>
+                    <div class="concert-venue">Musikverein, Golden Hall</div>
+                    <div class="concert-orch">Janáček Philharmonic Ostrava</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-05-03">
+                    <time class="concert-date" datetime="2027-05-03">3 May 2027</time>
+                    <div class="concert-place">Opava, Czech Republic</div>
+                    <div class="concert-orch">Janáček Philharmonic Ostrava</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-05-07">
+                    <time class="concert-date" datetime="2027-05-07">7 May 2027</time>
+                    <div class="concert-place">Aarhus, Denmark</div>
+                    <div class="concert-orch">Aarhus Symphony Orchestra</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-05-09">
+                    <time class="concert-date" datetime="2027-05-09">9 May 2027</time>
+                    <div class="concert-place">Amsterdam, Netherlands</div>
+                    <div class="concert-venue">Concertgebouw, Main Hall</div>
+                    <div class="concert-orch">Aarhus Symphony Orchestra</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
             </div>
         </div>
     </section>
@@ -1188,55 +1252,111 @@
     <section class="dates mobile-only" id="calendar-mobile">
         <div class="dates-content">
             <h2 class="block-title">Calendar</h2>
-            <p class="coming-soon">Update coming soon</p>
-            <div class="date-list" data-hidden-for-now>
-                <div class="date-entry">
-                    <span class="date-range">7–11 Oct</span>
-                    <span class="date-location">Paris</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">12 Oct</span>
-                    <span class="date-location">London</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">13–16 Oct</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">17–19 Oct</span>
-                    <span class="date-location">Schwarzenberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">20–21 Oct</span>
-                    <span class="date-location">Interlaken</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">22–26 Oct</span>
-                    <span class="date-location">Salzburg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">27–31 Oct</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">1–7 Nov</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">8–19 Nov</span>
-                    <span class="date-location">Seoul</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">20–21 Nov</span>
-                    <span class="date-location">Kronberg</span>
-                </div>
-                <div class="date-entry">
-                    <span class="date-range">22–30 Nov</span>
-                    <span class="date-location">New York</span>
-                </div>
+            <div class="concert-list">
+                <article class="concert" data-end="2026-11-02">
+                    <time class="concert-date" datetime="2026-11-02">2 November 2026</time>
+                    <div class="concert-place">Frankfurt, Germany</div>
+                    <div class="concert-venue">Volksbühne</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Grieg, Bach, Schubert, Strauss, Brahms</div>
+                </article>
+                <article class="concert" data-end="2026-12-02">
+                    <time class="concert-date" datetime="2026-12-02">2 December 2026</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Carl Bechstein Saal</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Strauss: Metamorphosen Septet</div>
+                </article>
+                <article class="concert" data-end="2027-01-13">
+                    <time class="concert-date" datetime="2027-01-13">13 January 2027</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Carl Bechstein Saal</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Ligeti, Tchaikovsky</div>
+                </article>
+                <article class="concert" data-end="2027-01-31">
+                    <time class="concert-date" datetime="2027-01-31">31 January 2027</time>
+                    <div class="concert-place">Catania, Italy</div>
+                    <div class="concert-venue">Teatro Metropolitan</div>
+                    <div class="concert-orch">La Sinfonica “Vincenzo Bellini”</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-02-26">
+                    <time class="concert-date" datetime="2027-02-26">26 February 2027</time>
+                    <div class="concert-place">Novi Sad, Serbia</div>
+                    <div class="concert-orch">Vojvodina Symphony Orchestra</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-03-04">
+                    <time class="concert-date" datetime="2027-03-04">4 March 2027</time>
+                    <div class="concert-place">Skopje, North Macedonia</div>
+                    <div class="concert-orch">Philharmonic Orchestra of North Macedonia</div>
+                    <div class="concert-work">Sibelius: Violin Concerto</div>
+                </article>
+                <article class="concert" data-end="2027-03-14">
+                    <time class="concert-date" datetime="2027-03-14">12–14 March 2027</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Casals Forum</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Various composers</div>
+                </article>
+                <article class="concert" data-end="2027-03-17">
+                    <time class="concert-date" datetime="2027-03-17">17 March 2027</time>
+                    <div class="concert-place">Chicago, USA</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">TBD</div>
+                </article>
+                <article class="concert" data-end="2027-03-23">
+                    <time class="concert-date" datetime="2027-03-23">23 March 2027</time>
+                    <div class="concert-place">Indianapolis, USA</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">TBD</div>
+                </article>
+                <article class="concert" data-end="2027-04-21">
+                    <time class="concert-date" datetime="2027-04-21">21 April 2027</time>
+                    <div class="concert-place">Kronberg, Germany</div>
+                    <div class="concert-venue">Carl Bechstein Saal</div>
+                    <div class="concert-orch">Recital</div>
+                    <div class="concert-work">Enescu: Octet</div>
+                </article>
+                <article class="concert" data-end="2027-05-02">
+                    <time class="concert-date" datetime="2027-05-02">2 May 2027</time>
+                    <div class="concert-place">Vienna, Austria</div>
+                    <div class="concert-venue">Musikverein, Golden Hall</div>
+                    <div class="concert-orch">Janáček Philharmonic Ostrava</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-05-03">
+                    <time class="concert-date" datetime="2027-05-03">3 May 2027</time>
+                    <div class="concert-place">Opava, Czech Republic</div>
+                    <div class="concert-orch">Janáček Philharmonic Ostrava</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-05-07">
+                    <time class="concert-date" datetime="2027-05-07">7 May 2027</time>
+                    <div class="concert-place">Aarhus, Denmark</div>
+                    <div class="concert-orch">Aarhus Symphony Orchestra</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
+                <article class="concert" data-end="2027-05-09">
+                    <time class="concert-date" datetime="2027-05-09">9 May 2027</time>
+                    <div class="concert-place">Amsterdam, Netherlands</div>
+                    <div class="concert-venue">Concertgebouw, Main Hall</div>
+                    <div class="concert-orch">Aarhus Symphony Orchestra</div>
+                    <div class="concert-work">Paganini: Concerto No. 1</div>
+                </article>
             </div>
         </div>
     </section>
+
+    <script>
+    /* Calendar: Konzerte, deren letzter Tag vorbei ist, werden ausgeblendet */
+    (function () {
+        var d = new Date(), today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        document.querySelectorAll('.concert[data-end]').forEach(function (c) { if (c.getAttribute('data-end') < today) { c.style.display = 'none'; } });
+        document.querySelectorAll('.concert-list').forEach(function (l) { var f = Array.prototype.find.call(l.children, function (c) { return c.style.display !== 'none'; }); if (f) { f.classList.add('is-first'); } });
+    })();
+    </script>
 
     <!-- Video Section -->
     <section class="video-section" id="video">
