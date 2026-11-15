@@ -13,7 +13,91 @@
     <meta property="og:url" content="https://ellichoi.com/">
     <meta property="og:image" content="https://ellichoi.com/images/elli-choi-800.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Elli Choi", "jobTitle": "Violinist", "url": "https://ellichoi.com/", "image": "https://ellichoi.com/images/elli-choi-800.jpg", "description": "Elli Choi – award-winning violinist, Silver Medal at the 12th International Violin Competition of Indianapolis, Third Prize at the 2024 Queen Elisabeth Violin Competition. Represented by TVM artists."}</script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://ellichoi.com/#website",
+          "url": "https://ellichoi.com/",
+          "name": "Elli Choi",
+          "inLanguage": "en",
+          "about": {
+            "@id": "https://ellichoi.com/#elli-choi"
+          }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://ellichoi.com/#profilepage",
+          "url": "https://ellichoi.com/",
+          "name": "Elli Choi – Violinist",
+          "inLanguage": "en",
+          "isPartOf": {
+            "@id": "https://ellichoi.com/#website"
+          },
+          "mainEntity": {
+            "@id": "https://ellichoi.com/#elli-choi"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://ellichoi.com/#elli-choi",
+          "name": "Elli Choi",
+          "givenName": "Elli",
+          "familyName": "Choi",
+          "jobTitle": "Violinist",
+          "description": "Elli Choi – American violinist. Silver Medal at the 12th International Violin Competition of Indianapolis (2026) and Third Prize at the Queen Elisabeth Competition (2024). Represented by TVM artists.",
+          "url": "https://ellichoi.com/",
+          "mainEntityOfPage": {
+            "@id": "https://ellichoi.com/#profilepage"
+          },
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://ellichoi.com/images/elli-choi-800.jpg",
+            "caption": "Elli Choi, violinist"
+          },
+          "nationality": {
+            "@type": "Country",
+            "name": "United States"
+          },
+          "knowsAbout": [
+            "Violin",
+            "Classical music"
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "The Juilliard School",
+              "url": "https://www.juilliard.edu/"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Columbia University",
+              "url": "https://www.columbia.edu/"
+            }
+          ],
+          "affiliation": {
+            "@type": "EducationalOrganization",
+            "name": "Kronberg Academy",
+            "url": "https://www.kronbergacademy.de/"
+          },
+          "award": [
+            "Silver Medal, International Violin Competition of Indianapolis (2026)",
+            "Third Prize, Queen Elisabeth Competition (2024)",
+            "First Prize, China International Music Competition (2024)",
+            "First Prize, Dubai Violin Competition (2024)",
+            "First Prize, Qingdao International Violin Competition",
+            "Winner, Monaco World Music Masters (2016)"
+          ],
+          "sameAs": [
+            "https://www.instagram.com/ellichhoi",
+            "https://tvmartists.com/elli-choi.html"
+          ]
+        }
+      ]
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&family=Great+Vibes:wght@400&family=Fredoka+One:wght@400&family=Pacifico:wght@400&display=swap" rel="stylesheet">
     <style>
         * {
