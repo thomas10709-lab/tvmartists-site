@@ -10,133 +10,97 @@
     <title>Mats Thiersch – Talking points</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; background: #0f2742; }
-        body { color: #fff; font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.6; }
-        .wrap { max-width: 820px; margin: 0 auto; padding: 28px 20px 60px; }
-        .top { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+        body { color: #fff; font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.5; }
+        .wrap { max-width: 860px; margin: 0 auto; padding: 24px 22px 60px; }
+        .top { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
         .tag { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9fc0e0; }
         .switch { display: inline-flex; border: 1px solid #5f86ad; border-radius: 999px; overflow: hidden; }
         .switch button { background: transparent; color: #cfe3f5; border: 0; padding: 7px 18px; font: inherit; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; cursor: pointer; }
         .switch button.on { background: #fff; color: #0f2742; }
-        h1 { font-weight: 600; font-size: clamp(28px, 6vw, 40px); line-height: 1.2; margin: 14px 0 4px; }
-        .sub { color: #cfe3f5; font-weight: 300; margin: 0 0 26px; }
-        h2 { font-weight: 600; font-size: 22px; margin: 38px 0 4px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.28); }
-        h2 .n { color: #9fc0e0; font-weight: 500; margin-right: 8px; }
-        h3 { font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #9fc0e0; margin: 26px 0 8px; }
-        .lead { color: #cfe3f5; font-weight: 300; margin: 0 0 14px; }
-        .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 16px 18px; margin: 0 0 12px; position: relative; }
-        .card p { margin: 0; font-size: 18px; font-weight: 400; }
-        .card .copy { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; font: inherit; font-size: 12px; padding: 3px 10px; cursor: pointer; }
-        .card .copy:hover { background: rgba(255,255,255,0.26); }
-        .card.has-copy { padding-right: 78px; }
-        ul.points { list-style: none; margin: 0; padding: 0; }
-        ul.points li { position: relative; padding: 9px 0 9px 22px; font-size: 17px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        ul.points li::before { content: ""; position: absolute; left: 2px; top: 19px; width: 8px; height: 8px; border-radius: 50%; background: #9fc0e0; }
-        blockquote { margin: 0 0 12px; padding: 4px 0 4px 18px; border-left: 3px solid #9fc0e0; }
-        blockquote p { margin: 0 0 10px; font-size: 17px; font-weight: 300; }
-        blockquote.orig p { font-style: italic; color: #e6f0fa; }
-        .src { font-size: 13px; color: #9fc0e0; margin: 4px 0 0; }
-        .orch { list-style: none; margin: 0; padding: 0; columns: 2 260px; column-gap: 28px; }
-        .orch li { padding: 7px 0; font-size: 17px; break-inside: avoid; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .note { font-size: 14px; color: #cfe3f5; font-weight: 300; margin: 12px 0 0; }
+        h1 { font-weight: 600; font-size: clamp(22px, 4vw, 28px); letter-spacing: 0.02em; color: #9fc0e0; margin: 18px 0 18px; }
+
+        /* ---- 1: klare Halbsaetze in grosser Schrift, drei verschiedene Formate ---- */
+        .hero { font-weight: 700; font-size: clamp(38px, 8.2vw, 64px); line-height: 1.08; letter-spacing: -0.01em; margin: 0 0 30px; }
+        .stack { list-style: none; margin: 0 0 30px; padding: 0; }
+        .stack li { font-weight: 500; font-size: clamp(26px, 5.4vw, 38px); line-height: 1.2; padding: 8px 0 8px 22px; border-left: 4px solid #6fa8dc; margin: 0 0 12px; }
+        .contrast { font-style: italic; font-weight: 300; font-size: clamp(28px, 6vw, 44px); line-height: 1.2; color: #cfe3f5; margin: 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.28); }
+
+        /* ---- 2 + 3: kleiner ---- */
+        h2 { font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: #9fc0e0; margin: 52px 0 12px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.28); }
+        h3 { font-weight: 600; font-size: 13px; letter-spacing: 0.06em; color: #cfe3f5; margin: 18px 0 4px; }
+        ul.bio { list-style: none; margin: 0; padding: 0; }
+        ul.bio li { position: relative; padding: 7px 0 7px 20px; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        ul.bio li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 7px; height: 7px; border-radius: 50%; background: #9fc0e0; }
+        .orch { list-style: none; margin: 0; padding: 0; columns: 2 280px; column-gap: 30px; }
+        .orch li { padding: 8px 0; font-size: 19px; break-inside: avoid; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .foot { margin-top: 44px; font-size: 12px; color: #7da2c7; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 14px; }
         html[data-ui="en"] .de, html[data-ui="en"] .fr { display: none !important; }
         html[data-ui="de"] .en, html[data-ui="de"] .fr { display: none !important; }
         html[data-ui="fr"] .en, html[data-ui="fr"] .de { display: none !important; }
-        @media print { html, body { background: #fff; } body { color: #000; } .switch, .copy { display: none; } }
+        @media print { html, body { background: #fff; } body { color: #000; } .switch { display: none; } }
     </style>
 </head>
 <body>
 <div class="wrap">
     <div class="top">
-        <span class="tag"><span class="en">TVM artists · internal · phone calls</span><span class="de">TVM artists · intern · Telefonate</span><span class="fr">TVM artists · interne · appels téléphoniques</span></span>
+        <span class="tag"><span class="en">TVM artists · internal</span><span class="de">TVM artists · intern</span><span class="fr">TVM artists · interne</span></span>
         <div class="switch" role="group" aria-label="Language / Sprache / Langue">
             <button type="button" data-set="en" class="on">EN</button><button type="button" data-set="de">DE</button><button type="button" data-set="fr">FR</button>
         </div>
     </div>
 
     <h1>Mats Thiersch</h1>
-    <p class="sub"><span class="en">Talking points for conversations about the artist</span><span class="de">Formulierungshilfe für Gespräche über den Künstler</span><span class="fr">Aide à la formulation pour parler de l’artiste</span></p>
 
-    <!-- ============ 1 ============ -->
-    <h2><span class="n">1</span><span class="en">Talking points</span><span class="de">Formulierungshilfe</span><span class="fr">Aide à la formulation</span></h2>
-    <p class="lead"><span class="en">Based on the review in <em>Le Figaro</em> of the final of the Concours de Genève 2026. Tap “Copy” to take a phrase along.</span><span class="de">Nach der Kritik in <em>Le Figaro</em> zum Finale des Concours de Genève 2026. Mit „Kopieren“ lässt sich ein Satz übernehmen.</span><span class="fr">D’après la critique du <em>Figaro</em> sur la finale du Concours de Genève 2026. « Copier » reprend une phrase.</span></p>
+    <!-- 1: Halbsaetze -->
+    <p class="hero">
+        <span class="en">A win that felt self&#8209;evident.</span>
+        <span class="de">Ein Sieg, der selbstverständlich wirkte.</span>
+        <span class="fr">Une victoire qui allait de soi.</span>
+    </p>
 
-    <h3><span class="en">In one breath</span><span class="de">In einem Atemzug</span><span class="fr">En une phrase</span></h3>
-    <div class="card has-copy">
-        <button type="button" class="copy" data-copy>Copy</button>
-        <p class="en">Mats Thiersch is 23, a pupil of Alain Altinoglu and assistant to Kirill Petrenko at the Berlin Philharmonic. In November he won First Prize in the conducting competition of the Concours de Genève, the first conducting laureate since Alan Gilbert in 1994. Le Figaro wrote: had he not won, there would have been a scandal.</p>
-        <p class="de">Mats Thiersch ist 23, Schüler von Alain Altinoglu und Assistent von Kirill Petrenko bei den Berliner Philharmonikern. Im November gewann er den 1. Preis im Dirigierwettbewerb des Concours de Genève, als erster Preisträger im Dirigieren seit Alan Gilbert 1994. Le Figaro schrieb: Hätte er nicht gewonnen, hätte es einen Skandal gegeben.</p>
-        <p class="fr">Mats Thiersch a 23 ans, il est élève d’Alain Altinoglu et assistant de Kirill Petrenko au Philharmonique de Berlin. En novembre, il a remporté le Premier Prix du concours de direction d’orchestre du Concours de Genève, premier lauréat de direction depuis Alan Gilbert en 1994. Le Figaro a écrit : s’il n’avait pas gagné, on aurait fait un scandale.</p>
-    </div>
-
-    <h3><span class="en">What Le Figaro said – in short</span><span class="de">Was Le Figaro sagt – kurz</span><span class="fr">Ce que dit Le Figaro – en bref</span></h3>
-    <ul class="points en">
-        <li>“Rarely has one had such a sense of the obvious.” If Mats Thiersch had not won, there would have been a scandal.</li>
-        <li>Exceptional qualities that show without the slightest ostentation: naturalness and simplicity are his compass.</li>
-        <li>His gesture is supple and fluid; his musical vision is lively and coherent.</li>
-        <li>His rapport with the orchestra is convivial, and he knows what he wants.</li>
-        <li>He never gives the impression of sitting a competition but of making music: you attend a concert, not a competition final.</li>
-    </ul>
-    <ul class="points de">
-        <li>„Selten hatte man ein solches Gefühl von Selbstverständlichkeit.“ Hätte Mats Thiersch nicht gewonnen, hätte es einen Skandal gegeben.</li>
-        <li>Außergewöhnliche Qualitäten, die ganz ohne Zurschaustellung auskommen: Natürlichkeit und Schlichtheit sind sein Kompass.</li>
-        <li>Seine Gestik ist geschmeidig und fließend, seine musikalische Vision lebendig und stimmig.</li>
-        <li>Sein Verhältnis zum Orchester ist freundschaftlich-zugewandt, und er weiß, was er will.</li>
-        <li>Er erweckt nie den Eindruck, einen Wettbewerb zu bestreiten, sondern Musik zu machen: Man erlebt ein Konzert, kein Wettbewerbsfinale.</li>
+    <ul class="stack">
+        <li><span class="en">natural, without any show</span><span class="de">natürlich, ohne jede Show</span><span class="fr">naturel, sans la moindre ostentation</span></li>
+        <li><span class="en">a supple, fluid gesture</span><span class="de">eine geschmeidige, fließende Gestik</span><span class="fr">un geste souple et fluide</span></li>
+        <li><span class="en">a lively, coherent musical vision</span><span class="de">eine lebendige, stimmige musikalische Vision</span><span class="fr">une vision musicale vivante et cohérente</span></li>
+        <li><span class="en">friendly with the orchestra – and clear about what he wants</span><span class="de">zugewandt im Orchester – und klar im Willen</span><span class="fr">convivial avec l’orchestre – et clair dans ce qu’il veut</span></li>
     </ul>
 
-    <ul class="points fr">
-        <li>« On a rarement eu un tel sentiment d’évidence. » Si Mats Thiersch n’avait pas gagné, on aurait fait un scandale.</li>
-        <li>Des qualités exceptionnelles qui s’expriment sans la moindre ostentation : naturel et simplicité sont ses boussoles.</li>
-        <li>Un geste souple et fluide ; une vision musicale vivante et cohérente.</li>
-        <li>Un rapport à l’orchestre convivial, tout en sachant ce qu’il veut.</li>
-        <li>Il ne donne jamais l’impression de passer un concours mais de faire de la musique : on assiste à un concert, non à une finale de compétition.</li>
+    <p class="contrast">
+        <span class="en">A concert, not a competition.</span>
+        <span class="de">Ein Konzert, kein Wettbewerb.</span>
+        <span class="fr">Un concert, pas un concours.</span>
+    </p>
+
+    <!-- 2: Biografisches -->
+    <h2><span class="en">Background</span><span class="de">Biografisches</span><span class="fr">Parcours</span></h2>
+
+    <h3><span class="en">Studies</span><span class="de">Studium</span><span class="fr">Études</span></h3>
+    <ul class="bio">
+        <li><span class="en">Violin from age six, later piano and composition</span><span class="de">Geige ab sechs Jahren, später Klavier und Komposition</span><span class="fr">Violon dès six ans, puis piano et composition</span></li>
+        <li><span class="en">Composition with Miroslav Srnka, HfMT Köln (from 2021)</span><span class="de">Komposition bei Miroslav Srnka, HfMT Köln (ab 2021)</span><span class="fr">Composition avec Miroslav Srnka, HfMT Cologne (depuis 2021)</span></li>
+        <li><span class="en">Conducting with Alain Altinoglu, Conservatoire de Paris (from 2023)</span><span class="de">Dirigieren bei Alain Altinoglu, Conservatoire de Paris (ab 2023)</span><span class="fr">Direction avec Alain Altinoglu, Conservatoire de Paris (depuis 2023)</span></li>
+        <li><span class="en">Masterclasses with Daniele Gatti, Mikko Franck, Alexandre Bloch</span><span class="de">Meisterkurse bei Daniele Gatti, Mikko Franck, Alexandre Bloch</span><span class="fr">Masterclasses avec Daniele Gatti, Mikko Franck, Alexandre Bloch</span></li>
     </ul>
 
-    <h3><span class="en">Short phrases to use</span><span class="de">Kurze Sätze zum Verwenden</span><span class="fr">Phrases courtes à utiliser</span></h3>
-    <div class="card has-copy"><button type="button" class="copy" data-copy>Copy</button>
-        <p class="en">Le Figaro wrote that there would have been a scandal if Mats had not won in Geneva.</p>
-        <p class="de">Le Figaro schrieb, es hätte einen Skandal gegeben, wenn Mats in Genf nicht gewonnen hätte.</p>
-        <p class="fr">Le Figaro a écrit qu’on aurait fait un scandale si Mats n’avait pas gagné à Genève.</p></div>
-    <div class="card has-copy"><button type="button" class="copy" data-copy>Copy</button>
-        <p class="en">What stands out is how natural he is: no ostentation, a fluid gesture, a clear musical vision.</p>
-        <p class="de">Auffällig ist seine Natürlichkeit: keine Show, eine fließende Gestik, eine klare musikalische Vision.</p>
-        <p class="fr">Ce qui frappe, c’est son naturel : aucune ostentation, un geste fluide, une vision musicale claire.</p></div>
-    <div class="card has-copy"><button type="button" class="copy" data-copy>Copy</button>
-        <p class="en">Orchestras enjoy working with him – he is open and friendly, and he knows exactly what he wants.</p>
-        <p class="de">Orchester arbeiten gern mit ihm: Er ist offen und zugewandt und weiß genau, was er will.</p>
-        <p class="fr">Les orchestres aiment travailler avec lui : il est ouvert, convivial, et sait exactement ce qu’il veut.</p></div>
-    <div class="card has-copy"><button type="button" class="copy" data-copy>Copy</button>
-        <p class="en">In the final it felt like a concert, not a competition.</p>
-        <p class="de">Im Finale war es ein Konzert, kein Wettbewerb.</p>
-        <p class="fr">En finale, on avait l’impression d’assister à un concert, pas à un concours.</p></div>
-
-    <h3><span class="en">The review (full paragraph)</span><span class="de">Die Kritik (vollständiger Absatz)</span><span class="fr">La critique (paragraphe complet)</span></h3>
-    <blockquote class="orig" lang="fr">
-        <p>On a rarement eu un tel sentiment d’évidence. Si Mats Thiersch n’avait pas gagné le concours de direction d’orchestre de Genève, on aurait fait un scandale ! Car le jeune Allemand de 23 ans, élève d’Alain Altinoglu au Conservatoire de Paris et assistant de Kirill Petrenko au Philharmonique de Berlin, a des qualités d’autant plus exceptionnelles qu’elles s’expriment sans la moindre ostentation. Naturel et simplicité sont ses boussoles. Cela vaut pour le geste, souple et fluide, comme pour la vision musicale, vivante et cohérente, et le rapport à l’orchestre, convivial tout en sachant ce qu’il veut. Il ne donne jamais l’impression de passer un concours mais de faire de la musique : on assiste à un concert, non à une finale de compétition.</p>
-    </blockquote>
-    <p class="src">Le Figaro (<span class="en">original, French</span><span class="de">Original, Französisch</span><span class="fr">texte original</span>)</p>
-    <blockquote class="en" lang="en">
-        <p>Rarely has one had such a sense of the obvious. Had Mats Thiersch not won the Geneva conducting competition, there would have been a scandal! For the young German, 23, a pupil of Alain Altinoglu at the Conservatoire de Paris and assistant to Kirill Petrenko at the Berlin Philharmonic, has exceptional qualities that are all the more striking because they come without the slightest ostentation. Naturalness and simplicity are his compass. This holds for the gesture, supple and fluid, as for the musical vision, lively and coherent, and for the rapport with the orchestra, convivial while knowing what he wants. He never gives the impression of sitting a competition but of making music: one attends a concert, not a competition final.</p>
-    </blockquote>
-    <blockquote class="de" lang="de">
-        <p>Selten hatte man ein solches Gefühl von Selbstverständlichkeit. Hätte Mats Thiersch den Dirigierwettbewerb von Genf nicht gewonnen, hätte es einen Skandal gegeben! Denn der junge Deutsche (23), Schüler von Alain Altinoglu am Pariser Konservatorium und Assistent von Kirill Petrenko bei den Berliner Philharmonikern, besitzt außergewöhnliche Qualitäten, die umso mehr beeindrucken, als sie sich ohne die geringste Zurschaustellung zeigen. Natürlichkeit und Schlichtheit sind sein Kompass. Das gilt für die Gestik, geschmeidig und fließend, ebenso wie für die musikalische Vision, lebendig und stimmig, und für das Verhältnis zum Orchester, zugewandt und kollegial und doch mit klarem Willen. Er erweckt nie den Eindruck, einen Wettbewerb zu bestreiten, sondern Musik zu machen: Man erlebt ein Konzert, kein Wettbewerbsfinale.</p>
-    </blockquote>
-    <p class="src"><span class="en">Translation: TVM artists, for internal use.</span><span class="de">Übersetzung: TVM artists, zum internen Gebrauch.</span><span class="fr">Le Figaro, texte original.</span></p>
-
-    <!-- ============ 2 ============ -->
-    <h2><span class="n">2</span><span class="en">Future engagements</span><span class="de">Future Engagements</span><span class="fr">Engagements à venir</span></h2>
-
-    <h3><span class="en">Berliner Philharmoniker</span><span class="de">Berliner Philharmoniker</span></h3>
-    <ul class="points">
-        <li><span class="en">Assistant Conductor of the Berliner Philharmoniker 2026–28, working with Kirill Petrenko</span><span class="de">Assistant Conductor der Berliner Philharmoniker 2026–28, in der Zusammenarbeit mit Kirill Petrenko</span><span class="fr">Chef assistant du Philharmonique de Berlin 2026–28, auprès de Kirill Petrenko</span></li>
-        <li><span class="en">Siemens Conducting Scholarship of the Karajan Academy</span><span class="de">Siemens-Dirigierstipendium der Karajan-Akademie</span><span class="fr">Bourse de direction Siemens de l’Académie Karajan</span></li>
+    <h3><span class="en">Prizes</span><span class="de">Preise</span><span class="fr">Prix</span></h3>
+    <ul class="bio">
+        <li><span class="en">First Prize, conducting competition of the Concours de Genève 2026 – first conducting laureate since Alan Gilbert (1994)</span><span class="de">1. Preis im Dirigierwettbewerb des Concours de Genève 2026 – erster Preisträger im Dirigieren seit Alan Gilbert (1994)</span><span class="fr">Premier Prix du concours de direction d’orchestre du Concours de Genève 2026 – premier lauréat de direction depuis Alan Gilbert (1994)</span></li>
+        <li><span class="en">Musicians’ Prize of the Orchestre de la Suisse Romande</span><span class="de">Musikerpreis des Orchestre de la Suisse Romande</span><span class="fr">Prix des musiciens de l’Orchestre de la Suisse Romande</span></li>
+        <li><span class="en">Composition Prize of the German Orchestra Foundation</span><span class="de">Kompositionspreis der Deutschen Orchester-Stiftung</span><span class="fr">Prix de composition de la Deutsche Orchester-Stiftung</span></li>
     </ul>
 
-    <h3><span class="en">Orchestras</span><span class="de">Orchester</span><span class="fr">Orchestres</span></h3>
+    <h3><span class="en">Positions</span><span class="de">Positionen</span><span class="fr">Postes</span></h3>
+    <ul class="bio">
+        <li><span class="en">Assistant Conductor of the Berliner Philharmoniker (Kirill Petrenko), Karajan Academy fellow, from September 2026</span><span class="de">Assistant Conductor der Berliner Philharmoniker (Kirill Petrenko), Fellow der Karajan-Akademie, seit September 2026</span><span class="fr">Chef assistant du Philharmonique de Berlin (Kirill Petrenko), boursier de l’Académie Karajan, depuis septembre 2026</span></li>
+        <li><span class="en">Music Director, Orchestre et Chœur Symphonique du COGE, Paris (2024–26)</span><span class="de">Musikdirektor, Orchestre et Chœur Symphonique du COGE, Paris (2024–26)</span><span class="fr">Directeur musical, Orchestre et Chœur Symphonique du COGE, Paris (2024–26)</span></li>
+        <li><span class="en">Assistant conductor: Orchestre national de Cannes, Orchestre national d’Île-de-France</span><span class="de">Assistenzdirigent: Orchestre national de Cannes, Orchestre national d’Île-de-France</span><span class="fr">Chef assistant : Orchestre national de Cannes, Orchestre national d’Île-de-France</span></li>
+    </ul>
+
+    <!-- 3: Gastorchester -->
+    <h2><span class="en">Guest orchestras</span><span class="de">Gastorchester</span><span class="fr">Orchestres invités</span></h2>
     <ul class="orch">
         <li>Konzerthausorchester Berlin</li>
         <li>Rotterdam Philharmonic</li>
@@ -150,39 +114,20 @@
         <li>Prague Philharmonia</li>
         <li>Orchestre de la Suisse Romande</li>
     </ul>
-    <p class="note"><span class="en">Orchestre de la Suisse Romande: as winner of the OSR Musicians’ Prize at the Concours de Genève he is invited to conduct the orchestra in each of the next two seasons.</span><span class="de">Orchestre de la Suisse Romande: Als Gewinner des Musikerpreises des OSR beim Concours de Genève ist er eingeladen, das Orchester in jeder der nächsten beiden Spielzeiten zu dirigieren.</span><span class="fr">Orchestre de la Suisse Romande : lauréat du Prix des musiciens de l’OSR au Concours de Genève, il est invité à diriger l’orchestre lors de chacune des deux prochaines saisons.</span></p>
 
-    <h3><span class="en">Opera</span><span class="de">Oper</span><span class="fr">Opéra</span></h3>
-    <ul class="points">
-        <li><span class="en">Opéra de Dijon – assistant conductor to Joseph Bastian for Strauss’s <em>Ariadne auf Naxos</em></span><span class="de">Opéra de Dijon – Assistenzdirigent von Joseph Bastian bei Strauss’ <em>Ariadne auf Naxos</em></span><span class="fr">Opéra de Dijon – chef assistant de Joseph Bastian pour <em>Ariadne auf Naxos</em> de Strauss</span></li>
-    </ul>
-
-    <p class="foot"><span class="en">Internal aid for phone calls. This page is not listed in search engines. Status: 17 November 2026 – please check dates with TVM artists before quoting them.</span><span class="de">Interne Hilfe für Telefonate. Diese Seite ist nicht in Suchmaschinen gelistet. Stand: 17. November 2026 – Termine bitte vor dem Nennen mit TVM artists prüfen.</span><span class="fr">Aide interne pour les appels. Cette page n’est pas référencée par les moteurs de recherche. État : 17 novembre 2026 – merci de vérifier les dates avec TVM artists avant de les citer.</span></p>
+    <p class="foot"><span class="en">Internal aid for phone calls. Not listed in search engines. Status: 17 November 2026 – please check dates with TVM artists before quoting them.</span><span class="de">Interne Hilfe für Telefonate. Nicht in Suchmaschinen gelistet. Stand: 17. November 2026 – Termine bitte vor dem Nennen mit TVM artists prüfen.</span><span class="fr">Aide interne pour les appels. Non référencée par les moteurs de recherche. État : 17 novembre 2026 – merci de vérifier les dates avec TVM artists avant de les citer.</span></p>
 </div>
 <script>
 (function () {
     var html = document.documentElement;
-    var COPY = { en: 'Copy', de: 'Kopieren', fr: 'Copier' }, COPIED = { en: 'Copied', de: 'Kopiert', fr: 'Copié' };
     function setLang(l) {
         html.setAttribute('data-ui', l); html.setAttribute('lang', l);
         document.querySelectorAll('.switch button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-set') === l); });
-        document.querySelectorAll('[data-copy]').forEach(function (b) { b.textContent = COPY[l]; });
         try { localStorage.setItem('tvm_talk_lang', l); } catch (e) { /* ohne Speicher: Standard Englisch */ }
     }
     document.querySelectorAll('.switch button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-set')); }); });
     var saved = null; try { saved = localStorage.getItem('tvm_talk_lang'); } catch (e) { saved = null; }
     if (saved === 'de' || saved === 'en' || saved === 'fr') { setLang(saved); }
-    document.querySelectorAll('[data-copy]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var lang = html.getAttribute('data-ui');
-            var p = btn.parentNode.querySelector('p.' + lang);
-            if (!p) { return; }
-            var text = p.textContent.trim();
-            var done = function () { btn.textContent = COPIED[lang]; setTimeout(function () { btn.textContent = COPY[html.getAttribute('data-ui')]; }, 1400); };
-            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { /* kein Zugriff auf die Zwischenablage */ }); }
-            else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { /* nicht möglich */ } document.body.removeChild(ta); }
-        });
-    });
 })();
 </script>
 </body>
