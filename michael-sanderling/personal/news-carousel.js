@@ -28,6 +28,11 @@
   // Relative Bildpfade aus news.json beziehen sich auf die Wurzel (base).
   function abs(base, p) { return !p || /^(https?:)?\/\//.test(p) ? p : base + p; }
 
+  // Ersatzbilder, Schlüssel = Bilddatei der News (Pfade relativ zur Wurzel, wie in news.json)
+  var IMAGE_OVERRIDES = {
+    "news-data/img/20261117-144537-dd286f.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
+  };
+
   // --- Quelle 1: eigene Liste ---------------------------------------------
   // base darf mehrere Kandidaten enthalten, getrennt durch "|" (z. B. "|../../"): der erste, der news.json liefert, gewinnt.
   function loadOwn(key, bases) {
@@ -51,7 +56,8 @@
       }).sort(function (a, b) {
         return String(b.ts || "").localeCompare(String(a.ts || ""));
       }).slice(0, MAX_ITEMS).map(function (it) {
-        return { image: abs(base, it.image), webp: abs(base, it.webp || ""), alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
+        var ov = IMAGE_OVERRIDES[it.image] || null;
+        return { image: abs(base, ov ? ov.image : it.image), webp: abs(base, ov ? ov.webp : (it.webp || "")), alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
       });
     });
   }
