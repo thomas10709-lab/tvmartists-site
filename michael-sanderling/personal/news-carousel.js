@@ -122,7 +122,7 @@
     injectCardStyles();
     var a = document.createElement(it.link ? "a" : "div");
     a.className = "news-card";
-    if (it.link) { a.href = it.link; a.target = "_blank"; a.rel = "noopener noreferrer"; }
+    if (it.link) { a.href = it.link; if (!it.internal) { a.target = "_blank"; a.rel = "noopener noreferrer"; } }
     if (it.image) {
       var img = document.createElement("img");
       img.src = it.image; img.alt = it.alt || it.title || ""; img.loading = "lazy";
@@ -164,7 +164,8 @@
         var slide = document.createElement("div");
         slide.className = "news-slide";
 
-        if (it.type === "card") {
+        // Text-News (Überschrift + Text) werden wie Karten mit Foto, Titel und Text dargestellt
+        if (it.type === "card" || (it.type === "article" && it.title)) {
           slide.className = "news-slide news-card-slide";
           slide.appendChild(buildCard(it));
           track.appendChild(slide);
