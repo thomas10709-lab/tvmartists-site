@@ -27,9 +27,21 @@ function tvm_articles(): array
         $f = __DIR__ . '/news-translations/' . $o['id'] . '.json';
         $t = is_file($f) ? json_decode((string)file_get_contents($f), true) : null;
         if (!is_array($t)) { continue; }
-        if (!tvm_has_de($o) && trim((string)($t['title_de'] ?? '')) !== '' && trim((string)($t['text_de'] ?? '')) !== '') {
+        // "base": "de" = der im Admin gespeicherte Titel/Text ist deutsch (Originalsprache); dann ist Deutsch die Standardsprache der Seite
+        if (($t['base'] ?? '') === 'de') {
+            $o['base'] = 'de';
+            $o['title_de'] = (string)($o['title'] ?? '');
+            $o['text_de']  = (string)($o['text'] ?? '');
+        } elseif (!tvm_has_de($o) && trim((string)($t['title_de'] ?? '')) !== '' && trim((string)($t['text_de'] ?? '')) !== '') {
             $o['title_de'] = (string)$t['title_de'];
             $o['text_de']  = (string)$t['text_de'];
+        }
+        // weitere Sprachen aus der Datei: title_en/text_en, title_fr/text_fr
+        foreach (['en', 'fr'] as $l) {
+            if (trim((string)($t['title_' . $l] ?? '')) !== '' && trim((string)($t['text_' . $l] ?? '')) !== '' && !isset($o['title_' . $l])) {
+                $o['title_' . $l] = (string)$t['title_' . $l];
+                $o['text_' . $l]  = (string)$t['text_' . $l];
+            }
         }
         foreach (is_array($t['en_replace'] ?? null) ? $t['en_replace'] : [] as $r) {
             $from = (string)($r['from'] ?? ''); $to = (string)($r['to'] ?? '');
@@ -44,13 +56,41 @@ function tvm_articles(): array
 /** Adresse eines Artikels; mit $lang = 'de' die deutsche Fassung (englisch ist der Standard ohne Zusatz) */
 function tvm_article_url(string $id, string $lang = ''): string
 {
-    return TVM_BASE . '/news-article.php?id=' . $id . ($lang === 'de' ? '&lang=de' : '');
+    return TVM_BASE . '/news-article.php?id=' . $id . ($lang !== '' ? '&lang=' . $lang : '');
 }
 
-/** Hat der Artikel eine deutsche Fassung (Titel und Text auf Deutsch eingetragen)? */
+/** Originalsprache der Seite: 'en' (Standard) oder 'de' (wenn der gespeicherte Text deutsch ist) */
+function tvm_base_lang(array $it): string
+{
+    return ($it['base'] ?? '') === 'de' ? 'de' : 'en';
+}
+
+/** Verfügbare Sprachfassungen in der Reihenfolge EN, DE, FR: Sprache => [Titel, Text] */
+function tvm_langs(array $it): array
+{
+    $base = tvm_base_lang($it);
+    $out = [];
+    foreach (['en', 'de', 'fr'] as $l) {
+        if ($l === $base) {
+            $t = trim((string)($it['title'] ?? '')); $x = (string)($it['text'] ?? '');
+        } else {
+            $t = trim((string)($it['title_' . $l] ?? '')); $x = (string)($it['text_' . $l] ?? '');
+        }
+        if ($t !== '' && trim($x) !== '') { $out[$l] = [$t, $x]; }
+    }
+    return $out;
+}
+
+/** Adresse der Fassung in der Sprache $lang; die Originalsprache hat die Adresse ohne Zusatz */
+function tvm_article_url_for(array $it, string $lang): string
+{
+    return tvm_article_url((string)$it['id'], $lang === tvm_base_lang($it) ? '' : $lang);
+}
+
+/** Hat der Artikel eine zusätzliche deutsche Fassung (Standardsprache Englisch, Titel und Text auf Deutsch eingetragen)? */
 function tvm_has_de(array $it): bool
 {
-    return trim((string)($it['title_de'] ?? '')) !== '' && trim((string)($it['text_de'] ?? '')) !== '';
+    return tvm_base_lang($it) === 'en' && trim((string)($it['title_de'] ?? '')) !== '' && trim((string)($it['text_de'] ?? '')) !== '';
 }
 
 function tvm_abs(string $path): string
@@ -71,7 +111,7 @@ function tvm_iso(string $ts): string
 function tvm_description(string $text, int $max = 155): string
 {
     $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
-    if (count($paras) > 1 && preg_match('/^(by|von)\s/iu', trim($paras[0])) && mb_strlen(trim($paras[0])) <= 160) {
+    if (count($paras) > 1 && preg_match('/^(by|von|par)\s/iu', trim($paras[0])) && mb_strlen(trim($paras[0])) <= 160) {
         array_shift($paras);
     }
     $s = trim((string)preg_replace('/\s+/u', ' ', tvm_strip_links(implode(' ', $paras))));
@@ -132,7 +172,7 @@ function tvm_byline(string $text): string
 {
     $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
     $first = trim((string)($paras[0] ?? ''));
-    if (count($paras) > 1 && preg_match('/^(by|von)\s/iu', $first) && mb_strlen($first) <= 160) {
+    if (count($paras) > 1 && preg_match('/^(by|von|par)\s/iu', $first) && mb_strlen($first) <= 160) {
         return tvm_strip_byline_date((string)preg_replace('/\s+/u', ' ', $first));
     }
     return '';
