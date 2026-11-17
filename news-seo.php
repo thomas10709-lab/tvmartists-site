@@ -19,15 +19,21 @@ function tvm_articles(): array
             $out[] = $it;
         }
     }
-    // Deutsche Fassungen, die im Repository liegen (news-translations/<id>.json), ergänzen Artikel ohne eigene deutsche Fassung im Admin
+    // Zusätze aus dem Repository (news-translations/<id>.json):
+    //  - deutsche Fassung (title_de/text_de) für Artikel ohne eigene deutsche Fassung im Admin (eine im Admin gespeicherte hat Vorrang)
+    //  - en_replace: [{from, to}] ersetzt im ENGLISCHEN Text genau diese Stelle, sofern sie noch so im Text steht
+    //    (steht sie nicht mehr da, z. B. weil der Text im Admin schon geändert wurde, passiert nichts)
     foreach ($out as &$o) {
-        if (!tvm_has_de($o)) {
-            $f = __DIR__ . '/news-translations/' . $o['id'] . '.json';
-            $t = is_file($f) ? json_decode((string)file_get_contents($f), true) : null;
-            if (is_array($t) && trim((string)($t['title_de'] ?? '')) !== '' && trim((string)($t['text_de'] ?? '')) !== '') {
-                $o['title_de'] = (string)$t['title_de'];
-                $o['text_de']  = (string)$t['text_de'];
-            }
+        $f = __DIR__ . '/news-translations/' . $o['id'] . '.json';
+        $t = is_file($f) ? json_decode((string)file_get_contents($f), true) : null;
+        if (!is_array($t)) { continue; }
+        if (!tvm_has_de($o) && trim((string)($t['title_de'] ?? '')) !== '' && trim((string)($t['text_de'] ?? '')) !== '') {
+            $o['title_de'] = (string)$t['title_de'];
+            $o['text_de']  = (string)$t['text_de'];
+        }
+        foreach (is_array($t['en_replace'] ?? null) ? $t['en_replace'] : [] as $r) {
+            $from = (string)($r['from'] ?? ''); $to = (string)($r['to'] ?? '');
+            if ($from !== '' && isset($o['text']) && strpos((string)$o['text'], $from) !== false) { $o['text'] = str_replace($from, $to, (string)$o['text']); }
         }
     }
     unset($o);
