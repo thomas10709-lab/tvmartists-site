@@ -177,6 +177,7 @@
             if (it.text) { body.appendChild(el("p", "news-text", excerpt(it.text))); }
             var foot = el("div", "news-foot"); foot.appendChild(el("span", "news-src", ""));
             var m = el("a", "more", "Read more"); m.href = url; foot.appendChild(m);
+            if (deIds.indexOf(it.id) !== -1) { var d = el("a", "more", "Auf Deutsch"); d.href = url + "&lang=de"; d.lang = "de"; d.hreflang = "de"; d.style.marginLeft = "16px"; foot.appendChild(d); }
             body.appendChild(foot);
             box.appendChild(body);
             return box;
@@ -191,7 +192,12 @@
         document.getElementById("pageSub").textContent = "News";
         var back = document.getElementById("backLink");
         back.href = ARTISTS[key][1]; back.textContent = "← " + name;
+        // Artikel mit deutscher Fassung bekommen einen Link "Auf Deutsch"
+        var deIds = [];
+        var deReady = fetch("news-de.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
+            .then(function (ids) { deIds = Array.isArray(ids) ? ids : []; }).catch(function () { /* ohne Liste kein deutscher Link */ });
         fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (all) { return deReady.then(function () { return all; }); })
         .then(function (all) {
             var items = (Array.isArray(all) ? all : []).filter(function (it) {
                 return it && it.type === "article" && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
