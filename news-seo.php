@@ -28,7 +28,8 @@ function tvm_articles(): array
         $t = is_file($f) ? json_decode((string)file_get_contents($f), true) : null;
         if (!is_array($t)) { continue; }
         // "base": "de" = der im Admin gespeicherte Titel/Text ist deutsch (Originalsprache); dann ist Deutsch die Standardsprache der Seite
-        if (($t['base'] ?? '') === 'de') {
+        // gilt nur, solange im Admin noch der deutsche Originaltitel steht (wurde dort auf Englisch umgestellt, greift die normale deutsche Fassung aus der Datei)
+        if (($t['base'] ?? '') === 'de' && trim((string)($o['title'] ?? '')) === trim((string)($t['title_de'] ?? ''))) {
             $o['base'] = 'de';
             $o['title_de'] = (string)($o['title'] ?? '');
             $o['text_de']  = (string)($o['text'] ?? '');
