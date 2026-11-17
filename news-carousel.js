@@ -25,6 +25,11 @@
     return stripHtml(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
   }
 
+  // Ersatzbilder (Original ohne eingebrannten Play-Button), Schlüssel = Bilddatei der News
+  var IMAGE_OVERRIDES = {
+    "news-data/img/20261117-150347-0ade13.jpg": { image: "images/news-overrides/20261117-150347-0ade13.jpg", webp: "images/news-overrides/20261117-150347-0ade13.webp" }
+  };
+
   // --- Quelle 1: eigene Liste ---------------------------------------------
   function loadOwn(key) {
     if (!key) { return Promise.resolve([]); }
@@ -42,7 +47,8 @@
       var out = list.slice(0, MAX_ITEMS).map(function (it) {
         // Text-News: Bild führt auf die eigene Seite (gleiches Fenster)
         var own = it.type === "article" && it.id;
-        return { image: it.image, webp: it.webp || "", alt: it.alt || "News", link: own ? "news-article.php?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
+        var ov = IMAGE_OVERRIDES[it.image] || null;
+        return { image: ov ? ov.image : it.image, webp: ov ? ov.webp : (it.webp || ""), alt: it.alt || "News", link: own ? "news-article.php?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
       });
       out.hadOwn = hadOwn;
       return out;
