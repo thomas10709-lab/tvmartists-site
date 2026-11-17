@@ -25,18 +25,25 @@ header('Content-Type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache');
 if (!$it) { http_response_code(404); header('X-Robots-Tag: noindex'); }
 
-// Sprache: Englisch ist der Standard; ?lang=de zeigt die deutsche Fassung, falls Titel und Text auf Deutsch eingetragen sind.
+// Sprache: Standard ist die Originalsprache des Artikels (meist Englisch); ?lang=en|de|fr zeigt eine vorhandene Fassung.
+$langs = $it ? tvm_langs($it) : [];
+$base  = $it ? tvm_base_lang($it) : 'en';
+$want  = (string)($_GET['lang'] ?? '');
+$lang  = isset($langs[$want]) ? $want : (isset($langs[$base]) ? $base : 'en');
 $hasDe = $it ? tvm_has_de($it) : false;
-$lang  = ($hasDe && ($_GET['lang'] ?? '') === 'de') ? 'de' : 'en';
-$title = $it ? trim((string)($lang === 'de' ? $it['title_de'] : ($it['title'] ?? ''))) : '';
-$text  = $it ? (string)($lang === 'de' ? $it['text_de'] : ($it['text'] ?? '')) : '';
-$T = $lang === 'de'
-    ? ['news' => 'News', 'missing' => 'Dieser Beitrag wurde nicht gefunden.', 'imprint' => 'Impressum', 'cookies' => 'Cookie-Richtlinie', 'locale' => 'de_DE']
-    : ['news' => 'News', 'missing' => 'This news item could not be found.', 'imprint' => 'imprint', 'cookies' => 'cookie policy', 'locale' => 'en_US'];
+$title = $it ? ($langs[$lang][0] ?? trim((string)($it['title'] ?? ''))) : '';
+$text  = $it ? ($langs[$lang][1] ?? (string)($it['text'] ?? '')) : '';
+$STR = [
+    'en' => ['news' => 'News', 'missing' => 'This news item could not be found.', 'imprint' => 'imprint', 'cookies' => 'cookie policy', 'locale' => 'en_US', 'empty' => 'News from TVM artists.'],
+    'de' => ['news' => 'News', 'missing' => 'Dieser Beitrag wurde nicht gefunden.', 'imprint' => 'Impressum', 'cookies' => 'Cookie-Richtlinie', 'locale' => 'de_DE', 'empty' => 'News von TVM artists.'],
+    'fr' => ['news' => 'Actualités', 'missing' => 'Cet article est introuvable.', 'imprint' => 'mentions légales', 'cookies' => 'politique de cookies', 'locale' => 'fr_FR', 'empty' => 'Actualités de TVM artists.'],
+];
+$T = $STR[$lang];
 $MONTHS_DE = ['', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+$MONTHS_FR = ['', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 $pageTitle = $title !== '' ? $title . ' | TVM artists' : 'News | TVM artists';
-$desc  = $it ? tvm_description($text) : ($lang === 'de' ? 'News von TVM artists.' : 'News from TVM artists.');
-$url   = $it ? tvm_article_url($id, $lang) : TVM_BASE . '/news.html';
+$desc  = $it ? tvm_description($text) : $T['empty'];
+$url   = $it ? tvm_article_url_for($it, $lang) : TVM_BASE . '/news.html';
 $img   = $it && !empty($it['image']) ? tvm_abs((string)$it['image']) : '';
 $ts    = $it ? tvm_iso((string)($it['ts'] ?? '')) : '';
 $cats  = $it && is_array($it['cats'] ?? null) ? $it['cats'] : [];
@@ -70,10 +77,10 @@ if ($it) {
     <meta name="description" content="<?= tvm_e($desc) ?>">
 <?php if ($it): ?>
     <link rel="canonical" href="<?= tvm_e($url) ?>">
-<?php if ($hasDe): ?>
-    <link rel="alternate" hreflang="en" href="<?= tvm_e(tvm_article_url($id)) ?>">
-    <link rel="alternate" hreflang="de" href="<?= tvm_e(tvm_article_url($id, 'de')) ?>">
-    <link rel="alternate" hreflang="x-default" href="<?= tvm_e(tvm_article_url($id)) ?>">
+<?php if (count($langs) > 1): foreach ($langs as $l => $_): ?>
+    <link rel="alternate" hreflang="<?= tvm_e($l) ?>" href="<?= tvm_e(tvm_article_url_for($it, $l)) ?>">
+<?php endforeach; ?>
+    <link rel="alternate" hreflang="x-default" href="<?= tvm_e(tvm_article_url_for($it, $base)) ?>">
 <?php endif; ?>
     <meta property="og:locale" content="<?= tvm_e($T['locale']) ?>">
     <meta property="og:type" content="article">
@@ -146,10 +153,11 @@ if ($it) {
 <?php else: ?>
             <a class="back-link" href="index.html">&larr; TVM artists</a>
 <?php endif; ?>
-<?php if ($hasDe): ?>
+<?php if (count($langs) > 1): ?>
             <span class="lang-switch" aria-label="Language">
-                <?php if ($lang === 'en'): ?><span class="on" lang="en">EN</span><?php else: ?><a href="news-article.php?id=<?= tvm_e($id) ?>" lang="en" hreflang="en">EN</a><?php endif; ?> |
-                <?php if ($lang === 'de'): ?><span class="on" lang="de">DE</span><?php else: ?><a href="news-article.php?id=<?= tvm_e($id) ?>&amp;lang=de" lang="de" hreflang="de">DE</a><?php endif; ?>
+<?php $first = true; foreach ($langs as $l => $_): ?>
+                <?= $first ? '' : '|' ?> <?php if ($l === $lang): ?><span class="on" lang="<?= tvm_e($l) ?>"><?= strtoupper($l) ?></span><?php else: ?><a href="<?= tvm_e(substr(tvm_article_url_for($it, $l), strlen(TVM_BASE) + 1)) ?>" lang="<?= tvm_e($l) ?>" hreflang="<?= tvm_e($l) ?>"><?= strtoupper($l) ?></a><?php endif; ?>
+<?php $first = false; endforeach; ?>
             </span>
 <?php endif; ?>
         </div>
@@ -160,11 +168,11 @@ if ($it) {
             <h1><?= tvm_e($title) ?></h1>
 <?php if ($img !== ''): ?>
             <?php if (!empty($it['webp'])): ?><picture><source type="image/webp" srcset="<?= tvm_e((string)$it['webp']) ?>"><?php endif; ?>
-            <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e($lang === 'de' ? $title : (string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?><?= tvm_image_crop_style($it) ?>>
+            <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e($lang !== $base ? $title : (string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?><?= tvm_image_crop_style($it) ?>>
             <?php if (!empty($it['webp'])): ?></picture><?php endif; ?>
 
 <?php endif; ?>
-            <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?php $dt = new DateTimeImmutable($ts); echo tvm_e($lang === 'de' ? $dt->format('j') . '. ' . $MONTHS_DE[(int)$dt->format('n')] . ' ' . $dt->format('Y') : $dt->format('j F Y')); ?></time></p>
+            <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?php $dt = new DateTimeImmutable($ts); echo tvm_e($lang === 'de' ? $dt->format('j') . '. ' . $MONTHS_DE[(int)$dt->format('n')] . ' ' . $dt->format('Y') : ($lang === 'fr' ? ($dt->format('j') === '1' ? '1er' : $dt->format('j')) . ' ' . $MONTHS_FR[(int)$dt->format('n')] . ' ' . $dt->format('Y') : $dt->format('j F Y'))); ?></time></p>
             <div class="article-text">
 <?php $bylineShown = tvm_byline($text); foreach (preg_split('/\n{2,}/', $text) ?: [] as $i => $par): if (trim($par) === '') { continue; } ?>
                 <p<?= $i === 0 && $bylineShown !== '' ? ' class="article-byline"' : '' ?>><?= tvm_linkify($i === 0 && $bylineShown !== '' ? $bylineShown : trim($par)) ?></p>
