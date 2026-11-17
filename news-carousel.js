@@ -90,13 +90,13 @@
     var st = document.createElement("style");
     st.id = "news-card-styles";
     st.textContent =
-      ".news-card-slide{display:flex}" +
-      ".news-card{display:flex;flex-direction:column;width:100%;background:#fff;border:1px solid #d9e1e8;border-radius:8px;overflow:hidden;color:#2C3E50;text-decoration:none}" +
+      ".news-card-slide{display:flex;aspect-ratio:4/5}" +   // gleiche Hoehe wie die Bild-Slides (4:5), sonst ragt die Textkarte unten heraus
+      ".news-card{display:flex;flex-direction:column;width:100%;height:100%;background:#fff;border:1px solid #d9e1e8;border-radius:8px;overflow:hidden;color:#2C3E50;text-decoration:none}" +
       ".news-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.12)}" +
-      ".news-card img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:0;display:block}" +
-      ".news-card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}" +
-      ".news-card-title{font-size:19px;font-weight:700;line-height:1.25;text-transform:uppercase;margin:0}" +
-      ".news-card-text{font-size:14px;line-height:1.5;color:#556;margin:0;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}" +
+      ".news-card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:0;display:block;flex:none}" +
+      ".news-card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}" +
+      ".news-card-title{font-size:19px;font-weight:700;line-height:1.25;text-transform:uppercase;margin:0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;flex:none}" +
+      ".news-card-text{font-size:14px;line-height:1.5;color:#556;margin:0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-height:0}" +
       ".news-card-foot{margin-top:auto;font-size:13px;display:flex;justify-content:space-between;gap:10px}" +
       ".news-card-src{font-weight:600}" +
       ".news-card-more{text-decoration:underline;color:#1d63c1}";
