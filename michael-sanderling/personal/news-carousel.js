@@ -101,11 +101,11 @@
       ".news-card{display:flex;flex-direction:column;width:100%;height:100%;background:#fff;border:1px solid #d9e1e8;border-radius:8px;overflow:hidden;color:#2C3E50;text-decoration:none}" +
       ".news-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.12)}" +
       ".news-card picture{display:contents}" +
-      // Foto: gut die Haelfte der Kartenhoehe, Ausschnitt etwas unterhalb der Oberkante (22 %), damit bei Hochkant-Fotos (Instagram) das ganze Gesicht sichtbar ist
-      ".news-card img{flex:0 0 58%;width:100%;min-height:0;object-fit:cover;object-position:50% 22%;border-radius:0;display:block}" +
+      // Foto: gut zwei Drittel der Kartenhoehe, Ausschnitt etwas unterhalb der Oberkante (28 %), damit bei Hochkant-Fotos (Instagram) das ganze Gesicht sichtbar ist
+      ".news-card img{flex:0 0 68%;width:100%;min-height:0;object-fit:cover;object-position:50% 28%;border-radius:0;display:block}" +
       ".news-card-body{padding:14px 16px 14px;display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow:hidden}" +
-      ".news-card-title{font-size:17px;font-weight:700;line-height:1.25;text-transform:uppercase;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:none}" +
-      ".news-card-text{font-size:13px;line-height:1.45;color:#556;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:0;flex:0 1 auto}" +
+      ".news-card-title{font-size:17px;font-weight:700;line-height:1.25;text-transform:uppercase;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:none}" +
+      ".news-card-text{font-size:13px;line-height:1.45;color:#556;margin:0;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;min-height:0;flex:0 1 auto}" +
       ".news-card-foot{margin-top:auto;font-size:13px;display:flex;justify-content:space-between;gap:10px;flex:none}" +
       ".news-card-src{font-weight:600}" +
       ".news-card-more{text-decoration:underline;color:#1d63c1}";
