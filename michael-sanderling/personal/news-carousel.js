@@ -30,7 +30,8 @@
 
   // Ersatzbilder, Schlüssel = Bilddatei der News (Pfade relativ zur Wurzel, wie in news.json)
   var IMAGE_OVERRIDES = {
-    "news-data/img/20261117-144537-dd286f.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
+    "news-data/img/20261117-144537-dd286f.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" },
+    "news-data/img/20261117-230946-b4c2b5.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
   };
 
   // --- Quelle 1: eigene Liste ---------------------------------------------

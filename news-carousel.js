@@ -28,7 +28,8 @@
   // Ersatzbilder (Mats: Original ohne Play-Button; Sanderling: ausgewähltes Porträt), Schlüssel = Bilddatei der News
   var IMAGE_OVERRIDES = {
     "news-data/img/20261117-150347-0ade13.jpg": { image: "images/news-overrides/20261117-150347-0ade13.jpg", webp: "images/news-overrides/20261117-150347-0ade13.webp" },
-    "news-data/img/20261117-144537-dd286f.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
+    "news-data/img/20261117-144537-dd286f.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" },
+    "news-data/img/20261117-230946-b4c2b5.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
   };
 
   // --- Quelle 1: eigene Liste ---------------------------------------------
