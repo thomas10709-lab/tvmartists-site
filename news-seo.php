@@ -19,6 +19,18 @@ function tvm_articles(): array
             $out[] = $it;
         }
     }
+    // Deutsche Fassungen, die im Repository liegen (news-translations/<id>.json), ergänzen Artikel ohne eigene deutsche Fassung im Admin
+    foreach ($out as &$o) {
+        if (!tvm_has_de($o)) {
+            $f = __DIR__ . '/news-translations/' . $o['id'] . '.json';
+            $t = is_file($f) ? json_decode((string)file_get_contents($f), true) : null;
+            if (is_array($t) && trim((string)($t['title_de'] ?? '')) !== '' && trim((string)($t['text_de'] ?? '')) !== '') {
+                $o['title_de'] = (string)$t['title_de'];
+                $o['text_de']  = (string)$t['text_de'];
+            }
+        }
+    }
+    unset($o);
     usort($out, fn($a, $b) => strcmp((string)($b['ts'] ?? ''), (string)($a['ts'] ?? '')));
     return $out;
 }
@@ -152,6 +164,7 @@ function tvm_latest_news_html(): string
         . ($by !== '' ? '<p class="ln-by">' . tvm_e($by) . '</p>' : '')
         . '<p class="ln-text">' . tvm_e($text) . '</p>'
         . '<a class="ln-more" href="' . tvm_e($url) . '">Read more</a>'
+        . (tvm_has_de($a) ? ' <span aria-hidden="true">&nbsp;&middot;&nbsp;</span> <a class="ln-more" lang="de" hreflang="de" href="' . tvm_e($url . '&lang=de') . '">Auf Deutsch lesen</a>' : '')
         . '</article></section>';
 }
 
