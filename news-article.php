@@ -131,39 +131,11 @@ if ($it) {
         .footer-copy a { color: rgba(255,255,255,0.9); text-decoration: none; transition: opacity 0.25s ease; }
         .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
     </style>
-    <script src="bg-sync.js?v=2"></script>
+    <meta name="theme-color" content="#46163A">
     <style>
-        /* Hintergrund wandert wie auf den Künstlerseiten durch die Farbtöne (synchron über bg-sync.js) */
+        /* Hintergrund: tiefes Brombeer, bleibt gleich (keine Farbwechsel); gilt auch hinter dem Seitenrand beim Überscrollen */
+        html, body { background-color: #46163A; }
         body { position: relative; min-height: 100vh; }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background-color: #17355E;
-            animation: bg-breathe 60s ease-in-out infinite;
-            animation-delay: var(--bg-delay, 0s);
-        }
-        @keyframes bg-breathe {
-            0%, 100% { background-color: #17355E; }
-            25%      { background-color: #2B6C9C; }
-            50%      { background-color: #6E78AC; }
-            75%      { background-color: #43285A; }
-        }
-        /* Hinter dem Seitenrand (Überscrollen am oberen/unteren Rand, besonders auf dem Handy): derselbe Farbverlauf wie die Seite,
-           in derselben Richtung und im selben Takt (über bg-sync.js synchron) */
-        html {
-            background-color: #17355E;
-            animation: bg-breathe 60s ease-in-out infinite;
-            animation-delay: var(--bg-delay, 0s);
-        }
-        body { background-color: transparent; }
-        @media (prefers-reduced-motion: reduce) {
-            body::before { animation: none; }
-            html { animation: none; background-color: #43285A; }
-        }
     </style>
 </head>
 <body>
