@@ -23,7 +23,17 @@ function tvm_articles(): array
     return $out;
 }
 
-function tvm_article_url(string $id): string { return TVM_BASE . '/news-article.php?id=' . $id; }
+/** Adresse eines Artikels; mit $lang = 'de' die deutsche Fassung (englisch ist der Standard ohne Zusatz) */
+function tvm_article_url(string $id, string $lang = ''): string
+{
+    return TVM_BASE . '/news-article.php?id=' . $id . ($lang === 'de' ? '&lang=de' : '');
+}
+
+/** Hat der Artikel eine deutsche Fassung (Titel und Text auf Deutsch eingetragen)? */
+function tvm_has_de(array $it): bool
+{
+    return trim((string)($it['title_de'] ?? '')) !== '' && trim((string)($it['text_de'] ?? '')) !== '';
+}
 
 function tvm_abs(string $path): string
 {
@@ -43,7 +53,7 @@ function tvm_iso(string $ts): string
 function tvm_description(string $text, int $max = 155): string
 {
     $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
-    if (count($paras) > 1 && preg_match('/^by\s/iu', trim($paras[0])) && mb_strlen(trim($paras[0])) <= 160) {
+    if (count($paras) > 1 && preg_match('/^(by|von)\s/iu', trim($paras[0])) && mb_strlen(trim($paras[0])) <= 160) {
         array_shift($paras);
     }
     $s = trim((string)preg_replace('/\s+/u', ' ', tvm_strip_links(implode(' ', $paras))));
@@ -104,7 +114,7 @@ function tvm_byline(string $text): string
 {
     $paras = preg_split('/\n{2,}/u', trim(str_replace(["\r\n", "\r"], "\n", $text))) ?: [];
     $first = trim((string)($paras[0] ?? ''));
-    if (count($paras) > 1 && preg_match('/^by\s/iu', $first) && mb_strlen($first) <= 160) {
+    if (count($paras) > 1 && preg_match('/^(by|von)\s/iu', $first) && mb_strlen($first) <= 160) {
         return tvm_strip_byline_date((string)preg_replace('/\s+/u', ' ', $first));
     }
     return '';
