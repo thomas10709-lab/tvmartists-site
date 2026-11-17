@@ -308,6 +308,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $link = clean_link((string)($_POST['link'] ?? ''));
                         $title = clean_text((string)($_POST['title'] ?? ''), 200);
                         $body  = clean_body((string)($_POST['body'] ?? ''), 20000);
+                        $titleDe = clean_text((string)($_POST['title_de'] ?? ''), 200);
+                        $bodyDe  = clean_body((string)($_POST['body_de'] ?? ''), 20000);
                         $dateIn  = (string)($_POST['date'] ?? '');
                         $newTs = ($dateIn !== '' && $dateIn !== (string)($_POST['date_orig'] ?? '')) ? input_to_ts($dateIn) : null;
                         $file = $_FILES['image'] ?? null;
@@ -334,7 +336,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     }
                                 }
                             }
-                            with_lock($DATA, function () use ($JSON, $id, $cats, $alt, $link, $newTs, $title, $body, $newImg, $IMG) {
+                            with_lock($DATA, function () use ($JSON, $id, $cats, $alt, $link, $newTs, $title, $body, $titleDe, $bodyDe, $newImg, $IMG) {
                                 $all = load_news($JSON);
                                 foreach ($all as &$it) {
                                     if (($it['id'] ?? '') === $id) {
@@ -353,6 +355,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         if (($it['type'] ?? '') === 'article') {
                                             if ($title !== '') { $it['title'] = $title; $it['alt'] = $title; }
                                             if ($body !== '') { $it['text'] = $body; }
+                                            // Deutsche Fassung (optional): beide Felder gefüllt = ?lang=de und Sprachumschalter; beide leer = entfernt
+                                            if ($titleDe !== '' && $bodyDe !== '') { $it['title_de'] = $titleDe; $it['text_de'] = $bodyDe; }
+                                            elseif ($titleDe === '' && $bodyDe === '') { unset($it['title_de'], $it['text_de']); }
                                         } elseif (($it['type'] ?? '') === 'card') {
                                             $it['link'] = $link;
                                             if ($title !== '') { $it['title'] = $title; $it['alt'] = $title; }
@@ -631,6 +636,11 @@ unset P H</pre>
             <label>Text</label>
             <textarea name="body" rows="8" maxlength="20000"><?= e((string)($it['text'] ?? '')) ?></textarea>
             <div class="hint"><a href="../news-article.php?id=<?= e($id) ?>" target="_blank" rel="noopener" style="color:#12396B;">Eigene Seite ansehen</a></div>
+            <label>Titel (Deutsch, optional)</label>
+            <input type="text" name="title_de" maxlength="200" value="<?= e((string)($it['title_de'] ?? '')) ?>">
+            <label>Text (Deutsch, optional)</label>
+            <textarea name="body_de" rows="8" maxlength="20000" placeholder="Leer lassen, wenn es keine deutsche Fassung geben soll. Titel und Text müssen beide ausgefüllt sein."><?= e((string)($it['text_de'] ?? '')) ?></textarea>
+            <?php if (!empty($it['title_de']) && !empty($it['text_de'])): ?><div class="hint"><a href="../news-article.php?id=<?= e($id) ?>&amp;lang=de" target="_blank" rel="noopener" style="color:#12396B;">Deutsche Seite ansehen</a></div><?php endif; ?>
             <?php elseif (($it['type'] ?? '') === 'card'): ?>
             <label>Titel</label>
             <input type="text" name="title" maxlength="200" value="<?= e((string)($it['title'] ?? '')) ?>">

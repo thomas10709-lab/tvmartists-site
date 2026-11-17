@@ -25,11 +25,18 @@ header('Content-Type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache');
 if (!$it) { http_response_code(404); header('X-Robots-Tag: noindex'); }
 
-$title = $it ? trim((string)($it['title'] ?? '')) : '';
-$text  = $it ? (string)($it['text'] ?? '') : '';
+// Sprache: Englisch ist der Standard; ?lang=de zeigt die deutsche Fassung, falls Titel und Text auf Deutsch eingetragen sind.
+$hasDe = $it ? tvm_has_de($it) : false;
+$lang  = ($hasDe && ($_GET['lang'] ?? '') === 'de') ? 'de' : 'en';
+$title = $it ? trim((string)($lang === 'de' ? $it['title_de'] : ($it['title'] ?? ''))) : '';
+$text  = $it ? (string)($lang === 'de' ? $it['text_de'] : ($it['text'] ?? '')) : '';
+$T = $lang === 'de'
+    ? ['news' => 'News', 'missing' => 'Dieser Beitrag wurde nicht gefunden.', 'imprint' => 'Impressum', 'cookies' => 'Cookie-Richtlinie', 'locale' => 'de_DE']
+    : ['news' => 'News', 'missing' => 'This news item could not be found.', 'imprint' => 'imprint', 'cookies' => 'cookie policy', 'locale' => 'en_US'];
+$MONTHS_DE = ['', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 $pageTitle = $title !== '' ? $title . ' | TVM artists' : 'News | TVM artists';
-$desc  = $it ? tvm_description($text) : 'News from TVM artists.';
-$url   = $it ? tvm_article_url($id) : TVM_BASE . '/news.html';
+$desc  = $it ? tvm_description($text) : ($lang === 'de' ? 'News von TVM artists.' : 'News from TVM artists.');
+$url   = $it ? tvm_article_url($id, $lang) : TVM_BASE . '/news.html';
 $img   = $it && !empty($it['image']) ? tvm_abs((string)$it['image']) : '';
 $ts    = $it ? tvm_iso((string)($it['ts'] ?? '')) : '';
 $cats  = $it && is_array($it['cats'] ?? null) ? $it['cats'] : [];
@@ -43,6 +50,7 @@ if ($it) {
         '@type' => 'NewsArticle',
         'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $url],
         'headline' => mb_substr($title, 0, 110),
+        'inLanguage' => $lang,
         'datePublished' => $ts,
         'dateModified' => $ts,
         'author' => ['@type' => 'Organization', 'name' => 'TVM artists', 'url' => TVM_BASE . '/'],
@@ -54,7 +62,7 @@ if ($it) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= tvm_e($lang) ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,6 +70,12 @@ if ($it) {
     <meta name="description" content="<?= tvm_e($desc) ?>">
 <?php if ($it): ?>
     <link rel="canonical" href="<?= tvm_e($url) ?>">
+<?php if ($hasDe): ?>
+    <link rel="alternate" hreflang="en" href="<?= tvm_e(tvm_article_url($id)) ?>">
+    <link rel="alternate" hreflang="de" href="<?= tvm_e(tvm_article_url($id, 'de')) ?>">
+    <link rel="alternate" hreflang="x-default" href="<?= tvm_e(tvm_article_url($id)) ?>">
+<?php endif; ?>
+    <meta property="og:locale" content="<?= tvm_e($T['locale']) ?>">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="TVM artists">
     <meta property="og:title" content="<?= tvm_e($title) ?>">
@@ -86,6 +100,12 @@ if ($it) {
         .article-page { max-width: 760px; margin: 0 auto; padding: 56px 20px 30px; }
         .back-link { display: inline-block; color: #cfe3f5; font-size: 14px; letter-spacing: 0.03em; text-decoration: none; margin-bottom: 26px; }
         .back-link:hover { text-decoration: underline; }
+        .top-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 26px; }
+        .top-row .back-link { margin-bottom: 0; }
+        .lang-switch { font-size: 13px; letter-spacing: 0.08em; color: #cfe3f5; white-space: nowrap; }
+        .lang-switch a { color: #cfe3f5; text-decoration: none; padding: 2px 4px; }
+        .lang-switch a:hover { text-decoration: underline; }
+        .lang-switch .on { color: #ffffff; font-weight: 600; padding: 2px 4px; }
         .article-img { display: block; width: 100%; height: auto; border-radius: 8px; margin: 0 0 18px; }
         .article-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #cfe3f5; margin: 0 0 22px; }
         h1 { font-weight: 500; font-size: clamp(26px, 4.6vw, 38px); line-height: 1.25; margin: 0 0 24px; }
@@ -148,23 +168,31 @@ if ($it) {
 </head>
 <body>
     <main class="article-page">
+        <div class="top-row">
 <?php if ($artist !== ''): ?>
-        <a class="back-link" href="news.html?artist=<?= tvm_e(rawurlencode($artist)) ?>">&larr; <?= tvm_e($ARTISTS[$artist][0]) ?> &ndash; News</a>
+            <a class="back-link" href="news.html?artist=<?= tvm_e(rawurlencode($artist)) ?>">&larr; <?= tvm_e($ARTISTS[$artist][0]) ?> &ndash; <?= tvm_e($T['news']) ?></a>
 <?php else: ?>
-        <a class="back-link" href="index.html">&larr; TVM artists</a>
+            <a class="back-link" href="index.html">&larr; TVM artists</a>
 <?php endif; ?>
+<?php if ($hasDe): ?>
+            <span class="lang-switch" aria-label="Language">
+                <?php if ($lang === 'en'): ?><span class="on" lang="en">EN</span><?php else: ?><a href="news-article.php?id=<?= tvm_e($id) ?>" lang="en" hreflang="en">EN</a><?php endif; ?> |
+                <?php if ($lang === 'de'): ?><span class="on" lang="de">DE</span><?php else: ?><a href="news-article.php?id=<?= tvm_e($id) ?>&amp;lang=de" lang="de" hreflang="de">DE</a><?php endif; ?>
+            </span>
+<?php endif; ?>
+        </div>
 <?php if (!$it): ?>
-        <p class="empty">This news item could not be found.</p>
+        <p class="empty"><?= tvm_e($T['missing']) ?></p>
 <?php else: ?>
         <article>
             <h1><?= tvm_e($title) ?></h1>
 <?php if ($img !== ''): ?>
             <?php if (!empty($it['webp'])): ?><picture><source type="image/webp" srcset="<?= tvm_e((string)$it['webp']) ?>"><?php endif; ?>
-            <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e((string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?><?= tvm_image_crop_style($it) ?>>
+            <img class="article-img" src="<?= tvm_e((string)$it['image']) ?>" alt="<?= tvm_e($lang === 'de' ? $title : (string)($it['alt'] ?? $title)) ?>"<?= !empty($it['w']) && !empty($it['h']) ? ' width="' . (int)$it['w'] . '" height="' . (int)$it['h'] . '"' : '' ?><?= tvm_image_crop_style($it) ?>>
             <?php if (!empty($it['webp'])): ?></picture><?php endif; ?>
 
 <?php endif; ?>
-            <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?= tvm_e((new DateTimeImmutable($ts))->format('j F Y')) ?></time></p>
+            <p class="article-date"><time datetime="<?= tvm_e($ts) ?>"><?php $dt = new DateTimeImmutable($ts); echo tvm_e($lang === 'de' ? $dt->format('j') . '. ' . $MONTHS_DE[(int)$dt->format('n')] . ' ' . $dt->format('Y') : $dt->format('j F Y')); ?></time></p>
             <div class="article-text">
 <?php $bylineShown = tvm_byline($text); foreach (preg_split('/\n{2,}/', $text) ?: [] as $i => $par): if (trim($par) === '') { continue; } ?>
                 <p<?= $i === 0 && $bylineShown !== '' ? ' class="article-byline"' : '' ?>><?= tvm_linkify($i === 0 && $bylineShown !== '' ? $bylineShown : trim($par)) ?></p>
@@ -179,7 +207,7 @@ if ($it) {
             <img src="images/insta-white.png" alt="Instagram">
         </a>
         <a href="https://tvmartists.com/" class="footer-logo-link" aria-label="TVM artists"><img src="images/footer-logo.png" alt="TVM artists" class="footer-logo" loading="lazy"></a>
-        <p class="footer-copy">&copy; <?= date('Y') ?> TVM artists &ndash; <a href="imprint.html">imprint</a> &ndash; <a href="imprint.html#cookies">cookie policy</a></p>
+        <p class="footer-copy">&copy; <?= date('Y') ?> TVM artists &ndash; <a href="imprint.html"><?= tvm_e($T['imprint']) ?></a> &ndash; <a href="imprint.html#cookies"><?= tvm_e($T['cookies']) ?></a></p>
     </footer>
 </body>
 </html>
