@@ -34,6 +34,24 @@
     "news-data/img/20261117-230946-b4c2b5.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
   };
 
+  // Sprachfassungen der News (news-i18n.php): Browser-Sprache wählen, wenn der Artikel sie hat
+  function i18nLang(map) {
+    var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+    for (var i = 0; i < ls.length; i++) {
+      var l = String(ls[i]).slice(0, 2).toLowerCase();
+      if (l === "en" || map[l]) { return l; }
+    }
+    return "en";
+  }
+  function i18nGet(map, id) {
+    var l = i18nLang(map), m = map[l] && map[l][id];
+    return m ? { l: l, t: m.t, x: m.x } : null;
+  }
+  function loadI18n(base) {
+    return fetch((base || "") + "news-i18n.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (m) { return (m && typeof m === "object" && !Array.isArray(m)) ? m : {}; }).catch(function () { return {}; });
+  }
+
   // --- Quelle 1: eigene Liste ---------------------------------------------
   // base darf mehrere Kandidaten enthalten, getrennt durch "|" (z. B. "|../../"): der erste, der news.json liefert, gewinnt.
   function loadOwn(key, bases) {
@@ -45,7 +63,15 @@
       return fetch(base + "news-data/news.json", { cache: "no-cache" }).then(function (res) {
         if (!res.ok) { throw new Error("no news.json at " + base); }
         return res.json();
-      }).then(function (all) { return build(all, key, base); }).catch(function () { return attempt(i + 1); });
+      }).then(function (all) { return build(all, key, base); }).then(function (items) {
+        return loadI18n(base).then(function (map) {
+          items.forEach(function (o) {
+            var tr = o.type === "article" && o.id ? i18nGet(map, o.id) : null;
+            if (tr) { o.title = tr.t; o.text = tr.x; o.link = abs(base, "news-article.php?id=" + encodeURIComponent(o.id) + "&lang=" + tr.l); }
+          });
+          return items;
+        });
+      }).catch(function () { return attempt(i + 1); });
     }
     return attempt(0);
   }
@@ -58,7 +84,7 @@
         return String(b.ts || "").localeCompare(String(a.ts || ""));
       }).slice(0, MAX_ITEMS).map(function (it) {
         var ov = IMAGE_OVERRIDES[it.image] || null;
-        return { image: abs(base, ov ? ov.image : it.image), webp: abs(base, ov ? ov.webp : (it.webp || "")), alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
+        return { id: it.id || "", image: abs(base, ov ? ov.image : it.image), webp: abs(base, ov ? ov.webp : (it.webp || "")), alt: it.alt || "News", link: it.link || "", type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "" };
       });
     });
   }

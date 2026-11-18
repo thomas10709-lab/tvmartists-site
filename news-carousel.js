@@ -32,6 +32,24 @@
     "news-data/img/20261117-230946-b4c2b5.jpg": { image: "images/sanderling-1092.jpg", webp: "images/sanderling-1092.webp" }
   };
 
+  // Sprachfassungen der News (news-i18n.php): Browser-Sprache wählen, wenn der Artikel sie hat
+  function i18nLang(map) {
+    var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+    for (var i = 0; i < ls.length; i++) {
+      var l = String(ls[i]).slice(0, 2).toLowerCase();
+      if (l === "en" || map[l]) { return l; }
+    }
+    return "en";
+  }
+  function i18nGet(map, id) {
+    var l = i18nLang(map), m = map[l] && map[l][id];
+    return m ? { l: l, t: m.t, x: m.x } : null;
+  }
+  function loadI18n(base) {
+    return fetch((base || "") + "news-i18n.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (m) { return (m && typeof m === "object" && !Array.isArray(m)) ? m : {}; }).catch(function () { return {}; });
+  }
+
   // --- Quelle 1: eigene Liste ---------------------------------------------
   function loadOwn(key) {
     if (!key) { return Promise.resolve([]); }
@@ -50,10 +68,16 @@
         // Text-News: Bild führt auf die eigene Seite (gleiches Fenster)
         var own = it.type === "article" && it.id;
         var ov = IMAGE_OVERRIDES[it.image] || null;
-        return { image: ov ? ov.image : it.image, webp: ov ? ov.webp : (it.webp || ""), alt: it.alt || "News", link: own ? "news-article.php?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
+        return { id: it.id || "", image: ov ? ov.image : it.image, webp: ov ? ov.webp : (it.webp || ""), alt: it.alt || "News", link: own ? "news-article.php?id=" + encodeURIComponent(it.id) : (it.link || ""), type: it.type || "", title: it.title || "", text: it.text || "", source: it.source || "", internal: !!own };
       });
       out.hadOwn = hadOwn;
-      return out;
+      return loadI18n("").then(function (map) {
+        out.forEach(function (o) {
+          var tr = o.type === "article" && o.id ? i18nGet(map, o.id) : null;
+          if (tr) { o.title = tr.t; o.text = tr.x; o.link = "news-article.php?id=" + encodeURIComponent(o.id) + "&lang=" + tr.l; }
+        });
+        return out;
+      });
     }).catch(function () { return []; });
   }
 
