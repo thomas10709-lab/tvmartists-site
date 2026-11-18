@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="description" content="News from TVM artists – all news for one of our artists in one place.">
+    <meta name="description" content="News from TVM artists – all news of our artists in one place, newest first.">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
@@ -175,23 +175,28 @@
             var by = byline(it.text);
             if (by) { body.appendChild(el("p", "news-by", by)); }
             if (it.text) { body.appendChild(el("p", "news-text", excerpt(it.text))); }
-            var foot = el("div", "news-foot"); foot.appendChild(el("span", "news-src", ""));
+            var names = allMode ? (it.cats || []).filter(function (c) { return !!ARTISTS[c]; }).map(function (c) { return ARTISTS[c][0]; }).join(", ") : "";
+            var foot = el("div", "news-foot"); foot.appendChild(el("span", "news-src", names));
             var m = el("a", "more", "Read more"); m.href = url; foot.appendChild(m);
             if (deIds.indexOf(it.id) !== -1) { var d = el("a", "more", "Auf Deutsch"); d.href = url + "&lang=de"; d.lang = "de"; d.hreflang = "de"; d.style.marginLeft = "16px"; foot.appendChild(d); }
             body.appendChild(foot);
             box.appendChild(body);
             return box;
         }
-        if (!ARTISTS[key]) {
-            document.getElementById("pageSub").textContent = "Please choose an artist on the main page.";
-            return;
+        // Ohne ?artist=... (oder bei unbekanntem Namen): alle News aller Künstler, neueste zuerst
+        var allMode = !ARTISTS[key];
+        if (allMode) {
+            document.title = "News | TVM artists";
+            document.getElementById("pageTitle").textContent = "News";
+            document.getElementById("pageSub").textContent = "All artists";
+        } else {
+            var name = ARTISTS[key][0];
+            document.title = name + " \u2013 News | TVM artists";
+            document.getElementById("pageTitle").textContent = name;
+            document.getElementById("pageSub").textContent = "News";
+            var back = document.getElementById("backLink");
+            back.href = ARTISTS[key][1]; back.textContent = "\u2190 " + name;
         }
-        var name = ARTISTS[key][0];
-        document.title = name + " – News | TVM artists";
-        document.getElementById("pageTitle").textContent = name;
-        document.getElementById("pageSub").textContent = "News";
-        var back = document.getElementById("backLink");
-        back.href = ARTISTS[key][1]; back.textContent = "← " + name;
         // Artikel mit deutscher Fassung bekommen einen Link "Auf Deutsch"
         var deIds = [];
         var deReady = fetch("news-de.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
@@ -200,7 +205,7 @@
         .then(function (all) { return deReady.then(function () { return all; }); })
         .then(function (all) {
             var items = (Array.isArray(all) ? all : []).filter(function (it) {
-                return it && it.type === "article" && Array.isArray(it.cats) && it.cats.indexOf(key) !== -1;
+                return it && it.type === "article" && Array.isArray(it.cats) && (allMode ? it.cats.some(function (c) { return !!ARTISTS[c]; }) : it.cats.indexOf(key) !== -1);
             }).sort(function (a, b) { return String(b.ts || "").localeCompare(String(a.ts || "")); });
             if (!items.length) { list.appendChild(el("p", "empty", "No news yet.")); return; }
             items.forEach(function (it) { list.appendChild(entry(it)); });
