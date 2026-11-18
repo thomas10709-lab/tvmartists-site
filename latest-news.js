@@ -29,9 +29,39 @@
     return first.replace(/\s+/g, " ").replace(/,?\s*\d{1,2}\.?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December|Januar|Februar|M\u00e4rz|Mai|Juni|Juli|Oktober|Dezember)\s+\d{4}(?=\s*:?\s*$)/i, "");
   }
 
+  // Sprachfassungen der News (news-i18n.php): Browser-Sprache wählen, wenn der Artikel sie hat
+  function i18nLang(map) {
+    var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+    for (var i = 0; i < ls.length; i++) {
+      var l = String(ls[i]).slice(0, 2).toLowerCase();
+      if (l === "en" || map[l]) { return l; }
+    }
+    return "en";
+  }
+  function translateBlock(slot) {
+    var card = slot.querySelector(".ln-card"), ta = card && card.querySelector(".ln-title a");
+    var m = ta && /[?&]id=([^&]+)/.exec(ta.getAttribute("href") || "");
+    if (!m) { return; }
+    var id = decodeURIComponent(m[1]);
+    fetch("news-i18n.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (map) {
+      var l = i18nLang(map || {}), tr = map && map[l] && map[l][id];
+      if (!tr) { return; }
+      ta.textContent = tr.t;
+      var te = card.querySelector(".ln-text"); if (te) { te.textContent = excerpt(tr.x, 420); }
+      var by = card.querySelector(".ln-by"), nb = byline(tr.x);
+      if (by) { if (nb) { by.textContent = nb; } else { by.remove(); } }
+      else if (nb && te) { var bp = el("p", "ln-by", nb); card.insertBefore(bp, te); }
+      card.querySelectorAll("a").forEach(function (a) {
+        var h = a.getAttribute("href") || "";
+        if (h.indexOf("news-article.php?id=") === 0 && h.indexOf("&lang=") === -1) { a.setAttribute("href", h + "&lang=" + l); }
+      });
+    }).catch(function () { /* ohne Übersetzungen bleibt der Block wie er ist */ });
+  }
+
   ready(function () {
     var slot = document.getElementById("latestNews");
-    if (!slot || slot.querySelector(".ln-card")) { return; }
+    if (!slot) { return; }
+    if (slot.querySelector(".ln-card")) { translateBlock(slot); return; }
     fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; }).then(function (all) {
       var list = (Array.isArray(all) ? all : []).filter(function (it) {
         return it && it.type === "article" && it.image && /^\d{8}-\d{6}-[a-f0-9]{6}$/.test(it.id || "") && Array.isArray(it.cats) && it.cats.indexOf("home") !== -1;
@@ -62,6 +92,7 @@
       var more = el("a", "ln-more", "Read more"); more.href = url; card.appendChild(more);
       sec.appendChild(card);
       slot.appendChild(sec);
+      translateBlock(slot);
     }).catch(function () { /* ohne News-Liste kein Block */ });
   });
 })();

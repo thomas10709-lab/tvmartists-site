@@ -160,8 +160,28 @@
             if (!(paras.length > 1 && /^by\s/i.test(first) && first.length <= 160)) { return ""; }
             return first.replace(/\s+/g, " ").replace(/,?\s*\d{1,2}\.?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December|Januar|Februar|M\u00e4rz|Mai|Juni|Juli|Oktober|Dezember)\s+\d{4}(?=\s*:?\s*$)/i, "");
         }
+        // Sprachfassungen der News (news-i18n.php): Browser-Sprache wählen, wenn der Artikel sie hat
+        function i18nLang(map) {
+          var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+          for (var i = 0; i < ls.length; i++) {
+            var l = String(ls[i]).slice(0, 2).toLowerCase();
+            if (l === "en" || map[l]) { return l; }
+          }
+          return "en";
+        }
+        function i18nGet(map, id) {
+          var l = i18nLang(map), m = map[l] && map[l][id];
+          return m ? { l: l, t: m.t, x: m.x } : null;
+        }
+        function loadI18n(base) {
+          return fetch((base || "") + "news-i18n.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; })
+            .then(function (m) { return (m && typeof m === "object" && !Array.isArray(m)) ? m : {}; }).catch(function () { return {}; });
+        }
+        var i18nMap = {};
         function entry(it) {
             var url = "news-article.php?id=" + encodeURIComponent(it.id);
+            var tr = i18nGet(i18nMap, it.id);
+            if (tr) { it.title = tr.t; it.text = tr.x; url += "&lang=" + tr.l; }
             var box = el("article", "news-entry");
             if (it.image) {
                 var a = el("a", "img-link"); a.href = url;
@@ -184,7 +204,7 @@
                 var lw = el("span", "langs");
                 extra.forEach(function (l, k) {
                     if (!LN[l]) { return; }
-                    var d = el("a", "more", LN[l]); d.href = url + "&lang=" + l; d.lang = l; d.hreflang = l;
+                    var d = el("a", "more", LN[l]); d.href = "news-article.php?id=" + encodeURIComponent(it.id) + "&lang=" + l; d.lang = l; d.hreflang = l;
                     if (k) { d.style.marginLeft = "16px"; }
                     lw.appendChild(d);
                 });
@@ -212,8 +232,9 @@
         var langMap = {};
         var deReady = fetch("news-langs.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; })
             .then(function (m) { langMap = (m && typeof m === "object" && !Array.isArray(m)) ? m : {}; }).catch(function () { /* ohne Liste keine Sprachlinks */ });
+        var i18nReady = loadI18n("").then(function (m) { i18nMap = m; });
         fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
-        .then(function (all) { return deReady.then(function () { return all; }); })
+        .then(function (all) { return Promise.all([deReady, i18nReady]).then(function () { return all; }); })
         .then(function (all) {
             var items = (Array.isArray(all) ? all : []).filter(function (it) {
                 return it && it.type === "article" && Array.isArray(it.cats) && (allMode ? it.cats.some(function (c) { return !!ARTISTS[c]; }) : it.cats.indexOf(key) !== -1);

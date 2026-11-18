@@ -38,6 +38,12 @@ $STR = [
     'de' => ['news' => 'News', 'missing' => 'Dieser Beitrag wurde nicht gefunden.', 'imprint' => 'Impressum', 'cookies' => 'Cookie-Richtlinie', 'locale' => 'de_DE', 'empty' => 'News von TVM artists.'],
     'fr' => ['news' => 'Actualités', 'missing' => 'Cet article est introuvable.', 'imprint' => 'mentions légales', 'cookies' => 'politique de cookies', 'locale' => 'fr_FR', 'empty' => 'Actualités de TVM artists.'],
 ];
+// Ohne ?lang=... und ohne Bot: Browser-Sprache (z. B. Französisch) übernehmen, falls der Artikel sie hat. Ausdrückliche Wahl (?lang=) bleibt immer bestehen.
+header('Vary: Accept-Language');
+if ($it && $want === '' && count($langs) > 1) {
+    $pref = tvm_pref_lang($langs);
+    if ($pref !== '' && $pref !== $base) { header('Location: ' . tvm_article_url_for($it, $pref), true, 302); exit; }
+}
 $T = $STR[$lang];
 $MONTHS_DE = ['', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 $MONTHS_FR = ['', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -156,7 +162,7 @@ if ($it) {
 <?php if (count($langs) > 1): ?>
             <span class="lang-switch" aria-label="Language">
 <?php $first = true; foreach ($langs as $l => $_): ?>
-                <?= $first ? '' : '|' ?> <?php if ($l === $lang): ?><span class="on" lang="<?= tvm_e($l) ?>"><?= strtoupper($l) ?></span><?php else: ?><a href="<?= tvm_e(substr(tvm_article_url_for($it, $l), strlen(TVM_BASE) + 1)) ?>" lang="<?= tvm_e($l) ?>" hreflang="<?= tvm_e($l) ?>"><?= strtoupper($l) ?></a><?php endif; ?>
+                <?= $first ? '' : '|' ?> <?php if ($l === $lang): ?><span class="on" lang="<?= tvm_e($l) ?>"><?= strtoupper($l) ?></span><?php else: ?><a href="news-article.php?id=<?= tvm_e($id) ?>&amp;lang=<?= tvm_e($l) ?>" lang="<?= tvm_e($l) ?>" hreflang="<?= tvm_e($l) ?>"><?= strtoupper($l) ?></a><?php endif; ?>
 <?php $first = false; endforeach; ?>
             </span>
 <?php endif; ?>
