@@ -98,7 +98,8 @@ nav.main a:hover{opacity:.7}
 nav.main svg{width:clamp(28px,1.85vw,40px);height:clamp(28px,1.85vw,40px);fill:#fff}
 .burger{display:none;background:none;border:0;padding:8px 6px;cursor:pointer;width:34px;height:32px;flex-direction:column;justify-content:space-between;box-sizing:content-box}
 .burger span{display:block;height:2px;background:#fff;width:100%}
-.hero-title{position:absolute;z-index:3;left:max(46.8%,40px);bottom:14%;margin:0;max-width:min(760px,86vw);font-family:Newsreader,Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(24px,2.7vw,44px);line-height:1.45;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.hero-title{position:absolute;z-index:3;left:max(46.8%,40px);bottom:14%;margin:0;max-width:min(760px,86vw);font-family:Newsreader,Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(15px,1.5vw,24px);line-height:1.45;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.hero-gap{display:block;height:2.175em}   /* 1,5 Zeilen Abstand zwischen den beiden Orchestern */
 .labels{position:absolute;z-index:3;right:4.8vw;top:11.1vw;display:flex;gap:2vw;align-items:flex-start}
 .labels img{height:auto}
 .labels .lw{width:clamp(70px,6.7vw,140px)}
@@ -305,7 +306,7 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
  .labels{top:auto;bottom:calc(14vh - 26px);left:0;right:0;justify-content:center;gap:22px;align-items:center}
  .labels .lw{width:92px}
  .labels .ls{width:60px;margin-top:0}
- .hero-title{left:0;right:0;max-width:none;text-align:center;bottom:calc(32vh - 26px);font-size:clamp(18px,5.3vw,28px)}
+ .hero-title{left:0;right:0;max-width:none;text-align:center;bottom:calc(32vh - 26px);font-size:clamp(13px,3.6vw,18px)}
  .pano-title{padding-left:20px}
  .cal,.cal.four,.rec,.contact-grid,.tiles,.fp-row{grid-template-columns:1fr}
  .press-card picture{min-height:240px}
@@ -358,7 +359,7 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
     </nav>
   </header>
   <div class="labels"><a href="#recordings" aria-label="Warner Classics"><picture><source srcset="images/logo-warner.webp" type="image/webp"><img class="lw" src="images/logo-warner.png" alt="Warner Classics" width="520" height="213"></picture></a><a href="#recordings" aria-label="Sony Classical"><picture><source srcset="images/logo-sony.webp" type="image/webp"><img class="ls" src="images/logo-sony.png" alt="Sony Classical" width="360" height="360"></picture></a></div>
-  <p class="hero-title">Chief Conductor<br>Luzerner Sinfonieorchester<br>Residenzorchester of the KKL Lucerne<br>Principal Guest Conductor<br>Düsseldorfer Symphoniker from 2027/28</p>
+  <p class="hero-title">Chief Conductor<br>Luzerner Sinfonieorchester<br>Residenzorchester of the KKL Lucerne<span class="hero-gap"></span>Principal Guest Conductor<br>Düsseldorfer Symphoniker from 2027/28</p>
 </section>
 
 <!-- ============ INTRO ============ -->
