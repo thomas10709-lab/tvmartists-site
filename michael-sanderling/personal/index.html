@@ -103,6 +103,7 @@ nav.main svg{width:clamp(28px,1.85vw,40px);height:clamp(28px,1.85vw,40px);fill:#
 .hero-gap{display:block;height:.775em}   /* 0,5 Zeilen Abstand zwischen den beiden Orchestern */
 .labels{position:absolute;z-index:3;right:4.8vw;top:11.1vw;display:flex;gap:2vw;align-items:flex-start}
 .labels img{height:auto}
+.contact-labels{display:none}
 .labels .lw{width:clamp(70px,6.7vw,140px)}
 .labels .ls{width:clamp(48px,4.8vw,100px);margin-top:.25vw}
 
@@ -304,11 +305,15 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
  .burger{display:flex;margin:0 auto;width:26px;height:22px}
  nav.main{display:none;position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 8px);background:rgba(0,0,0,.92);flex-direction:column;align-items:center;padding:22px 34px;gap:16px;z-index:9;font-size:15px;white-space:nowrap}
  nav.main.open{display:flex}
- .labels{top:auto;bottom:max(18px,3.2vh);left:0;right:0;transform:none;justify-content:center;gap:22px;align-items:center}
+ .labels{display:none}   /* mobil: Logos stehen ganz unten unter dem Presskit (.contact-labels) */
+ .contact-labels{display:flex;justify-content:center;align-items:center;gap:28px;margin-top:34px}
+ .contact-labels img{height:auto;filter:brightness(0)}   /* Logos sind weiß: auf dem hellen Seitenende schwarz darstellen */
+ .contact-labels .lw{width:92px}
+ .contact-labels .ls{width:60px}
  .labels a:nth-child(2){order:-1}   /* Sony zuerst */
  .labels .lw{width:92px}
  .labels .ls{width:60px;margin-top:0}
- .hero-title{left:0;right:0;top:auto;transform:none;max-width:none;text-align:center;bottom:calc(max(18px,3.2vh) + 78px);font-size:clamp(12px,3.6vw,16px);font-weight:300}
+ .hero-title{left:0;right:0;top:auto;transform:none;max-width:none;text-align:center;bottom:max(18px,3.2vh);font-size:clamp(12px,3.6vw,16px);font-weight:300}
  .pano-title{padding-left:20px}
  .cal,.cal.four,.rec,.contact-grid,.tiles,.fp-row{grid-template-columns:1fr}
  .press-card picture{min-height:240px}
@@ -513,6 +518,7 @@ nav.main{font-size:clamp(15px,.92vw,20px)}
       <p class="photo-credit">Photo credit: © Marco Borggreve</p>
     </div>
   </div>
+  <div class="contact-labels"><a href="#recordings" aria-label="Sony Classical"><picture><source srcset="images/logo-sony.webp" type="image/webp"><img class="ls" src="images/logo-sony.png" alt="Sony Classical" width="360" height="360"></picture></a><a href="#recordings" aria-label="Warner Classics"><picture><source srcset="images/logo-warner.webp" type="image/webp"><img class="lw" src="images/logo-warner.png" alt="Warner Classics" width="520" height="213"></picture></a></div>
 </section>
 
 <footer class="f wrap">
