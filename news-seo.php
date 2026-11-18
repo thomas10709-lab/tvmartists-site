@@ -82,6 +82,28 @@ function tvm_langs(array $it): array
     return $out;
 }
 
+/**
+ * Bevorzugte Sprache des Besuchers (Accept-Language des Browsers), soweit der Artikel sie hat; sonst leer.
+ * Die Reihenfolge der Browser-Sprachen zählt: steht die Originalsprache vor einer anderen vorhandenen, bleibt es dabei.
+ * Suchmaschinen und Link-Vorschauen (Bots) bekommen immer die Standardfassung.
+ */
+function tvm_pref_lang(array $langs): string
+{
+    $ua = (string)($_SERVER['HTTP_USER_AGENT'] ?? '');
+    if ($ua === '' || preg_match('/bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|whatsapp|telegram|curl|wget/i', $ua)) { return ''; }
+    $cands = [];
+    foreach (explode(',', (string)($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '')) as $i => $part) {
+        $bits = explode(';', trim($part));
+        $tag = strtolower(substr(trim($bits[0]), 0, 2));
+        $q = 1.0;
+        foreach (array_slice($bits, 1) as $b) { if (preg_match('/^\s*q\s*=\s*([0-9.]+)/i', $b, $m)) { $q = (float)$m[1]; } }
+        if ($tag !== '' && $q > 0) { $cands[] = [$q, $i, $tag]; }
+    }
+    usort($cands, fn($a, $b) => $b[0] <=> $a[0] ?: $a[1] <=> $b[1]);
+    foreach ($cands as $c) { if (isset($langs[$c[2]])) { return $c[2]; } }
+    return '';
+}
+
 /** Adresse der Fassung in der Sprache $lang; die Originalsprache hat die Adresse ohne Zusatz */
 function tvm_article_url_for(array $it, string $lang): string
 {
