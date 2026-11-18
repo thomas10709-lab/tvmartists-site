@@ -178,7 +178,18 @@
             var names = allMode ? (it.cats || []).filter(function (c) { return !!ARTISTS[c]; }).map(function (c) { return ARTISTS[c][0]; }).join(", ") : "";
             var foot = el("div", "news-foot"); foot.appendChild(el("span", "news-src", names));
             var m = el("a", "more", "Read more"); m.href = url; foot.appendChild(m);
-            if (deIds.indexOf(it.id) !== -1) { var d = el("a", "more", "Auf Deutsch"); d.href = url + "&lang=de"; d.lang = "de"; d.hreflang = "de"; d.style.marginLeft = "16px"; foot.appendChild(d); }
+            var extra = langMap[it.id] || [];
+            if (extra.length) {
+                var LN = { de: "Auf Deutsch", fr: "En fran\u00e7ais", en: "In English" };
+                var lw = el("span", "langs");
+                extra.forEach(function (l, k) {
+                    if (!LN[l]) { return; }
+                    var d = el("a", "more", LN[l]); d.href = url + "&lang=" + l; d.lang = l; d.hreflang = l;
+                    if (k) { d.style.marginLeft = "16px"; }
+                    lw.appendChild(d);
+                });
+                foot.appendChild(lw);
+            }
             body.appendChild(foot);
             box.appendChild(body);
             return box;
@@ -197,10 +208,10 @@
             var back = document.getElementById("backLink");
             back.href = ARTISTS[key][1]; back.textContent = "\u2190 " + name;
         }
-        // Artikel mit deutscher Fassung bekommen einen Link "Auf Deutsch"
-        var deIds = [];
-        var deReady = fetch("news-de.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
-            .then(function (ids) { deIds = Array.isArray(ids) ? ids : []; }).catch(function () { /* ohne Liste kein deutscher Link */ });
+        // Artikel mit weiteren Sprachfassungen (Deutsch, Französisch) bekommen je einen Link
+        var langMap = {};
+        var deReady = fetch("news-langs.php", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; })
+            .then(function (m) { langMap = (m && typeof m === "object" && !Array.isArray(m)) ? m : {}; }).catch(function () { /* ohne Liste keine Sprachlinks */ });
         fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; })
         .then(function (all) { return deReady.then(function () { return all; }); })
         .then(function (all) {

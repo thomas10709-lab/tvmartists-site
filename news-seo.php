@@ -211,7 +211,10 @@ function tvm_latest_news_html(): string
         . ($by !== '' ? '<p class="ln-by">' . tvm_e($by) . '</p>' : '')
         . '<p class="ln-text">' . tvm_e($text) . '</p>'
         . '<a class="ln-more" href="' . tvm_e($url) . '">Read more</a>'
-        . (tvm_has_de($a) ? ' <span aria-hidden="true">&nbsp;&middot;&nbsp;</span> <a class="ln-more" lang="de" hreflang="de" href="' . tvm_e($url . '&lang=de') . '">Auf Deutsch lesen</a>' : '')
+        . implode('', array_map(function (string $l) use ($a, $url) {
+            $label = ['de' => 'Auf Deutsch lesen', 'fr' => 'Lire en français', 'en' => 'Read in English'][$l] ?? '';
+            return $label === '' ? '' : ' <span aria-hidden="true">&nbsp;&middot;&nbsp;</span> <a class="ln-more" lang="' . $l . '" hreflang="' . $l . '" href="' . tvm_e($url . '&lang=' . $l) . '">' . $label . '</a>';
+        }, array_values(array_diff(array_keys(tvm_langs($a)), [tvm_base_lang($a)]))))
         . '</article></section>';
 }
 
