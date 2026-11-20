@@ -15,7 +15,9 @@ if ($html === false) {
     header('Content-Type: text/plain; charset=UTF-8');
     exit('Startseite nicht gefunden.');
 }
-try { $block = tvm_latest_news_html(); } catch (Throwable $e) { $block = ''; }
+// Block ausgeblendet, solange am Platzhalter-Div in index.html data-hidden="1" steht (zum Wieder-Einblenden dieses Attribut entfernen)
+if (strpos($html, 'id="latestNews" data-hidden="1"') !== false) { $block = ''; }
+else { try { $block = tvm_latest_news_html(); } catch (Throwable $e) { $block = ''; } }
 
 header('Content-Type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache');

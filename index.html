@@ -1615,8 +1615,9 @@
         </div>
     </div>
 
-    <!-- 2b. LATEST NEWS: home.php setzt hier serverseitig die neueste Text-News ein; ohne home.php füllt latest-news.js den Platz -->
-    <div id="latestNews"><!--LATEST_NEWS--></div>
+    <!-- 2b. LATEST NEWS: home.php setzt hier serverseitig die neueste Text-News ein; ohne home.php füllt latest-news.js den Platz.
+         AUSGEBLENDET: solange data-hidden="1" am Block steht, erscheint nichts (weder serverseitig noch per Skript). Zum Wieder-Einblenden dieses Attribut entfernen. -->
+    <div id="latestNews" data-hidden="1"><!--LATEST_NEWS--></div>
 
     <!-- 3. CONDUCTORS (2-SPALTEN GRID, ZUFÄLLIGE REIHENFOLGE) -->
     <div class="conductors-section" id="artists">
@@ -1879,6 +1880,6 @@
 
     <!-- NEWS-KARUSSELL: eigene Liste (news-data/news.json), sonst WordPress -->
     <script src="news-carousel.js?v=14" defer></script>
-    <script src="latest-news.js?v=3" defer></script>
+    <script src="latest-news.js?v=4" defer></script>
 </body>
 </html>
