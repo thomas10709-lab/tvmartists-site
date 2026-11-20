@@ -60,7 +60,7 @@
 
   ready(function () {
     var slot = document.getElementById("latestNews");
-    if (!slot) { return; }
+    if (!slot || slot.getAttribute("data-hidden") === "1") { return; }   // ausgeblendet (siehe index.html)
     if (slot.querySelector(".ln-card")) { translateBlock(slot); return; }
     fetch("news-data/news.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : []; }).then(function (all) {
       var list = (Array.isArray(all) ? all : []).filter(function (it) {
