@@ -62,40 +62,18 @@
         .footer-copy a { color: rgba(255,255,255,0.9); text-decoration: none; transition: opacity 0.25s ease; }
         .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
     </style>
-    <script src="bg-sync.js?v=2"></script>
     <style>
-        /* Hintergrund wandert wie auf den Künstlerseiten durch die Farbtöne (synchron über bg-sync.js) */
-        body { position: relative; min-height: 100vh; }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background-color: #17355E;
-            animation: bg-breathe 60s ease-in-out infinite;
-            animation-delay: var(--bg-delay, 0s);
-        }
-        @keyframes bg-breathe {
-            0%, 100% { background-color: #17355E; }
-            25%      { background-color: #2B6C9C; }
-            50%      { background-color: #6E78AC; }
-            75%      { background-color: #43285A; }
-        }
-        /* Hinter dem Seitenrand (Überscrollen am oberen/unteren Rand, besonders auf dem Handy): derselbe Farbverlauf wie die Seite,
-           in derselben Richtung und im selben Takt (über bg-sync.js synchron) */
-        html {
-            background-color: #17355E;
-            animation: bg-breathe 60s ease-in-out infinite;
-            animation-delay: var(--bg-delay, 0s);
-        }
-        body { background-color: transparent; }
-        @media (prefers-reduced-motion: reduce) {
-            body::before { animation: none; }
-            html { animation: none; background-color: #43285A; }
-        }
+        /* Feste Hintergrundfarbe (kein Farbwechsel; der Wechsel der Farben gilt nur für die Startseite) */
+        html, body { background-color: #17355E !important; }
     </style>
+    <script>
+        // Liste eines Kuenstlers (news.html?artist=...): Hintergrund in der Farbe dieses Kuenstlers; sonst das Standard-Dunkelblau
+        (function () {
+            var C = { "mats-thiersch": "#46163A", "elli-choi": "#0F4C5C", "gerald-karni": "#1E4D3A", "francesco-cagnasso": "#5C3D14", "johannes-pierre-bettac": "#3B2A78", "jose-luis-gutierrez": "#6A2B22", "michael-sanderling": "#17355E" };
+            var a = new URLSearchParams(location.search).get("artist") || "";
+            if (C[a]) { var st = document.createElement("style"); st.textContent = "html, body { background-color: " + C[a] + " !important; }"; document.head.appendChild(st); }
+        })();
+    </script>
 </head>
 <body>
     <main class="news-page">
