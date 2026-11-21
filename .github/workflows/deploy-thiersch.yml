@@ -1,0 +1,72 @@
+name: Deploy Mats Thiersch site
+
+# Laedt die eigene Seite von Mats Thiersch (Ordner thiersch-site/) per FTP ueber TLS (FTPS) auf den Server seiner Domain
+# (eigener All-Inkl-Unteraccount) - nach jedem Merge nach main, der diesen Ordner aendert.
+#
+# Secrets (Settings > Secrets and variables > Actions); fehlen sie, wird der Lauf uebersprungen:
+#   THIERSCH_FTP_HOST      FTP-Server, z. B. w01c2840.kasserver.com
+#   THIERSCH_FTP_USER      FTP-Benutzer (am besten ein eigener, der nur den Ordner dieser Domain sieht)
+#   THIERSCH_FTP_PASSWORD  dessen Passwort
+#   THIERSCH_FTP_PATH      (optional) Zielordner auf dem FTP-Server, Standard "/"
+#
+# Solange noch DOMAIN-TBD in der Seite steht (Domain nicht eingetragen), wird nichts hochgeladen.
+# Es wird nie etwas auf dem Server geloescht: Dateien, die nur dort liegen, bleiben unberuehrt.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'thiersch-site/**'
+      - '.github/workflows/deploy-thiersch.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-thiersch
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the site folder
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp -r thiersch-site/. dist/
+          rm -f dist/LIESMICH.md dist/.htaccess
+          cp thiersch-site/htaccess.prod dist/.htaccess
+          rm -f dist/htaccess.prod
+          if grep -rq 'DOMAIN-TBD' dist/index.html dist/sitemap.xml; then echo "PLACEHOLDER=1" >> "$GITHUB_ENV"; fi
+          ls -la dist dist/images
+      - name: Upload to the server (FTPS)
+        env:
+          FTP_HOST: ${{ secrets.THIERSCH_FTP_HOST }}
+          FTP_USER: ${{ secrets.THIERSCH_FTP_USER }}
+          FTP_PASS: ${{ secrets.THIERSCH_FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.THIERSCH_FTP_PATH }}
+        run: |
+          if [ "${PLACEHOLDER:-}" = "1" ]; then
+            echo "DOMAIN-TBD steht noch in der Seite - nichts wird hochgeladen."
+            exit 0
+          fi
+          if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
+            echo "FTP secrets are missing - run skipped."
+            exit 0
+          fi
+          REMOTE="${FTP_PATH:-/}"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          lftp -u "$FTP_USER,$FTP_PASS" "ftp://$FTP_HOST" <<LFTP
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set net:max-retries 3
+          set net:timeout 30
+          lcd dist
+          cd "$REMOTE"
+          mirror --reverse --parallel=3 --no-perms --verbose
+          bye
+          LFTP

@@ -1,0 +1,10 @@
+# Mats-Thiersch-Seite (eigener All-Inkl-Unteraccount) - wird vom Workflow deploy-thiersch.yml als .htaccess hochgeladen
+Options -MultiViews
+DirectoryIndex index.html
+
+# HTML-Seiten immer neu pruefen lassen, damit Aenderungen sofort sichtbar sind
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

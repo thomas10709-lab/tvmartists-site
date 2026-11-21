@@ -10,6 +10,7 @@ declare(strict_types=1);
  *
  *   /termine.php?a=sanderling   Feed von Michael Sanderling
  *   /termine.php?a=bettac       Feed von Johannes Pierre Bettac
+ *   /termine.php?a=mats         Feed von Mats Thiersch
  *
  * Verhalten:
  * - Es wird immer sofort die gespeicherte Fassung ausgeliefert, auch wenn sie älter als 5 Minuten ist;
