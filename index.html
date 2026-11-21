@@ -96,8 +96,7 @@
             overflow-x: hidden;
         }
 
-        /* Hintergrund wandert sehr langsam durch mehrere Farbtöne:
-           Dunkelblau → Blautürkis → sanftes Rosa → dunkles Rot-Violett → zurück zum Blau. */
+        /* Hintergrund wandert sehr langsam von Dunkelblau zu Hellblau und wieder zurück (60 s). */
         body::before {
             content: "";
             position: absolute;
@@ -114,9 +113,7 @@
 
         @keyframes bg-breathe {
             0%, 100% { background-color: #17355E; }
-            25%      { background-color: #2B6C9C; }
-            50%      { background-color: #6E78AC; }
-            75%      { background-color: #43285A; }
+            50%      { background-color: #5A94C8; }
         }
         /* Hinter dem Seitenrand (Überscrollen am oberen/unteren Rand, besonders auf dem Handy): derselbe Farbverlauf wie die Seite,
            in derselben Richtung und im selben Takt (über bg-sync.js synchron) */
@@ -129,7 +126,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             body::before { animation: none; }
-            html { animation: none; background-color: #43285A; }
+            html { animation: none; background-color: #2B6C9C; }
         }
 
         :root {
