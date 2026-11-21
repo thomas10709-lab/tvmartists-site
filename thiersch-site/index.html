@@ -47,7 +47,7 @@
         /* ---- Titelbild ---- */
         .hero { position: relative; min-height: 100vh; min-height: 100svh; background: #0b0e13 url('images/hero.jpg') center / cover no-repeat; display: flex; align-items: flex-end; }
         .hero picture, .hero img { display: none; }
-        .hero h1 { margin: 0 0 14vh 18%; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: clamp(46px, 6.4vw, 110px); line-height: 1.05; letter-spacing: .01em; color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+        .hero h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; /* Desktop: Name steht im Foto; h1 bleibt fuer Suchmaschinen/Screenreader */ margin: 0 0 14vh 18%; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: clamp(46px, 6.4vw, 110px); line-height: 1.05; letter-spacing: .01em; color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 
         /* ---- About ---- */
         .about { max-width: 1060px; margin: 0 auto; padding: 78px 28px 40px; }
@@ -101,7 +101,7 @@
             .site-nav a { font-size: 17px; }
             .site-nav.solid ul { height: 54px; }
             .hero { background-image: url('images/hero-mobile.jpg'); background-position: center top; }
-            .hero h1 { margin: 0 0 11vh 7%; font-size: clamp(40px, 12vw, 64px); }
+            .hero h1 { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0 0 11vh 7%; font-size: clamp(40px, 12vw, 64px); } /* Handy-Foto hat keinen Schriftzug */
             .about { padding: 48px 20px 20px; }
             .calendar { padding: 60px 20px 40px; }
             .event { margin-bottom: 38px; }
