@@ -55,6 +55,12 @@
         /* ---- About ---- */
         .about { max-width: 1060px; margin: 0 auto; padding: 78px 28px 40px; }
         .about p { margin: 0 0 1.5em; }
+        .about .rm-wrap { margin: -.4em 0 0; }
+        .about .rm { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+        .about .rm:hover { opacity: .65; }
+        .about .more { display: none; margin-top: 1.5em; }
+        .about .more.open { display: block; }
+        .about .more p:last-child { margin-bottom: 0; }
 
         /* ---- Calendar ---- */
         .calendar { padding: 90px 28px 60px; text-align: center; }
@@ -176,8 +182,11 @@
     <!-- Bio nach Freigabe vom 21.11.2026. Die drei Nebenpreise (Prix des Musiciens de l'OSR, Prix Fondation Eric Ballard, Prix Jeune Public) sind bestaetigt. Schreibweise "Leipzig Gewandhaus Orchestra" ist bestaetigt. -->
     <p>Mats Thiersch (b. 2003) is a German conductor and since September 2026 assistant conductor with the Berliner Philharmoniker for Kirill Petrenko and conducting fellow in the Karajan-Academy. In November 2026 he won First Prize at the 80th Concours de Genève, the first conducting laureate since Alan Gilbert in 1994. He was also awarded the Prix des Musiciens de l’OSR, the Prix Fondation Éric Ballard and the Prix Jeune Public.</p>
     <p>The coming seasons will see him on the podium of numerous leading orchestras, among them the Leipzig Gewandhaus Orchestra, the Konzerthausorchester Berlin, the Rotterdam Philharmonic, the NDR Radiophilharmonie, the SWR Symphony Orchestra Stuttgart, the RTVE Symphony Orchestra in Madrid, the Orquesta Sinfónica de Galicia, the Orquestra Sinfónica do Porto, the Tokyo Symphony Orchestra, the Symphonieorchester Vorarlberg, the Prague Philharmonia, and the Orchestre de la Suisse Romande. He will also serve as assistant conductor to Joseph Bastian for Strauss’s Ariadne auf Naxos at the Opéra de Dijon. Previously, he worked with ensembles including the Orchestre National de Lille, the Deutsche Radio Philharmonie Saarbrücken, the Ensemble Intercontemporain, and the Gstaad Festival Orchestra.</p>
+    <p class="rm-wrap"><button type="button" class="rm" id="aboutBtn" aria-expanded="false" aria-controls="aboutMore">read more</button></p>
+    <div class="more" id="aboutMore">
     <p>In June 2026, he took part in Paavo Järvi’s Conductors’ Academy with the Tonhalle-Orchester Zürich, followed by a conducting-seminar fellowship at Tanglewood with the Boston Symphony Orchestra later that summer. In 2024, he was invited to the renowned Gstaad Conducting Academy, where he studied with Johannes Schlaefli and Jaap van Zweden.</p>
     <p>Thiersch began his musical journey at the age of six with the violin, later expanding his studies to include piano and composition. He completed his composition studies with Miroslav Srnka at the University of Music and Dance Cologne (HfMT Köln) and his conducting studies at the Conservatoire National Supérieur de Musique et de Danse de Paris in the class of Alain Altinoglu. His original works have been performed by renowned groups such as Ensemble Musikfabrik and have earned him prestigious accolades, including the Composition Prize of the German Orchestra Foundation (Deutsche Orchester-Stiftung). From 2024 to 2026, he served as Music Director of the Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris), and he has gained additional artistic insights in masterclasses with distinguished conductors such as Daniele Gatti, Mikko Franck, and Alexandre Bloch.</p>
+    </div>
 </section>
 
 <section class="calendar" id="calendar" aria-label="Calendar">
@@ -261,6 +270,13 @@
     var nav = document.getElementById('nav'), hero = document.getElementById('top');
     function onScroll() { nav.classList.toggle('solid', window.scrollY > hero.offsetHeight * 0.7); }
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    // Bio: "read more" / "read less"
+    var rmBtn = document.getElementById('aboutBtn'), rmBox = document.getElementById('aboutMore');
+    rmBtn.addEventListener('click', function () {
+        var o = rmBox.classList.toggle('open');
+        rmBtn.textContent = o ? 'read less' : 'read more'; rmBtn.setAttribute('aria-expanded', o ? 'true' : 'false');
+        if (!o) { rmBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    });
     // Hamburger-Menue (Handy): auf-/zuklappen, bei Klick auf einen Eintrag oder Esc schliessen
     var burger = document.getElementById('burger'), menu = document.getElementById('menu');
     function setMenu(o) { nav.classList.toggle('open', o); burger.setAttribute('aria-expanded', o ? 'true' : 'false'); document.documentElement.style.overflow = o ? 'hidden' : ''; }
