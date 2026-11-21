@@ -69,7 +69,7 @@
     <script>
         // Liste eines Kuenstlers (news.html?artist=...): Hintergrund in der Farbe dieses Kuenstlers; sonst das Standard-Dunkelblau
         (function () {
-            var C = { "mats-thiersch": "#43285A", "elli-choi": "#2B6C9C", "gerald-karni": "#21507D", "francesco-cagnasso": "#4C72A4", "johannes-pierre-bettac": "#585083", "jose-luis-gutierrez": "#2D2E5C", "michael-sanderling": "#17355E" };
+            var C = { "mats-thiersch": "#2F5FA8", "elli-choi": "#2B6C9C", "gerald-karni": "#21507D", "francesco-cagnasso": "#4C72A4", "johannes-pierre-bettac": "#3A6EC0", "jose-luis-gutierrez": "#2B4A8B", "michael-sanderling": "#17355E" };
             var a = new URLSearchParams(location.search).get("artist") || "";
             if (C[a]) { var st = document.createElement("style"); st.textContent = "html, body { background-color: " + C[a] + " !important; }"; document.head.appendChild(st); }
         })();
