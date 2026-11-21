@@ -248,12 +248,15 @@
     }
     function iso(dt) { return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); }
     function lines(t) { return (t || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean); }
+    var dbg = /[?&]caldebug/.test(location.search), src = '';
+    function dbgBox(t) { var pre = document.createElement('pre'); pre.style.cssText = 'position:fixed;z-index:999;left:10px;top:10px;right:10px;bottom:10px;overflow:auto;background:#fff;color:#000;border:2px solid #c00;padding:14px;font:12px/1.4 monospace;white-space:pre-wrap'; pre.textContent = t; document.body.appendChild(pre); }
     function loadFeed() {
         return fetch(CACHE_URL).then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
-            .then(function (t) { if (t.indexOf('###EVENT###') < 0) { throw 0; } return t; })
-            .catch(function () { return fetch(FEED_URL).then(function (r) { return r.text(); }); });
+            .then(function (t) { if (t.indexOf('###EVENT###') < 0) { throw 0; } src = 'Zwischenspeicher tvmartists.com'; return t; })
+            .catch(function () { src = 'direkt bei Google'; return fetch(FEED_URL + '?_=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.text(); }); });
     }
     loadFeed().then(function (text) {
+        if (dbg) { dbgBox('Kalender-Diagnose (Seite neu laden zum Schliessen)\nQuelle: ' + src + '\nAdresse: ' + FEED_URL + '\n\nAnfang der Antwort:\n\n' + text.slice(0, 600)); }
         var evs = text.trim().split('###EVENT###').filter(function (b) { return b.trim() !== ''; }).map(function (b, i) {
             var parts = b.trim().split('---').map(function (p) { return p.trim(); }), fl = parts[0].split('\n').map(function (s) { return s.trim(); });
             return { date: fl[0] || '', city: fl[1] || '', venue: parts[1] || '', orchestra: parts[2] || '', program: parts[3] || '', pd: pdate(fl[0] || ''), i: i };
@@ -270,7 +273,7 @@
             sec.appendChild(a);
         });
         hidePast();
-    }).catch(function () { /* feste Liste bleibt */ });
+    }).catch(function (err) { if (dbg) { dbgBox("Abruf fehlgeschlagen: " + err); } /* feste Liste bleibt */ });
 
     // Videos: erst nach einem Klick von YouTube laden (ohne Cookies)
     document.querySelectorAll('.vid').forEach(function (v) {
