@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +55,13 @@
         /* ---- About ---- */
         .about { max-width: 1060px; margin: 0 auto; padding: 78px 28px 40px; }
         .about p { margin: 0 0 1.5em; }
+        .about p[data-l] { display: none; }
+        html[data-lang="en"] .about p[data-l="en"], html[data-lang="de"] .about p[data-l="de"], html[data-lang="fr"] .about p[data-l="fr"] { display: block; }
+        .about { position: relative; }
+        .about .lang { display: flex; justify-content: flex-end; align-items: center; gap: 9px; margin: -30px 0 18px; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: .08em; color: #000; }
+        .about .lang button { background: none; border: 0; padding: 2px 1px; margin: 0; font: inherit; letter-spacing: inherit; color: inherit; cursor: pointer; opacity: .55; }
+        .about .lang button:hover { opacity: 1; }
+        .about .lang button[aria-pressed="true"] { opacity: 1; font-weight: 400; border-bottom: 1px solid currentColor; }
         .about .rm-wrap { margin: -.4em 0 0; }
         .about .rm { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
         .about .rm:hover { opacity: .65; }
@@ -137,6 +144,7 @@
             .hero { background-image: url('images/hero-mobile.jpg?v=3'); background-position: center top; }
             .hero h1 { position: absolute; left: 55%; top: 66%; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0; text-align: left; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-size: clamp(26px, 7.8vw, 32px); font-weight: 400; letter-spacing: .02em; line-height: 1.12; }
             .about { padding: 40px 20px 14px; }
+            .about .lang { margin: -18px 0 14px; font-size: 14px; }
             .calendar { padding: 50px 20px 30px; }
             .event { margin-bottom: 26px; grid-template-columns: 39% 1fr; gap: 0 16px; font-size: 15px; line-height: 1.2; font-weight: 400; }
             .event .d, .event .o { font-weight: 700; }
@@ -159,6 +167,21 @@
         }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
+    <script>
+    // Sprache der Bio: 1. ?lang=de|fr|en, 2. gespeicherte Wahl, 3. erste unterstuetzte Browsersprache (de/fr), sonst Englisch
+    (function () {
+        var ok = { en: 1, de: 1, fr: 1 }, L = '';
+        try { var m = /[?&]lang=(en|de|fr)\b/.exec(location.search); if (m) { L = m[1]; } } catch (e) {}
+        if (!L) { try { var st = localStorage.getItem('mtLang'); if (st && ok[st]) { L = st; } } catch (e) {} }
+        if (!L) {
+            var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+            for (var i = 0; i < langs.length && !L; i++) { var c = String(langs[i]).slice(0, 2).toLowerCase(); if (ok[c]) { L = c; } }
+        }
+        L = L || 'en';
+        document.documentElement.setAttribute('data-lang', L);
+        document.documentElement.setAttribute('lang', L);
+    })();
+    </script>
 </head>
 <body>
 
@@ -180,13 +203,22 @@
 
 <main>
 <section class="about" id="about" aria-label="About">
-    <!-- Bio nach Freigabe vom 21.11.2026. Die drei Nebenpreise (Prix des Musiciens de l'OSR, Prix Fondation Eric Ballard, Prix Jeune Public) sind bestaetigt. Schreibweise "Leipzig Gewandhaus Orchestra" ist bestaetigt. -->
-    <p>Mats Thiersch (b. 2003) is a German conductor and since September 2026 assistant conductor with the Berliner Philharmoniker for Kirill Petrenko and conducting fellow in the Karajan-Academy. In November 2026 he won First Prize at the 80th Concours de Genève, the first conducting laureate since Alan Gilbert in 1994. He was also awarded the Prix des Musiciens de l’OSR, the Prix Fondation Éric Ballard and the Prix Jeune Public.</p>
-    <p>The coming seasons will see him on the podium of numerous leading orchestras, among them the Leipzig Gewandhaus Orchestra, the Konzerthausorchester Berlin, the Rotterdam Philharmonic, the NDR Radiophilharmonie, the SWR Symphony Orchestra Stuttgart, the RTVE Symphony Orchestra in Madrid, the Orquesta Sinfónica de Galicia, the Orquestra Sinfónica do Porto, the Tokyo Symphony Orchestra, the Symphonieorchester Vorarlberg, the Prague Philharmonia, and the Orchestre de la Suisse Romande. He will also serve as assistant conductor to Joseph Bastian for Strauss’s Ariadne auf Naxos at the Opéra de Dijon. Previously, he worked with ensembles including the Orchestre National de Lille, the Deutsche Radio Philharmonie Saarbrücken, the Ensemble Intercontemporain, and the Gstaad Festival Orchestra.</p>
+    <!-- Bio nach Freigabe vom 21.11.2026 (Nebenpreise und Schreibweise Leipzig bestaetigt). Dreisprachig: EN (Standard), DE, FR; Umschalter oben rechts, Browsersprache wird automatisch erkannt. -->
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-set="en" aria-pressed="true">EN</button><span aria-hidden="true">|</span><button type="button" data-set="de" aria-pressed="false">DE</button><span aria-hidden="true">|</span><button type="button" data-set="fr" aria-pressed="false">FR</button></div>
+    <p data-l="en" lang="en">Mats Thiersch (b. 2003) is a German conductor and since September 2026 assistant conductor with the Berliner Philharmoniker for Kirill Petrenko and conducting fellow in the Karajan-Academy. In November 2026 he won First Prize at the 80th Concours de Genève, the first conducting laureate since Alan Gilbert in 1994. He was also awarded the Prix des Musiciens de l’OSR, the Prix Fondation Éric Ballard and the Prix Jeune Public.</p>
+    <p data-l="de" lang="de">Mats Thiersch (geb. 2003) ist ein deutscher Dirigent. Seit September 2026 ist er Assistent von Kirill Petrenko bei den Berliner Philharmonikern und Dirigierstipendiat der Karajan-Akademie. Im November 2026 gewann er den Ersten Preis beim 80. Concours de Genève und ist damit der erste Preisträger im Fach Dirigieren seit Alan Gilbert im Jahr 1994. Außerdem wurde er mit dem Prix des Musiciens de l’OSR, dem Prix Fondation Éric Ballard und dem Prix Jeune Public ausgezeichnet.</p>
+    <p data-l="fr" lang="fr">Mats Thiersch (né en 2003) est un chef d’orchestre allemand. Depuis septembre 2026, il est chef assistant de Kirill Petrenko auprès des Berliner Philharmoniker et boursier de direction de la Karajan-Akademie. En novembre 2026, il a remporté le Premier Prix du 80e Concours de Genève, devenant ainsi le premier lauréat de direction d’orchestre depuis Alan Gilbert en 1994. Il s’est également vu décerner le Prix des Musiciens de l’OSR, le Prix Fondation Éric Ballard et le Prix Jeune Public.</p>
+    <p data-l="en" lang="en">The coming seasons will see him on the podium of numerous leading orchestras, among them the Leipzig Gewandhaus Orchestra, the Konzerthausorchester Berlin, the Rotterdam Philharmonic, the NDR Radiophilharmonie, the SWR Symphony Orchestra Stuttgart, the RTVE Symphony Orchestra in Madrid, the Orquesta Sinfónica de Galicia, the Orquestra Sinfónica do Porto, the Tokyo Symphony Orchestra, the Symphonieorchester Vorarlberg, the Prague Philharmonia, and the Orchestre de la Suisse Romande. He will also serve as assistant conductor to Joseph Bastian for Strauss’s Ariadne auf Naxos at the Opéra de Dijon. Previously, he worked with ensembles including the Orchestre National de Lille, the Deutsche Radio Philharmonie Saarbrücken, the Ensemble Intercontemporain, and the Gstaad Festival Orchestra.</p>
+    <p data-l="de" lang="de">In den kommenden Spielzeiten steht er am Pult zahlreicher führender Orchester, darunter das Gewandhausorchester Leipzig, das Konzerthausorchester Berlin, das Rotterdam Philharmonic, die NDR Radiophilharmonie, das SWR Symphonieorchester Stuttgart, das Sinfonieorchester des spanischen Rundfunks RTVE in Madrid, die Orquesta Sinfónica de Galicia, die Orquestra Sinfónica do Porto, das Tokyo Symphony Orchestra, das Symphonieorchester Vorarlberg, die Prague Philharmonia und das Orchestre de la Suisse Romande. An der Opéra de Dijon wird er außerdem Joseph Bastian bei Strauss’ „Ariadne auf Naxos“ assistieren. Zuvor arbeitete er unter anderem mit dem Orchestre National de Lille, der Deutschen Radio Philharmonie Saarbrücken, dem Ensemble intercontemporain und dem Gstaad Festival Orchestra.</p>
+    <p data-l="fr" lang="fr">Au cours des prochaines saisons, il dirigera de nombreux orchestres de premier plan, parmi lesquels l’Orchestre du Gewandhaus de Leipzig, le Konzerthausorchester Berlin, le Rotterdam Philharmonic, la NDR Radiophilharmonie, l’Orchestre symphonique de la SWR à Stuttgart, l’Orchestre symphonique de la RTVE à Madrid, l’Orquesta Sinfónica de Galicia, l’Orquestra Sinfónica do Porto, le Tokyo Symphony Orchestra, le Symphonieorchester Vorarlberg, le Prague Philharmonia et l’Orchestre de la Suisse Romande. À l’Opéra de Dijon, il sera en outre l’assistant de Joseph Bastian pour Ariadne auf Naxos de Strauss. Il a auparavant travaillé notamment avec l’Orchestre National de Lille, la Deutsche Radio Philharmonie Saarbrücken, l’Ensemble intercontemporain et le Gstaad Festival Orchestra.</p>
     <p class="rm-wrap"><button type="button" class="rm" id="aboutBtn" aria-expanded="false" aria-controls="aboutMore">read more</button></p>
     <div class="more" id="aboutMore">
-    <p>In June 2026, he took part in Paavo Järvi’s Conductors’ Academy with the Tonhalle-Orchester Zürich, followed by a conducting-seminar fellowship at Tanglewood with the Boston Symphony Orchestra later that summer. In 2024, he was invited to the renowned Gstaad Conducting Academy, where he studied with Johannes Schlaefli and Jaap van Zweden.</p>
-    <p>Thiersch began his musical journey at the age of six with the violin, later expanding his studies to include piano and composition. He completed his composition studies with Miroslav Srnka at the University of Music and Dance Cologne (HfMT Köln) and his conducting studies at the Conservatoire National Supérieur de Musique et de Danse de Paris in the class of Alain Altinoglu. His original works have been performed by renowned groups such as Ensemble Musikfabrik and have earned him prestigious accolades, including the Composition Prize of the German Orchestra Foundation (Deutsche Orchester-Stiftung). From 2024 to 2026, he served as Music Director of the Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris), and he has gained additional artistic insights in masterclasses with distinguished conductors such as Daniele Gatti, Mikko Franck, and Alexandre Bloch.</p>
+    <p data-l="en" lang="en">In June 2026, he took part in Paavo Järvi’s Conductors’ Academy with the Tonhalle-Orchester Zürich, followed by a conducting-seminar fellowship at Tanglewood with the Boston Symphony Orchestra later that summer. In 2024, he was invited to the renowned Gstaad Conducting Academy, where he studied with Johannes Schlaefli and Jaap van Zweden.</p>
+    <p data-l="de" lang="de">Im Juni 2026 nahm er an Paavo Järvis Conductors’ Academy mit dem Tonhalle-Orchester Zürich teil; im Sommer folgte ein Stipendium für das Dirigierseminar in Tanglewood mit dem Boston Symphony Orchestra. 2024 wurde er an die renommierte Gstaad Conducting Academy eingeladen, wo er bei Johannes Schlaefli und Jaap van Zweden studierte.</p>
+    <p data-l="fr" lang="fr">En juin 2026, il a participé à la Conductors’ Academy de Paavo Järvi avec le Tonhalle-Orchester Zürich, puis, plus tard dans l’été, à un séminaire de direction à Tanglewood avec le Boston Symphony Orchestra, en tant que boursier. En 2024, il a été invité à la prestigieuse Gstaad Conducting Academy, où il a étudié auprès de Johannes Schlaefli et de Jaap van Zweden.</p>
+    <p data-l="en" lang="en">Thiersch began his musical journey at the age of six with the violin, later expanding his studies to include piano and composition. He completed his composition studies with Miroslav Srnka at the University of Music and Dance Cologne (HfMT Köln) and his conducting studies at the Conservatoire National Supérieur de Musique et de Danse de Paris in the class of Alain Altinoglu. His original works have been performed by renowned groups such as Ensemble Musikfabrik and have earned him prestigious accolades, including the Composition Prize of the German Orchestra Foundation (Deutsche Orchester-Stiftung). From 2024 to 2026, he served as Music Director of the Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris), and he has gained additional artistic insights in masterclasses with distinguished conductors such as Daniele Gatti, Mikko Franck, and Alexandre Bloch.</p>
+    <p data-l="de" lang="de">Mit sechs Jahren begann Thiersch mit dem Geigenspiel und erweiterte seine Studien später um Klavier und Komposition. Er schloss sein Kompositionsstudium bei Miroslav Srnka an der Hochschule für Musik und Tanz Köln (HfMT Köln) sowie sein Dirigierstudium in der Klasse von Alain Altinoglu am Conservatoire National Supérieur de Musique et de Danse de Paris ab. Seine eigenen Werke wurden von namhaften Ensembles wie dem Ensemble Musikfabrik aufgeführt und brachten ihm bedeutende Auszeichnungen ein, darunter den Kompositionspreis der Deutschen Orchester-Stiftung. Von 2024 bis 2026 war er Musikalischer Leiter des Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris); weitere künstlerische Impulse erhielt er in Meisterkursen bei Dirigenten wie Daniele Gatti, Mikko Franck und Alexandre Bloch.</p>
+    <p data-l="fr" lang="fr">Thiersch a commencé la musique à l’âge de six ans avec le violon, avant d’élargir ses études au piano et à la composition. Il a achevé ses études de composition auprès de Miroslav Srnka à la Hochschule für Musik und Tanz de Cologne (HfMT Köln), ainsi que ses études de direction d’orchestre dans la classe d’Alain Altinoglu au Conservatoire National Supérieur de Musique et de Danse de Paris. Ses compositions ont été jouées par des ensembles de renom comme l’Ensemble Musikfabrik et lui ont valu de prestigieuses distinctions, dont le Prix de composition de la Deutsche Orchester-Stiftung. De 2024 à 2026, il a été directeur musical de l’Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris), et il a enrichi sa pratique artistique lors de masterclasses avec des chefs d’orchestre de renom tels que Daniele Gatti, Mikko Franck et Alexandre Bloch.</p>
     </div>
 </section>
 
@@ -271,11 +303,22 @@
     var nav = document.getElementById('nav'), hero = document.getElementById('top');
     function onScroll() { nav.classList.toggle('solid', window.scrollY > hero.offsetHeight * 0.7); }
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-    // Bio: "read more" / "read less"
+    // Bio: Sprachumschalter und "read more" / "read less" (in der jeweiligen Sprache)
+    var RM = { en: ['read more', 'read less'], de: ['weiterlesen', 'weniger anzeigen'], fr: ['lire la suite', 'réduire'] };
     var rmBtn = document.getElementById('aboutBtn'), rmBox = document.getElementById('aboutMore');
+    function curLang() { return document.documentElement.getAttribute('data-lang') || 'en'; }
+    function rmLabel() { rmBtn.textContent = RM[curLang()][rmBox.classList.contains('open') ? 1 : 0]; }
+    function setLang(l, save) {
+        document.documentElement.setAttribute('data-lang', l); document.documentElement.setAttribute('lang', l);
+        document.querySelectorAll('.about .lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === l ? 'true' : 'false'); });
+        rmLabel();
+        if (save) { try { localStorage.setItem('mtLang', l); } catch (e) {} }
+    }
+    document.querySelectorAll('.about .lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-set'), true); }); });
+    setLang(curLang(), false);
     rmBtn.addEventListener('click', function () {
         var o = rmBox.classList.toggle('open');
-        rmBtn.textContent = o ? 'read less' : 'read more'; rmBtn.setAttribute('aria-expanded', o ? 'true' : 'false');
+        rmLabel(); rmBtn.setAttribute('aria-expanded', o ? 'true' : 'false');
         if (!o) { rmBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     });
     // Hamburger-Menue (Handy): auf-/zuklappen, bei Klick auf einen Eintrag oder Esc schliessen
