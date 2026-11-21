@@ -66,14 +66,6 @@
         /* Feste Hintergrundfarbe (kein Farbwechsel; der Wechsel der Farben gilt nur für die Startseite) */
         html, body { background-color: #17355E !important; }
     </style>
-    <script>
-        // Liste eines Kuenstlers (news.html?artist=...): Hintergrund in der Farbe dieses Kuenstlers; sonst das Standard-Dunkelblau
-        (function () {
-            var C = { "mats-thiersch": "#4F86CF", "elli-choi": "#2B6C9C", "gerald-karni": "#21507D", "francesco-cagnasso": "#4C72A4", "johannes-pierre-bettac": "#3A6EC0", "jose-luis-gutierrez": "#2B4A8B", "michael-sanderling": "#17355E" };
-            var a = new URLSearchParams(location.search).get("artist") || "";
-            if (C[a]) { var st = document.createElement("style"); st.textContent = "html, body { background-color: " + C[a] + " !important; }"; document.head.appendChild(st); }
-        })();
-    </script>
 </head>
 <body>
     <main class="news-page">
