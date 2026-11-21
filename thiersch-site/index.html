@@ -183,7 +183,7 @@
 
 <section class="calendar" id="calendar" aria-label="Calendar">
     <h2 class="title">Calendar</h2>
-    <!-- Das Skript unten blendet Termine vor dem Stichtag 01.06.2026 aus (data-end = letzter Tag). -->
+    <!-- Diese feste Liste gilt nur als Rueckfall; normalerweise ersetzt das Skript unten sie durch alle Termine aus der Google-Tabelle. -->
     <article class="event" data-end="2026-06-12"><div class="ev-l"><p class="d">09 Jun 2026 – 12 Jun 2026</p><p>Zurich, Switzerland</p></div><div class="ev-r"><p class="o">Tonhalle-Orchester Zürich</p><p class="gap"></p><p class="sp"></p><p>Conductors Academy with Paavo Järvi</p></div></article>
     <article class="event" data-end="2026-06-12"><div class="ev-l"><p class="d">12 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="gap"></p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
     <article class="event" data-end="2026-06-13"><div class="ev-l"><p class="d">13 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="gap"></p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
@@ -270,9 +270,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); } });
 
     // Vergangene Termine ausblenden
-    var today = '2026-06-01';   // Termine ab diesem Datum werden angezeigt (Stichtag fest; vorher: heutiges Datum)
-    function hidePast() { document.querySelectorAll('.event[data-end]').forEach(function (e) { if (e.getAttribute('data-end') < today) { e.style.display = 'none'; } }); }
-    hidePast();
+    // Alle Termine der Tabelle werden angezeigt (nichts wird nach Datum ausgeblendet)
 
     // Termine aus der Google-Tabelle (wie bei michaelsanderling.de). Schlaegt der Abruf fehl, bleibt die feste Liste im HTML stehen.
     var FEED_URL = 'https://script.google.com/macros/s/AKfycbzhzLFHoBbDHB7BjQ_OQpl8zFOrezpsJ1ssEFGaMvMrcnYJ7_3VaoqzgQ2g665gR1OFYQ/exec';
@@ -321,7 +319,6 @@
             a.appendChild(L); a.appendChild(R);
             sec.appendChild(a);
         });
-        hidePast();
     }).catch(function (err) { if (dbg) { dbgBox("Abruf fehlgeschlagen: " + err); } /* feste Liste bleibt */ });
 
     // Videos: erst nach einem Klick von YouTube laden (ohne Cookies)
