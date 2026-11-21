@@ -69,6 +69,7 @@
         /* ---- Videos (ein Klick laedt das Video erst dann von YouTube) ---- */
         .videos { padding: 60px 28px 90px; }
         .vgrid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        .vgrid.single { grid-template-columns: minmax(0, 760px); justify-content: center; }
         .vid { position: relative; display: block; aspect-ratio: 16 / 9; background: #11151c; color: #fff; text-decoration: none; border: 0; padding: 0; cursor: pointer; overflow: hidden; font: inherit; text-align: left; }
         .vid .vt { position: absolute; left: 22px; right: 22px; top: 18px; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 18px; line-height: 1.3; }
         .vid .vp { position: absolute; left: 50%; top: 52%; width: 76px; height: 52px; margin: -26px 0 0 -38px; border-radius: 14px; background: #e00; }
@@ -108,6 +109,8 @@
             .media { padding: 40px 14px 20px; }
             .videos { padding: 40px 14px 60px; }
             .vgrid { grid-template-columns: 1fr; gap: 18px; }
+            .vid .vt { font-size: 15px; top: 14px; }
+            .vid .vp { top: 60%; }
             .contact { padding: 54px 20px 44px; }
             .contact .rule { margin: -54px auto 54px; }
             .contact .name { font-size: 28px; }
@@ -182,12 +185,9 @@
 
 <section class="videos" aria-label="Videos">
     <h2 class="title">Videos</h2>
-    <!-- Videos: data-yt = die YouTube-Video-ID (der Teil nach v= in der Adresse). Ohne ID fuehrt die Karte zur YouTube-Playlist. Das Video wird erst nach einem Klick (youtube-nocookie) geladen. -->
-    <div class="vgrid">
-        <a class="vid" data-yt="" data-title="Mats Thiersch – Gstaad Festival Orchestra" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Gstaad Festival Orchestra</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
-        <a class="vid" data-yt="" data-title="Mats Thiersch – Orchestre des Lauréats" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Orchestre des Lauréats du Concours de Genève (1)</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
-        <a class="vid" data-yt="" data-title="Mats Thiersch – Orchestre des Lauréats" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Orchestre des Lauréats du Concours de Genève (2)</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
-        <a class="vid" data-yt="" data-title="Mats Thiersch – Interview – Concours de Genève" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Interview – Concours de Genève</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
+    <!-- Video: data-yt = die YouTube-Video-ID (der Teil nach v= in der Adresse). Das Video wird erst nach einem Klick (youtube-nocookie) geladen. Weitere Videos: weitere <a class="vid" data-yt="..."> in den .vgrid einfuegen und die Klasse "single" entfernen. -->
+    <div class="vgrid single">
+        <a class="vid" data-yt="GheNobq2u88" data-title="Mats Thiersch – Final, Concours de Genève 2026 – Strauss: Don Juan" href="https://www.youtube.com/watch?v=GheNobq2u88" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Final, Concours de Genève 2026<br>Strauss: Don Juan</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
     </div>
 </section>
 </main>
