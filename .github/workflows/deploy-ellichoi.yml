@@ -42,6 +42,7 @@ jobs:
           set -euo pipefail
           mkdir -p dist/images
           cp ellichoi-site/index.html dist/index.html
+          cp ellichoi-site/impressum.html ellichoi-site/datenschutz.html dist/
           cp images/elli-choi-hero.jpg images/elli-choi-hero.webp images/elli-choi-800.jpg images/elli-choi-800.webp images/elli-choi-gallery-*.jpg images/elli-choi-hero2-1920.jpg images/elli-choi-hero2-1920.webp images/elli-choi-hero-m2.jpg images/elli-choi-hero-m2.webp dist/images/
           cp ellichoi-site/.htaccess ellichoi-site/robots.txt ellichoi-site/sitemap.xml dist/
           # Kontrolle: auf der neuen Domain darf keine canonical-Adresse mehr auf tvmartists.com zeigen
