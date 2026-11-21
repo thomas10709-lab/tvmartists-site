@@ -227,7 +227,50 @@
 
     // Vergangene Termine ausblenden
     var d = new Date(), today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-    document.querySelectorAll('.event[data-end]').forEach(function (e) { if (e.getAttribute('data-end') < today) { e.style.display = 'none'; } });
+    function hidePast() { document.querySelectorAll('.event[data-end]').forEach(function (e) { if (e.getAttribute('data-end') < today) { e.style.display = 'none'; } }); }
+    hidePast();
+
+    // Termine aus der Google-Tabelle (wie bei michaelsanderling.de). Schlaegt der Abruf fehl, bleibt die feste Liste im HTML stehen.
+    var FEED_URL = 'https://script.google.com/macros/s/AKfycbzhzLFHoBbDHB7BjQ_OQpl8zFOrezpsJ1ssEFGaMvMrcnYJ7_3VaoqzgQ2g665gR1OFYQ/exec';
+    var CACHE_URL = 'https://tvmartists.com/termine.php?a=mats';
+    var MM = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAI: 4, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OKT: 9, OCT: 9, NOV: 10, DEZ: 11, DEC: 11, MRZ: 2, 'MÄR': 2 };
+    function pdate(str) {
+        if (!str) { return null; }
+        var p = str.split('–')[0].split('-')[0].trim().split(' ').filter(Boolean);
+        if (p.length < 3) { return null; }
+        var dd = parseInt(p[0], 10), m = MM[p[1].toUpperCase().replace(/[.,]/g, '').slice(0, 3)], y = parseInt(p[p.length - 1], 10);
+        if (isNaN(dd) || m === undefined || isNaN(y)) { return null; }
+        return new Date(y, m, dd);
+    }
+    function lastDay(str) {
+        var all = (str || '').match(/\d{1,2}\s+[A-Za-zÄäÖöÜü]{3,4}\.?\s+\d{4}/g);
+        return all ? pdate(all[all.length - 1]) : null;
+    }
+    function iso(dt) { return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); }
+    function lines(t) { return (t || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean); }
+    function loadFeed() {
+        return fetch(CACHE_URL).then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
+            .then(function (t) { if (t.indexOf('###EVENT###') < 0) { throw 0; } return t; })
+            .catch(function () { return fetch(FEED_URL).then(function (r) { return r.text(); }); });
+    }
+    loadFeed().then(function (text) {
+        var evs = text.trim().split('###EVENT###').filter(function (b) { return b.trim() !== ''; }).map(function (b, i) {
+            var parts = b.trim().split('---').map(function (p) { return p.trim(); }), fl = parts[0].split('\n').map(function (s) { return s.trim(); });
+            return { date: fl[0] || '', city: fl[1] || '', venue: parts[1] || '', orchestra: parts[2] || '', program: parts[3] || '', pd: pdate(fl[0] || ''), i: i };
+        }).filter(function (e) { return e.city !== '' && e.pd !== null; }).sort(function (a, b) { return (a.pd - b.pd) || (a.i - b.i); });
+        if (!evs.length) { return; }
+        var sec = document.getElementById('calendar');
+        sec.querySelectorAll('.event').forEach(function (n) { n.parentNode.removeChild(n); });
+        evs.forEach(function (e) {
+            var a = document.createElement('article'), end = lastDay(e.date) || e.pd;
+            a.className = 'event'; a.setAttribute('data-end', iso(end));
+            [['d', e.date], [null, e.city]].concat(lines(e.venue).concat(lines(e.orchestra), lines(e.program)).map(function (l) { return [null, l]; })).forEach(function (x) {
+                var p = document.createElement('p'); if (x[0]) { p.className = x[0]; } p.textContent = x[1]; a.appendChild(p);
+            });
+            sec.appendChild(a);
+        });
+        hidePast();
+    }).catch(function () { /* feste Liste bleibt */ });
 
     // Videos: erst nach einem Klick von YouTube laden (ohne Cookies)
     document.querySelectorAll('.vid').forEach(function (v) {
