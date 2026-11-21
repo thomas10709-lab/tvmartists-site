@@ -27,7 +27,7 @@
       "url": "https://DOMAIN-TBD/"
     }
     </script>
-    <link rel="stylesheet" href="fonts/fonts.css?v=3">
+    <link rel="stylesheet" href="fonts/fonts.css?v=4">
     <style>
         *, *::before, *::after { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -98,15 +98,15 @@
         .lb button { position: absolute; top: 14px; right: 18px; background: none; border: 0; color: #fff; font-size: 38px; line-height: 1; cursor: pointer; }
 
         @media (max-width: 860px) {
-            body { font-size: 15.5px; line-height: 1.65; }
-            h2.title { font-size: 27px; margin-bottom: 34px; }
+            body { font-size: 17px; font-weight: 500; line-height: 1.6; }
+            h2.title { font-size: 30px; font-weight: 500; margin-bottom: 34px; }
             /* Hamburger-Menue */
             .site-nav { padding: 0 18px; }
             .site-nav .burger { display: block; }
             .site-nav ul, .site-nav.solid ul { position: fixed; z-index: 25; top: 0; left: 0; right: 0; bottom: 0; height: auto; background: rgba(9, 11, 14, .97); flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: none; }
             .site-nav.open ul { display: flex; }
-            .site-nav a, .site-nav.solid a { font-size: 22px; color: #fff; }
-            .site-nav .ig svg { width: 26px; height: 26px; }
+            .site-nav a, .site-nav.solid a { font-size: 24px; font-weight: 400; color: #fff; }
+            .site-nav .ig svg { width: 28px; height: 28px; }
             .site-nav .burger { position: fixed; z-index: 30; top: 6px; right: 8px; width: 44px; height: 44px; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; }
             .site-nav .burger span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: #fff; transition: transform .25s, opacity .2s, background .3s; }
             .site-nav .burger span:nth-child(1) { top: 15px; }
@@ -119,25 +119,25 @@
             .site-nav.open .burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
             .site-nav.solid { height: 54px; }
             /* Titelbild: dasselbe Foto wie am Desktop, Mats in der Mitte; Name in zwei Zeilen rechts */
-            .hero { background-image: url('images/hero.jpg?v=2'); background-position: 65% center; }
-            .hero h1 { position: absolute; right: 6%; top: 25%; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0; text-align: right; font-size: clamp(28px, 8.2vw, 34px); line-height: 1.05; }
+            .hero { background-image: url('images/hero-mobile.jpg?v=3'); background-position: center top; }
+            .hero h1 { position: absolute; right: 6%; top: 25%; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0; text-align: right; font-size: clamp(32px, 9.6vw, 40px); font-weight: 500; line-height: 1.05; }
             .about { padding: 40px 20px 14px; }
             .calendar { padding: 50px 20px 30px; }
             .event { margin-bottom: 30px; }
             .media { padding: 34px 14px 16px; }
             .videos { padding: 34px 14px 50px; }
             .vgrid { grid-template-columns: 1fr; gap: 18px; }
-            .vid .vt { font-size: 13px; top: auto; bottom: 28px; left: 16px; right: 16px; }
-            .vid .vn { font-size: 11px; left: 16px; bottom: 10px; }
+            .vid .vt { font-size: 14.5px; font-weight: 500; top: auto; bottom: 28px; left: 16px; right: 16px; }
+            .vid .vn { font-size: 12.5px; font-weight: 500; left: 16px; bottom: 10px; }
             .vid::before { background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .75) 100%); }
             .vid .vp { top: 40%; width: 60px; height: 42px; margin: -21px 0 0 -30px; }
             .vid .vp::after { left: 24px; top: 11px; border-left-width: 16px; border-top-width: 10px; border-bottom-width: 10px; }
             .contact { padding: 46px 20px 36px; }
             .contact .rule { margin: -46px auto 46px; }
-            .contact h3 { font-size: 22px; margin-bottom: 34px; }
-            .contact .name { font-size: 19px; }
-            .contact p { font-size: 14.5px; }
-            .foot { margin-top: 44px; font-size: 12.5px; }
+            .contact h3 { font-size: 25px; font-weight: 400; margin-bottom: 34px; }
+            .contact .name { font-size: 22px; }
+            .contact p { font-size: 16.5px; font-weight: 400; }
+            .foot { margin-top: 44px; font-size: 14px; }
             .foot .links { margin-top: 26px; }
         }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
