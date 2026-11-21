@@ -40,6 +40,7 @@
         .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 42px; height: 118px; align-items: center; transition: height .3s; }
         .site-nav a { text-decoration: none; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: 18.5px; letter-spacing: .02em; color: #fff; transition: color .3s; }
         .site-nav a:hover { opacity: .75; }
+        .site-nav .burger { display: none; }
         .site-nav .ig { display: block; line-height: 0; }
         .site-nav .ig svg { width: 22px; height: 22px; fill: currentColor; display: block; }
         .site-nav.solid { background: rgba(250, 251, 251, .96); box-shadow: 0 1px 0 rgba(0, 0, 0, .08); }
@@ -97,25 +98,47 @@
         .lb button { position: absolute; top: 14px; right: 18px; background: none; border: 0; color: #fff; font-size: 38px; line-height: 1; cursor: pointer; }
 
         @media (max-width: 860px) {
-            body { font-size: 18.5px; }
-            .site-nav { padding: 0 20px; }
-            .site-nav ul { height: 82px; gap: 22px; justify-content: center; }
-            .site-nav a { font-size: 16px; }
-            .site-nav.solid ul { height: 54px; }
-            .hero { background-image: url('images/hero-mobile.jpg?v=2'); background-position: center top; }
-            .hero h1 { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0 0 11vh 7%; font-size: clamp(36px, 11vw, 58px); } /* Handy-Foto hat keinen Schriftzug */
-            .about { padding: 48px 20px 20px; }
-            .calendar { padding: 60px 20px 40px; }
-            .event { margin-bottom: 38px; }
-            .media { padding: 40px 14px 20px; }
-            .videos { padding: 40px 14px 60px; }
+            body { font-size: 15.5px; line-height: 1.65; }
+            h2.title { font-size: 27px; margin-bottom: 34px; }
+            /* Hamburger-Menue */
+            .site-nav { padding: 0 18px; }
+            .site-nav .burger { display: block; }
+            .site-nav ul, .site-nav.solid ul { position: fixed; z-index: 25; top: 0; left: 0; right: 0; bottom: 0; height: auto; background: rgba(9, 11, 14, .97); flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: none; }
+            .site-nav.open ul { display: flex; }
+            .site-nav a, .site-nav.solid a { font-size: 22px; color: #fff; }
+            .site-nav .ig svg { width: 26px; height: 26px; }
+            .site-nav .burger { position: fixed; z-index: 30; top: 6px; right: 8px; width: 44px; height: 44px; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; }
+            .site-nav .burger span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: #fff; transition: transform .25s, opacity .2s, background .3s; }
+            .site-nav .burger span:nth-child(1) { top: 15px; }
+            .site-nav .burger span:nth-child(2) { top: 21px; }
+            .site-nav .burger span:nth-child(3) { top: 27px; }
+            .site-nav.solid .burger span { background: #000; }
+            .site-nav.open .burger span { background: #fff; }
+            .site-nav.open .burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+            .site-nav.open .burger span:nth-child(2) { opacity: 0; }
+            .site-nav.open .burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+            .site-nav.solid { height: 54px; }
+            /* Titelbild: dasselbe Foto wie am Desktop, Mats in der Mitte; Name in zwei Zeilen rechts */
+            .hero { background-image: url('images/hero.jpg?v=2'); background-position: 65% center; }
+            .hero h1 { position: absolute; right: 6%; top: 25%; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0; text-align: right; font-size: clamp(28px, 8.2vw, 34px); line-height: 1.05; }
+            .about { padding: 40px 20px 14px; }
+            .calendar { padding: 50px 20px 30px; }
+            .event { margin-bottom: 30px; }
+            .media { padding: 34px 14px 16px; }
+            .videos { padding: 34px 14px 50px; }
             .vgrid { grid-template-columns: 1fr; gap: 18px; }
-            .vid .vt { font-size: 16px; top: auto; bottom: 34px; }
+            .vid .vt { font-size: 13px; top: auto; bottom: 28px; left: 16px; right: 16px; }
+            .vid .vn { font-size: 11px; left: 16px; bottom: 10px; }
             .vid::before { background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .75) 100%); }
-            .vid .vp { top: 40%; }
-            .contact { padding: 54px 20px 44px; }
-            .contact .rule { margin: -54px auto 54px; }
-            .contact .name { font-size: 24px; }
+            .vid .vp { top: 40%; width: 60px; height: 42px; margin: -21px 0 0 -30px; }
+            .vid .vp::after { left: 24px; top: 11px; border-left-width: 16px; border-top-width: 10px; border-bottom-width: 10px; }
+            .contact { padding: 46px 20px 36px; }
+            .contact .rule { margin: -46px auto 46px; }
+            .contact h3 { font-size: 22px; margin-bottom: 34px; }
+            .contact .name { font-size: 19px; }
+            .contact p { font-size: 14.5px; }
+            .foot { margin-top: 44px; font-size: 12.5px; }
+            .foot .links { margin-top: 26px; }
         }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
@@ -123,7 +146,8 @@
 <body>
 
 <nav class="site-nav" id="nav" aria-label="Main">
-    <ul>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul id="menu">
         <li><a class="ig" href="https://www.instagram.com/mats.thiersch/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.2 5.8a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg></a></li>
         <!-- Facebook-Symbol: Adresse fehlt noch (auf der Wix-Seite vorhanden) – dann hier als weiteres <li> mit gleichem Aufbau einfuegen -->
         <li><a href="#about">About</a></li>
@@ -135,7 +159,7 @@
 
 <header class="hero" id="top">
     <!-- Titelfoto: images/hero.jpg (Desktop) und images/hero-mobile.jpg (Handy) – VORLAEUFIGE Fotos, durch die Originale gleichen Namens ersetzen -->
-    <h1>Mats Thiersch</h1>
+    <h1>Mats <br>Thiersch</h1>
 </header>
 
 <main>
@@ -217,6 +241,12 @@
     var nav = document.getElementById('nav'), hero = document.getElementById('top');
     function onScroll() { nav.classList.toggle('solid', window.scrollY > hero.offsetHeight * 0.7); }
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    // Hamburger-Menue (Handy): auf-/zuklappen, bei Klick auf einen Eintrag oder Esc schliessen
+    var burger = document.getElementById('burger'), menu = document.getElementById('menu');
+    function setMenu(o) { nav.classList.toggle('open', o); burger.setAttribute('aria-expanded', o ? 'true' : 'false'); document.documentElement.style.overflow = o ? 'hidden' : ''; }
+    burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) { setMenu(false); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); } });
 
     // Vergangene Termine ausblenden
     var d = new Date(), today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
