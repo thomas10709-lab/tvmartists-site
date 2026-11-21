@@ -64,7 +64,8 @@
         .event .ev-l, .event .ev-r { min-width: 0; }
         .event .d { font-variant-numeric: lining-nums; }
         .event .d, .event .o { font-weight: 700; }
-        .event .sp { height: 1.2em; }
+        .event .sp { height: .6em; }
+        .event .gap { height: 1.2em; }
 
         /* ---- Media (Galerie) ---- */
         .media { padding: 70px 28px 40px; }
@@ -182,24 +183,24 @@
 
 <section class="calendar" id="calendar" aria-label="Calendar">
     <h2 class="title">Calendar</h2>
-    <!-- Vergangene Termine blendet das Skript unten selbst aus (data-end = letzter Tag). -->
-    <article class="event" data-end="2026-06-12"><div class="ev-l"><p class="d">09 Jun 2026 – 12 Jun 2026</p><p>Zurich, Switzerland</p></div><div class="ev-r"><p class="o">Tonhalle-Orchester Zürich</p><p class="sp"></p><p>Conductors Academy with Paavo Järvi</p></div></article>
-    <article class="event" data-end="2026-06-12"><div class="ev-l"><p class="d">12 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
-    <article class="event" data-end="2026-06-13"><div class="ev-l"><p class="d">13 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
+    <!-- Das Skript unten blendet Termine vor dem Stichtag 01.06.2026 aus (data-end = letzter Tag). -->
+    <article class="event" data-end="2026-06-12"><div class="ev-l"><p class="d">09 Jun 2026 – 12 Jun 2026</p><p>Zurich, Switzerland</p></div><div class="ev-r"><p class="o">Tonhalle-Orchester Zürich</p><p class="gap"></p><p class="sp"></p><p>Conductors Academy with Paavo Järvi</p></div></article>
+    <article class="event" data-end="2026-06-12"><div class="ev-l"><p class="d">12 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="gap"></p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
+    <article class="event" data-end="2026-06-13"><div class="ev-l"><p class="d">13 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="gap"></p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
     <article class="event" data-end="2026-07-17"><div class="ev-l"><p class="d">04 Jul 2026 – 17 Jul 2026</p><p>Tanglewood, MA, USA</p><p>Tanglewood Music Center</p></div><div class="ev-r"><p>Conducting Seminar</p></div></article>
-    <article class="event" data-end="2026-10-31"><div class="ev-l"><p class="d">31 Oct 2026</p><p>Berlin, Germany</p><p>Philharmonie</p></div><div class="ev-r"><p class="o">Karajan-Akademie der Berliner Philharmoniker</p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p></div></article>
-    <article class="event" data-end="2026-11-13"><div class="ev-l"><p class="d">07 Nov 2026 – 13 Nov 2026</p><p>Geneva, Switzerland</p></div><div class="ev-r"><p class="o">Concours de Genève</p><p class="sp"></p><p>Conducting Competition</p></div></article>
+    <article class="event" data-end="2026-10-31"><div class="ev-l"><p class="d">31 Oct 2026</p><p>Berlin, Germany</p><p>Philharmonie</p></div><div class="ev-r"><p class="o">Karajan-Akademie der Berliner Philharmoniker</p><p class="gap"></p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p></div></article>
+    <article class="event" data-end="2026-11-13"><div class="ev-l"><p class="d">07 Nov 2026 – 13 Nov 2026</p><p>Geneva, Switzerland</p></div><div class="ev-r"><p class="o">Concours de Genève</p><p class="gap"></p><p class="sp"></p><p>Conducting Competition</p></div></article>
     <article class="event" data-end="2027-01-17"><div class="ev-l"><p class="d">15 Jan 2027 – 17 Jan 2027</p><p>Berlin, Germany</p><p>Konzerthaus Berlin</p></div><div class="ev-r"><p class="o">Konzerthausorchester Berlin</p><p>Mendelssohn Competition</p><p class="sp"></p><p>Mendelssohn: Overture Schöne Melusine</p><p>Cello Concertos of Shostakovich, Elgar, Schumann, Haydn</p></div></article>
-    <article class="event" data-end="2027-02-09"><div class="ev-l"><p class="d">18 Jan 2027 – 09 Feb 2027</p><p>Dijon, France</p></div><div class="ev-r"><p class="o">Opéra de Dijon</p><p class="sp"></p><p>Strauss: Ariadne auf Naxos</p><p>(Assistant Conductor)</p></div></article>
-    <article class="event" data-end="2027-03-11"><div class="ev-l"><p class="d">11 Mar 2027</p><p>Rotterdam, Netherlands</p></div><div class="ev-r"><p class="o">Rotterdam Philharmonic</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
-    <article class="event" data-end="2027-04-16"><div class="ev-l"><p class="d">16 Apr 2027</p><p>Porto, Portugal</p><p>Casa da Música</p></div><div class="ev-r"><p class="o">Orquestra Sinfónica do Porto</p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p><p>Prokofiev: Romeo &amp; Juliet Suite No. 2</p></div></article>
-    <article class="event" data-end="2027-04-18"><div class="ev-l"><p class="d">18 Apr 2027</p><p>Porto, Portugal</p><p>Casa da Música</p></div><div class="ev-r"><p class="o">Orquestra Sinfónica do Porto</p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p><p>Prokofiev: Romeo &amp; Juliet Suite No. 2</p></div></article>
-    <article class="event" data-end="2027-04-23"><div class="ev-l"><p class="d">23 Apr 2027</p><p>Hanover, Germany</p></div><div class="ev-r"><p class="o">NDR Radiophilharmonie</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
-    <article class="event" data-end="2028-01-14"><div class="ev-l"><p class="d">14 Jan 2028</p><p>Madrid, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de RTVE</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
-    <article class="event" data-end="2028-10-21"><div class="ev-l"><p class="d">21 Oct 2028</p><p>Galicia, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de Galicia</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
-    <article class="event" data-end="2028-10-22"><div class="ev-l"><p class="d">22 Oct 2028</p><p>Galicia, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de Galicia</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
-    <article class="event" data-end="2029-01-27"><div class="ev-l"><p class="d">27 Jan 2029</p><p>Bregenz, Austria</p></div><div class="ev-r"><p class="o">Symphonieorchester Vorarlberg</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
-    <article class="event" data-end="2029-01-28"><div class="ev-l"><p class="d">28 Jan 2029</p><p>Bregenz, Austria</p></div><div class="ev-r"><p class="o">Symphonieorchester Vorarlberg</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2027-02-09"><div class="ev-l"><p class="d">18 Jan 2027 – 09 Feb 2027</p><p>Dijon, France</p></div><div class="ev-r"><p class="o">Opéra de Dijon</p><p class="gap"></p><p class="sp"></p><p>Strauss: Ariadne auf Naxos</p><p>(Assistant Conductor)</p></div></article>
+    <article class="event" data-end="2027-03-11"><div class="ev-l"><p class="d">11 Mar 2027</p><p>Rotterdam, Netherlands</p></div><div class="ev-r"><p class="o">Rotterdam Philharmonic</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2027-04-16"><div class="ev-l"><p class="d">16 Apr 2027</p><p>Porto, Portugal</p><p>Casa da Música</p></div><div class="ev-r"><p class="o">Orquestra Sinfónica do Porto</p><p class="gap"></p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p><p>Prokofiev: Romeo &amp; Juliet Suite No. 2</p></div></article>
+    <article class="event" data-end="2027-04-18"><div class="ev-l"><p class="d">18 Apr 2027</p><p>Porto, Portugal</p><p>Casa da Música</p></div><div class="ev-r"><p class="o">Orquestra Sinfónica do Porto</p><p class="gap"></p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p><p>Prokofiev: Romeo &amp; Juliet Suite No. 2</p></div></article>
+    <article class="event" data-end="2027-04-23"><div class="ev-l"><p class="d">23 Apr 2027</p><p>Hanover, Germany</p></div><div class="ev-r"><p class="o">NDR Radiophilharmonie</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2028-01-14"><div class="ev-l"><p class="d">14 Jan 2028</p><p>Madrid, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de RTVE</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2028-10-21"><div class="ev-l"><p class="d">21 Oct 2028</p><p>Galicia, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de Galicia</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2028-10-22"><div class="ev-l"><p class="d">22 Oct 2028</p><p>Galicia, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de Galicia</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2029-01-27"><div class="ev-l"><p class="d">27 Jan 2029</p><p>Bregenz, Austria</p></div><div class="ev-r"><p class="o">Symphonieorchester Vorarlberg</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+    <article class="event" data-end="2029-01-28"><div class="ev-l"><p class="d">28 Jan 2029</p><p>Bregenz, Austria</p></div><div class="ev-r"><p class="o">Symphonieorchester Vorarlberg</p><p class="gap"></p><p class="sp"></p><p>Program t.b.a.</p></div></article>
 </section>
 
 <section class="media" id="media" aria-label="Media">
@@ -269,7 +270,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); } });
 
     // Vergangene Termine ausblenden
-    var d = new Date(), today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    var today = '2026-06-01';   // Termine ab diesem Datum werden angezeigt (Stichtag fest; vorher: heutiges Datum)
     function hidePast() { document.querySelectorAll('.event[data-end]').forEach(function (e) { if (e.getAttribute('data-end') < today) { e.style.display = 'none'; } }); }
     hidePast();
 
@@ -314,7 +315,8 @@
             L.className = 'ev-l'; R.className = 'ev-r';
             function add(box, text, cls) { var p = document.createElement('p'); if (cls) { p.className = cls; } p.textContent = text; box.appendChild(p); }
             add(L, e.date, 'd'); add(L, e.city); lines(e.venue).forEach(function (l) { add(L, l); });
-            orch.forEach(function (l, k) { add(R, l, k === 0 ? 'o' : null); });
+            // Orchester fett; darunter Solist (Zeile bleibt frei, wenn keiner genannt ist); dann eine halbe Zeile Abstand; dann Repertoire
+            if (orch.length) { orch.forEach(function (l, k) { add(R, l, k === 0 ? 'o' : null); }); if (orch.length === 1 && prog.length) { var gap = document.createElement('p'); gap.className = 'gap'; R.appendChild(gap); } }
             if (prog.length) { if (orch.length) { var sp = document.createElement('p'); sp.className = 'sp'; R.appendChild(sp); } prog.forEach(function (l) { add(R, l); }); }
             a.appendChild(L); a.appendChild(R);
             sec.appendChild(a);
