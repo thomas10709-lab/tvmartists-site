@@ -1,9 +1,6 @@
-# ENTWURF: Dieser Ordner liegt im Repository von tvmartists.com und wuerde dort sonst oeffentlich erreichbar sein.
-# Die Sperre verhindert das. Auf dem Server der eigenen Domain gilt stattdessen htaccess.prod (siehe LIESMICH.md und den Workflow deploy-thiersch.yml).
-<IfModule mod_authz_core.c>
-  Require all denied
-</IfModule>
-<IfModule !mod_authz_core.c>
-  Order deny,allow
-  Deny from all
+# ENTWURF: Dieser Ordner liegt im Repository von tvmartists.com und ist dort unter /thiersch-site/ per Link erreichbar.
+# Die Seite bleibt aus Suchmaschinen heraus (zusaetzlich zum noindex im HTML). Auf dem Server der eigenen Domain gilt htaccess.prod
+# (siehe LIESMICH.md und den Workflow deploy-thiersch.yml).
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
 </IfModule>
