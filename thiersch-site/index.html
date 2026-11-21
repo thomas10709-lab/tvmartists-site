@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mats Thiersch – Conductor</title>
+    <meta name="description" content="Mats Thiersch (b. 2003) is a German conductor, First Prize winner of the 80th Concours de Genève (2026) and assistant conductor of the Berliner Philharmoniker. Biography, calendar, photos, videos and management contact.">
+    <!-- ENTWURF: Solange die Domain nicht feststeht, steht hier DOMAIN-TBD. Beim Start der Seite durch die echte Adresse ersetzen (siehe LIESMICH.md); der Upload-Workflow laedt nichts hoch, solange DOMAIN-TBD im Text steht. -->
+    <link rel="canonical" href="https://DOMAIN-TBD/">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Mats Thiersch – Conductor">
+    <meta property="og:description" content="German conductor, First Prize winner of the 80th Concours de Genève (2026), assistant conductor of the Berliner Philharmoniker.">
+    <meta property="og:url" content="https://DOMAIN-TBD/">
+    <meta property="og:image" content="https://DOMAIN-TBD/images/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0b0e13">
+    <meta name="robots" content="noindex, nofollow"><!-- ENTWURF: beim Start der Seite entfernen (siehe LIESMICH.md) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mats Thiersch",
+      "jobTitle": "Conductor",
+      "nationality": "German",
+      "birthDate": "2003",
+      "sameAs": ["https://www.instagram.com/mats.thiersch/"],
+      "url": "https://DOMAIN-TBD/"
+    }
+    </script>
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; background: #fafbfb; color: #000; font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 19px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; }
+        h2.title { font-weight: 400; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.15; text-align: center; margin: 0 0 56px; }
+
+        /* ---- Menue (liegt ueber dem Titelbild, nach dem Scrollen eine feine helle Leiste) ---- */
+        .site-nav { position: fixed; z-index: 20; top: 0; left: 0; right: 0; padding: 0 22%; transition: background .3s, box-shadow .3s; }
+        .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 42px; height: 118px; align-items: center; transition: height .3s; }
+        .site-nav a { text-decoration: none; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: 20px; letter-spacing: .02em; color: #fff; transition: color .3s; }
+        .site-nav a:hover { opacity: .75; }
+        .site-nav.solid { background: rgba(250, 251, 251, .96); box-shadow: 0 1px 0 rgba(0, 0, 0, .08); }
+        .site-nav.solid ul { height: 62px; }
+        .site-nav.solid a { color: #000; }
+
+        /* ---- Titelbild ---- */
+        .hero { position: relative; min-height: 100vh; min-height: 100svh; background: #0b0e13 url('images/hero.jpg') center / cover no-repeat; display: flex; align-items: flex-end; }
+        .hero picture, .hero img { display: none; }
+        .hero h1 { margin: 0 0 14vh 18%; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: clamp(46px, 6.4vw, 110px); line-height: 1.05; letter-spacing: .01em; color: #fff; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+
+        /* ---- About ---- */
+        .about { max-width: 1060px; margin: 0 auto; padding: 78px 28px 40px; }
+        .about p { margin: 0 0 1.5em; }
+
+        /* ---- Calendar ---- */
+        .calendar { padding: 90px 28px 60px; text-align: center; }
+        .event { margin: 0 auto 50px; max-width: 720px; }
+        .event p { margin: 0; }
+        .event .d { font-variant-numeric: lining-nums; }
+
+        /* ---- Media (Galerie) ---- */
+        .media { padding: 70px 28px 40px; }
+        .gallery { max-width: 1060px; margin: 0 auto; }
+        .gal-row { display: flex; gap: 2.4%; margin-bottom: 2.4%; }
+        .gal { flex: var(--r) 1 0; min-width: 0; margin: 0; padding: 0; border: 0; background: none; cursor: zoom-in; aspect-ratio: var(--r); overflow: hidden; }
+        .gal img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+        /* ---- Videos (ein Klick laedt das Video erst dann von YouTube) ---- */
+        .videos { padding: 60px 28px 90px; }
+        .vgrid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        .vid { position: relative; display: block; aspect-ratio: 16 / 9; background: #11151c; color: #fff; text-decoration: none; border: 0; padding: 0; cursor: pointer; overflow: hidden; font: inherit; text-align: left; }
+        .vid .vt { position: absolute; left: 22px; right: 22px; top: 18px; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 18px; line-height: 1.3; }
+        .vid .vp { position: absolute; left: 50%; top: 52%; width: 76px; height: 52px; margin: -26px 0 0 -38px; border-radius: 14px; background: #e00; }
+        .vid .vp::after { content: ""; position: absolute; left: 31px; top: 14px; border-left: 20px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+        .vid .vn { position: absolute; left: 22px; bottom: 14px; font-family: 'Jost', sans-serif; font-size: 14px; opacity: .8; }
+        .vid:hover .vp { background: #f22; }
+        .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+        /* ---- Contact / Fusszeile ---- */
+        .contact { background: #eff3f5; padding: 70px 28px 56px; text-align: center; }
+        .contact .rule { width: min(920px, 90%); height: 1px; background: #111; margin: -70px auto 70px; }
+        .contact h3 { font-weight: 400; font-size: clamp(34px, 4.2vw, 54px); margin: 0 0 56px; }
+        .contact .name { font-size: 34px; line-height: 1.2; margin: 0 0 8px; }
+        .contact p { margin: 0 0 1.6em; }
+        .foot { margin-top: 70px; font-size: 15px; line-height: 1.7; }
+        .foot .links { margin-top: 38px; }
+        .social { display: inline-flex; gap: 22px; margin-top: 10px; }
+        .social svg { width: 30px; height: 30px; fill: #000; display: block; }
+
+        /* ---- Grossbild ---- */
+        .lb { position: fixed; z-index: 50; inset: 0; background: rgba(8, 10, 14, .94); display: none; align-items: center; justify-content: center; padding: 28px; }
+        .lb.open { display: flex; }
+        .lb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .lb button { position: absolute; top: 14px; right: 18px; background: none; border: 0; color: #fff; font-size: 38px; line-height: 1; cursor: pointer; }
+
+        @media (max-width: 860px) {
+            body { font-size: 17.5px; }
+            .site-nav { padding: 0 20px; }
+            .site-nav ul { height: 82px; gap: 22px; justify-content: center; }
+            .site-nav a { font-size: 17px; }
+            .site-nav.solid ul { height: 54px; }
+            .hero { background-image: url('images/hero-mobile.jpg'); background-position: center top; }
+            .hero h1 { margin: 0 0 11vh 7%; font-size: clamp(40px, 12vw, 64px); }
+            .about { padding: 48px 20px 20px; }
+            .calendar { padding: 60px 20px 40px; }
+            .event { margin-bottom: 38px; }
+            .media { padding: 40px 14px 20px; }
+            .videos { padding: 40px 14px 60px; }
+            .vgrid { grid-template-columns: 1fr; gap: 18px; }
+            .contact { padding: 54px 20px 44px; }
+            .contact .rule { margin: -54px auto 54px; }
+            .contact .name { font-size: 28px; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    </style>
+</head>
+<body>
+
+<nav class="site-nav" id="nav" aria-label="Main">
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<header class="hero" id="top">
+    <!-- Titelfoto: images/hero.jpg (Desktop) und images/hero-mobile.jpg (Handy) – VORLAEUFIGE Fotos, durch die Originale gleichen Namens ersetzen -->
+    <h1>Mats Thiersch</h1>
+</header>
+
+<main>
+<section class="about" id="about" aria-label="About">
+    <p>Mats Thiersch (b. 2003) is a German conductor and since September 2026 assistant conductor with the Berliner Philharmoniker for Kirill Petrenko and conducting fellow in the Karajan-Academy. Despite his young age, he has already collaborated with several prestigious ensembles, including the Orchestre National de Lille, the Deutsche Radio Philharmonie Saarbrücken, the Ensemble Intercontemporain, and the Gstaad Festival Orchestra.</p>
+    <p>Future highlights include debuts with the Konzerthausorchester Berlin, the Rotterdam Philharmonic, the NDR Radiophilharmonie, the RTVE Symphony Orchestra in Madrid, the Orquesta Sinfónica de Galicia, and the Orquestra Sinfónica do Porto. He will also serve as assistant conductor to Joseph Bastian for Strauss’s Ariadne auf Naxos at the Opéra de Dijon. Most recently, in June 2026, he took part in Paavo Järvi’s Conductors’ Academy with the Tonhalle-Orchester Zürich, followed by a conducting-seminar fellowship at Tanglewood with the Boston Symphony Orchestra later that summer.</p>
+    <p>Thiersch began his musical journey at the age of six with the violin, later expanding his studies to include piano and composition. In 2021, he began studying composition under Miroslav Srnka at the University of Music and Dance Cologne (HfMT Köln). His original works have been performed by renowned groups such as Ensemble Musikfabrik and have earned him prestigious accolades, including the Composition Prize of the German Orchestra Foundation (Deutsche Orchester-Stiftung).</p>
+    <!-- ENTWURF: Der folgende Absatz ist gegenueber der Wix-Seite AKTUALISIERT: dort stand noch "He is currently one of the six semi-finalists in the 80th Concours de Genève". Bitte freigeben. -->
+    <p>In 2024, he was invited to the renowned Gstaad Conducting Academy, where he studied with Johannes Schlaefli and Jaap van Zweden. In November 2026 he won First Prize in the conducting competition of the 80th Concours de Genève, the first conducting laureate since Alan Gilbert in 1994. Since 2023, Thiersch has been continuing his conducting studies at the Conservatoire National Supérieur de Musique et de Danse de Paris in the class of Alain Altinoglu and from 2024 to 2026, served as Music Director of the Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris). He has gained additional artistic insights in masterclasses with distinguished conductors such as Daniele Gatti, Mikko Franck, and Alexandre Bloch.</p>
+</section>
+
+<section class="calendar" id="calendar" aria-label="Calendar">
+    <h2 class="title">Calendar</h2>
+    <!-- Vergangene Termine blendet das Skript unten selbst aus (data-end = letzter Tag). -->
+    <article class="event" data-end="2026-06-12"><p class="d">09.06. – 12.06.2026</p><p>Zurich, Switzerland</p><p>Tonhalle-Orchester Zürich</p><p>Conductors Academy with Paavo Järvi</p></article>
+    <article class="event" data-end="2026-06-13"><p class="d">12./13.06.2026</p><p>Paris, France</p><p>Chœur et Orchestre des Grandes Ecoles de Paris</p><p>Berlioz – Symphonie Fantastique</p></article>
+    <article class="event" data-end="2026-07-17"><p class="d">04.–17.07.2026</p><p>Tanglewood, MA, USA</p><p>Tanglewood Music Center</p><p>Conducting Seminar</p></article>
+    <article class="event" data-end="2026-10-31"><p class="d">31.10.2026</p><p>Berlin, Germany</p><p>Philharmonie</p><p>Karajan-Akademie der Berliner Philharmoniker</p><p>Mozart: Symphony No. 40 KV 550</p></article>
+    <article class="event" data-end="2026-11-13"><p class="d">07.–13.11.2026</p><p>Geneva, Switzerland</p><p>Concours de Genève</p><p>Conducting Competition</p></article>
+    <article class="event" data-end="2027-01-17"><p class="d">15.–17.01.2027</p><p>Berlin, Germany</p><p>Konzerthausorchester Berlin</p><p>Mendelssohn Competition</p><p>Mendelssohn: Overture Schöne Melusine</p><p>Cello Concertos of</p><p>Shostakovich, Elgar, Schumann, Haydn</p></article>
+    <article class="event" data-end="2027-02-09"><p class="d">18.01.–09.02.2027</p><p>Opéra de Dijon</p><p>Strauss: Ariane à Naxos</p><p>(Assistant Conductor)</p></article>
+    <article class="event" data-end="2027-03-11"><p class="d">11.03.2027</p><p>Rotterdam, Netherlands</p><p>Rotterdam Philharmonic</p><p>Program t.b.a.</p></article>
+    <article class="event" data-end="2027-04-16"><p class="d">16.04.2027</p><p>Porto, Portugal</p><p>Casa da Musica</p><p>Orquestra Sinfónica do Porto</p><p>Mozart: Symphony No. 40 KV 550</p><p>Prokofjew: Romeo &amp; Juliet Suite No. 2</p></article>
+    <article class="event" data-end="2027-04-18"><p class="d">18.04.2027</p><p>Porto, Portugal</p><p>Casa da Musica</p><p>Orquestra Sinfónica do Porto</p><p>Mozart: Symphony No. 40 KV 550</p><p>Prokofjew: Romeo &amp; Juliet Suite No. 2</p></article>
+    <article class="event" data-end="2027-04-23"><p class="d">23.04.2027</p><p>Hanover, Germany</p><p>NDR Radio Philharmonic Hanover</p><p>Program t.b.a.</p></article>
+    <article class="event" data-end="2028-01-14"><p class="d">14.01.2028</p><p>Madrid, Spain</p><p>Orquesta Sinfónica de RTVE</p><p>Program t.b.a.</p></article>
+    <article class="event" data-end="2028-10-22"><p class="d">21./22.10.2028</p><p>Orquesta Sinfónica de Galicia</p><p>Program t.b.a.</p></article>
+    <article class="event" data-end="2029-01-28"><p class="d">27./28.01.2029</p><p>Bregenz, Austria</p><p>Symphonieorchester Vorarlberg</p><p>Program t.b.a.</p></article>
+</section>
+
+<section class="media" id="media" aria-label="Media">
+    <h2 class="title">Media</h2>
+    <!-- Fotos: images/gallery-01.jpg … gallery-10.jpg (VORLAEUFIGE Platzhalter) – durch die Originale gleichen Namens ersetzen; die Seitenverhaeltnisse (--r = Breite/Hoehe) bei Bedarf anpassen. -->
+    <div class="gallery" id="gallery">
+        <div class="gal-row">
+            <button class="gal" style="--r:0.71" type="button" aria-label="Enlarge photo 1"><img src="images/gallery-01.jpg" alt="Mats Thiersch, photo 1" loading="lazy"></button>
+            <button class="gal" style="--r:1.41" type="button" aria-label="Enlarge photo 2"><img src="images/gallery-02.jpg" alt="Mats Thiersch, photo 2" loading="lazy"></button>
+        </div>
+        <div class="gal-row">
+            <button class="gal" style="--r:1.26" type="button" aria-label="Enlarge photo 3"><img src="images/gallery-03.jpg" alt="Mats Thiersch, photo 3" loading="lazy"></button>
+            <button class="gal" style="--r:0.63" type="button" aria-label="Enlarge photo 4"><img src="images/gallery-04.jpg" alt="Mats Thiersch, photo 4" loading="lazy"></button>
+        </div>
+        <div class="gal-row">
+            <button class="gal" style="--r:0.71" type="button" aria-label="Enlarge photo 5"><img src="images/gallery-05.jpg" alt="Mats Thiersch, photo 5" loading="lazy"></button>
+            <button class="gal" style="--r:1.43" type="button" aria-label="Enlarge photo 6"><img src="images/gallery-06.jpg" alt="Mats Thiersch, photo 6" loading="lazy"></button>
+        </div>
+        <div class="gal-row">
+            <button class="gal" style="--r:1.41" type="button" aria-label="Enlarge photo 7"><img src="images/gallery-07.jpg" alt="Mats Thiersch, photo 7" loading="lazy"></button>
+            <button class="gal" style="--r:0.71" type="button" aria-label="Enlarge photo 8"><img src="images/gallery-08.jpg" alt="Mats Thiersch, photo 8" loading="lazy"></button>
+        </div>
+        <div class="gal-row">
+            <button class="gal" style="--r:0.63" type="button" aria-label="Enlarge photo 9"><img src="images/gallery-09.jpg" alt="Mats Thiersch, photo 9" loading="lazy"></button>
+            <button class="gal" style="--r:1.27" type="button" aria-label="Enlarge photo 10"><img src="images/gallery-10.jpg" alt="Mats Thiersch, photo 10" loading="lazy"></button>
+        </div>
+    </div>
+</section>
+
+<section class="videos" aria-label="Videos">
+    <h2 class="title">Videos</h2>
+    <!-- Videos: data-yt = die YouTube-Video-ID (der Teil nach v= in der Adresse). Ohne ID fuehrt die Karte zur YouTube-Playlist. Das Video wird erst nach einem Klick (youtube-nocookie) geladen. -->
+    <div class="vgrid">
+        <a class="vid" data-yt="" data-title="Mats Thiersch – Gstaad Festival Orchestra" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Gstaad Festival Orchestra</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
+        <a class="vid" data-yt="" data-title="Mats Thiersch – Orchestre des Lauréats" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Orchestre des Lauréats du Concours de Genève (1)</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
+        <a class="vid" data-yt="" data-title="Mats Thiersch – Orchestre des Lauréats" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Orchestre des Lauréats du Concours de Genève (2)</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
+        <a class="vid" data-yt="" data-title="Mats Thiersch – Interview – Concours de Genève" href="https://www.youtube.com/playlist?list=PLrmAgOdd1GnhvRiwyvkAi5HsBh4Ne65mi" target="_blank" rel="noopener"><span class="vt">Mats Thiersch – Interview – Concours de Genève</span><span class="vp"></span><span class="vn">Watch on YouTube</span></a>
+    </div>
+</section>
+</main>
+
+<footer class="contact" id="contact">
+    <div class="rule"></div>
+    <h3>General Management</h3>
+    <p class="name">Thomas Voigt</p>
+    <p><a href="mailto:thomas@tvmartists.com">thomas@tvmartists.com</a></p>
+    <p>TVM artists<br>Kurfürstendamm 157-158<br>10709 Berlin</p>
+    <p><a href="https://www.tvmartists.com">www.tvmartists.com</a></p>
+    <div class="foot">
+        <div>Official Website of Mats Thiersch © 2026<br>Photo Credit © Marco Borggreve</div>
+        <div class="links"><a href="imprint.html">Imprint</a></div>
+        <div class="social">
+            <a href="https://www.instagram.com/mats.thiersch/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.2 5.8a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg></a>
+            <!-- Facebook-Symbol: Adresse fehlt noch (auf der Wix-Seite vorhanden) – dann hier einfuegen:
+            <a href="https://www.facebook.com/…" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a> -->
+        </div>
+    </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo"><button type="button" id="lbClose" aria-label="Close">×</button><img alt="" id="lbImg"></div>
+
+<script>
+(function () {
+    // Menue wird nach dem Titelbild zu einer hellen Leiste
+    var nav = document.getElementById('nav'), hero = document.getElementById('top');
+    function onScroll() { nav.classList.toggle('solid', window.scrollY > hero.offsetHeight * 0.7); }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // Vergangene Termine ausblenden
+    var d = new Date(), today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    document.querySelectorAll('.event[data-end]').forEach(function (e) { if (e.getAttribute('data-end') < today) { e.style.display = 'none'; } });
+
+    // Videos: erst nach einem Klick von YouTube laden (ohne Cookies)
+    document.querySelectorAll('.vid').forEach(function (v) {
+        var id = (v.getAttribute('data-yt') || '').trim();
+        if (!id) { return; }
+        v.removeAttribute('href'); v.removeAttribute('target'); v.setAttribute('role', 'button'); v.setAttribute('tabindex', '0');
+        function load(ev) { if (ev && ev.type === 'keydown' && ev.key !== 'Enter' && ev.key !== ' ') { return; } if (ev) { ev.preventDefault(); }
+            var f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = v.getAttribute('data-title') || 'Video';
+            v.innerHTML = ''; v.appendChild(f); }
+        v.addEventListener('click', load); v.addEventListener('keydown', load);
+    });
+
+    // Fotos vergroessern
+    var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+    document.querySelectorAll('.gal').forEach(function (b) { b.addEventListener('click', function () { var i = b.querySelector('img'); lbImg.src = i.src; lbImg.alt = i.alt; lb.classList.add('open'); }); });
+    function closeLb() { lb.classList.remove('open'); lbImg.removeAttribute('src'); }
+    lb.addEventListener('click', closeLb);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeLb(); } });
+})();
+</script>
+</body>
+</html>

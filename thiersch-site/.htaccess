@@ -1,0 +1,9 @@
+# ENTWURF: Dieser Ordner liegt im Repository von tvmartists.com und wuerde dort sonst oeffentlich erreichbar sein.
+# Die Sperre verhindert das. Auf dem Server der eigenen Domain gilt stattdessen htaccess.prod (siehe LIESMICH.md und den Workflow deploy-thiersch.yml).
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order deny,allow
+  Deny from all
+</IfModule>
