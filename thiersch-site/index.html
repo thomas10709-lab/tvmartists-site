@@ -36,7 +36,7 @@
         h2.title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; text-align: center; margin: 0 0 56px; }
 
         /* ---- Menue (liegt ueber dem Titelbild, nach dem Scrollen eine feine helle Leiste) ---- */
-        .site-nav { position: fixed; z-index: 20; top: 0; left: 0; right: 0; padding: 0 22%; transition: background .3s, box-shadow .3s; }
+        .site-nav { position: fixed; z-index: 20; top: 0; left: 0; right: 0; padding: 0 22%; /* linke Kante = linke Kante des Namens im Titelfoto (Foto fuellt den Bildschirm, mittig beschnitten) */ padding-left: calc(min(17.6vw, 50vw - 57.6vh) - 2px); padding-left: calc(min(17.6vw, 50vw - 57.6svh) - 2px); transition: background .3s, box-shadow .3s; }
         .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 42px; height: 118px; align-items: center; transition: height .3s; }
         .site-nav a { text-decoration: none; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: 18.5px; letter-spacing: .02em; color: #fff; transition: color .3s; }
         .site-nav a:hover { opacity: .75; }
