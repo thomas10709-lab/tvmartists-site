@@ -372,6 +372,15 @@
         .container-content b {
             font-weight: 500;
         }
+        /* Calendar unter der Biographie: zwei Spalten, Schrift wie die Biographie (Raleway Light) */
+        .container-content .cal2 { margin-top: 4px; -webkit-hyphens: manual; -ms-hyphens: manual; hyphens: manual; line-height: 1.3; }
+        .cal2 .event { display: grid; grid-template-columns: 1fr 1.3fr; gap: 0 36px; margin: 0 0 26px 0; text-align: left; }
+        .cal2 .event p { margin: 0; }
+        .cal2 .ev-l, .cal2 .ev-r { min-width: 0; }
+        .cal2 .d { font-variant-numeric: lining-nums; }
+        .cal2 .d, .cal2 .o { font-weight: 600; }
+        .cal2 .sp { height: 0.6em; }
+        @media (max-width: 600px) { .cal2 .event { grid-template-columns: 39% 1fr; gap: 0 12px; margin-bottom: 20px; font-size: 14.5px; } }
         .container-content .para-gap {
             display: block;
             height: 0.85em;   /* halbe Zeile statt voller Leerzeile */
@@ -699,6 +708,30 @@
 
             Thiersch began his musical journey at the age of six with the violin, later expanding his studies to include piano and composition. He completed his composition studies with Miroslav Srnka at the University of Music and Dance Cologne (HfMT Köln) and his conducting studies at the Conservatoire National Supérieur de Musique et de Danse de Paris in the class of Alain Altinoglu. His original works have been performed by renowned groups such as Ensemble Musikfabrik and have earned him prestigious accolades, including the Composition Prize of the German Orchestra Foundation (Deutsche Orchester-Stiftung). From 2024 to 2026, he served as Music Director of the Orchestre et Chœur Symphonique du COGE (Chœurs et Orchestres des Grandes Écoles de Paris), and he has gained additional artistic insights in masterclasses with distinguished conductors such as Daniele Gatti, Mikko Franck, and Alexandre Bloch.<br><span class="para-gap"></span>
 
+            <br><span class="para-gap"></span>
+
+            <strong>Calendar</strong><br><span class="para-gap"></span>
+
+            <div class="cal2" id="mats-cal">
+                    <article class="event"><div class="ev-l"><p class="d">09 Jun 2026 – 12 Jun 2026</p><p>Zurich, Switzerland</p></div><div class="ev-r"><p class="o">Tonhalle-Orchester Zürich</p><p class="sp"></p><p>Conductors Academy with Paavo Järvi</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">12 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">13 Jun 2026</p><p>Paris, France</p></div><div class="ev-r"><p class="o">Chœur et Orchestre des Grandes Ecoles de Paris</p><p class="sp"></p><p>Berlioz: Symphonie Fantastique</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">04 Jul 2026 – 17 Jul 2026</p><p>Tanglewood, MA, USA</p><p>Tanglewood Music Center</p></div><div class="ev-r"><p>Conducting Seminar</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">31 Oct 2026</p><p>Berlin, Germany</p><p>Philharmonie</p></div><div class="ev-r"><p class="o">Karajan-Akademie der Berliner Philharmoniker</p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">07 Nov 2026 – 13 Nov 2026</p><p>Geneva, Switzerland</p></div><div class="ev-r"><p class="o">Concours de Genève</p><p class="sp"></p><p>Conducting Competition</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">15 Jan 2027 – 17 Jan 2027</p><p>Berlin, Germany</p><p>Konzerthaus Berlin</p></div><div class="ev-r"><p class="o">Konzerthausorchester Berlin</p><p>Mendelssohn Competition</p><p class="sp"></p><p>Mendelssohn: Overture Schöne Melusine</p><p>Cello Concertos of Shostakovich, Elgar, Schumann, Haydn</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">18 Jan 2027 – 09 Feb 2027</p><p>Dijon, France</p></div><div class="ev-r"><p class="o">Opéra de Dijon</p><p class="sp"></p><p>Strauss: Ariadne auf Naxos</p><p>(Assistant Conductor)</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">11 Mar 2027</p><p>Rotterdam, Netherlands</p></div><div class="ev-r"><p class="o">Rotterdam Philharmonic</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">16 Apr 2027</p><p>Porto, Portugal</p><p>Casa da Música</p></div><div class="ev-r"><p class="o">Orquestra Sinfónica do Porto</p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p><p>Prokofiev: Romeo &amp; Juliet Suite No. 2</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">18 Apr 2027</p><p>Porto, Portugal</p><p>Casa da Música</p></div><div class="ev-r"><p class="o">Orquestra Sinfónica do Porto</p><p class="sp"></p><p>Mozart: Symphony No. 40, K. 550</p><p>Prokofiev: Romeo &amp; Juliet Suite No. 2</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">23 Apr 2027</p><p>Hanover, Germany</p></div><div class="ev-r"><p class="o">NDR Radiophilharmonie</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">14 Jan 2028</p><p>Madrid, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de RTVE</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">21 Oct 2028</p><p>Galicia, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de Galicia</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">22 Oct 2028</p><p>Galicia, Spain</p></div><div class="ev-r"><p class="o">Orquesta Sinfónica de Galicia</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">27 Jan 2029</p><p>Bregenz, Austria</p></div><div class="ev-r"><p class="o">Symphonieorchester Vorarlberg</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+                    <article class="event"><div class="ev-l"><p class="d">28 Jan 2029</p><p>Bregenz, Austria</p></div><div class="ev-r"><p class="o">Symphonieorchester Vorarlberg</p><p class="sp"></p><p>Program t.b.a.</p></div></article>
+            </div>
+
             <div class="artist-footer-note">
 
                 <!-- Instagram -->
@@ -801,6 +834,46 @@
                 });
             });
         });
+    </script>
+    <script>
+    // Calendar unter der Biographie: alle Termine aus der Google-Tabelle (wie auf der eigenen Seite von Mats); bei einem Fehler bleibt die feste Liste stehen
+    (function () {
+        var box = document.getElementById('mats-cal'); if (!box) { return; }
+        var FEED_URL = 'https://script.google.com/macros/s/AKfycbzhzLFHoBbDHB7BjQ_OQpl8zFOrezpsJ1ssEFGaMvMrcnYJ7_3VaoqzgQ2g665gR1OFYQ/exec';
+        var CACHE_URL = 'termine.php?a=mats';
+        var MM = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAI: 4, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OKT: 9, OCT: 9, NOV: 10, DEZ: 11, DEC: 11, MRZ: 2, 'MÄR': 2 };
+        function pdate(str) {
+            if (!str) { return null; }
+            var p = str.split('–')[0].split('-')[0].trim().split(' ').filter(Boolean);
+            if (p.length < 3) { return null; }
+            var dd = parseInt(p[0], 10), m = MM[p[1].toUpperCase().replace(/[.,]/g, '').slice(0, 3)], y = parseInt(p[p.length - 1], 10);
+            if (isNaN(dd) || m === undefined || isNaN(y)) { return null; }
+            return new Date(y, m, dd);
+        }
+        function lines(t) { return (t || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean); }
+        function loadFeed() {
+            return fetch(CACHE_URL).then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
+                .then(function (t) { if (t.indexOf('###EVENT###') < 0) { throw 0; } return t; })
+                .catch(function () { return fetch(FEED_URL + '?_=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.text(); }); });
+        }
+        loadFeed().then(function (text) {
+            var evs = text.trim().split('###EVENT###').filter(function (b) { return b.trim() !== ''; }).map(function (b, i) {
+                var parts = b.trim().split('---').map(function (p) { return p.trim(); }), fl = parts[0].split('\n').map(function (s) { return s.trim(); });
+                return { date: fl[0] || '', city: fl[1] || '', venue: parts[1] || '', orchestra: parts[2] || '', program: parts[3] || '', pd: pdate(fl[0] || ''), i: i };
+            }).filter(function (e) { return e.city !== '' && e.pd !== null; }).sort(function (a, b) { return (a.pd - b.pd) || (a.i - b.i); });
+            if (!evs.length) { return; }
+            box.textContent = '';
+            evs.forEach(function (e) {
+                var a = document.createElement('article'), L = document.createElement('div'), R = document.createElement('div'), orch = lines(e.orchestra), prog = lines(e.program);
+                a.className = 'event'; L.className = 'ev-l'; R.className = 'ev-r';
+                function add(c, text, cls) { var p = document.createElement('p'); if (cls) { p.className = cls; } p.textContent = text; c.appendChild(p); }
+                add(L, e.date, 'd'); add(L, e.city); lines(e.venue).forEach(function (l) { add(L, l); });
+                orch.forEach(function (l, k) { add(R, l, k === 0 ? 'o' : null); });   // Orchester fett, darunter ggf. Solist
+                if (prog.length) { if (orch.length) { var sp = document.createElement('p'); sp.className = 'sp'; R.appendChild(sp); } prog.forEach(function (l) { add(R, l); }); }
+                a.appendChild(L); a.appendChild(R); box.appendChild(a);
+            });
+        }).catch(function () { /* feste Liste bleibt */ });
+    })();
     </script>
 </body>
 </html>
