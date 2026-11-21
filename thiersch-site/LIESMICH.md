@@ -6,7 +6,7 @@ Ersatz für die bisherige Wix-Seite. **Status: Entwurf, nicht online.**
 ## Ordner
 - `index.html` – die Seite (About, Calendar, Media, Videos, Kontakt)
 - `imprint.html` – Impressum/Datenschutz (Platzhalter!)
-- `fonts/` – Jost und Source Serif 4 (lokal, kein Google-Abruf)
+- `fonts/` – Jost und EB Garamond (lokal, kein Google-Abruf)
 - `images/` – `hero.jpg`/`hero-mobile.jpg` (vorläufig) und `gallery-01…10.jpg` (Platzhalter) → durch die Originale gleichen Namens ersetzen
 - `.htaccess` – nur für den Entwurf auf tvmartists.com: Seite per Link erreichbar (/thiersch-site/), aber mit noindex-Header; `htaccess.prod` gilt auf der echten Domain
 
