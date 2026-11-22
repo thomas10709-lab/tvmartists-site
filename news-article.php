@@ -144,10 +144,10 @@ if ($it) {
         .footer-copy a { color: rgba(255,255,255,0.9); text-decoration: none; transition: opacity 0.25s ease; }
         .footer-copy a:hover { opacity: 0.7; text-decoration: underline; }
     </style>
-    <meta name="theme-color" content="#46163A">
+    <meta name="theme-color" content="#17355E">
     <style>
-        /* Hintergrund: tiefes Brombeer, bleibt gleich (keine Farbwechsel); gilt auch hinter dem Seitenrand beim Überscrollen */
-        html, body { background-color: #46163A; }
+        /* Hintergrund: Standard-Dunkelblau wie auf allen Unterseiten, bleibt gleich (keine Farbwechsel); gilt auch hinter dem Seitenrand beim Überscrollen */
+        html, body { background-color: #17355E !important; }
         body { position: relative; min-height: 100vh; }
     </style>
 </head>
