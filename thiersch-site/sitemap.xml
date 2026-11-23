@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ENTWURF: beim Start der Seite die echte Domain eintragen (und imprint.html aufnehmen) -->
+<!-- Domain eingetragen. Beim Start: noindex/robots-Sperre entfernen. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://DOMAIN-TBD/</loc></url>
+  <url><loc>https://matsthiersch.com/</loc></url>
 </urlset>
