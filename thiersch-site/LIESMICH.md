@@ -11,7 +11,7 @@ Ersatz für die bisherige Wix-Seite. **Status: Entwurf, nicht online.**
 - `.htaccess` – nur für den Entwurf auf tvmartists.com: Seite per Link erreichbar (/thiersch-site/), aber mit noindex-Header; `htaccess.prod` gilt auf der echten Domain
 
 ## Was vor dem Start erledigt sein muss
-1. Domain steht; **DOMAIN-TBD** in `index.html` (canonical, og:url, og:image, JSON-LD) und `sitemap.xml` ersetzen.
+1. Domain steht: `matsthiersch.com` ist in `index.html` (canonical, og:url, og:image, JSON-LD) und `sitemap.xml` eingetragen.
 2. In `index.html` das `<meta name="robots" content="noindex, nofollow">` und in `imprint.html` und `privacy.html` ebenfalls entfernen; `robots.txt` auf `Allow: /` + Sitemap umstellen.
 3. Originalfotos (Titelbild, Handy-Titelbild, 10 Galeriebilder) einsetzen; Fotografen-Nennung (Marco Borggreve) prüfen.
 4. Video-Links eintragen (`data-yt="VIDEO-ID"` an den vier Karten).
