@@ -11,7 +11,7 @@ Pflege: Bei jeder abgeschlossenen Änderung im selben Pull Request anpassen. Nur
 | Mats Thiersch | matsthiersch.com | `thiersch-site/` | `deploy-thiersch.yml` (FTPS, Ziel `/matsthiersch.com/`) | **noindex**, Go-live offen |
 
 ## Offen
-- **Elli Choi, Bio (Herbst 2027):** Der Satz „Next season she will also appear with the Düsseldorfer Symphoniker and the Korean National Symphony Orchestra, among others.“ in `elli-choi.html` und `ellichoi-site/index.html` bezieht sich auf 2027/28 und muss ab der Saison 2027/28 angepasst werden (z. B. „In 2027/28, …“). Die Orchester sollten vorher öffentlich bestätigt sein.
+- **Elli Choi, Bio (Herbst 2027):** Der Satz „Next season she will also make her debuts with the Düsseldorfer Symphoniker and the Korean National Symphony Orchestra, among others.“ in `elli-choi.html` und `ellichoi-site/index.html` bezieht sich auf 2027/28 und muss ab der Saison 2027/28 angepasst werden (z. B. „In 2027/28, …“). Die Orchester sollten vorher öffentlich bestätigt sein.
 - **Mats Thiersch, Domain:** Domain liegt bei Wix. DNS auf ALL-INKL umstellen: A-Record `@` → 85.13.168.58, `www` CNAME → matsthiersch.com, MX/TXT behalten. Wix verlangt dafür Abrechnungsrechte (Anleitung als PDF an Thomas übergeben). Testadresse: `https://matsthiersch.com.w02274a9.kasserver.com/`.
 - **Mats Thiersch, nach dem Umstellen:** DNS-Verbreitung und SSL (KAS) prüfen, dann `noindex` und `Disallow` in `robots.txt` entfernen, `sitemap.xml` vervollständigen, Impressum/Datenschutz (Telefon, Adresse) prüfen.
 - **`termine.php` auf dem Server:** Eintrag `'mats'` (Kalender-Feed) wirkt erst nach FTP-Upload. Bis dahin fällt die Seite auf den direkten Google-Abruf zurück.
