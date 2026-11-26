@@ -19,7 +19,8 @@ declare(strict_types=1);
  *   wird einmalig direkt bei Google geholt.
  * - Ein fehlerhafter Abruf (Fehler, leere Antwort, kein "###EVENT###") überschreibt die gute Fassung nie.
  * - Optional per Cron alle 5 Minuten, dann ist der Speicher auch ohne Besucher aktuell:
- *     php /pfad/zur/termine.php refresh
+ *     php /pfad/zur/termine.php refresh            (Kommandozeile)
+ *     https://tvmartists.com/termine.php?a=all      (Cron-Job per URL, z. B. im KAS von ALL-INKL)
  */
 
 const TTL_SECONDS = 300;
@@ -76,6 +77,25 @@ if (PHP_SAPI === 'cli') {
         if (!$ok) $bad++;
     }
     exit($bad ? 1 : 0);
+}
+
+// Aufruf per URL durch einen Cron-Job des Hosters (z. B. alle 5 Minuten): /termine.php?a=all
+// Erneuert jeden Feed, dessen Zwischenspeicher aelter als ca. 4 Minuten ist; sonst wird nichts bei Google geholt
+// (Besucher koennen damit weder Google noch den Server belasten). Gibt je Feed eine Zeile aus.
+if (($_GET['a'] ?? '') === 'all') {
+    @set_time_limit(150);
+    header('Content-Type: text/plain; charset=utf-8');
+    header('Cache-Control: no-store');
+    foreach ($FEEDS as $k => $url) {
+        $f = cache_file($dir, $k);
+        $age = is_file($f) ? time() - (int)filemtime($f) : PHP_INT_MAX;
+        if ($age > TTL_SECONDS - 60) {
+            echo $k . ': ' . (refresh_feed($dir, $k, $url) ? 'erneuert' : 'FEHLER (alte Fassung bleibt)') . "\n";
+        } else {
+            echo $k . ': aktuell (' . $age . ' s)' . "\n";
+        }
+    }
+    exit;
 }
 
 $key = (string)($_GET['a'] ?? '');
