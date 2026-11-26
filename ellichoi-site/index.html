@@ -1474,11 +1474,69 @@
     </section>
 
     <script>
-    /* Calendar: Konzerte, deren letzter Tag vorbei ist, werden ausgeblendet */
+    /* Calendar: Termine kommen aus der Google-Tabelle (Skript "Choi Master Calendar"), Zwischenspeicher auf tvmartists.com.
+       Schlaegt der Abruf fehl, bleibt die feste Liste im HTML stehen. Konzerte, deren letzter Tag vorbei ist, werden ausgeblendet. */
     (function () {
-        var d = new Date(), today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-        document.querySelectorAll('.concert[data-end]').forEach(function (c) { if (c.getAttribute('data-end') < today) { c.style.display = 'none'; } });
-        document.querySelectorAll('.concert-list').forEach(function (l) { var f = Array.prototype.find.call(l.children, function (c) { return c.style.display !== 'none'; }); if (f) { f.classList.add('is-first'); } });
+        var FEED_URL = 'https://script.google.com/macros/s/AKfycbyI6AwhB1lIh1QDPGF2w6TnuMO3fry4JXlexgM30ZQB4Cv6CoKyXbnUyMVeYpNh6WH0NQ/exec';
+        var CACHE_URL = 'https://tvmartists.com/termine.php?a=choi';
+        var MON = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, MAI: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, OKT: 9, NOV: 10, DEC: 11, DEZ: 11 };
+        var FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function iso(dt) { return dt.getFullYear() + '-' + pad(dt.getMonth() + 1) + '-' + pad(dt.getDate()); }
+        function todayIso() { return iso(new Date()); }
+        function dates(str) {   // alle Daten "09 Jun 2026" in einem Text -> [Date, ...]
+            var out = [], re = /(\d{1,2})\s+([A-Za-z\u00c4\u00e4]{3,4})\.?\s+(\d{4})/g, m;
+            while ((m = re.exec(str || ''))) { var mo = MON[m[2].toUpperCase().slice(0, 3)]; if (mo !== undefined) out.push(new Date(+m[3], mo, +m[1])); }
+            return out;
+        }
+        function longDate(ds) {   // "12 Mar 2027 - 14 Mar 2027" -> "12\u201314 March 2027", "24 Nov 2026" -> "24 November 2026"
+            var a = ds[0], b = ds[ds.length - 1];
+            function one(d) { return d.getDate() + ' ' + FULL[d.getMonth()] + ' ' + d.getFullYear(); }
+            if (ds.length < 2 || iso(a) === iso(b)) return one(a);
+            if (a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth()) return a.getDate() + '\u2013' + b.getDate() + ' ' + FULL[a.getMonth()] + ' ' + a.getFullYear();
+            return one(a) + ' \u2013 ' + one(b);
+        }
+        function lines(t) { return (t || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean); }
+        function apply() {
+            var today = todayIso();
+            document.querySelectorAll('.concert[data-end]').forEach(function (c) { c.style.display = c.getAttribute('data-end') < today ? 'none' : ''; c.classList.remove('is-first'); });
+            document.querySelectorAll('.concert-list').forEach(function (l) { var f = Array.prototype.find.call(l.children, function (c) { return c.style.display !== 'none'; }); if (f) { f.classList.add('is-first'); } });
+        }
+        function parse(text) {
+            return text.trim().split('###EVENT###').filter(function (b) { return b.trim() !== ''; }).map(function (b, i) {
+                var parts = b.trim().split('---').map(function (p) { return p.trim(); }), fl = lines(parts[0]);
+                var ds = dates(fl[0] || '');
+                return { ds: ds, city: fl[1] || '', venue: lines(parts[1]), orch: lines(parts[2]), prog: lines(parts[3]), i: i };
+            }).filter(function (e) { return e.city !== '' && e.ds.length > 0; }).sort(function (a, b) { return (a.ds[0] - b.ds[0]) || (a.i - b.i); });
+        }
+        function render(evs) {
+            document.querySelectorAll('.concert-list').forEach(function (list) {
+                list.innerHTML = '';
+                evs.forEach(function (e) {
+                    var a = document.createElement('article'); a.className = 'concert'; a.setAttribute('data-end', iso(e.ds[e.ds.length - 1]));
+                    function add(tag, cls, text) { var n = document.createElement(tag); n.className = cls; n.textContent = text; a.appendChild(n); return n; }
+                    var t = add('time', 'concert-date', longDate(e.ds)); t.setAttribute('datetime', iso(e.ds[0]));
+                    add('div', 'concert-place', e.city);
+                    e.venue.forEach(function (v) { add('div', 'concert-venue', v); });
+                    var recital = e.orch.length && /^recital$/i.test(e.orch[0]);
+                    if (recital) {   // Recital: "Recital" fett, darunter das Programm
+                        add('div', 'concert-main', 'Recital');
+                        e.prog.forEach(function (p) { add('div', 'concert-orch', p); });
+                    } else {         // Konzert: Werk fett, darunter Orchester und Dirigent
+                        e.prog.forEach(function (p) { add('div', 'concert-main', p); });
+                        if (e.orch[0]) { add('div', 'concert-orch', e.orch[0]); }
+                        e.orch.slice(1).forEach(function (c) { add('div', 'concert-cond', c); });
+                    }
+                    list.appendChild(a);
+                });
+            });
+        }
+        apply();   // feste Liste: Vergangenes sofort ausblenden
+        fetch(CACHE_URL).then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
+            .then(function (t) { if (t.indexOf('###EVENT###') < 0) { throw 0; } return t; })
+            .catch(function () { return fetch(FEED_URL + '?_=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.text(); }); })
+            .then(function (text) { var evs = parse(text); if (!evs.length) { return; } render(evs); apply(); })
+            .catch(function () { /* feste Liste bleibt */ });
     })();
     </script>
 
