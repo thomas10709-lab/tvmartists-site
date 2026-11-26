@@ -11,6 +11,7 @@ declare(strict_types=1);
  *   /termine.php?a=sanderling   Feed von Michael Sanderling
  *   /termine.php?a=bettac       Feed von Johannes Pierre Bettac
  *   /termine.php?a=mats         Feed von Mats Thiersch
+ *   /termine.php?a=choi         Feed von Elli Choi
  *
  * Verhalten:
  * - Es wird immer sofort die gespeicherte Fassung ausgeliefert, auch wenn sie älter als 5 Minuten ist;
@@ -26,8 +27,10 @@ const TTL_SECONDS = 300;
 $FEEDS = [
     'sanderling' => 'https://script.google.com/macros/s/AKfycbwIsVT1iJGDACNdpbtpeK2yUP7W1rugP6uVmX6uinXRyuiIlMFXvsh03JPiE2qdjnq7/exec',
     'bettac'     => 'https://script.google.com/macros/s/AKfycbx-l_QkTurXbeyaGjmR1K7asVBsYnvUhJXUZzq73KiQ7-QEWJOrJr-UQb-MbYkWDaO-/exec',
+    'mats'       => 'https://script.google.com/macros/s/AKfycbzhzLFHoBbDHB7BjQ_OQpl8zFOrezpsJ1ssEFGaMvMrcnYJ7_3VaoqzgQ2g665gR1OFYQ/exec',
+    'choi'       => 'https://script.google.com/macros/s/AKfycbyI6AwhB1lIh1QDPGF2w6TnuMO3fry4JXlexgM30ZQB4Cv6CoKyXbnUyMVeYpNh6WH0NQ/exec',
 ];
-$ALLOWED_ORIGINS = ['https://michaelsanderling.de', 'https://www.michaelsanderling.de', 'https://tvmartists.com', 'https://www.tvmartists.com'];
+$ALLOWED_ORIGINS = ['https://michaelsanderling.de', 'https://www.michaelsanderling.de', 'https://tvmartists.com', 'https://www.tvmartists.com', 'https://ellichoi.com', 'https://www.ellichoi.com', 'https://matsthiersch.com', 'https://www.matsthiersch.com'];
 
 $dir = __DIR__ . '/news-data/termine';
 
