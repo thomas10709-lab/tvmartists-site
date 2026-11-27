@@ -5,7 +5,7 @@ Pflege: Bei jeder abgeschlossenen Änderung im selben Pull Request anpassen. Nur
 | Seite | Adresse | Ordner | Deployment | Status |
 |---|---|---|---|---|
 | TVM artists | tvmartists.com | Wurzel | `deploy.yml` (SSH `deploy`, nach Merge auf `main`), Cloudflare davor | live |
-| Elli Choi | ellichoi.com | `ellichoi-site/` | `deploy-ellichoi.yml` (FTPS) | live |
+| Elli Choi | ellichoi.com | `ellichoi-site/` | `deploy-ellichoi.yml` (FTPS; kopiert auch `google*.html` für die Search Console) | live; Search Console: Bestätigungsdatei `ellichoi-site/google4aab9005a6bfce86.html` (nicht löschen), danach Sitemap einreichen |
 | Michael Sanderling | michaelsanderling.de | `michael-sanderling/personal/` | `deploy-sanderling.yml` (FTPS) | live |
 | Predan Voigt | predanvoigt.com | `predanvoigt-site/` | `deploy-predanvoigt.yml` (FTPS) | live |
 | Mats Thiersch | matsthiersch.com | `thiersch-site/` | `deploy-thiersch.yml` (FTPS, Ziel `/matsthiersch.com/`) | **live seit 27.11.2026**, für Suchmaschinen freigegeben (noindex entfernt, `robots.txt`: Allow, Sitemap) |
