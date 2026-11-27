@@ -2,6 +2,17 @@
 Options -MultiViews
 DirectoryIndex index.html
 
+# Immer https und immer die Adresse ohne www (301), wie bei matsthiersch.com. Zwei Bedingungen gegen Weiterleitungsschleifen: der Server sitzt
+# hinter einem Proxy, deshalb gilt eine Anfrage auch dann als https, wenn der Proxy es per X-Forwarded-Proto meldet.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://ellichoi.com%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\.ellichoi\.com$ [NC]
+  RewriteRule ^ https://ellichoi.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
 # HTML-Seiten immer neu pruefen lassen, damit Aenderungen sofort sichtbar sind
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
