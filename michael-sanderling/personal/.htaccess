@@ -2,6 +2,14 @@
 Options -MultiViews
 DirectoryIndex index.html
 
+# www.michaelsanderling.de -> michaelsanderling.de (301). Gilt nur fuer diese Adresse; unter tvmartists.com/michael-sanderling/personal/ greift die Regel nicht.
+# Bewusst ohne https-Bedingung: https erzwingt Cloudflare, so kann hinter dem Proxy keine Schleife entstehen.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.michaelsanderling\.de$ [NC]
+  RewriteRule ^ https://michaelsanderling.de%{REQUEST_URI} [L,R=301]
+</IfModule>
+
 <IfModule mod_headers.c>
   # HTML always revalidated so changes show up immediately
   <FilesMatch "\.html$">
