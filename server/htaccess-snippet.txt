@@ -23,6 +23,9 @@ RedirectMatch 301 ^/michael-sanderling/?$       /michael-sanderling.html
 RedirectMatch 301 ^/imprint/?$                  /imprint.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # www.tvmartists.com -> tvmartists.com (301). Ohne https-Bedingung: https erzwingt Cloudflare. Alternativ als Cloudflare-Redirect-Rule einrichten.
+  RewriteCond %{HTTP_HOST} ^www\.tvmartists\.com$ [NC]
+  RewriteRule ^ https://tvmartists.com%{REQUEST_URI} [L,R=301]
   RewriteRule ^cookie-policy/?$            /imprint.html#cookies        [R=301,L,NE]
   # Startseite über home.php ausliefern: setzt serverseitig den "Latest News"-Block in index.html ein
   RewriteRule ^$                           /home.php                    [L]
