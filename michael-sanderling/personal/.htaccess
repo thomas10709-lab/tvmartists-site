@@ -1,8 +1,9 @@
-# Personal site of Michael Sanderling (served at michaelsanderling.de and at tvmartists.com/michael-sanderling/personal/)
+# Personal site of Michael Sanderling, served at michaelsanderling.de (uploaded by deploy-sanderling.yml). The copy that used to be reachable at
+# tvmartists.com/michael-sanderling/personal/ (development location) is no longer published there.
 Options -MultiViews
 DirectoryIndex index.html
 
-# www.michaelsanderling.de -> michaelsanderling.de (301). Gilt nur fuer diese Adresse; unter tvmartists.com/michael-sanderling/personal/ greift die Regel nicht.
+# www.michaelsanderling.de -> michaelsanderling.de (301). Gilt nur fuer diesen Hostnamen.
 # Bewusst ohne https-Bedingung: https erzwingt Cloudflare, so kann hinter dem Proxy keine Schleife entstehen.
 <IfModule mod_rewrite.c>
   RewriteEngine On
