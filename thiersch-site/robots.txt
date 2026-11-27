@@ -1,6 +1,4 @@
-# ENTWURF: noch nicht indexieren. Beim Start der Seite ersetzen durch:
-#   User-agent: *
-#   Allow: /
-#   Sitemap: https://matsthiersch.com/sitemap.xml
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://matsthiersch.com/sitemap.xml
