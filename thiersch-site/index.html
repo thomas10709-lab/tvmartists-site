@@ -156,8 +156,11 @@
             .about { scroll-margin-top: 44px; } /* Menueleiste 54 px, Sprachleiste liegt 22 px unter dem Abschnittsanfang */
             .about .lang { margin: -18px 0 14px; font-size: 14px; }
             .calendar { padding: 50px 20px 30px; }
-            .event { margin-bottom: 26px; grid-template-columns: 39% 1fr; gap: 0 16px; font-size: 15px; line-height: 1.2; font-weight: 400; }
+            /* Termine am Handy untereinander (Datum/Ort, dann Orchester/Programm), grosse Schrift */
+            .event { margin-bottom: 0; padding: 22px 0; grid-template-columns: 1fr; gap: 10px 0; font-size: 19px; line-height: 1.35; font-weight: 500; border-top: 1px solid rgba(0, 0, 0, .12); }
+            .event:first-of-type { border-top: 0; }
             .event .d, .event .o { font-weight: 700; }
+            .event .sp { height: .4em; }
             .media { padding: 34px 14px 16px; }
             .videos { padding: 34px 14px 50px; }
             .vgrid { grid-template-columns: 1fr; gap: 18px; }
