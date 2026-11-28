@@ -452,6 +452,9 @@
             height: 0.85em;   /* halbe Zeile statt voller Leerzeile */
         }
 
+        /* Überschrift über dem Text in den weißen Blöcken */
+        .container-content .box-title { margin: 0 0 12px 0; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; line-height: 1.3; text-align: left; color: #1b2a3a; }
+
         /* Termine unter der Biografie: weisser Block in Form und Breite der Biografie-Box, drei Spalten, kleine serifenlose Schrift */
         .container-content.choi-cal { margin-top: 24px; font-size: 13px; line-height: 1.45; font-weight: 400; letter-spacing: 0.01em; text-align: left; }
         .container-content.choi-cal[hidden] { display: none; }
@@ -823,13 +826,16 @@
 
         <!-- BUTTON-REIHE -->
         <div id="top-button-row">
+            <a href="#biography" class="custom-btn">Biography</a>
+            <a href="#calendar" class="custom-btn">Calendar</a>
             <a href="#videos" class="custom-btn">Videos</a>
             <a href="https://www.dropbox.com/scl/fo/kevethm48fbhw1al5ty0j/ANEkdbLSYvsoOHWkHHPXNqw?rlkey=qvm8mi8vcoxix55akcdx5e038&amp;dl=0" target="_blank" rel="noopener" class="custom-btn">Photo Download</a>
             <a href="https://ellichoi.com" target="_blank" rel="noopener" class="custom-btn">Official Website</a>
         </div>
 
         <!-- BIOGRAPHY -->
-        <div class="container-content">
+        <div class="container-content" id="biography">
+            <h2 class="box-title">Biography</h2>
             <div class="bio-text">
                 <p>
                     In her mid-twenties, award-winning US-American violinist Elli Choi has already established herself as one of the most talented violinists of her generation.
@@ -886,7 +892,8 @@
         </div>
 
         <!-- TERMINE (weisser Block unter der Biografie, Daten aus dem Zwischenspeicher termine.php?a=choi) -->
-        <div class="container-content choi-cal" id="choi-calendar" aria-label="Upcoming concerts" hidden>
+        <div class="container-content choi-cal" id="calendar" aria-label="Calendar" hidden>
+            <h2 class="box-title">Calendar</h2>
             <div class="cal-grid"></div>
         </div>
 
@@ -1072,7 +1079,7 @@
     /* Termine von Elli Choi: aus dem Zwischenspeicher /termine.php?a=choi (Google-Tabelle "Choi Master Calendar"); vergangene Termine werden ausgeblendet.
        Schlaegt der Abruf fehl, bleibt der Block unsichtbar. */
     (function () {
-        var box = document.getElementById('choi-calendar'); if (!box) { return; }
+        var box = document.getElementById('calendar'); if (!box) { return; }
         var grid = box.querySelector('.cal-grid');
         var MON = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, MAI: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, OKT: 9, NOV: 10, DEC: 11, DEZ: 11 };
         var FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
