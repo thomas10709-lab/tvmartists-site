@@ -202,21 +202,23 @@
 
         /* Desktop: Name als Text links neben dem Foto */
         @media (min-width: 769px) {
-            /* Foto etwas weiter weggezoomt, links und rechts je ein anthrazitfarbener Streifen (wie auf ellichoi.com) */
-            .artist-hero--overlay-desktop { background: #262626; padding-top: 0; }   /* kein dunkler Balken mehr ueber dem Foto */
+            /* Desktop: dasselbe Hochformat-Foto mit weissem Hintergrund wie am Handy, mittig auf einem hellen Band; Name links daneben */
+            .artist-hero--overlay-desktop { background: #fbfbfb; padding-top: 0; }
+            .artist-hero--overlay-desktop picture { display: block; }
             .artist-hero--overlay-desktop img {
-                width: 84%;
+                width: auto;
+                height: 620px;
+                max-width: 100%;
                 margin: 0 auto;
-                position: relative;
-                left: -2cm;   /* Foto 2 cm weiter nach links */
-                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
-                mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+                object-fit: contain;
+                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 86%, transparent 100%);
+                mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 86%, transparent 100%);
             }
             .artist-hero--overlay-desktop .hero-name {
                 position: absolute;
                 z-index: 2;
-                left: calc(30% - 3cm);   /* 1 cm weiter links als vorher */
-                top: 62%;                /* untere Haelfte des Fotos */
+                right: calc(50% + 250px);   /* links neben dem Foto */
+                top: 56%;
                 width: auto;
                 height: auto;
                 margin: 0;
@@ -228,8 +230,8 @@
                 font-size: clamp(28px, 3.3vw, 52px);
                 line-height: 1.2;
                 letter-spacing: 0.05em;
-                color: #ffffff;
-                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+                color: #1b2a3a;
+                text-shadow: none;
             }
         }
         @media (max-width: 768px) {
@@ -806,8 +808,8 @@
         <picture>
             <source media="(max-width: 768px)" srcset="images/elli-choi-hero-m2.webp 800w" sizes="100vw" type="image/webp">
             <source media="(max-width: 768px)" srcset="images/elli-choi-hero-m2.jpg 800w" sizes="100vw">
-            <source srcset="images/elli-choi-hero2-1280.webp 1280w, images/elli-choi-hero2-1920.webp 1920w" sizes="100vw" type="image/webp">
-            <img src="images/elli-choi-hero2-1920.jpg" alt="Elli Choi" width="1920" height="1080" loading="eager">
+            <source srcset="images/elli-choi-hero-m2.webp 800w" sizes="468px" type="image/webp">
+            <img src="images/elli-choi-hero-m2.jpg" alt="Elli Choi" width="800" height="1060" loading="eager">
         </picture>
         <h1 class="hero-name">Elli Choi</h1>
     </div>
