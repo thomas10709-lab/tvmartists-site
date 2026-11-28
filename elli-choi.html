@@ -452,6 +452,17 @@
             height: 0.85em;   /* halbe Zeile statt voller Leerzeile */
         }
 
+        /* Termine unter der Biografie: weisser Block in Form und Breite der Biografie-Box, drei Spalten, kleine serifenlose Schrift */
+        .container-content.choi-cal { margin-top: 24px; font-size: 13px; line-height: 1.45; font-weight: 400; letter-spacing: 0.01em; text-align: left; }
+        .container-content.choi-cal[hidden] { display: none; }
+        .choi-cal .cal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 28px; }
+        .choi-cal .cal-ev { text-align: left; }
+        .choi-cal .cal-ev > div { margin: 0; }
+        .choi-cal .cal-date, .choi-cal .cal-work { font-weight: 700; }
+        .choi-cal .cal-work { margin-top: 4px; }
+        @media (max-width: 900px) { .choi-cal .cal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 560px) { .choi-cal .cal-grid { grid-template-columns: 1fr; } }
+
         /* Biografie: Absaetze, am Handy nach ca. 30 % Text "Read more" */
         .container-content .bio-text p { margin: 0 0 0.85em 0; }
         .bio-toggle { display: none; }
@@ -874,6 +885,11 @@
             </div>
         </div>
 
+        <!-- TERMINE (weisser Block unter der Biografie, Daten aus dem Zwischenspeicher termine.php?a=choi) -->
+        <div class="container-content choi-cal" id="choi-calendar" aria-label="Upcoming concerts" hidden>
+            <div class="cal-grid"></div>
+        </div>
+
         <!-- VIDEOS (Vorschaubilder, Klick oeffnet YouTube) -->
         <div id="videos" class="video-grid">
             <a href="https://www.youtube.com/watch?v=Fn9uw2dGYc4" target="_blank" rel="noopener" class="video-card" aria-label="Play video: Shostakovich Violin Concerto No. 1">
@@ -1050,6 +1066,49 @@
             btn.textContent = collapsed ? 'Read more' : 'Show less';
             btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
         });
+    })();
+    </script>
+    <script>
+    /* Termine von Elli Choi: aus dem Zwischenspeicher /termine.php?a=choi (Google-Tabelle "Choi Master Calendar"); vergangene Termine werden ausgeblendet.
+       Schlaegt der Abruf fehl, bleibt der Block unsichtbar. */
+    (function () {
+        var box = document.getElementById('choi-calendar'); if (!box) { return; }
+        var grid = box.querySelector('.cal-grid');
+        var MON = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, MAI: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, OKT: 9, NOV: 10, DEC: 11, DEZ: 11 };
+        var FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+        function dates(str) { var out = [], re = /(\d{1,2})\s+([A-Za-z\u00c4\u00e4]{3,4})\.?\s+(\d{4})/g, m; while ((m = re.exec(str || ''))) { var mo = MON[m[2].toUpperCase().slice(0, 3)]; if (mo !== undefined) { out.push(new Date(+m[3], mo, +m[1])); } } return out; }
+        function longDate(ds) {
+            var a = ds[0], b = ds[ds.length - 1];
+            function one(d) { return d.getDate() + ' ' + FULL[d.getMonth()] + ' ' + d.getFullYear(); }
+            if (ds.length < 2 || iso(a) === iso(b)) { return one(a); }
+            if (a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth()) { return a.getDate() + '\u2013' + b.getDate() + ' ' + FULL[a.getMonth()] + ' ' + a.getFullYear(); }
+            return one(a) + ' \u2013 ' + one(b);
+        }
+        function lines(t) { return (t || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean); }
+        function parse(text) {
+            return text.trim().split('###EVENT###').filter(function (b) { return b.trim() !== ''; }).map(function (b, i) {
+                var parts = b.trim().split('---').map(function (p) { return p.trim(); }), fl = lines(parts[0]);
+                return { ds: dates(fl[0] || ''), city: fl[1] || '', venue: lines(parts[1]), orch: lines(parts[2]), prog: lines(parts[3]), i: i };
+            }).filter(function (e) { return e.city !== '' && e.ds.length > 0; }).sort(function (a, b) { return (a.ds[0] - b.ds[0]) || (a.i - b.i); });
+        }
+        function render(evs) {
+            var today = iso(new Date()); grid.innerHTML = '';
+            evs.filter(function (e) { return iso(e.ds[e.ds.length - 1]) >= today; }).forEach(function (e) {
+                var a = document.createElement('div'); a.className = 'cal-ev';
+                function add(cls, text) { var n = document.createElement('div'); n.className = cls; n.textContent = text; a.appendChild(n); }
+                add('cal-date', longDate(e.ds)); add('cal-place', e.city);
+                e.venue.forEach(function (v) { add('cal-venue', v); });
+                e.prog.forEach(function (p, k) { add('cal-work', p); });
+                e.orch.forEach(function (o) { add('cal-orch', o); });
+                grid.appendChild(a);
+            });
+            box.hidden = !grid.children.length;
+        }
+        fetch('/termine.php?a=choi').then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
+            .then(function (t) { if (t.indexOf('###EVENT###') < 0) { throw 0; } render(parse(t)); })
+            .catch(function () { /* Block bleibt unsichtbar */ });
     })();
     </script>
 </body>
