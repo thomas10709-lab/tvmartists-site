@@ -58,7 +58,8 @@
         html[data-lang="en"] .about p[data-l="en"], html[data-lang="de"] .about p[data-l="de"], html[data-lang="fr"] .about p[data-l="fr"], html[data-lang="ja"] .about p[data-l="ja"] { display: block; }
         /* Japanisch: Mincho-Schrift des Systems (Cormorant hat keine japanischen Zeichen), etwas weiterer Zeilenabstand */
         .about p[lang="ja"] { font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "Noto Serif CJK JP", "MS PMincho", serif; line-height: 1.95; letter-spacing: .02em; line-break: strict; word-break: normal; overflow-wrap: anywhere; hyphens: manual; font-size: .92em; }
-        .about { position: relative; }
+        /* Klick auf "About": Sprachleiste (EN | DE | FR | JA) landet knapp unter der festen Menueleiste (Leiste 62 px, Sprachleiste liegt 48 px unter dem Abschnittsanfang) */
+        .about { position: relative; scroll-margin-top: 26px; }
         .about .lang { display: flex; justify-content: flex-end; align-items: center; gap: 9px; margin: -30px 0 18px; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: .08em; color: #000; }
         .about .lang button { background: none; border: 0; padding: 2px 1px; margin: 0; font: inherit; letter-spacing: inherit; color: inherit; cursor: pointer; opacity: .55; }
         .about .lang button[lang="ja"] { font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Noto Sans JP", "Noto Sans CJK JP", "Meiryo", sans-serif; font-size: .93em; letter-spacing: .04em; }
@@ -149,6 +150,7 @@
             .hero { background-image: url('images/hero-mobile.jpg?v=3'); background-position: center top; }
             .hero h1 { position: absolute; left: 55%; top: 66%; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0; text-align: left; font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif; font-size: clamp(26px, 7.8vw, 32px); font-weight: 400; letter-spacing: .02em; line-height: 1.12; }
             .about { padding: 40px 20px 14px; }
+            .about { scroll-margin-top: 44px; } /* Menueleiste 54 px, Sprachleiste liegt 22 px unter dem Abschnittsanfang */
             .about .lang { margin: -18px 0 14px; font-size: 14px; }
             .calendar { padding: 50px 20px 30px; }
             .event { margin-bottom: 26px; grid-template-columns: 39% 1fr; gap: 0 16px; font-size: 15px; line-height: 1.2; font-weight: 400; }
