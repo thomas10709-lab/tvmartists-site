@@ -178,11 +178,11 @@
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
     <script>
-    // Sprache der Bio: 1. ?lang=de|fr|ja|en, 2. gespeicherte Wahl, 3. erste unterstuetzte Browsersprache (de/fr/ja), sonst Englisch
+    // Sprache der Bio: 1. ?lang=de|fr|ja|en, 2. Wahl in dieser Sitzung (sessionStorage, nicht dauerhaft), 3. erste unterstuetzte Browsersprache (de/fr/ja), sonst Englisch
     (function () {
         var ok = { en: 1, de: 1, fr: 1, ja: 1, ko: 1 }, L = '';
         try { var m = /[?&]lang=(en|de|fr|ja|ko)\b/.exec(location.search); if (m) { L = m[1]; } } catch (e) {}
-        if (!L) { try { var st = localStorage.getItem('mtLang'); if (st && ok[st]) { L = st; } } catch (e) {} }
+        if (!L) { try { var st = sessionStorage.getItem('mtLang'); if (st && ok[st]) { L = st; } } catch (e) {} }
         if (!L) {
             var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
             for (var i = 0; i < langs.length && !L; i++) { var c = String(langs[i]).slice(0, 2).toLowerCase(); if (ok[c]) { L = c; } }
@@ -331,7 +331,7 @@
         document.documentElement.setAttribute('data-lang', l); document.documentElement.setAttribute('lang', l);
         document.querySelectorAll('.about .lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === l ? 'true' : 'false'); });
         rmLabel();
-        if (save) { try { localStorage.setItem('mtLang', l); } catch (e) {} }
+        if (save) { try { sessionStorage.setItem('mtLang', l); } catch (e) {} }
     }
     document.querySelectorAll('.about .lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-set'), true); }); });
     setLang(curLang(), false);
